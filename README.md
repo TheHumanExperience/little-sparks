@@ -1,8 +1,34 @@
 # Little Sparks
 
-A daily puzzle app with Letterlight, Pocket Sudoku, Dot & Match, The Aha Moment, Bloom Trail, Time Lens, and Little Neighbours.
+A daily puzzle app laid out as a vertical, snap-scrolling feed, like Reels. Each full-screen card holds a game you can play right there. Today's 17 sparks come first, then a short "you made it" note. After that the feed keeps going into yesterday, the day before, and so on back 30 days. Each earlier day is loaded as you reach it. Every solve sets off a short celebration: a sparkle burst, a card glow, a "Solved n/17" count-up, and a vibration on phones that support it. With reduced motion turned on, you get a calm glow instead.
 
-Three difficulty levels, hints, past-day puzzles, and browser-local saved progress.
+The games, in feed order:
+
+1. Letterlight
+2. Starlines
+3. Pocket Sudoku
+4. Story Shuffle
+5. Dot & Match
+6. Colour Alchemy
+7. The Aha Moment
+8. Mirror Garden
+9. Bloom Trail
+10. Sudoku Six
+11. Time Lens
+12. Letterlight Ladder
+13. Little Neighbours
+14. Bloom Trail 5×5
+15. Killer Six
+16. Time Lens Duel
+17. Neighbours Goal
+
+All 17 games have three difficulty levels and hints, and progress is saved in the browser.
+
+| File | Contents |
+| --- | --- |
+| `dist/app.js`, `dist/extras.js` | The original seven games |
+| `dist/sparks.js` | The ten feed games |
+| `dist/feed.js` | Feed, celebration, day and level sheets, and midnight rollover |
 
 ## Run locally
 
@@ -19,9 +45,18 @@ Open http://localhost:8000. No build or package installation is required.
 Requires Node.js:
 
 ```sh
-node verify.cjs
-node verify-levels.cjs
-node verify-extras.cjs
+for f in verify*.cjs; do node "$f"; done
+```
+
+| Script | Checks |
+| --- | --- |
+| `verify-sparks.cjs` | The ten feed games, every level, a full year of dates. Each puzzle must be deterministic, solvable by its own checker, unique where promised, and varied. |
+| `verify-feed.cjs` | Feed order, the 31-day window, and that `feed.js` does nothing on a page without the feed. |
+
+`dist/ladders.js` is generated. After editing the word list in `tools/build-ladders.cjs`, rebuild it:
+
+```sh
+node tools/build-ladders.cjs
 ```
 
 ## Original source history

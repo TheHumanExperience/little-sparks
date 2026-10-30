@@ -11,7 +11,26 @@
 - Source catalogue dates, creator credits, and applicable licence links appear after guessing. Historical catalogue dates are not independently authenticated dates.
 - Progress stays in browser-local storage. It is not shared between devices.
 
-Run `node verify-window.cjs` and `node verify-levels.cjs` before changing the generators or photo bank.
+## Feed games
+
+Like the original games, the ten feed games are built from the date and the difficulty level, so past days look the same every time you open them.
+
+- **Starlines** draws from the 18 constellations in `dist/constellations.js`. Every clue must lead to only one star, and `verify-sparks.cjs` checks that.
+- **Story Shuffle** draws from the 22 stories in `dist/stories.js`. The card clues must allow only one correct order.
+- **Letterlight Ladder** uses `dist/ladders.js`, which holds 90 shortest-route ladders per level. Every step must be an everyday word.
+- **Colour Alchemy** works through a shuffled cycle of every recipe at the day's level:
+
+  | Level | Drops | Recipes |
+  | --- | --- | --- |
+  | Gentle | 2–4 | 15 |
+  | Medium | 3–6 | 35 |
+  | Tricky | 4–7 | 124 |
+
+- **Mirror Garden**, **Sudoku Six**, **Killer Six**, **Bloom Trail 5×5** and **Neighbours Goal** are generated from scratch each day.
+- **Time Lens Duel** reuses the Time Lens photo bank in `dist/photos.js`.
+- The feed counts all 17 games for each day. The original five games keep their own progress records, so older saves still work.
+
+Run `node verify-window.cjs`, `node verify-levels.cjs` and `node verify-sparks.cjs` before changing the generators or the content banks.
 
 ## Photographs
 
