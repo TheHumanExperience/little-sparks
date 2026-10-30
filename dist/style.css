@@ -41,7 +41,7 @@ button,input[type=range]{touch-action:manipulation}
 .wordkeyboard{margin:20px auto 8px;max-width:460px}.keyrow{display:flex;justify-content:center;gap:4px;margin:5px 0}.letterkey{flex:1;max-width:42px;min-width:0;min-height:44px;padding:4px 0;border:1px solid #b8c3b0;border-radius:5px;background:#e1e5da;color:#243f32;font-size:14px;font-weight:700}.letterkey.wide{flex:1.5;max-width:64px;font-size:11px}.letterkey.correct{background:#52775a;color:white}.letterkey.present{background:#99731d;color:white}.letterkey.absent{background:#565d54;color:white}.letterkey:disabled{cursor:default;opacity:1}.photo-clue{background:#edf0e4;border-left:3px solid #64815b;border-radius:8px;padding:14px 16px;margin:14px 0}.photo-clue strong{font-size:12px}.photo-clue p{margin:6px 0 0;font-size:13px;line-height:1.6}
 
 /* ───────── Feed: one full-screen, snap-scrolling card per puzzle ───────── */
-body.feedmode { height: 100dvh; overflow: hidden; display: flex; flex-direction: column; }
+body.feedmode { height: 100vh; height: 100dvh; overflow: hidden; display: flex; flex-direction: column; }
 body.feedmode header.feedbar { flex: none; width: 100%; max-width: none; height: 56px; padding: 0 14px; padding-top: env(safe-area-inset-top); background: var(--paper); z-index: 5; }
 body.feedmode .brand { font-size: 19px; letter-spacing: -0.5px; white-space: nowrap; }
 body.feedmode .brand span { font-size: 26px; margin-right: 5px; }
@@ -203,4 +203,28 @@ dialog.sheet h2 { font-size: 26px; margin: 0; }
   .sparkinner { padding: 12px 12px 10px; }
   .rung span { width: 36px; height: 36px; }
   .swatch { width: 92px; height: 92px; }
+}
+
+/* Mobile: every card is exactly one screen; long games scroll inside their card so
+   mandatory snapping never fights the player (oversized snap areas misbehave on iOS). */
+html { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+button { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+.feedbar { height: calc(56px + env(safe-area-inset-top)); padding-left: max(14px, env(safe-area-inset-left)); padding-right: max(14px, env(safe-area-inset-right)); }
+.spark { height: 100%; min-height: 0; position: relative; overflow: hidden; padding-bottom: calc(18px + env(safe-area-inset-bottom)); }
+.sparkinner { max-height: 100%; overflow-y: auto; overscroll-behavior-y: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+.sparkinner::-webkit-scrollbar { display: none; }
+.sparkinner > * { flex-shrink: 0; }
+.lovenote { font-family: "Libre Caslon Display", Georgia, serif; font-size: 24px; color: var(--ink); margin: 22px 0 12px; }
+.lovenote span { display: block; color: #b07d5b; font-size: 26px; margin-bottom: 6px; }
+@media (max-width: 380px) { .spark { padding-bottom: calc(12px + env(safe-area-inset-bottom)); } }
+/* Comfortable 44px tap targets */
+.nextspark { min-height: 44px; padding: 10px 18px; }
+.keys button { min-height: 44px; }
+.star { width: 44px; height: 44px; padding-bottom: 5px; background: radial-gradient(circle, #fff8d6 0 17%, #fff8d630 28%, transparent 46%); }
+.feedbar .pill { position: relative; }
+.feedbar .pill::after { content: ""; position: absolute; inset: -6px -2px; }
+@media (max-width: 360px) {
+  .feedbar .brand { font-size: 17px; }
+  .pills { gap: 4px; }
+  .pill { padding: 6px 9px; font-size: 12px; }
 }

@@ -33,7 +33,7 @@ if (document.getElementById?.("feed")) {
   };
   const coverHtml = (g, done) => `<div class="cover"><div class="coverart" aria-hidden="true">${g.art}</div><p>${g.blurb}</p><span class="coverhint">${done ? "✓ Solved — scroll here to see it again" : "Settle here to play"}</span></div>`;
   const introHtml = (d, offset) => `<section class="spark dayintro" data-day="${d}" data-intro="1"><div class="sparkinner"><span class="eyebrow">${offset === 1 ? "Yesterday" : offset + " days ago"}</span><h2>${new Date(d + "T12:00:00").toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" })}</h2><p class="introcount"><b>${feedCount(d)}</b> of ${FEED_ORDER.length} sparks solved</p><div class="introdots">${FEED_ORDER.map((i) => `<i class="${feedDone(d, i) ? "done" : ""}"></i>`).join("")}</div><p class="small">Every puzzle from that day, waiting just below. ↓</p></div></section>`;
-  const noteHtml = () => `<section class="spark notecard" data-note="1"><div class="sparkinner"><div class="coverart" aria-hidden="true">✳ ✴ ✦</div><span class="eyebrow">You made it through today</span><h2 class="notehero">A little play.<br>A lovely little pause.</h2><p class="todaycount"><b class="todaycountnum">${feedCount(feedToday)}</b> of ${FEED_ORDER.length} sparks today</p><section class="note"><span>♡</span><div><h3>A little gift, just for you, Nidhi. 💛</h3><p>While we wait to meet our little one, I wanted to make something just for you—a few puzzles you’ll love, little discoveries, and a quiet moment in your day.<br><br>Some days, one puzzle is plenty. Some days, all five. No rush, no perfect score—just the joy of figuring something out and knowing I made this thinking of you.<br><br>I can’t wait to be a parent with you.<br><br>With all my love,<br>Devansh</p></div></section><p class="small">Keep scrolling for yesterday’s sparks ↓</p></div></section>`;
+  const noteHtml = () => `<section class="spark notecard" data-note="1"><div class="sparkinner"><div class="coverart" aria-hidden="true">✳ ✴ ✦</div><span class="eyebrow">You made it through today</span><h2 class="notehero">A little play.<br>A lovely little pause.</h2><p class="todaycount"><b class="todaycountnum">${feedCount(feedToday)}</b> of ${FEED_ORDER.length} sparks today</p><p class="lovenote"><span aria-hidden="true">♡</span> Created with love from Devansh</p><p class="small">Keep scrolling for yesterday’s sparks ↓</p></div></section>`;
   const endHtml = () => `<section class="spark endcard" data-end="1"><div class="sparkinner"><div class="coverart" aria-hidden="true">✿ ✳ ✿</div><h2>That’s the whole garden.</h2><p>You’ve reached ${FEED_DAYS - 1} days back. New sparks arrive every morning.</p><button class="btn" type="button" data-top="1">Back to today ↑</button></div></section>`;
 
   function appendDay() {
@@ -162,7 +162,7 @@ if (document.getElementById?.("feed")) {
     setTimeout(() => (chip.querySelector("b").textContent = n), reduceMotion.matches ? 0 : 350);
     setTimeout(() => chip.remove(), 2600);
     if (reduceMotion.matches) return;
-    navigator.vibrate?.([20, 40, 20]);
+    try { if ("vibrate" in navigator) navigator.vibrate([20, 40, 20]); } catch {}
     const burst = document.createElement("div"), glyphs = ["✦", "✿", "●", "★", "✳", "♡"], colours = ["#e9a23b", "#d56d4c", "#7da26c", "#5a8fb5", "#c57bb0", "#f2c94c"];
     burst.className = "burst";
     burst.setAttribute("aria-hidden", "true");
@@ -172,7 +172,7 @@ if (document.getElementById?.("feed")) {
       p.style.cssText = `--dx:${Math.cos(ang) * dist}px;--dy:${Math.sin(ang) * dist - 40}px;--rot:${Math.random() * 540 - 270}deg;--delay:${Math.random() * 120}ms;color:${colours[k % colours.length]};font-size:${12 + Math.random() * 14}px`;
       burst.append(p);
     }
-    card.querySelector(".sparkinner").append(burst);
+    card.append(burst);
     setTimeout(() => burst.remove(), 1500);
   }
 

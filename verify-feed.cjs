@@ -27,4 +27,5 @@ if (feedCount(d) !== 4) fail("feedCount should count all 17 games");
 if (Object.entries(all[progressKey(d)].games).filter(([i, g]) => +i < 5 && g.done).length !== 2) fail("legacy 5-game count changed");
 FEED_ORDER.length + " cards × " + FEED_DAYS + " days";
 `, context);
+if (!fs.readFileSync("dist/feed.js", "utf8").includes("Created with love from Devansh")) throw Error("note card message missing");
 console.log("Feed OK:", result);
