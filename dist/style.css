@@ -228,3 +228,49 @@ button { -webkit-user-select: none; user-select: none; -webkit-touch-callout: no
   .pills { gap: 4px; }
   .pill { padding: 6px 9px; font-size: 12px; }
 }
+/* Small rewards: flow bar, sound toggle, toasts, milestones, shiny cards, golden day */
+.feedbar { position: relative; }
+.soundpill { padding: 6px 9px; min-width: 36px; }
+.soundpill span { font-size: 14px; line-height: 1; }
+.soundpill[aria-pressed="false"] { opacity: 0.65; }
+.flowbar { position: absolute; left: 0; right: 0; bottom: -1px; height: 4px; background: #e6e8dd; }
+.flowbar i { display: block; height: 100%; width: calc(var(--flow, 0) * 100%); background: linear-gradient(90deg, #f2c94c, #e9a23b); border-radius: 0 3px 3px 0; transition: width 0.6s ease; }
+body.golden .flowbar i { background: linear-gradient(90deg, #e9a23b, #f6d77a, #e9a23b); }
+.rewardline { color: #7a6a3a; font-size: 14px; margin: 6px 0 0; }
+.solvedchip small { font-size: 11px; opacity: 0.85; font-weight: 600; }
+.toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 30; background: #2f4a37; color: #fff; padding: 12px 18px; border-radius: 999px; font-weight: 600; font-size: 15px; box-shadow: 0 8px 24px #0003; white-space: nowrap; animation: toastin 0.35s ease-out; transition: opacity 0.4s, transform 0.4s; }
+.toast.sticker { background: linear-gradient(110deg, #7b6cd9, #4fa3c7, #6cc49a, #e3a34a); }
+.toast.gold { background: linear-gradient(110deg, #b9822a, #e9b949, #b9822a); color: #2a1d05; }
+.toast.out { opacity: 0; transform: translate(-50%, 12px); }
+@keyframes toastin { from { opacity: 0; transform: translate(-50%, 16px); } }
+.milestone { position: fixed; inset: 0; z-index: 25; display: grid; place-items: center; pointer-events: none; transition: opacity 0.5s; }
+.milestone.out { opacity: 0; }
+.milestone .mscard { display: grid; gap: 4px; text-align: center; background: #fffdf8f2; border: 2px solid #e9c46a; border-radius: 24px; padding: 22px 30px; box-shadow: 0 20px 60px #24403240; animation: mspop 0.6s cubic-bezier(0.2, 1.4, 0.4, 1); }
+.milestone .mscard b { font-family: "Libre Caslon Display", Georgia, serif; font-weight: 400; font-size: 38px; color: var(--ink); }
+.milestone .mscard span { color: #6b5a2a; font-weight: 600; }
+.milestone.ms-ten .mscard { border-color: #e9a23b; background: #fff7e6f2; }
+.milestone.ms-all { background: radial-gradient(circle at 50% 45%, #fff3c880, transparent 70%); }
+.milestone.ms-all .mscard { border-width: 3px; background: linear-gradient(160deg, #fffaf0, #fff1c9); }
+.milestone.ms-all .mscard b { font-size: 46px; }
+@keyframes mspop { from { transform: scale(0.6); opacity: 0; } }
+.shinytag { font-weight: 700; background: linear-gradient(90deg, #7b6cd9, #4fa3c7, #6cc49a, #e3a34a); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.spark.shiny .sparkinner { border: 2px solid transparent; background: linear-gradient(150deg, #fffdf8, #f7f3ff 35%, #eefaf5 65%, #fff8ec) padding-box, linear-gradient(120deg, #b6a8ff, #8fd3f0, #a6e8c2, #f6d58b, #f3a7c8, #b6a8ff) 0 0 / 300% 300% border-box; animation: holo 4s linear infinite; }
+@keyframes holo { to { background-position: 0 0, 300% 0; } }
+body.golden .spark:not(.dayintro):not(.shiny) .sparkinner { background: linear-gradient(170deg, #fffaf0, #fdf1d2); border-color: #e9c46a; box-shadow: 0 6px 24px #e9a23b30; }
+body.golden .feedbar .brand span { color: #c8901f; }
+@media (prefers-reduced-motion: reduce) {
+  .spark.shiny .sparkinner { animation: none; }
+  .toast, .milestone .mscard { animation: none; }
+  .flowbar i { transition: none; }
+}
+@media (max-width: 360px) { .soundpill { padding: 6px 7px; min-width: 32px; } }
+/* Clear & retry: quiet ↺ in the card's bottom-left corner */
+.sparkfoot { position: relative; align-items: center; }
+.retry { position: absolute; left: 0; top: 50%; transform: translateY(-50%); z-index: 1; width: 44px; height: 44px; border: 0; border-radius: 50%; background: transparent; color: #8a9586; font-size: 20px; line-height: 1; display: grid; place-items: center; }
+.retry:hover, .retry:focus-visible { color: #355a40; background: #eef2e8; }
+.retrybar { flex: 1; min-height: 44px; padding-left: 50px; font-size: 13px; color: #55634f; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.retrybar:empty { display: none; }
+.retrybar button { pointer-events: auto; min-height: 44px; padding: 0 12px; border: 1px solid #cdd6c4; border-radius: 999px; background: #fff; color: #355a40; font: inherit; font-weight: 600; }
+@media (max-width: 340px) { .todaylabel { display: none; } }
+.sparkfoot:has(.retrybar:not(:empty)) .nextspark { display: none; }
+.sparkinner > .stage, .sparkinner > .sparkfoot { flex-shrink: 0; flex-basis: auto; }

@@ -10,11 +10,13 @@
   </head>
   <body class="feedmode">
     <header class="feedbar">
-      <a class="brand" href="#" aria-label="Little Sparks home"><span>✳</span> little sparks</a>
+      <a class="brand" href="#" aria-label="Little Sparks, back to the top of today"><span>✳</span> little sparks</a>
       <div class="pills">
-        <button class="pill" id="todayPill" type="button" aria-label="Jump to a day">Today · <b id="todayCount">0/17</b></button>
+        <button class="pill" id="todayPill" type="button" aria-label="Jump to a day"><span class="todaylabel">Today · </span><b id="todayCount">0/17</b></button>
+        <button class="pill soundpill" id="soundPill" type="button" aria-pressed="true" aria-label="Sound on. Turn chimes off"><span aria-hidden="true">🔔</span></button>
         <button class="pill" id="levelPill" type="button" aria-label="Change difficulty">Medium</button>
       </div>
+      <div id="flowBar" class="flowbar" role="meter" aria-label="Flow: solve without hints to fill it" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0"><i></i></div>
     </header>
     <main id="feed" aria-label="Puzzle feed"></main>
     <p id="announce" class="visually-hidden" aria-live="polite"></p>

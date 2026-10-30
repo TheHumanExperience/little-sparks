@@ -28,6 +28,7 @@ Like the original games, the ten feed games are built from the date and the diff
 
 - **Mirror Garden**, **Sudoku Six**, **Killer Six**, **Bloom Trail 5×5** and **Neighbours Goal** are generated from scratch each day.
 - **Time Lens Duel** reuses the Time Lens photo bank in `dist/photos.js`.
+- Shiny cards are picked with `rng(`${date}|shiny|${game}`)() < 0.05`, so the same cards are shiny every time you load a day. Changing that formula changes which past cards are shiny.
 - The feed counts all 17 games for each day. The original five games keep their own progress records, so older saves still work.
 
 Run `node verify-window.cjs`, `node verify-levels.cjs` and `node verify-sparks.cjs` before changing the generators or the content banks.
