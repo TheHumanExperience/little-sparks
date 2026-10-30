@@ -45,6 +45,9 @@ git push origin sites-history
 
 ## Hosting and credits
 
+The site is hosted on GitHub Pages at https://thehumanexperience.github.io/little-sparks/.
+Every push to `main` runs the validation scripts and deploys `dist/` via `.github/workflows/pages.yml`.
+
 The existing Sites hosting configuration is retained in `.openai/hosting.json`.
 This GitHub copy is not automatically synchronized with future Sites changes.
 
