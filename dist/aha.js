@@ -1,20 +1,20 @@
-/* Aha track — five CAT-style (Indian MBA entrance) questions a day (state indexes 3, 17, 18,
-   19, 20), drawn from ten Quant and LRDI category generators. Gentle/Medium are MCQs, Tricky
-   is TITA (type in the answer), as in the real exam. A question is a pure function of (date, difficulty, slot).
+/* Aha track — five logical-reasoning questions a day (state indexes 3, 17, 18, 19, 20), drawn
+   from ten category generators (number and logic groups alternate). Gentle/Medium are multiple
+   choice; Tricky asks you to type the answer. A question is a pure function of (date, difficulty, slot).
    Every generator builds a puzzle, then brute-forces it with ahaSolve() and retries until
    exactly one answer survives. verify-aha.cjs re-runs the same solvers. */
 const AHA_SLOTS = [3, 17, 18, 19, 20];
 const AHA_CATS = [
-  { id: "percent", name: "Profit & Percentages", type: "Quant · Arithmetic", art: "% ₹", blurb: "Mark-ups, discounts and the percentage traps CAT loves." },
-  { id: "order", name: "Seating Arrangement", type: "LRDI · Arrangement", art: "▢ ▢ ▣ ▢", blurb: "A handful of clues, exactly one order." },
-  { id: "tsd", name: "Speed, Time & Work", type: "Quant · Arithmetic", art: "⇢ ⏱", blurb: "Trains, boats, taps and teamwork." },
-  { id: "liars", name: "Truth & Lies", type: "LRDI · Truth-tellers", art: "☺ ☹ ?", blurb: "Some always tell the truth. Some never do." },
-  { id: "numbers", name: "Number Systems", type: "Quant · Numbers", art: "7 ÷ 3 = 2 r1", blurb: "Remainders, divisors, cycles and LCMs." },
-  { id: "di", name: "Data Interpretation", type: "LRDI · Tables", art: "▤ ▥ ▦", blurb: "Read the table, dodge the trap." },
-  { id: "ratio", name: "Ratios & Mixtures", type: "Quant · Arithmetic", art: "2 : 3", blurb: "Blends, ages and shares." },
-  { id: "grid", name: "Logic Grid", type: "LRDI · Grid", art: "✓ ✗ ✗", blurb: "Cross out the impossible." },
-  { id: "guarantee", name: "Counting & Chance", type: "Quant · Modern maths", art: "● ● ○", blurb: "Plan for the unluckiest draw." },
-  { id: "clock", name: "Clocks & Calendars", type: "LRDI · Time", art: "◷ ▦", blurb: "Hands, hours and weekdays." },
+  { id: "percent", name: "Profit & Percentages", group: "numbers", type: "Logical reasoning", art: "% ₹", blurb: "Mark-ups, discounts and the percentage traps that catch everyone." },
+  { id: "order", name: "Seating Arrangement", group: "logic", type: "Logical reasoning", art: "▢ ▢ ▣ ▢", blurb: "A handful of clues, exactly one order." },
+  { id: "tsd", name: "Speed, Time & Work", group: "numbers", type: "Logical reasoning", art: "⇢ ⏱", blurb: "Trains, boats, taps and teamwork." },
+  { id: "liars", name: "Truth & Lies", group: "logic", type: "Logical reasoning", art: "☺ ☹ ?", blurb: "Some always tell the truth. Some never do." },
+  { id: "numbers", name: "Number Puzzles", group: "numbers", type: "Logical reasoning", art: "7 ÷ 3 = 2 r1", blurb: "Remainders, divisors, cycles and LCMs." },
+  { id: "di", name: "Read the Table", group: "logic", type: "Logical reasoning", art: "▤ ▥ ▦", blurb: "Read the table, dodge the trap." },
+  { id: "ratio", name: "Ratios & Mixtures", group: "numbers", type: "Logical reasoning", art: "2 : 3", blurb: "Blends, ages and shares." },
+  { id: "grid", name: "Logic Grid", group: "logic", type: "Logical reasoning", art: "✓ ✗ ✗", blurb: "Cross out the impossible." },
+  { id: "guarantee", name: "Counting & Chance", group: "numbers", type: "Logical reasoning", art: "● ● ○", blurb: "Plan for the unluckiest draw." },
+  { id: "clock", name: "Clocks & Calendars", group: "logic", type: "Logical reasoning", art: "◷ ▦", blurb: "Hands, hours and weekdays." },
 ];
 const AHA_NAMES = ["Asha", "Bilal", "Chitra", "Dev", "Esha", "Farhan", "Gauri", "Hari", "Ira", "Jai", "Kavya", "Leela", "Manav", "Neel", "Ojas", "Pari", "Rhea", "Sahil", "Tara", "Uma", "Vikram", "Zoya", "Anya", "Kabir", "Meera", "Rohan", "Sana", "Arjun", "Diya", "Ishaan", "Naina", "Vihaan", "Aditi", "Kiran", "Mira", "Noor", "Tanvi", "Yash", "Ved", "Riya", "Om", "Lata", "Nikhil", "Pooja", "Sameer", "Tejas"];
 const WEEKDAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
@@ -31,8 +31,8 @@ function ahaPerms(n) {
 const AHA_PERMS = new Map();
 const permsOf = (n) => AHA_PERMS.get(n) || (AHA_PERMS.set(n, ahaPerms(n)), AHA_PERMS.get(n));
 
-/* Which five categories a date shows: a window sliding through all ten (Quant and LRDI
-   alternate in AHA_CATS, so every day mixes both), shuffled into slots. */
+/* Which five categories a date shows: a window sliding through all ten (number and logic
+   groups alternate in AHA_CATS, so every day mixes both), shuffled into slots. */
 function ahaCategories(d) {
   const N = AHA_CATS.length, start = mod(calendarIndex(d) * 3 + difficulty * 7, N);
   return shuffle([0, 1, 2, 3, 4].map((j) => mod(start + j, N)), rng(puzzleSeed(d) + "|aha-order"));
@@ -281,7 +281,7 @@ function genGrid(r, lv) {
   }
 }
 
-/* ───────── CAT Quant & DI: each solver searches for the answer from the raw data ───────── */
+/* ───────── Number and table puzzles: each solver searches for the answer from the raw data ───────── */
 const ahaGcd = (a, b) => (b ? ahaGcd(b, a % b) : Math.abs(a));
 const ahaRs = (n) => "₹" + ahaFmt(n);
 const ahaSeek = (lo, hi, ok) => { const out = []; for (let v = lo; v <= hi && out.length < 2; v++) if (ok(v)) out.push(String(v)); return out; };
@@ -548,7 +548,7 @@ function ahaModel(d, slot) {
   AHA_CACHE.set(key, m);
   return m;
 }
-/* TITA answers: units, commas and ₹ are ignored; the number must match exactly. */
+/* Typed answers: units, commas and ₹ are ignored; the number must match exactly. */
 function ahaCheck(m, raw) {
   if (m.kind === "choice") return String(raw) === m.a;
   const txt = String(raw).replace(/[−–]/g, "-").replace(/[^\d.\-]/g, ""), v = Number(txt);
@@ -585,7 +585,7 @@ function ahaRender(i) {
   const slot = AHA_SLOTS.indexOf(i), m = ahaModel(day, slot), s = state(i), cat = AHA_CATS[m.cat];
   s.aha = 1;
   persist();
-  $("#rules").textContent = `CAT-style ${cat.type.split(" · ")[0]} · ${m.kind === "number" ? "TITA: type the answer, no options to lean on." : "MCQ: one option is right."}`;
+  $("#rules").textContent = `Logical reasoning · ${m.kind === "number" ? "Type your answer, no options to lean on." : "Pick the one right answer."}`;
   const label = (v) => (m.numeric ? `${m.pre || ""}${Number(v).toLocaleString("en-IN")}${m.unit ? (/^[%°]$/.test(m.unit) ? "" : " ") + m.unit : ""}` : v);
   const table = m.table ? `<div class="ahatable"><table><thead><tr>${m.table.head.map((h) => `<th scope="col">${h}</th>`).join("")}</tr></thead><tbody>${m.table.rows.map((row) => `<tr>${row.map((c, k) => (k ? `<td>${c}</td>` : `<th scope="row">${c}</th>`)).join("")}</tr>`).join("")}</tbody></table></div>` : "";
   function draw() {

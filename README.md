@@ -45,14 +45,14 @@ The games, in feed order:
 
 All 21 cards have three difficulty levels and hints, and progress is saved in the browser.
 
-**The Aha track** replaces the old single Aha Moment card. Each day has five CAT-style reasoning cards, spread through the feed so that no two sit next to each other. They are drawn from ten categories that alternate between Quant and LRDI:
+**The Aha track** replaces the old single Aha Moment card. Each day has five logical-reasoning cards, spread through the feed so that no two sit next to each other. They are drawn from ten categories that alternate between number puzzles and logic puzzles:
 
 - Percentages and profit
 - Arrangements
 - Time, speed and distance
 - Truth-tellers and liars
-- Number properties
-- Data tables
+- Number puzzles
+- Reading a table
 - Ratio and mixtures
 - 3×3 logic grids
 - Pigeonhole and guarantee
@@ -60,7 +60,7 @@ All 21 cards have three difficulty levels and hints, and progress is saved in th
 
 Each date and level shows five consecutive categories from the ten, and the window rotates daily. Every question is generated in `dist/aha.js` from the date and difficulty. Its names and numbers are drawn fresh each time. A brute-force solver confirms the question has exactly one answer, and each question comes with a hint and a "why" explanation.
 
-- **Formats.** Gentle and Medium are multiple choice (MCQ). Tricky uses typed answers (TITA): a numeric field, or a name picker for grids and liars.
+- **Formats.** Gentle and Medium are multiple choice. Tricky asks you to type the answer in a numeric field, or a name picker for grids and liars.
 - **Skill badges.** A small badge on each card shows how many questions of that category you have solved.
 - **Older saves.** Past days that have an old Aha Moment save in slot 3 still open the original puzzle.
 

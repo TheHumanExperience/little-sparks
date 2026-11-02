@@ -1,5 +1,5 @@
-// Checks the CAT-style Aha track (dist/aha.js): every category × level × 366 days generates
-// deterministically, the brute-force solver finds exactly one answer and it matches, MCQ
+// Checks the logical-reasoning Aha track (dist/aha.js): every category × level × 366 days generates
+// deterministically, the brute-force solver finds exactly one answer and it matches, multiple-choice
 // options are unique and contain the answer, each day shows five different categories,
 // wording barely repeats within 61 days, and old index-3 progress stays on the legacy card.
 const fs = require("fs"), vm = require("vm");
@@ -17,7 +17,7 @@ const fail = (m) => { throw Error(m); };
 const N = AHA_CATS.length, dates = [], start = new Date("2026-01-01T12:00:00");
 for (let o = 0; o < 366; o++) { const t = new Date(start); t.setDate(t.getDate() + o); dates.push(t.getFullYear() + "-" + String(t.getMonth() + 1).padStart(2, "0") + "-" + String(t.getDate()).padStart(2, "0")); }
 if (AHA_GEN.length !== N || new Set(AHA_CATS.map((c) => c.id)).size !== N) fail("one generator per category");
-for (const c of AHA_CATS) if (!/^(Quant|LRDI) · /.test(c.type) || !c.blurb) fail("category needs a CAT section and blurb: " + c.id);
+for (const c of AHA_CATS) if (!["numbers", "logic"].includes(c.group) || !c.blurb || /CAT|Quant|LRDI|MCQ|TITA/.test(c.name + c.type + c.blurb)) fail("category needs a group, a blurb and no exam labels: " + c.id);
 const text = (q) => [q.intro, JSON.stringify(q.table || ""), ...(q.clues || []), q.ask].join(" | ");
 let questions = 0, repeats = 0;
 for (let lv = 0; lv < 3; lv++) {
@@ -33,7 +33,7 @@ for (let lv = 0; lv < 3; lv++) {
       const sol = ahaSolve(c, q.data);
       if (sol.length !== 1) fail("expected exactly one answer, got " + JSON.stringify(sol) + " for " + AHA_CATS[c].id + " " + d + " L" + lv + " " + JSON.stringify(q.data));
       if (sol[0] !== String(q.a)) fail("answer mismatch " + AHA_CATS[c].id + " " + d + " L" + lv + ": " + sol[0] + " vs " + q.a);
-      if (q.kind === "number" && !Number.isInteger(q.a * 2)) fail("TITA answers should be whole or half numbers: " + AHA_CATS[c].id + " " + q.a);
+      if (q.kind === "number" && !Number.isInteger(q.a * 2)) fail("typed answers should be whole or half numbers: " + AHA_CATS[c].id + " " + q.a);
       if (q.options && (new Set(q.options).size !== q.options.length || !q.options.includes(q.a))) fail("options must be unique and include the answer: " + AHA_CATS[c].id + " " + d);
       const tx = text(q);
       if (history.slice(-60).includes(tx)) repeats++;
@@ -45,7 +45,7 @@ for (let lv = 0; lv < 3; lv++) {
   for (const d of dates) {
     const cats = ahaCategories(d);
     if (cats.length !== 5 || new Set(cats).size !== 5) fail("a day needs five different categories: " + d);
-    if (!cats.some((x) => AHA_CATS[x].type.startsWith("Quant")) || !cats.some((x) => AHA_CATS[x].type.startsWith("LRDI"))) fail("each day should mix Quant and LRDI: " + d);
+    if (!cats.some((x) => AHA_CATS[x].group === "numbers") || !cats.some((x) => AHA_CATS[x].group === "logic")) fail("each day should mix number and logic puzzles: " + d);
     cats.forEach((x) => { seenCats.add(x); catDays.set(x, (catDays.get(x) || 0) + 1); });
     AHA_CACHE.clear();
     const first = AHA_SLOTS.map((_, slot) => JSON.stringify(ahaModel(d, slot)));
@@ -54,13 +54,13 @@ for (let lv = 0; lv < 3; lv++) {
       const m = ahaModel(d, slot);
       if (JSON.stringify(m) !== first[slot]) fail("ahaModel not deterministic " + d + " slot " + slot);
       if (m.cat !== cats[slot]) fail("slot category mismatch " + d);
-      if (lv < 2 && m.kind !== "choice") fail("Gentle/Medium must be MCQ: " + d + " " + AHA_CATS[m.cat].id);
+      if (lv < 2 && m.kind !== "choice") fail("Gentle/Medium must be multiple choice: " + d + " " + AHA_CATS[m.cat].id);
       if (m.kind === "choice") {
-        if (m.options.length < 3 || new Set(m.options).size !== m.options.length || !m.options.includes(m.a)) fail("bad MCQ options " + d + " " + AHA_CATS[m.cat].id + " " + JSON.stringify(m.options) + " a=" + m.a);
-        if (!ahaCheck(m, m.a) || m.options.some((o) => o !== m.a && ahaCheck(m, o))) fail("MCQ check wrong " + d);
+        if (m.options.length < 3 || new Set(m.options).size !== m.options.length || !m.options.includes(m.a)) fail("bad options " + d + " " + AHA_CATS[m.cat].id + " " + JSON.stringify(m.options) + " a=" + m.a);
+        if (!ahaCheck(m, m.a) || m.options.some((o) => o !== m.a && ahaCheck(m, o))) fail("choice check wrong " + d);
       } else {
         const typed = (m.pre || "") + Number(m.a).toLocaleString("en-IN") + (m.unit ? " " + m.unit : "");
-        if (!ahaCheck(m, String(m.a)) || !ahaCheck(m, typed) || ahaCheck(m, String(m.a + 1)) || ahaCheck(m, "")) fail("TITA check wrong " + d + " " + typed);
+        if (!ahaCheck(m, String(m.a)) || !ahaCheck(m, typed) || ahaCheck(m, String(m.a + 1)) || ahaCheck(m, "")) fail("typed check wrong " + d + " " + typed);
       }
     }
   }
