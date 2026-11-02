@@ -5,9 +5,9 @@
 - Letterlight cycles through a fixed shuffled word list; no word repeats within a 61-day window at one difficulty.
 - Reasoning uses eight templates with date-specific values, hints, and worked answers. Templates recur; the questions vary.
 - Sudoku, dominoes, and Little Neighbours are generated from the date and difficulty. Bloom Trail rotates through full paths with distinct clue layouts, without repeats within 61 days at each difficulty.
-- Time Lens uses 183 local photos in a fixed 61-day cycle, three per day, with at least one Indian-context photo. No image repeats within any 61 consecutive dates for newly started rounds. The same date uses the same photos across difficulty levels; the clues change.
+- Time Lens uses 183 active local photos in a fixed 61-day cycle, three per day: one history-shaping photo (`iconic: true`, for example the first flight, the Solvay Conference, Earthrise, independence in 1947, Kargil, Chandrayaan-3), one Indian-context photo and one more scene, shown in a shuffled order. No image repeats within any 61 consecutive dates for newly started rounds. The same date uses the same photos across difficulty levels; the clues change.
 - The photo cycle repeats after 61 days. It is not an indefinitely growing archive.
-- Started puzzles preserve their old words, reasoning, and saved photo IDs. Those legacy photo sets may repeat images from the new schedule.
+- Started puzzles preserve their old words, reasoning, and saved photo IDs. Those legacy photo sets may repeat images from the new schedule. Weaker entries are marked `retired: true` rather than deleted, so saved IDs still resolve; retired photos never enter new rounds.
 - Source catalogue dates, creator credits, and applicable licence links appear after guessing. Historical catalogue dates are not independently authenticated dates.
 - Progress stays in browser-local storage. It is not shared between devices.
 
@@ -33,7 +33,7 @@ Like the original games, the ten feed games are built from the date and the diff
   | Tricky | 4–7 | 124 |
 
 - **Mirror Garden**, **Sudoku Six**, **Killer Six**, **Bloom Trail 5×5** and **Neighbours Goal** are generated from scratch each day.
-- **Time Lens Duel** reuses the Time Lens photo bank in `dist/photos.js`.
+- **Time Lens Duel** reuses the active Time Lens photos in `dist/photos.js`, always includes at least one history-shaping photo and never uses today's Time Lens photos. A started Duel pins its photo IDs; Duels saved before pinning use the original 183-photo model (`legacyDuelModel`).
 - Shiny cards are picked with `rng(`${date}|shiny|${game}`)() < 0.05`, so the same cards are shiny every time you load a day. Changing that formula changes which past cards are shiny.
 - The feed counts all 21 cards for each day: 16 games plus five Aha track cards, generated in `dist/aha.js`. The original five games keep their own progress records, so older saves still work.
 
@@ -42,5 +42,7 @@ Run `node verify-window.cjs`, `node verify-levels.cjs` and `node verify-sparks.c
 ## Photographs
 
 `dist/photos.js` is the canonical image manifest. Every referenced image is bundled under `dist/photos/`; gameplay does not depend on Wikimedia or NASA image servers being available. Commons previews may be resized/re-encoded for delivery; no substantive image changes are intended. Original source pages and licence links remain attached to each entry.
+
+Entry fields: `image`, `year`, `title`, `alt`, `story`, `credit`, `source`, `licenseUrl`, `sourceDate`, `india`, plus optional `iconic`, `clue` (shown before the guess and must not contain a year), `why` (one-line "why it mattered", shown after the guess) and `retired`. Keep the first 183 entries in their original order (legacy schedules depend on it) and append new photos. Only freely licensed images (public domain, CC0, CC BY, CC BY-SA, GODL-India, Flickr Commons no known restrictions) are allowed; press-agency photos (AP, Reuters, Getty, etc.) and fair-use files are not. `tools/fetch-historic.py` checks the Commons licence, then downloads and resizes an image (800 px, JPEG q80) and prints its credit metadata.
 
 Do not overwrite the manifest with the old six-photo starter script. `prepare_photos.py` now verifies the full local collection instead.

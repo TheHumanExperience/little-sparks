@@ -2,7 +2,7 @@ const fs=require('fs'),vm=require('vm'),assert=require('assert');
 for(let level=0;level<3;level++){
  let src=fs.readFileSync('verify.cjs','utf8').replace('for(let n=0;n<366;n++)',`vm.runInContext('difficulty=${level}',context);for(let n=0;n<366;n++)`);
  vm.runInNewContext(src,{require,console});
- let extra=fs.readFileSync('verify-extras.cjs','utf8').replace('for(let n=1;n<=365;n++)',`difficulty=${level};setup();for(let n=1;n<=365;n++)`).replace("if(new Set(photos).size!==3)","if(!photos.some(p=>p.india))throw Error('Missing Indian photo');if(new Set(photos).size!==3)");
+ let extra=fs.readFileSync('verify-extras.cjs','utf8').replace('for(let n=1;n<=365;n++)',`difficulty=${level};setup();for(let n=1;n<=365;n++)`).replace("if(new Set(photos).size!==3)","if(!photos.some(p=>p.india))throw Error('Missing Indian photo');if(!photos.some(p=>p.iconic))throw Error('Missing history-shaping photo');if(new Set(photos).size!==3)");
  vm.runInNewContext(extra,{require,console});
  console.log('Level',level,'passed');
 }

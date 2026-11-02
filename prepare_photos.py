@@ -11,6 +11,9 @@ for item in bank:
  assert digest not in seen, f'Duplicate image: {path}'
  seen.add(digest)
  assert item['source'].startswith('https://') and item['credit']
-assert len(bank)==183
-assert sum(bool(x.get('india')) for x in bank)>=61
-print(f'PASS: {len(bank)} distinct, decodable images with source credits.')
+active=[x for x in bank if not x.get('retired')]
+assert len(active)==183, len(active)
+assert sum(1 for x in active if x.get('iconic'))>=61
+assert sum(1 for x in active if x.get('india') and not x.get('iconic'))>=61
+assert all(x.get('why') and x.get('clue') for x in active if x.get('iconic'))
+print(f'PASS: {len(bank)} distinct, decodable images with source credits; {len(active)} active, {len(bank)-len(active)} retired kept for saved rounds.')

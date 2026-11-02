@@ -34,7 +34,7 @@ const checks = {
   12: (m) => { if (!validSix(m.sol)) fail("bad killer"); if (m.cages.flatMap((c) => c.cells).length !== 36) fail("cages incomplete"); if (m.cages.some((c) => c.sum !== c.cells.reduce((t, i) => t + m.sol[i], 0))) fail("cage sum"); if (sixCount(m.givens, m.cages) !== 1) fail("killer not unique"); },
   13: (m) => { for (let k = 1; k < m.route.length; k++) if (ladderStepError(m.route[k - 1], m.route[k], m.route.slice(0, k))) fail("bad ladder step " + m.route); if (m.par !== [3, 4, 5][difficulty]) fail("ladder par"); },
   14: (m) => { if (!bloomFiveValid(m, m.path)) fail("bloom path invalid"); if (m.turns.length !== [4, 3, 2][difficulty]) fail("turn count"); },
-  15: (m, d) => { const skip = photoSet(d).map((p) => p.image); if (new Set(m.photos).size !== 3 || m.photos.some((p) => skip.includes(p.image))) fail("duel photos"); if (!m.options.includes(m.decade)) fail("decade option"); },
+  15: (m, d) => { const skip = photoSet(d).map((p) => p.image); if (new Set(m.photos).size !== 3 || m.photos.some((p) => skip.includes(p.image) || p.retired)) fail("duel photos"); if (!m.photos.some((p) => p.iconic)) fail("duel needs a history-shaping photo"); const old = legacyDuelModel(d); if (old.photos.some((p) => !LEGACY_PHOTO_BANK.includes(p) || legacyPhotoSet(d).includes(p))) fail("legacy duel photos"); if (!m.options.includes(m.decade)) fail("decade option"); },
   16: (m) => { if (happyPct(m.board, m.threshold) > m.target - 15) fail("goal start too easy"); if (happyPct(m.good, m.threshold) < m.target) fail("goal unreachable"); if (m.board.filter((v, i) => v !== m.good[i]).length / 2 > m.moves) fail("goal needs too many moves"); },
 };
 const out = [];
@@ -55,6 +55,12 @@ for (const lvl of [0, 1, 2]) {
     out.push(i + ":" + distinct);
   }
 }
+// Duels saved before photo pinning keep the legacy model; new ones pin their photos.
+difficulty = 1;
+{ const d = "2026-05-04", legacy = { picks: [0], misses: 0 }, fresh = {};
+  if (JSON.stringify(savedDuel(d, legacy)) !== JSON.stringify(legacyDuelModel(d))) fail("legacy duel changed");
+  if (JSON.stringify(savedDuel(d, fresh)) !== JSON.stringify(duelModel(d))) fail("fresh duel");
+  if (JSON.stringify(savedDuel(d, JSON.parse(JSON.stringify(fresh)))) !== JSON.stringify(duelModel(d))) fail("pinned duel changed"); }
 // Smoke-render each game into the fake DOM and play a scripted solve.
 difficulty = 1; day = "2026-05-04"; data = { games: {} };
 for (const i of Object.keys(models)) { openSpark(+i); if (!$("#rules").textContent || !$("#board").innerHTML) fail("render " + i); }

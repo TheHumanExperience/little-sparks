@@ -667,20 +667,39 @@ SPARKS[14] = { name: "Bloom Trail 5×5", blurb: "A bigger garden, with a few twi
 
 /* ───────────── 15 · Time Lens Duel ───────────── */
 const hideYears = (t) => t.replace(/\b(?:18|19|20)\d{2}s?\b/g, "[year hidden]");
-function duelModel(d) {
-  const lvl = difficulty, r = rng(puzzleSeed(d) + "duel"), skip = new Set(photoSet(d).map((p) => p.image));
-  const pool = PHOTO_BANK.filter((p) => !skip.has(p.image)), [lo, hi] = [[25, 999], [12, 40], [5, 20]][lvl];
+function duelPick(d, pool, needIconic) {
+  const lvl = difficulty, r = rng(puzzleSeed(d) + "duel"), [lo, hi] = [[25, 999], [12, 40], [5, 20]][lvl];
   for (let attempt = 0; attempt < 5000; attempt++) {
     const pick = shuffle(pool.slice(), r).slice(0, 3), sorted = pick.slice().sort((a, b) => a.year - b.year);
     const g1 = sorted[1].year - sorted[0].year, g2 = sorted[2].year - sorted[1].year;
-    if (g1 < lo || g2 < lo || g1 > hi || g2 > hi) continue;
+    if (g1 < lo || g2 < lo || g1 > hi || g2 > hi || (needIconic && !pick.some((p) => p.iconic))) continue;
     const decade = Math.floor(sorted[1].year / 10) * 10, n = [3, 4, 6][lvl], first = decade - 10 * Math.floor(r() * n);
-    return { photos: pick, order: sorted.map((p) => pick.indexOf(p)), middle: pick.indexOf(sorted[1]), decade, options: Array.from({ length: n }, (_, k) => first + 10 * k) };
+    return duelFrom(pick, decade, Array.from({ length: n }, (_, k) => first + 10 * k));
   }
   throw Error("Time Lens Duel generation failed for " + d);
 }
+function duelFrom(pick, decade, options) {
+  const sorted = pick.slice().sort((a, b) => a.year - b.year);
+  return { photos: pick, order: sorted.map((p) => pick.indexOf(p)), middle: pick.indexOf(sorted[1]), decade, options };
+}
+// At least one history-shaping photo, never one of today's Time Lens photos, never a retired entry.
+function duelModel(d) {
+  const skip = new Set(photoSet(d).map((p) => p.image));
+  return duelPick(d, ACTIVE_PHOTOS.filter((p) => !skip.has(p.image)), true);
+}
+// Duels saved before photo IDs were pinned keep the original 183-photo model.
+function legacyDuelModel(d) {
+  const skip = new Set(legacyPhotoSet(d).map((p) => p.image));
+  return duelPick(d, LEGACY_PHOTO_BANK.filter((p) => !skip.has(p.image)), false);
+}
+function savedDuel(d, s) {
+  if (s.duelIds) return duelFrom(s.duelIds.map((id) => PHOTO_BANK.find((p) => p.image === id)), s.duelDecade, s.duelOptions);
+  const m = s.picks?.length || s.misses || s.ordered || s.done ? legacyDuelModel(d) : duelModel(d);
+  Object.assign(s, { duelIds: m.photos.map((p) => p.image), duelDecade: m.decade, duelOptions: m.options });
+  return m;
+}
 function timeDuel(i) {
-  const m = duelModel(day), s = state(i);
+  const s = state(i), m = savedDuel(day, s);
   s.picks ||= [];
   s.misses ??= 0;
   $("#rules").textContent = "Three real archive photographs. Tap them from oldest to newest. Then guess the decade of the middle one — you get one try.";
@@ -691,7 +710,7 @@ function timeDuel(i) {
       return `<button class="duelphoto ${at >= 0 ? "picked" : ""} ${ordered && k === m.middle ? "middle" : ""}" data-duel="${k}" ${ordered ? "disabled" : ""}><img src="${p.image}" alt="${hideYears(p.alt)}" loading="lazy"><span class="duelbadge">${ordered ? rank + 1 : at >= 0 ? at + 1 : ""}</span>${s.done ? `<span class="duelyear">${p.year}</span>` : ""}</button>`;
     }).join("")}</div>` +
       (ordered && !s.done ? `<p class="instruction">Now: which decade is the middle photo (<b>2</b>) from?</p><div class="decades">${m.options.map((y) => `<button class="btn secondary" data-decade="${y}">${y}s</button>`).join("")}</div>` : "") +
-      (s.done ? `<div class="reveal"><p>${s.guess === m.decade ? "Right decade! ★★★" : `It was the ${m.decade}s.${s.misses ? "" : " Your order was perfect though!"}`}</p>${m.order.map((k) => `<p class="small"><b>${m.photos[k].year} · ${m.photos[k].title}</b> — ${m.photos[k].story}<br><a href="${m.photos[k].source}" target="_blank" rel="noopener">${m.photos[k].credit}</a></p>`).join("")}</div>` : "") +
+      (s.done ? `<div class="reveal"><p>${s.guess === m.decade ? "Right decade! ★★★" : `It was the ${m.decade}s.${s.misses ? "" : " Your order was perfect though!"}`}</p>${m.order.map((k) => `<p class="small"><b>${m.photos[k].year} · ${m.photos[k].title}</b> — ${m.photos[k].story}${m.photos[k].why ? ` <i>Why it mattered: ${m.photos[k].why}</i>` : ""}<br><a href="${m.photos[k].source}" target="_blank" rel="noopener">${m.photos[k].credit}</a></p>`).join("")}</div>` : "") +
       (!ordered ? `<p class="small">${s.picks.length ? `${s.picks.length} of 3 chosen` : "Tap the oldest first"}${s.misses ? ` · ${s.misses} reshuffle${s.misses === 1 ? "" : "s"}` : ""}</p>` : "");
     $("#board").querySelectorAll("[data-duel]").forEach((b) => (b.onclick = () => {
       if (ordered) return;

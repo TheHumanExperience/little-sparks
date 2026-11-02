@@ -3,15 +3,18 @@ const nodes=new Map();const el=()=>({innerHTML:'',textContent:'',value:'',childr
 const ctx={document:{querySelector(k){if(!nodes.has(k))nodes.set(k,el());return nodes.get(k)},querySelectorAll(){return[]},createElement:el},window:{},localStorage:{getItem(){return null},setItem(){}},setInterval(){}};vm.createContext(ctx);
 for(const f of ['app.js','daily-content.js','photos.js','extras.js'])vm.runInContext(fs.readFileSync('dist/'+f,'utf8'),ctx);
 vm.runInContext(`
-if(PHOTO_BANK.length!==183)throw Error('Expected 183 photos');
-if(new Set(PHOTO_BANK.map(p=>p.image)).size!==183)throw Error('Duplicate image IDs');
+if(ACTIVE_PHOTOS.length!==183)throw Error('Expected 183 active photos');
+if(new Set(PHOTO_BANK.map(p=>p.image)).size!==PHOTO_BANK.length)throw Error('Duplicate image IDs');
+if(PHOTO_BANK.slice(0,183).some(p=>p.image.startsWith('photos/hist-'))||LEGACY_PHOTO_BANK.length!==183)throw Error('Original 183 entries must keep their order for legacy saves');
+for(const p of PHOTO_BANK){if(p.iconic&&(!p.why||!p.clue))throw Error('Iconic photo needs why and clue: '+p.image);if(p.clue&&/\b(?:18|19|20)\d{2}s?\b/.test(p.clue))throw Error('Clue reveals a year: '+p.image);if(p.image.startsWith('photos/hist-')&&!(p.licenseUrl||/public domain|no known copyright/.test(p.credit)))throw Error('New photo needs a licence: '+p.image)}
 for(let level=0;level<3;level++){
  difficulty=level;
  for(const centre of ['2026-10-30','2026-12-31','2027-03-28']){
   const start=calendarIndex(centre)-30,images=new Set(),answers=new Set(),questions=new Set(),gardens=new Set();
   for(let n=0;n<61;n++){
    const d=new Date((start+n)*86400000).toISOString().slice(0,10),photos=photoSet(d),q=logicModel(d);
-   if(photos.length!==3||!photos.some(p=>p.india))throw Error('Invalid photo round');
+   if(photos.length!==3||!photos.some(p=>p.india)||!photos.some(p=>p.iconic)||photos.some(p=>p.retired))throw Error('Invalid photo round');
+   const old=legacyPhotoSet(d);if(old.length!==3||!old.some(p=>p.india)||old.some(p=>!LEGACY_PHOTO_BANK.includes(p)))throw Error('Invalid legacy photo round');
    for(const p of photos){if(images.has(p.image))throw Error('Photo repeated within 61 days');images.add(p.image);if(!Number.isInteger(p.year)||p.year<1850||p.year>2025||!p.source||!p.credit)throw Error('Invalid metadata')}
    const garden=JSON.stringify(trailModel(d).anchors);if(gardens.has(garden))throw Error('Repeated garden clues');gardens.add(garden);const answer=wordAnswer(d);if(answers.has(answer))throw Error('Word repeated within 61 days');answers.add(answer);
    if(questions.has(q.q))throw Error('Reasoning question repeated');questions.add(q.q);
@@ -33,4 +36,4 @@ if(wordAnswer(day)!==a||JSON.stringify(logicModel(day))!==q)throw Error('Fresh c
 $('#past').onclick();if(($('#days').innerHTML.match(/data-date=/g)||[]).length!==31)throw Error('Archive must include today plus 30 days');
 `,ctx);
 const bank=vm.runInContext('PHOTO_BANK',ctx);const hashes=new Set();const crypto=require('crypto');for(const p of bank){const f=path.join('dist',p.image);assert(fs.existsSync(f),f);const hash=crypto.createHash('sha256').update(fs.readFileSync(f)).digest('hex');assert(!hashes.has(hash),'Duplicate image bytes');hashes.add(hash)}
-console.log('PASS: 61-day windows at all levels; 183 distinct local photos; Indian context daily; unique words/questions; legacy and new save continuity; 30-day archive.');
+console.log('PASS: 61-day windows at all levels; 183 active of '+bank.length+' distinct local photos (retired kept for saves); history-shaping and Indian photo daily; unique words/questions; legacy and new save continuity; 30-day archive.');
