@@ -1,10 +1,11 @@
 /* Little Sparks feed — a vertical, snap-scrolling stream of playable cards.
-   Today's 17 games come first, then each earlier day back to 30 days ago.
+   Today's 21 cards (16 games + a 5-card Aha track) come first, then each earlier day back to 30 days ago.
    Exactly one card is "live" at a time: it owns the #rules/#board/#feedback/#actions
    ids the game renderers draw into. Other cards are frozen snapshots or covers. */
-const FEED_ORDER = [0, 7, 1, 8, 2, 9, 3, 10, 4, 11, 5, 13, 6, 14, 12, 15, 16];
+const FEED_ORDER = [0, 7, 3, 1, 8, 17, 2, 9, 10, 18, 4, 11, 5, 19, 13, 6, 14, 20, 12, 15, 16];
 const FEED_DAYS = 31;
-function feedGame(i) {
+function feedGame(i, d) {
+  if (AHA_SLOTS.includes(i)) { const c = d && ahaMeta(d, i); if (c) return { name: c.name, blurb: c.blurb, type: "Aha · " + c.type, art: c.art }; if (i !== 3) return { name: "Aha Moment", blurb: "A fresh reasoning puzzle.", type: "Aha", art: "✧ ? ✧" }; }
   if (i < 5) return { name: games[i][0], blurb: games[i][1], type: games[i][2], art: games[i][5] };
   if (i < 7) return { name: extraGames[i - 5][0], blurb: extraGames[i - 5][1], type: extraGames[i - 5][2], art: extraGames[i - 5][5] };
   return SPARKS[i];
@@ -19,7 +20,7 @@ const feedDone = (d, i) => { const g = all[progressKey(d)]?.games?.[i]; return !
    { credit: true } marker so its solve still counts and can't be earned twice. */
 function clearPuzzle(store, d, i) {
   const key = progressKey(d), games = (store[key] ||= { games: {} }).games ||= {}, prev = games[i];
-  if (prev?.done || prev?.credit) games[i] = { credit: true };
+  if (prev?.done || prev?.credit) games[i] = prev.aha ? { credit: true, aha: 1 } : { credit: true };
   else delete games[i];
   return { key, i, prev: prev === undefined ? undefined : JSON.parse(JSON.stringify(prev)) };
 }
@@ -61,7 +62,7 @@ if (document.getElementById?.("feed")) {
   const flowNow = () => flowStep(rewards.flow, {}, today());
 
   const cardHtml = (d, offset, i, n) => {
-    const g = feedGame(i), done = feedDone(d, i), shiny = isShiny(d, i);
+    const g = feedGame(i, d), done = feedDone(d, i), shiny = isShiny(d, i);
     return `<section class="spark ${done ? "is-done" : ""} ${shiny ? "shiny" : ""}" data-day="${d}" data-idx="${i}" aria-label="${g.name}, ${feedDayName(offset, d)}"><div class="sparkinner"><div class="sparkhead"><span>${String(n + 1).padStart(2, "0")} / ${FEED_ORDER.length} · ${g.type}</span><span class="sparkday">${shiny ? `<b class="shinytag">✧ Shiny</b> ` : ""}${feedDayName(offset, d)}</span></div><h2 class="sparktitle">${g.name} <span class="donebadge" ${done ? "" : "hidden"}>✓</span></h2><div class="stage">${coverHtml(g, done)}</div><div class="sparkfoot"><button class="retry" type="button" aria-label="Clear and retry ${g.name}" title="Clear &amp; retry"><span aria-hidden="true">↺</span></button><span class="retrybar" role="status"></span><button class="nextspark" type="button">Next spark ↓</button></div></div></section>`;
   };
   const coverHtml = (g, done) => `<div class="cover"><div class="coverart" aria-hidden="true">${g.art}</div><p>${g.blurb}</p><span class="coverhint">${done ? "✓ Solved — scroll here to see it again" : "Settle here to play"}</span></div>`;
@@ -104,7 +105,8 @@ if (document.getElementById?.("feed")) {
     liveWasDone = !!state(i).done;
     card.classList.add("live");
     try {
-      if (i < 5) openGame(i);
+      if (AHA_SLOTS.includes(i)) openAha(i);
+      else if (i < 5) openGame(i);
       else if (i < 7) openExtra(i);
       else openSpark(i);
     } catch (e) {

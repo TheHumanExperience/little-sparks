@@ -8,7 +8,7 @@ const nodes = new Map();
 const document = { querySelector(s) { if (!nodes.has(s)) nodes.set(s, element()); return nodes.get(s); }, querySelectorAll: () => [], createElement: () => element(), addEventListener() {}, getElementById: () => null };
 const context = { document, localStorage: { getItem: () => null, setItem: () => {} }, window: {}, setInterval: () => {} };
 vm.createContext(context);
-for (const f of ["valid-words.js", "app.js", "daily-content.js", "photos.js", "extras.js", "constellations.js", "stories.js", "ladders.js", "sparks.js", "feed.js"]) vm.runInContext(fs.readFileSync("dist/" + f, "utf8"), context);
+for (const f of ["valid-words.js", "app.js", "daily-content.js", "photos.js", "extras.js", "constellations.js", "stories.js", "ladders.js", "sparks.js", "aha.js", "feed.js"]) vm.runInContext(fs.readFileSync("dist/" + f, "utf8"), context);
 const result = vm.runInContext(`
 const fail = (m) => { throw Error(m); };
 // Shiny cards
@@ -53,7 +53,7 @@ if (next.golden || next.value !== 0 || next.hinted.length) fail("flow must reset
 let prev = 0;
 for (let s = 1; s <= 30; s++) { const b = burstSize(s); if (b < prev || b > 76) fail("burst not monotonic/capped"); prev = b; }
 if (burstSize(1) !== 28 || burstSize(30) !== 76) fail("burst bounds changed");
-if (milestoneFor(5) !== "five" || milestoneFor(10) !== "ten" || milestoneFor(17) !== "all" || milestoneFor(4) || milestoneFor(11)) fail("milestones wrong");
+if (milestoneFor(5) !== "five" || milestoneFor(10) !== "ten" || milestoneFor(FEED_ORDER.length) !== "all" || milestoneFor(17) || milestoneFor(4) || milestoneFor(11)) fail("milestones wrong");
 for (let s = 2; s <= 10; s++) if (!(chimeFreq(s) > chimeFreq(s - 1))) fail("chime must rise up to streak 10");
 if (chimeFreq(15) !== chimeFreq(10)) fail("chime must cap at streak 10");
 // Clear & retry isolation
