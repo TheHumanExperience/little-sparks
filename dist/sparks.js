@@ -1,4 +1,4 @@
-/* Little Sparks — ten newer games (state indexes 7–16). Each model is a pure
+/* Little Sparks — nine newer games (state indexes 8–16; 7 was Starlines, now retired). Each model is a pure
    function of (date, difficulty); renderers draw into the live card's
    #rules/#board/#feedback/#actions like the original games. */
 const SPARKS = {};
@@ -31,86 +31,43 @@ document.addEventListener?.("keydown", (e) => {
   window.sparkKeys(e);
 });
 
-/* ───────────── 7 · Starlines ───────────── */
-const STAR_ARROWS = ["→", "↘", "↓", "↙", "←", "↖", "↑", "↗"];
-function starDir(a, b) {
-  return STAR_ARROWS[mod(Math.round(Math.atan2(b[1] - a[1], b[0] - a[0]) / (Math.PI / 4)), 8)];
+/* Swipe-to-draw for Bloom Trail grids: press a cell and slide across neighbours to extend
+   the trail; slide back onto the previous cell to undo. Each step goes through the cell's
+   normal tap handler, so all rules and messages stay the same. Plain taps still work. */
+function swipeTrail(grid, attr, getPath) {
+  if (!grid) return;
+  grid.classList.add("swipe");
+  grid.onpointerdown = (e) => {
+    const first = e.target.closest?.(`[${attr}]`);
+    if (!first || e.button > 0 || state(active).done) return;
+    let cur = +first.getAttribute(attr), moved = false, lx = e.clientX, ly = e.clientY;
+    const tap = (c) => document.querySelector(`#board [${attr}="${c}"]`)?.click();
+    const visit = (x, y) => {
+      const el = document.elementFromPoint(x, y)?.closest?.(`#board [${attr}]`);
+      if (!el || +el.getAttribute(attr) === cur) return;
+      const c = +el.getAttribute(attr);
+      if (!moved) { moved = true; if (getPath().at(-1) !== cur) tap(cur); }
+      const p = getPath();
+      if (c === p.at(-2) && cur === p.at(-1)) tap(cur);
+      else if (cur === p.at(-1)) tap(c);
+      cur = c;
+    };
+    const move = (ev) => {
+      if (state(active).done) return;
+      const size = first.getBoundingClientRect().width || 40, n = Math.max(1, Math.ceil(Math.hypot(ev.clientX - lx, ev.clientY - ly) / (size / 4)));
+      for (let k = 1; k <= n; k++) visit(lx + ((ev.clientX - lx) * k) / n, ly + ((ev.clientY - ly) * k) / n);
+      lx = ev.clientX; ly = ev.clientY;
+    };
+    const end = () => {
+      removeEventListener("pointermove", move); removeEventListener("pointerup", end); removeEventListener("pointercancel", end);
+      if (!moved) return;
+      const kill = (ev) => { ev.stopPropagation(); ev.preventDefault(); };
+      addEventListener("click", kill, true);
+      setTimeout(() => removeEventListener("click", kill, true), 60);
+    };
+    addEventListener("pointermove", move); addEventListener("pointerup", end); addEventListener("pointercancel", end);
+  };
 }
-function starDist(a, b, step) {
-  return Math.round(Math.hypot(b[0] - a[0], b[1] - a[1]) / step) * step;
-}
-function starCandidates(stars, c) {
-  return stars.map((_, j) => j).filter((j) => j !== c.from && starDir(stars[c.from], stars[j]) === c.dir && starDist(stars[c.from], stars[j], c.step) === c.dist);
-}
-const lineKey = (a, b) => (a < b ? a + "-" + b : b + "-" + a);
-function starModel(d) {
-  const lvl = difficulty,
-    c = CONSTELLATIONS[cycleIndex(CONSTELLATIONS.length, "starlines-v1-" + lvl, d, lvl * 5)],
-    r = rng(puzzleSeed(d) + "starlines"),
-    w = Math.max(...c.stars.map((p) => p[0])),
-    h = Math.max(...c.stars.map((p) => p[1])),
-    ox = Math.floor(r() * (10 - w)),
-    oy = Math.floor(r() * (10 - h)),
-    base = c.stars.map(([x, y]) => [x + ox, y + oy]),
-    step = lvl === 2 ? 1 : 0.5;
-  const clueFor = ([a, b]) => ({ from: a, to: b, dir: starDir(base[a], base[b]), dist: starDist(base[a], base[b], step), step });
-  let stars = base,
-    clues = c.lines.map(clueFor);
-  const ok = (all) => clues.every((cl) => starCandidates(all, cl).length === 1);
-  for (let want = [0, 3, 6][lvl]; want > 0; want--) {
-    let found = null;
-    for (let attempt = 0; attempt < 120 && !found; attempt++) {
-      const all = base.slice();
-      for (let tries = 0; all.length < base.length + want && tries < 400; tries++) {
-        const p = [Math.floor(r() * 10), Math.floor(r() * 10)];
-        if (all.every((q) => Math.hypot(q[0] - p[0], q[1] - p[1]) >= 1.5)) all.push(p);
-      }
-      if (all.length === base.length + want && ok(all)) found = all;
-    }
-    if (found) { stars = found; break; }
-  }
-  const letters = shuffle([...stars.keys()], r).reduce((m, j, k) => ((m[j] = "ABCDEFGHIJKLMNOP"[k]), m), {});
-  return { name: c.name, note: c.note, stars, letters, clues: shuffle(clues, r), lines: c.lines.map(([a, b]) => lineKey(a, b)).sort(), given: lvl === 0 ? lineKey(...c.lines[0]) : null, unique: ok(stars) };
-}
-function starSolved(m, lines) {
-  return lines.length === m.lines.length && [...lines].sort().join() === m.lines.join();
-}
-function starlines(i) {
-  const m = starModel(day), s = state(i);
-  s.lines ||= m.given ? [m.given] : [];
-  let pick = null;
-  $("#rules").textContent = "Each clue starts at a lettered star and gives a direction and roughly how far to the next star. Tap two stars to draw (or erase) a line. Draw every line to reveal the constellation." + (difficulty === 0 ? " One line is drawn for you." : difficulty === 2 ? " Distances are rounded to whole steps and some stars are decoys." : " A few stars are decoys.");
-  const pos = ([x, y]) => `left:${((x + 0.8) / 10.6) * 100}%;top:${((y + 0.8) / 10.6) * 100}%`;
-  function draw() {
-    const solved = s.done, drawn = new Set(s.lines);
-    $("#board").innerHTML =
-      `<div class="skybox ${solved ? "solved" : ""}"><svg viewBox="-0.8 -0.8 10.6 10.6" aria-hidden="true">${s.lines.map((k) => { const [a, b] = k.split("-").map(Number); return `<line x1="${m.stars[a][0]}" y1="${m.stars[a][1]}" x2="${m.stars[b][0]}" y2="${m.stars[b][1]}"/>`; }).join("")}</svg>` +
-      m.stars.map((p, j) => `<button class="star ${pick === j ? "picked" : ""}" style="${pos(p)}" data-star="${j}" aria-label="Star ${m.letters[j]}">${m.letters[j]}</button>`).join("") +
-      `</div><ul class="starclues">${m.clues.map((c) => `<li class="${difficulty === 0 && drawn.has(lineKey(c.from, c.to)) ? "met" : ""}"><b>${m.letters[c.from]}</b> <span>${c.dir}</span> ≈ ${c.dist}</li>`).join("")}</ul><p class="small">${s.lines.length} line${s.lines.length === 1 ? "" : "s"} drawn · ${m.clues.length} to find</p>` +
-      (solved ? `<div class="reveal"><span class="eyebrow">YOU FOUND</span><h3>${m.name}</h3><p>${m.note}</p></div>` : "");
-    $("#board").querySelectorAll("[data-star]").forEach((b) => (b.onclick = () => {
-      if (s.done) return;
-      const j = +b.dataset.star;
-      if (pick === null || pick === j) { pick = pick === j ? null : j; return draw(); }
-      const k = lineKey(pick, j);
-      if (k === m.given) { pick = null; draw(); return msg("That line is a gift — it stays."); }
-      s.lines = s.lines.includes(k) ? s.lines.filter((x) => x !== k) : [...s.lines, k];
-      pick = null;
-      persist();
-      if (starSolved(m, s.lines)) { sparkSolved(`${m.name}! The stars click into place.`); }
-      else msg("");
-      draw();
-    }));
-  }
-  draw();
-  action("Clear lines", () => { if (s.done) return; s.lines = m.given ? [m.given] : []; pick = null; persist(); draw(); msg("A clear sky."); }, true);
-  action("A gentle hint", () => {
-    const missing = m.clues.find((c) => !s.lines.includes(lineKey(c.from, c.to)));
-    const wrong = s.lines.find((k) => !m.lines.includes(k));
-    msg(wrong ? "One of your lines isn't part of the pattern. Check each clue's direction." : missing ? `Start from ${m.letters[missing.from]} and look ${missing.dir}.` : "Every line is here!");
-  }, true);
-}
-SPARKS[7] = { name: "Starlines", blurb: "Join the stars. Find the story in the sky.", type: "Stars", art: "✦ ⋰ ✧", render: starlines };
 
 /* ───────────── 8 · Story Shuffle ───────────── */
 // No clue lines: the beats' own time and cause cues carry the order. A story is solved by
@@ -621,7 +578,7 @@ function bloomFiveModel(d) {
 function bloomFive(i) {
   const m = bloomFiveModel(day), s = state(i);
   s.path ||= [];
-  $("#rules").textContent = `Start at bloom 1 and visit every square once, moving up, down, left or right. Collect the ${m.anchors.length} blooms in order and finish on the last. On a ↻ square the trail must turn, and it can never run straight through more than 3 squares. Tap your last square to undo.`;
+  $("#rules").textContent = `Start at bloom 1 and visit every square once, moving up, down, left or right. Collect the ${m.anchors.length} blooms in order and finish on the last. On a ↻ square the trail must turn, and it can never run straight through more than 3 squares. Drag across the squares or tap them one by one; slide back or tap your last square to undo.`;
   function tryStep(c) {
     const p = s.path, last = p.at(-1);
     if (!p.length) return c === m.anchors[0] ? "" : "Begin at bloom 1.";
@@ -652,6 +609,7 @@ function bloomFive(i) {
       else msg("");
       draw();
     }));
+    swipeTrail($("#board .grid"), "data-bloom", () => s.path);
   }
   draw();
   action("Start over", () => { if (s.done) return; s.path = []; persist(); draw(); msg("A fresh trail."); }, true);

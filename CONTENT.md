@@ -14,9 +14,8 @@
 
 ## Feed games
 
-Like the original games, the ten feed games are built from the date and the difficulty level, so past days look the same every time you open them.
+Like the original games, the nine feed games are built from the date and the difficulty level, so past days look the same every time you open them.
 
-- **Starlines** draws from the 18 constellations in `dist/constellations.js`. Every clue must lead to only one star, and `verify-sparks.cjs` checks that.
 - **Story Shuffle** draws from the 22 stories in `dist/stories.js`.
   - There are no clue lines. The order has to come from the story text itself, so each beat needs natural time and cause cues ("That evening…", "Once it's baked…").
   - Each story has an `accepted` list of orders. The canonical order comes first. Add other orders only when two middle beats really could happen either way round (for example Paper boat, Garden swing and Moving in).
@@ -36,7 +35,7 @@ Like the original games, the ten feed games are built from the date and the diff
 - **Mirror Garden**, **Sudoku Six**, **Killer Six**, **Bloom Trail 5×5** and **Neighbours Goal** are generated from scratch each day.
 - **Time Lens Duel** reuses the active Time Lens photos in `dist/photos.js`, always includes at least one history-shaping photo and never uses today's Time Lens photos. A started Duel pins its photo IDs; Duels saved before pinning use the original 183-photo model (`legacyDuelModel`).
 - Shiny cards are picked with `rng(`${date}|shiny|${game}`)() < 0.05`, so the same cards are shiny every time you load a day. Changing that formula changes which past cards are shiny.
-- The feed counts all 21 cards for each day: 16 games plus five Aha track cards, generated in `dist/aha.js`. The original five games keep their own progress records, so older saves still work.
+- The feed counts 16 cards for each day and level: 11 games (one per family: Pocket Sudoku / Sudoku Six / Killer Six, Bloom Trail / 5×5 / 5×5, Little Neighbours / Neighbours Goal / Neighbours Goal) plus five Aha track cards in one block, generated in `dist/aha.js`. The original five games keep their own progress records, so older saves still work.
 
 Run `node verify-window.cjs`, `node verify-levels.cjs` and `node verify-sparks.cjs` before changing the generators or the content banks.
 

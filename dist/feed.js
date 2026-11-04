@@ -1,8 +1,15 @@
 /* Little Sparks feed — a vertical, snap-scrolling stream of playable cards.
-   Today's 21 cards (16 games + a 5-card Aha track) come first, then each earlier day back to 30 days ago.
+   Today's 16 cards (11 games + a 5-card Aha track) come first, then each earlier day back to 30 days ago.
    Exactly one card is "live" at a time: it owns the #rules/#board/#feedback/#actions
    ids the game renderers draw into. Other cards are frozen snapshots or covers. */
-const FEED_ORDER = [0, 7, 3, 1, 8, 17, 2, 9, 10, 18, 4, 11, 5, 19, 13, 6, 14, 20, 12, 15, 16];
+/* Each level shows one game per family, so Gentle/Medium/Tricky feel distinct:
+   Sudoku → Pocket Sudoku / Sudoku Six / Killer Six; Bloom → Bloom Trail / 5×5 / 5×5;
+   Neighbours → Little Neighbours / Neighbours Goal / Neighbours Goal.
+   The five Aha cards (3, 17–20) sit together as one block. */
+const FEED_FAMILIES = { sudoku: [1, 11, 12], bloom: [4, 14, 14], neighbours: [6, 16, 16] };
+const FEED_PLAN = [0, "sudoku", 8, 3, 17, 18, 19, 20, 2, 9, "bloom", 5, 10, 13, "neighbours", 15];
+const feedOrder = (lv = difficulty) => FEED_PLAN.map((x) => (typeof x === "string" ? FEED_FAMILIES[x][lv] : x));
+const feedSibling = (i, lv = difficulty) => Object.values(FEED_FAMILIES).find((f) => f.includes(i))?.[lv] ?? i;
 const FEED_DAYS = 31;
 function feedGame(i, d) {
   if (AHA_SLOTS.includes(i)) { const c = d && ahaMeta(d, i); if (c) return { name: c.name, blurb: c.blurb, type: "Aha · " + c.type, art: c.art }; if (i !== 3) return { name: "Aha Moment", blurb: "A fresh reasoning puzzle.", type: "Aha", art: "✧ ? ✧" }; }
@@ -24,7 +31,7 @@ function clearPuzzle(store, d, i) {
   else delete games[i];
   return { key, i, prev: prev === undefined ? undefined : JSON.parse(JSON.stringify(prev)) };
 }
-const feedCount = (d) => FEED_ORDER.filter((i) => feedDone(d, i)).length;
+const feedCount = (d) => feedOrder().filter((i) => feedDone(d, i)).length;
 function feedDayName(offset, d) {
   if (offset === 0) return "Today";
   if (offset === 1) return "Yesterday";
@@ -46,7 +53,7 @@ function flowStep(f, ev, date) {
   return f;
 }
 const burstSize = (streak) => Math.min(28 + 8 * (Math.max(1, streak) - 1), 76);
-const milestoneFor = (n) => (n === FEED_ORDER.length ? "all" : n === 10 ? "ten" : n === 5 ? "five" : null);
+const milestoneFor = (n) => (n === feedOrder().length ? "all" : n === 10 ? "ten" : n === 5 ? "five" : null);
 /* Soft chime: a pentatonic note that climbs one step per consecutive solve. */
 const PENTA = [0, 2, 4, 7, 9];
 const chimeFreq = (streak) => { const k = Math.min(Math.max(1, streak), 10) - 1; return 523.25 * 2 ** ((12 * Math.floor(k / 5) + PENTA[k % 5]) / 12); };
@@ -63,18 +70,18 @@ if (document.getElementById?.("feed")) {
 
   const cardHtml = (d, offset, i, n) => {
     const g = feedGame(i, d), done = feedDone(d, i), shiny = isShiny(d, i);
-    return `<section class="spark ${done ? "is-done" : ""} ${shiny ? "shiny" : ""}" data-day="${d}" data-idx="${i}" aria-label="${g.name}, ${feedDayName(offset, d)}"><div class="sparkinner"><div class="sparkhead"><span>${String(n + 1).padStart(2, "0")} / ${FEED_ORDER.length} · ${g.type}</span><span class="sparkday">${shiny ? `<b class="shinytag">✧ Shiny</b> ` : ""}${feedDayName(offset, d)}</span></div><h2 class="sparktitle">${g.name} <span class="donebadge" ${done ? "" : "hidden"}>✓</span></h2><div class="stage">${coverHtml(g, done)}</div><div class="sparkfoot"><button class="retry" type="button" aria-label="Clear and retry ${g.name}" title="Clear &amp; retry"><span aria-hidden="true">↺</span></button><span class="retrybar" role="status"></span><button class="nextspark" type="button">Next spark ↓</button></div></div></section>`;
+    return `<section class="spark ${done ? "is-done" : ""} ${shiny ? "shiny" : ""}" data-day="${d}" data-idx="${i}" aria-label="${g.name}, ${feedDayName(offset, d)}"><div class="sparkinner"><div class="sparkhead"><span>${String(n + 1).padStart(2, "0")} / ${feedOrder().length} · ${g.type}</span><span class="sparkday">${shiny ? `<b class="shinytag">✧ Shiny</b> ` : ""}${feedDayName(offset, d)}</span></div><h2 class="sparktitle">${g.name} <span class="donebadge" ${done ? "" : "hidden"}>✓</span></h2><div class="stage">${coverHtml(g, done)}</div><div class="sparkfoot"><button class="retry" type="button" aria-label="Clear and retry ${g.name}" title="Clear &amp; retry"><span aria-hidden="true">↺</span></button><span class="retrybar" role="status"></span><button class="nextspark" type="button">Next spark ↓</button></div></div></section>`;
   };
   const coverHtml = (g, done) => `<div class="cover"><div class="coverart" aria-hidden="true">${g.art}</div><p>${g.blurb}</p><span class="coverhint">${done ? "✓ Solved — scroll here to see it again" : "Settle here to play"}</span></div>`;
-  const introHtml = (d, offset) => `<section class="spark dayintro" data-day="${d}" data-intro="1"><div class="sparkinner"><span class="eyebrow">${offset === 1 ? "Yesterday" : offset + " days ago"}</span><h2>${new Date(d + "T12:00:00").toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" })}</h2><p class="introcount"><b>${feedCount(d)}</b> of ${FEED_ORDER.length} sparks solved</p><div class="introdots">${FEED_ORDER.map((i) => `<i class="${feedDone(d, i) ? "done" : ""}"></i>`).join("")}</div><p class="small">Every puzzle from that day, waiting just below. ↓</p></div></section>`;
-  const noteHtml = () => `<section class="spark notecard" data-note="1"><div class="sparkinner"><div class="coverart" aria-hidden="true">✳ ✴ ✦</div><span class="eyebrow">You made it through today</span><h2 class="notehero">A little play.<br>A lovely little pause.</h2><p class="todaycount"><b class="todaycountnum">${feedCount(feedToday)}</b> of ${FEED_ORDER.length} sparks today</p><p class="rewardline"><span class="stickercount">${rewards.stickers.length}</span> shiny stickers · flow <span class="flowcount">${flowNow().value}</span>/${FLOW_MAX}</p><p class="lovenote"><span aria-hidden="true">♡</span> Created with love from Devansh</p><p class="small">Keep scrolling for yesterday’s sparks ↓</p></div></section>`;
+  const introHtml = (d, offset) => `<section class="spark dayintro" data-day="${d}" data-intro="1"><div class="sparkinner"><span class="eyebrow">${offset === 1 ? "Yesterday" : offset + " days ago"}</span><h2>${new Date(d + "T12:00:00").toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" })}</h2><p class="introcount"><b>${feedCount(d)}</b> of ${feedOrder().length} sparks solved</p><div class="introdots">${feedOrder().map((i) => `<i class="${feedDone(d, i) ? "done" : ""}"></i>`).join("")}</div><p class="small">Every puzzle from that day, waiting just below. ↓</p></div></section>`;
+  const noteHtml = () => `<section class="spark notecard" data-note="1"><div class="sparkinner"><div class="coverart" aria-hidden="true">✳ ✴ ✦</div><span class="eyebrow">You made it through today</span><h2 class="notehero">A little play.<br>A lovely little pause.</h2><p class="todaycount"><b class="todaycountnum">${feedCount(feedToday)}</b> of ${feedOrder().length} sparks today</p><p class="rewardline"><span class="stickercount">${rewards.stickers.length}</span> shiny stickers · flow <span class="flowcount">${flowNow().value}</span>/${FLOW_MAX}</p><p class="lovenote"><span aria-hidden="true">♡</span> Created with love from Devansh</p><p class="small">Keep scrolling for yesterday’s sparks ↓</p></div></section>`;
   const endHtml = () => `<section class="spark endcard" data-end="1"><div class="sparkinner"><div class="coverart" aria-hidden="true">✿ ✳ ✿</div><h2>That’s the whole garden.</h2><p>You’ve reached ${FEED_DAYS - 1} days back. New sparks arrive every morning.</p><button class="btn" type="button" data-top="1">Back to today ↑</button></div></section>`;
 
   function appendDay() {
     if (loadedDays >= FEED_DAYS) return false;
     const offset = loadedDays, d = feedDate(offset, feedToday);
     let html = offset ? introHtml(d, offset) : "";
-    html += FEED_ORDER.map((i, n) => cardHtml(d, offset, i, n)).join("");
+    html += feedOrder().map((i, n) => cardHtml(d, offset, i, n)).join("");
     if (!offset) html += noteHtml();
     loadedDays++;
     if (loadedDays === FEED_DAYS) html += endHtml();
@@ -154,7 +161,7 @@ if (document.getElementById?.("feed")) {
     appendDay();
     let target = null;
     if (keepDay) {
-      while (!(target = findCard(keepDay, keepIdx)) && appendDay());
+      while (!(target = findCard(keepDay, feedSibling(keepIdx))) && appendDay());
     }
     appendDay();
     target ||= cards()[0];
@@ -165,7 +172,7 @@ if (document.getElementById?.("feed")) {
 
   function refreshHeader() {
     const n = feedCount(feedToday);
-    $("#todayCount").textContent = `${n}/${FEED_ORDER.length}`;
+    $("#todayCount").textContent = `${n}/${feedOrder().length}`;
     $("#levelPill").textContent = levelName();
     feed.querySelectorAll(".todaycountnum").forEach((b) => (b.textContent = n));
   }
@@ -176,7 +183,7 @@ if (document.getElementById?.("feed")) {
     const intro = feed.querySelector(`.dayintro[data-day="${card.dataset.day}"]`);
     if (intro) {
       intro.querySelector(".introcount b").textContent = feedCount(card.dataset.day);
-      intro.querySelectorAll(".introdots i").forEach((dot, n) => dot.classList.toggle("done", feedDone(card.dataset.day, FEED_ORDER[n])));
+      intro.querySelectorAll(".introdots i").forEach((dot, n) => dot.classList.toggle("done", feedDone(card.dataset.day, feedOrder()[n])));
     }
   }
 
@@ -198,10 +205,10 @@ if (document.getElementById?.("feed")) {
     void pill.offsetWidth;
     pill.classList.add("bump");
     const isToday = card.dataset.day === feedToday, n = feedCount(card.dataset.day);
-    $("#announce").textContent = `Solved! ${n} of ${FEED_ORDER.length} sparks ${isToday ? "today" : "that day"}.`;
+    $("#announce").textContent = `Solved! ${n} of ${feedOrder().length} sparks ${isToday ? "today" : "that day"}.`;
     const chip = document.createElement("div");
     chip.className = "solvedchip";
-    chip.innerHTML = `✦ Solved <b>${Math.max(0, n - 1)}</b>/${FEED_ORDER.length}${streak > 1 ? ` <small>×${streak} streak</small>` : ""}`;
+    chip.innerHTML = `✦ Solved <b>${Math.max(0, n - 1)}</b>/${feedOrder().length}${streak > 1 ? ` <small>×${streak} streak</small>` : ""}`;
     card.querySelector(".sparkinner").append(chip);
     setTimeout(() => (chip.querySelector("b").textContent = n), reduceMotion.matches ? 0 : 350);
     setTimeout(() => chip.remove(), 2600);
@@ -247,7 +254,7 @@ if (document.getElementById?.("feed")) {
   const MILESTONES = {
     five: ["Five sparks!", "You’re glowing ✦", ["★", "✦"]],
     ten: ["Ten sparks!", "Look at you go ✦✦", ["★", "✿", "✦"]],
-    all: [`All ${FEED_ORDER.length}!`, "The whole garden is in bloom ✿", ["✿", "❀", "✦", "★", "♡"]],
+    all: [`All ${feedOrder().length}!`, "The whole garden is in bloom ✿", ["✿", "❀", "✦", "★", "♡"]],
   };
   function celebrateMilestone(kind) {
     const [title, sub, glyphs] = MILESTONES[kind], el = document.createElement("div");
@@ -408,7 +415,7 @@ if (document.getElementById?.("feed")) {
   const closeSheets = () => document.querySelectorAll("dialog.sheet[open]").forEach((d) => d.close());
   $("#levelPill").onclick = () => { difficultyUI(); $("#levelSheet").showModal(); };
   $("#todayPill").onclick = () => {
-    $("#days").innerHTML = Array.from({ length: FEED_DAYS }, (_, k) => { const d = feedDate(k, feedToday), n = feedCount(d); return `<button data-jump="${d}" class="${n === FEED_ORDER.length ? "full" : ""}"><span>${feedDayName(k, d)}</span><span>${n}/${FEED_ORDER.length} ${n ? "✦" : ""}</span></button>`; }).join("");
+    $("#days").innerHTML = Array.from({ length: FEED_DAYS }, (_, k) => { const d = feedDate(k, feedToday), n = feedCount(d); return `<button data-jump="${d}" class="${n === feedOrder().length ? "full" : ""}"><span>${feedDayName(k, d)}</span><span>${n}/${feedOrder().length} ${n ? "✦" : ""}</span></button>`; }).join("");
     $("#days").querySelectorAll("[data-jump]").forEach((b) => (b.onclick = () => {
       const d = b.dataset.jump;
       while (!feed.querySelector(`.spark[data-day="${d}"]`) && appendDay());

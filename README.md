@@ -1,12 +1,12 @@
 # Little Sparks
 
-A daily puzzle app laid out as a vertical, snap-scrolling feed, like Reels. Each full-screen card holds a game you can play right there. Today's 21 sparks come first (16 games plus five Aha reasoning cards), then a short "you made it" note. After that the feed keeps going into yesterday, the day before, and so on back 30 days. Each earlier day is loaded as you reach it. Every solve sets off a short celebration: a sparkle burst, a card glow, a "Solved n/21" count-up, and a vibration on phones that support it. With reduced motion turned on, you get a calm glow instead.
+A daily puzzle app laid out as a vertical, snap-scrolling feed, like Reels. Each full-screen card holds a game you can play right there. Today's 16 sparks come first (11 games plus a block of five Aha reasoning cards), then a short "you made it" note. After that the feed keeps going into yesterday, the day before, and so on back 30 days. Each earlier day is loaded as you reach it. Every solve sets off a short celebration: a sparkle burst, a card glow, a "Solved n/21" count-up, and a vibration on phones that support it. With reduced motion turned on, you get a calm glow instead.
 
 Tap the Little Sparks logo at any time to go back to the first card of today.
 
 ### Small rewards while playing
 
-- **Escalating celebrations.** Solves less than 15 minutes apart build a streak. Each streak step adds more confetti to the burst. You also get bigger celebrations at the 5th and 10th solve of a day and when all 21 are solved.
+- **Escalating celebrations.** Solves less than 15 minutes apart build a streak. Each streak step adds more confetti to the burst. You also get bigger celebrations at the 5th and 10th solve of a day and when all 16 are solved.
 - **Chimes.** Each solve plays a soft chime made with the Web Audio API. Its pitch climbs a pentatonic scale as your streak grows, up to a streak of 10. The 🔔 button in the header mutes it, and that setting is saved. Sound only starts after your first tap or key press, which iOS requires.
 - **Flow bar.** The thin bar under the header fills by 1 for each puzzle you solve without a hint, up to 5. The first hint you use on a puzzle drains 2, never below 0, and that puzzle can no longer add flow. When the bar is full, cards turn golden for the rest of the day and stay golden even if you use hints. The bar resets at midnight.
 - **Shiny cards.** About 1 card in 20 has a holographic look. Which cards are shiny depends only on the date and the game, so reloading the page doesn't change them. Solving a shiny card gives you a sticker, shown in a toast and counted on the note card.
@@ -19,33 +19,26 @@ With reduced motion turned on there's no confetti and no shimmer, and the logo j
 
 Flow, stickers and the mute setting are saved in `localStorage` under `little-sparks-rewards-v1`. Puzzle progress is saved under the existing `little-sparks-v1` key. After you clear a solved puzzle, it's stored as `{ credit: true }`.
 
-The games, in feed order:
+The games, in feed order. Each level shows one game from each family, so Gentle, Medium and Tricky feel different:
 
-1. Letterlight
-2. Starlines
-3. **Aha track** (1 of 5)
-4. Pocket Sudoku
-5. Story Shuffle
-6. **Aha track** (2 of 5)
-7. Dot & Match
-8. Colour Alchemy
-9. Mirror Garden
-10. **Aha track** (3 of 5)
-11. Bloom Trail
-12. Sudoku Six
-13. Time Lens
-14. **Aha track** (4 of 5)
-15. Letterlight Ladder
-16. Little Neighbours
-17. Bloom Trail 5×5
-18. **Aha track** (5 of 5)
-19. Killer Six
-20. Time Lens Duel
-21. Neighbours Goal
+| # | Gentle | Medium | Tricky |
+|---|--------|--------|--------|
+| 1 | Letterlight | Letterlight | Letterlight |
+| 2 | Pocket Sudoku | Sudoku Six | Killer Six |
+| 3 | Story Shuffle | Story Shuffle | Story Shuffle |
+| 4–8 | **Aha track** (5 cards) | **Aha track** (5 cards) | **Aha track** (5 cards) |
+| 9 | Dot & Match | Dot & Match | Dot & Match |
+| 10 | Colour Alchemy | Colour Alchemy | Colour Alchemy |
+| 11 | Bloom Trail | Bloom Trail 5×5 | Bloom Trail 5×5 |
+| 12 | Time Lens | Time Lens | Time Lens |
+| 13 | Mirror Garden | Mirror Garden | Mirror Garden |
+| 14 | Letterlight Ladder | Letterlight Ladder | Letterlight Ladder |
+| 15 | Little Neighbours | Neighbours Goal | Neighbours Goal |
+| 16 | Time Lens Duel | Time Lens Duel | Time Lens Duel |
 
-All 21 cards have three difficulty levels and hints, and progress is saved in the browser.
+Each level has 16 cards. The families are set in `FEED_FAMILIES` in `dist/feed.js`. Starlines has been retired; old Starlines saves are simply ignored. Every card still gets harder from Gentle to Tricky, and progress is saved in the browser.
 
-**The Aha track** replaces the old single Aha Moment card. Each day has five logical-reasoning cards, spread through the feed so that no two sit next to each other. They are drawn from ten categories that alternate between number puzzles and logic puzzles:
+**The Aha track** replaces the old single Aha Moment card. Each day has five logical-reasoning cards, placed together as one block (cards 4–8) so the reasoning flow isn't broken up. They are drawn from ten categories that alternate between number puzzles and logic puzzles:
 
 - Percentages and profit
 - Arrangements
@@ -64,6 +57,8 @@ Each date and level shows five consecutive categories from the ten, and the wind
 - **Skill badges.** A small badge on each card shows how many questions of that category you have solved.
 - **Older saves.** Past days that have an old Aha Moment save in slot 3 still open the original puzzle.
 
+**Swipe to draw.** In Bloom Trail and Bloom Trail 5×5 you can press a square and slide your finger (or mouse) across neighbouring squares to draw the trail. Sliding back onto the previous square undoes a step. Tapping squares one by one still works. The grid uses `touch-action: none`, so drawing never scrolls the feed.
+
 Mobile browsers are the main target, and the feed was tested at 320, 360, 375 and 390 px wide:
 
 - Each card is exactly one screen tall. Taller games scroll inside their own card, so in-card scrolling never moves the feed.
@@ -75,7 +70,7 @@ Mobile browsers are the main target, and the feed was tested at 320, 360, 375 an
 | File | Contents |
 | --- | --- |
 | `dist/app.js`, `dist/extras.js` | The original seven games |
-| `dist/sparks.js` | The ten feed games |
+| `dist/sparks.js` | The nine feed games |
 | `dist/feed.js` | Feed, celebrations and rewards, clear & retry, day and level sheets, and midnight rollover |
 
 ## Run locally
@@ -98,7 +93,7 @@ for f in verify*.cjs; do node "$f"; done
 
 | Script | Checks |
 | --- | --- |
-| `verify-sparks.cjs` | The ten feed games, every level, a full year of dates. Each puzzle must be deterministic, solvable by its own checker, unique where promised, and varied. For Story Shuffle it also checks that every accepted order is a valid permutation, that the canonical order is listed first, and that the starting shuffle is never already solved. |
+| `verify-sparks.cjs` | The nine feed games, every level, a full year of dates. Each puzzle must be deterministic, solvable by its own checker, unique where promised, and varied. For Story Shuffle it also checks that every accepted order is a valid permutation, that the canonical order is listed first, and that the starting shuffle is never already solved. |
 | `verify-aha.cjs` | Every Aha category at all three levels over 366 days. Each question must be deterministic, have exactly one answer (confirmed by brute force), have unique options that include the answer, and rarely repeat its wording within 61 days. Also checks the old slot-3 saves, the skill counts, and that clear & retry keeps credit. |
 | `verify-feed.cjs` | Feed order, the 31-day window, and that `feed.js` does nothing on a page without the feed. |
 | `verify-rewards.cjs` | Which cards are shiny never changes, and about 5% of cards are shiny across 366 days. Also checks the flow-meter rules, burst and milestone sizes, the rising chime, and that clear & retry only affects that one puzzle on that day and level. |

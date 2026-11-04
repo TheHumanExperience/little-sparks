@@ -116,12 +116,6 @@ dialog.sheet h2 { font-size: 26px; margin: 0; }
 .skybox svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .skybox line { stroke: #f6e7b0; stroke-width: 0.09; stroke-linecap: round; }
 .skybox.solved line { stroke: #ffd56b; stroke-width: 0.13; filter: drop-shadow(0 0 0.15px #ffd56b); }
-.star { position: absolute; transform: translate(-50%, -50%); width: 34px; height: 34px; border-radius: 50%; border: 0; background: radial-gradient(circle, #fff8d6 0 22%, #fff8d630 36%, transparent 60%); color: #e4eefa; font-size: 12px; font-weight: 700; display: grid; place-items: end center; padding: 0; text-shadow: 0 1px 2px #000; }
-.star.picked { background: radial-gradient(circle, #ffd56b 0 28%, #ffd56b60 45%, transparent 65%); color: #ffd56b; }
-.starclues { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 8px 0 2px; justify-content: center; }
-.starclues li { font-size: 13px; background: #eef1e8; border-radius: 999px; padding: 4px 10px; }
-.starclues li span { font-size: 15px; }
-.starclues li.met { background: #d6e5cc; text-decoration: line-through; opacity: 0.7; }
 .reveal .eyebrow { color: #a45a2b; }
 .reveal h3 { font-family: "Libre Caslon Display", Georgia, serif; font-size: 26px; margin: 4px 0; }
 .storytitle { text-align: center; font-weight: 700; margin: 4px 0; }
@@ -219,7 +213,6 @@ button { -webkit-user-select: none; user-select: none; -webkit-touch-callout: no
 /* Comfortable 44px tap targets */
 .nextspark { min-height: 44px; padding: 10px 18px; }
 .keys button { min-height: 44px; }
-.star { width: 44px; height: 44px; padding-bottom: 5px; background: radial-gradient(circle, #fff8d6 0 17%, #fff8d630 28%, transparent 46%); }
 .feedbar .pill { position: relative; }
 .feedbar .pill::after { content: ""; position: absolute; inset: -6px -2px; }
 @media (max-width: 360px) {
@@ -290,3 +283,4 @@ body.golden .feedbar .brand span { color: #c8901f; }
 .ahatable th, .ahatable td { padding: 6px 8px; border-bottom: 1px solid #e0e3d6; text-align: right; }
 .ahatable thead th { font-size: 12px; color: #6f786d; font-weight: 600; }
 .ahatable tbody th { text-align: left; font-weight: 600; }
+.grid.swipe { touch-action: none; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }

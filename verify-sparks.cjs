@@ -8,18 +8,17 @@ function element() {
 const document = { querySelector(s) { if (!nodes.has(s)) nodes.set(s, element()); return nodes.get(s); }, querySelectorAll: () => [], createElement: () => element(), addEventListener() {} };
 const context = { document, localStorage: { getItem: () => null, setItem: () => {} }, window: {}, setInterval: () => {} };
 vm.createContext(context);
-for (const f of ["valid-words.js", "app.js", "daily-content.js", "photos.js", "extras.js", "constellations.js", "stories.js", "ladders.js", "sparks.js"]) vm.runInContext(fs.readFileSync("dist/" + f, "utf8"), context);
+for (const f of ["valid-words.js", "app.js", "daily-content.js", "photos.js", "extras.js", "stories.js", "ladders.js", "sparks.js"]) vm.runInContext(fs.readFileSync("dist/" + f, "utf8"), context);
 const t0 = Date.now();
 const summary = vm.runInContext(`
 const fail = (m) => { throw Error(m); };
 const days = Array.from({ length: 366 }, (_, n) => new Date(Date.UTC(2026, 0, 1 + n)).toISOString().slice(0, 10));
 const models = {
-  7: starModel, 8: storyModel, 9: alchemyModel, 10: mirrorModel, 11: sudokuSixModel,
+  8: storyModel, 9: alchemyModel, 10: mirrorModel, 11: sudokuSixModel,
   12: killerSixModel, 13: ladderModel, 14: bloomFiveModel, 15: duelModel, 16: goalModel,
 };
 const validSix = (g) => [0, 1, 2, 3, 4, 5].every((k) => [[0, 1, 2, 3, 4, 5].map((c) => g[k * 6 + c]), [0, 1, 2, 3, 4, 5].map((r) => g[r * 6 + k]), g.filter((_, i) => BOX6(i) === k)].every((grp) => new Set(grp).size === 6 && grp.every((v) => v >= 1 && v <= 6)));
 const checks = {
-  7: (m) => { if (!m.unique) fail("ambiguous starline clue"); if (!starSolved(m, m.lines)) fail("starline answer rejected"); if (m.clues.length !== m.lines.length) fail("clue count"); },
   8: (m) => {
     const keys = m.accepted.map((o) => o.join(""));
     if (keys[0] !== "012345") fail("canonical story order must come first in accepted");
@@ -66,9 +65,10 @@ difficulty = 1; day = "2026-05-04"; data = { games: {} };
 for (const i of Object.keys(models)) { openSpark(+i); if (!$("#rules").textContent || !$("#board").innerHTML) fail("render " + i); }
 out.join(" ");
 `, context);
-vm.runInContext(`for (const st of STORIES) {
+vm.runInContext(`if (typeof starModel !== "undefined" || SPARKS[7]) throw Error("Starlines should be retired");
+for (const st of STORIES) {
   if (!st.accepted || st.accepted[0].join("") !== "012345") throw Error("story needs accepted orders starting with the canonical one: " + st.title);
   for (const o of st.accepted) if (o.length !== 6 || [...o].sort().join("") !== "012345") throw Error("bad accepted order in " + st.title);
   if (st.beats.some(([tag, body]) => /Right (after|before)|Two cards after/.test(body))) throw Error("clue text left in " + st.title);
 }`, context);
-console.log(`PASS: 10 feed games × 3 levels × 366 days — solvable, deterministic, unique where promised (${((Date.now() - t0) / 1000).toFixed(1)}s). Distinct puzzles per 61 days: ${summary}`);
+console.log(`PASS: 9 feed games × 3 levels × 366 days — solvable, deterministic, unique where promised (${((Date.now() - t0) / 1000).toFixed(1)}s). Distinct puzzles per 61 days: ${summary}`);

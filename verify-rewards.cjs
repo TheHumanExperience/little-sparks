@@ -8,7 +8,7 @@ const nodes = new Map();
 const document = { querySelector(s) { if (!nodes.has(s)) nodes.set(s, element()); return nodes.get(s); }, querySelectorAll: () => [], createElement: () => element(), addEventListener() {}, getElementById: () => null };
 const context = { document, localStorage: { getItem: () => null, setItem: () => {} }, window: {}, setInterval: () => {} };
 vm.createContext(context);
-for (const f of ["valid-words.js", "app.js", "daily-content.js", "photos.js", "extras.js", "constellations.js", "stories.js", "ladders.js", "sparks.js", "aha.js", "feed.js"]) vm.runInContext(fs.readFileSync("dist/" + f, "utf8"), context);
+for (const f of ["valid-words.js", "app.js", "daily-content.js", "photos.js", "extras.js", "stories.js", "ladders.js", "sparks.js", "aha.js", "feed.js"]) vm.runInContext(fs.readFileSync("dist/" + f, "utf8"), context);
 const result = vm.runInContext(`
 const fail = (m) => { throw Error(m); };
 // Shiny cards
@@ -18,15 +18,15 @@ for (let o = 0; o < 366; o++) {
   const t = new Date(start); t.setDate(t.getDate() + o);
   const d = t.getFullYear() + "-" + String(t.getMonth() + 1).padStart(2, "0") + "-" + String(t.getDate()).padStart(2, "0");
   days.add(d);
-  const set = FEED_ORDER.filter((i) => isShiny(d, i));
-  for (const i of FEED_ORDER) { total++; if (isShiny(d, i) !== isShiny(d, i)) fail("shiny not deterministic " + d + " " + i); }
+  const set = feedOrder().filter((i) => isShiny(d, i));
+  for (const i of feedOrder()) { total++; if (isShiny(d, i) !== isShiny(d, i)) fail("shiny not deterministic " + d + " " + i); }
   shiny += set.length; perDay.push(set.join(","));
 }
 if (days.size !== 366) fail("expected 366 distinct days");
 const rate = shiny / total;
 if (rate < 0.035 || rate > 0.065) fail("shiny rate out of range: " + rate);
 if (new Set(perDay.filter(Boolean)).size < 40) fail("shiny cards barely vary across days");
-for (const i of FEED_ORDER) if (!perDay.some((s) => s.split(",").includes(String(i)))) fail("game " + i + " is never shiny");
+for (const i of feedOrder()) if (!perDay.some((s) => s.split(",").includes(String(i)))) fail("game " + i + " is never shiny");
 // Flow meter
 const D = "2026-05-05";
 let f = flowStep(null, {}, D);
@@ -53,7 +53,7 @@ if (next.golden || next.value !== 0 || next.hinted.length) fail("flow must reset
 let prev = 0;
 for (let s = 1; s <= 30; s++) { const b = burstSize(s); if (b < prev || b > 76) fail("burst not monotonic/capped"); prev = b; }
 if (burstSize(1) !== 28 || burstSize(30) !== 76) fail("burst bounds changed");
-if (milestoneFor(5) !== "five" || milestoneFor(10) !== "ten" || milestoneFor(FEED_ORDER.length) !== "all" || milestoneFor(17) || milestoneFor(4) || milestoneFor(11)) fail("milestones wrong");
+if (milestoneFor(5) !== "five" || milestoneFor(10) !== "ten" || milestoneFor(feedOrder().length) !== "all" || milestoneFor(17) || milestoneFor(4) || milestoneFor(11)) fail("milestones wrong");
 for (let s = 2; s <= 10; s++) if (!(chimeFreq(s) > chimeFreq(s - 1))) fail("chime must rise up to streak 10");
 if (chimeFreq(15) !== chimeFreq(10)) fail("chime must cap at streak 10");
 // Clear & retry isolation
@@ -61,15 +61,15 @@ const snap = (o) => JSON.stringify(o);
 const lvl = difficulty;
 difficulty = 1;
 const A = "2026-05-05", B = "2026-05-04";
-all[progressKey(A)] = { games: { 7: { started: true, pot: [1, 0, 2] }, 8: { done: true, stars: 3, moves: [1] }, 9: { started: true } } };
-all[progressKey(B)] = { games: { 7: { started: true, pot: [4] } } };
-difficulty = 2; all[progressKey(A)] = { games: { 7: { done: true } } }; difficulty = 1;
+all[progressKey(A)] = { games: { 10: { started: true, pot: [1, 0, 2] }, 8: { done: true, stars: 3, moves: [1] }, 9: { started: true } } };
+all[progressKey(B)] = { games: { 10: { started: true, pot: [4] } } };
+difficulty = 2; all[progressKey(A)] = { games: { 10: { done: true } } }; difficulty = 1;
 const other = snap({ b: all[progressKey(B)], t: all[A + "-level-2"], g9: all[progressKey(A)].games[9] });
-let u = clearPuzzle(all, A, 7);
-if (7 in all[progressKey(A)].games || feedDone(A, 7)) fail("unsolved clear must remove the puzzle state");
+let u = clearPuzzle(all, A, 10);
+if (10 in all[progressKey(A)].games || feedDone(A, 10)) fail("unsolved clear must remove the puzzle state");
 if (snap(u.prev) !== snap({ started: true, pot: [1, 0, 2] })) fail("clear must return the previous state for undo");
 all[u.key].games[u.i] = u.prev;
-if (all[progressKey(A)].games[7].pot[2] !== 2) fail("undo must restore the state");
+if (all[progressKey(A)].games[10].pot[2] !== 2) fail("undo must restore the state");
 u = clearPuzzle(all, A, 8);
 if (snap(all[progressKey(A)].games[8]) !== snap({ credit: true })) fail("solved clear must leave only a credit marker");
 if (!feedDone(A, 8) || feedCount(A) !== 1) fail("solved credit must still count after clear");
