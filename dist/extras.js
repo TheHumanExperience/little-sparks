@@ -1,8 +1,37 @@
 function photoClue(p){
  const context=p.clue||p.alt.replace(/\b(?:18|19|20)\d{2}\b/g,'[year hidden]');
- const start=Math.floor(p.year/25)*25;
- return context+(difficulty===2?'':` Think of the years ${start}–${start+24}.`);
+ const whisper=difficulty===0?ERA_DECADE[Math.min(2020,Math.floor(p.year/10)*10)]:difficulty===1?ERA_GENERATION[Math.min(2000,Math.floor(p.year/25)*25)]:'';
+ return context+(whisper?`<em class="era-whisper">${whisper}</em>`:'');
 }
+const ERA_DECADE={
+ 1850:'The world back then: sitters hold perfectly still for slow exposures, and steam trains are still a wonder.',
+ 1860:'The world back then: glass plates travel by cart, telegraph wires are crossing continents, and America is torn by civil war.',
+ 1870:'The world back then: the telephone is a brand-new invention, and the Raj is at its most formal.',
+ 1880:'The world back then: electric light is a marvel in a few rich cities, and the motor car has only just sputtered into life.',
+ 1890:'The world back then: bicycles are the craze, and the first moving pictures flicker in darkened halls.',
+ 1900:'The world back then: a new century, noisy rare motor cars, and the very first aeroplanes leaving the ground.',
+ 1910:'The world back then: a great war rages, a deadly flu follows it, and silent films pack the halls.',
+ 1920:'The world back then: jazz and silent cinema in the West, and a growing call for swaraj in India.',
+ 1930:'The world back then: a Great Depression, films that have just learned to talk, and Gandhi marching for salt.',
+ 1940:'The world back then: a second world war, and then the end of empires.',
+ 1950:'The world back then: a young republic builds dams and steel plants, while television reaches Western living rooms.',
+ 1960:'The world back then: the space race is on, colour film is spreading, and the Beatles are on the radio.',
+ 1970:'The world back then: flared trousers, pocket calculators, and colour photographs everywhere.',
+ 1980:'The world back then: Walkmans, the first personal computers, and colour TV arriving in Indian homes.',
+ 1990:'The world back then: the Cold War is over, India opens its economy, and the World Wide Web is born.',
+ 2000:'The world back then: mobile phones in every pocket, and digital cameras replacing film.',
+ 2010:'The world back then: smartphones and social media take over, and "selfie" becomes a word.',
+ 2020:'The world back then: a pandemic reshapes daily life, and video calls become normal.'
+};
+const ERA_GENERATION={
+ 1850:'Think of the first age of photography: long exposures, steam and the telegraph.',
+ 1875:'Think of late Victorian times: gaslight, horse-drawn streets and the first electric bulbs.',
+ 1900:'Think of the dawn of flight and motor cars, and a world at war.',
+ 1925:'Think of the years between the Depression and the end of empires.',
+ 1950:'Think of the post-war world: new nations, the space race, and black-and-white giving way to colour.',
+ 1975:'Think of colour film and the first home computers, up to the end of the Cold War.',
+ 2000:'Think of the digital age, with a camera in every pocket.'
+};
 function neighbourFace(shape,happy){return `<svg class="neighbourface" viewBox="0 0 64 64" aria-hidden="true">${shape===1?'<path class="facebody" d="M32 4 61 57H3Z"/>':'<rect class="facebody" x="7" y="7" width="50" height="50" rx="10"/>'}<circle cx="24" cy="33" r="2.8"/><circle cx="40" cy="33" r="2.8"/><path class="facemouth" d="${happy?'M23 41Q32 52 41 41':'M24 47Q32 39 40 47'}"/></svg>`}
 /* Two optional discoveries; daily-five progress remains independent. */
 const extraGames=[['Time Lens','Look closely. What year are you looking at?','Observation','Curious','3 photos','◉'],['Little Neighbours','Small moves. Surprisingly big changes.','Experiment','Play & learn','Puzzle + sandbox','▲ ■ ▲']];

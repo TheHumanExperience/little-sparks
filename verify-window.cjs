@@ -6,7 +6,8 @@ vm.runInContext(`
 if(ACTIVE_PHOTOS.length!==183)throw Error('Expected 183 active photos');
 if(new Set(PHOTO_BANK.map(p=>p.image)).size!==PHOTO_BANK.length)throw Error('Duplicate image IDs');
 if(PHOTO_BANK.slice(0,183).some(p=>p.image.startsWith('photos/hist-'))||LEGACY_PHOTO_BANK.length!==183)throw Error('Original 183 entries must keep their order for legacy saves');
-for(const p of PHOTO_BANK){if(p.iconic&&(!p.why||!p.clue))throw Error('Iconic photo needs why and clue: '+p.image);if(p.clue&&/\b(?:18|19|20)\d{2}s?\b/.test(p.clue))throw Error('Clue reveals a year: '+p.image);if(p.image.startsWith('photos/hist-')&&!(p.licenseUrl||/public domain|no known copyright/.test(p.credit)))throw Error('New photo needs a licence: '+p.image)}
+for(const p of PHOTO_BANK){if(p.iconic&&(!p.why||!p.clue))throw Error('Iconic photo needs why and clue: '+p.image);if(!p.retired&&!p.clue)throw Error('Active photo needs a curated clue: '+p.image);if(p.clue&&/\b(?:18|19|20)\d{2}s?\b/.test(p.clue))throw Error('Clue reveals a year: '+p.image);if(p.image.startsWith('photos/hist-')&&!(p.licenseUrl||/public domain|no known copyright/.test(p.credit)))throw Error('New photo needs a licence: '+p.image)}
+for(const p of ACTIVE_PHOTOS){for(let level=0;level<3;level++){difficulty=level;const parts=photoClue(p).split('<em class="era-whisper">');const w=parts[1]?parts[1].split('<')[0]:'';if(level<2&&!w)throw Error('Missing era hint: '+p.image+' level '+level);if(level===2&&w)throw Error('Hard shows an era hint');if(/[0-9]/.test(w))throw Error('Era hint shows a number: '+w)}}
 for(let level=0;level<3;level++){
  difficulty=level;
  for(const centre of ['2026-10-30','2026-12-31','2027-03-28']){
