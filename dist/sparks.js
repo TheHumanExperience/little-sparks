@@ -113,47 +113,36 @@ function starlines(i) {
 SPARKS[7] = { name: "Starlines", blurb: "Join the stars. Find the story in the sky.", type: "Stars", art: "✦ ⋰ ✧", render: starlines };
 
 /* ───────────── 8 · Story Shuffle ───────────── */
+// No clue lines: the beats' own time and cause cues carry the order. A story is solved by
+// any order in its `accepted` list. Tricky hides the card titles, leaving only the text.
 function storyModel(d) {
   const lvl = difficulty,
     story = STORIES[cycleIndex(STORIES.length, "stories-v1-" + lvl, d, lvl * 7)],
     r = rng(puzzleSeed(d) + "story"),
-    clues = story.beats.map(() => []),
-    tag = (k) => `“${story.beats[k][0]}”`,
-    skip = lvl === 2 ? 1 + Math.floor(r() * 3) : -1;
-  for (let k = 0; k < 5; k++) {
-    // Tricky swaps one adjacent link for a "two cards after" link.
-    if (k === skip) { clues[k + 1].push({ type: "after2", ref: k - 1 }); continue; }
-    if (lvl === 0 || r() < 0.5) clues[k + 1].push({ type: "after", ref: k });
-    else clues[k].push({ type: "before", ref: k + 1 });
-  }
-  if (lvl === 0) clues[0].push({ type: "first" });
-  const text = (c) => c.type === "first" ? "The story begins here." : c.type === "after" ? `Right after ${tag(c.ref)}` : c.type === "before" ? `Right before ${tag(c.ref)}` : `Two cards after ${tag(c.ref)}`;
+    accepted = story.accepted.map((o) => o.join(""));
   let order;
   do order = shuffle([0, 1, 2, 3, 4, 5], r);
-  while (order.filter((v, i) => v === i).length > 1);
-  return { title: story.title, cards: story.beats.map(([t, body], k) => ({ tag: t, body, clues: clues[k].map(text) })), rules: clues, start: order };
+  while (accepted.includes(order.join("")) || order.filter((v, i) => v === i).length > 1);
+  return { title: story.title, cards: story.beats.map(([tag, body]) => ({ tag, body })), accepted: story.accepted, start: order };
 }
-function storyOrdersMatching(m) {
-  const out = [];
-  const perm = (a, rest) => {
-    if (!rest.length) {
-      const pos = []; a.forEach((v, i) => (pos[v] = i));
-      if (m.rules.every((cs, k) => cs.every((c) => c.type === "first" ? pos[k] === 0 : c.type === "after" ? pos[k] === pos[c.ref] + 1 : c.type === "before" ? pos[k] + 1 === pos[c.ref] : pos[k] === pos[c.ref] + 2))) out.push(a.join(""));
-      return;
-    }
-    rest.forEach((v, i) => perm([...a, v], rest.filter((_, j) => j !== i)));
-  };
-  perm([], [0, 1, 2, 3, 4, 5]);
-  return out;
+const storyAccepted = (m, order) => m.accepted.some((o) => o.every((v, k) => v === order[k]));
+// The accepted order closest to the current one: [order, cards in place, length of the in-place opening run].
+function storyBest(m, order) {
+  return m.accepted.map((o) => {
+    const placed = o.filter((v, k) => v === order[k]).length;
+    let run = 0; while (run < 6 && o[run] === order[run]) run++;
+    return [o, placed, run];
+  }).sort((x, y) => y[1] - x[1] || y[2] - x[2])[0];
 }
 function storyShuffle(i) {
-  const m = storyModel(day), s = state(i);
+  const m = storyModel(day), s = state(i), titles = difficulty < 2;
   s.order ||= m.start.slice();
   let pick = null;
-  $("#rules").textContent = "Put the six moments in order, top to bottom. Tap one card, then another, to swap them. The little clues link cards together.";
+  $("#rules").textContent = "Put the six moments in order, top to bottom. Tap one card, then another, to swap them. Read for time and cause: what has to happen before what?" + (titles ? "" : " On Tricky the cards have no titles.");
+  const label = (k) => titles ? `“${m.cards[k].tag}”` : `“${m.cards[k].body.split(" ").slice(0, 5).join(" ")}…”`;
   function draw() {
-    const right = s.order.filter((v, k) => v === k).length;
-    $("#board").innerHTML = `<p class="storytitle">${m.title}</p><ol class="storycards">${s.order.map((k, p) => `<li><button class="storycard ${pick === p ? "picked" : ""} ${s.done ? "placed" : ""}" data-pos="${p}"><b>${m.cards[k].tag}</b><span>${m.cards[k].body}</span>${m.cards[k].clues.map((c) => `<em>↳ ${c}</em>`).join("")}</button></li>`).join("")}</ol>` + (difficulty === 0 && !s.done ? `<p class="small">${right} of 6 in the right place</p>` : "");
+    const placed = storyBest(m, s.order)[1];
+    $("#board").innerHTML = `<p class="storytitle">${m.title}</p><ol class="storycards">${s.order.map((k, p) => `<li><button class="storycard ${pick === p ? "picked" : ""} ${s.done ? "placed" : ""}" data-pos="${p}">${titles ? `<b>${m.cards[k].tag}</b>` : ""}<span>${m.cards[k].body}</span></button></li>`).join("")}</ol>` + (difficulty === 0 && !s.done ? `<p class="small">${placed} of 6 in a sensible place</p>` : "");
     $("#board").querySelectorAll("[data-pos]").forEach((b) => (b.onclick = () => {
       if (s.done) return;
       const p = +b.dataset.pos;
@@ -161,14 +150,27 @@ function storyShuffle(i) {
       [s.order[pick], s.order[p]] = [s.order[p], s.order[pick]];
       pick = null;
       persist();
-      if (s.order.every((v, k) => v === k)) sparkSolved("The story flows! Every moment in its place.");
+      if (storyAccepted(m, s.order)) sparkSolved("The story flows! Every moment in its place.");
       draw();
     }));
   }
   draw();
+  action("Check order", () => {
+    if (s.done || storyAccepted(m, s.order)) return msg("The story flows!");
+    const [, placed, run] = storyBest(m, s.order);
+    msg(difficulty === 2 ? (run ? `The first ${run} ${run === 1 ? "card reads" : "cards read"} right. Something after that is out of place.` : "The story doesn't start there yet. What has to happen first?") : `${placed} of 6 cards are in a sensible place. Keep going!`);
+  }, true);
   action("A gentle hint", () => {
-    const k = s.order.findIndex((v, p) => v !== p);
-    msg(k < 0 ? "It's all in order!" : `Card ${k + 1} should be “${m.cards[k].tag}”.`);
+    if (s.done) return msg("It's all in order!");
+    const [o] = storyBest(m, s.order), k = o.findIndex((v, p) => v !== s.order[p]);
+    if (k < 0) return msg("It's all in order!");
+    const j = s.order.indexOf(o[k]);
+    [s.order[k], s.order[j]] = [s.order[j], s.order[k]];
+    pick = null;
+    persist();
+    if (storyAccepted(m, s.order)) sparkSolved("The story flows! Every moment in its place.");
+    draw();
+    if (!s.done) msg(`Placed ${label(o[k])} as card ${k + 1}.`);
   }, true);
 }
 SPARKS[8] = { name: "Story Shuffle", blurb: "Six little moments. One story.", type: "Stories", art: "❶ ❸ ❷", render: storyShuffle };

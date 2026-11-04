@@ -16,7 +16,13 @@
 Like the original games, the ten feed games are built from the date and the difficulty level, so past days look the same every time you open them.
 
 - **Starlines** draws from the 18 constellations in `dist/constellations.js`. Every clue must lead to only one star, and `verify-sparks.cjs` checks that.
-- **Story Shuffle** draws from the 22 stories in `dist/stories.js`. The card clues must allow only one correct order.
+- **Story Shuffle** draws from the 22 stories in `dist/stories.js`.
+  - There are no clue lines. The order has to come from the story text itself, so each beat needs natural time and cause cues ("That evening…", "Once it's baked…").
+  - Each story has an `accepted` list of orders. The canonical order comes first. Add other orders only when two middle beats really could happen either way round (for example Paper boat, Garden swing and Moving in).
+  - Any accepted order solves the puzzle.
+  - Tricky hides the card titles, so the cues must still work from the body text alone.
+  - On Gentle and Medium, "Check order" says how many cards are in a sensible place. On Tricky it says how many opening cards read right.
+  - The hint moves one card into its correct place.
 - **Letterlight Ladder** uses `dist/ladders.js`, which holds 90 shortest-route ladders per level. Every step must be an everyday word.
 - **Colour Alchemy** works through a shuffled cycle of every recipe at the day's level:
 

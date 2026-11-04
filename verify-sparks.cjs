@@ -20,7 +20,14 @@ const models = {
 const validSix = (g) => [0, 1, 2, 3, 4, 5].every((k) => [[0, 1, 2, 3, 4, 5].map((c) => g[k * 6 + c]), [0, 1, 2, 3, 4, 5].map((r) => g[r * 6 + k]), g.filter((_, i) => BOX6(i) === k)].every((grp) => new Set(grp).size === 6 && grp.every((v) => v >= 1 && v <= 6)));
 const checks = {
   7: (m) => { if (!m.unique) fail("ambiguous starline clue"); if (!starSolved(m, m.lines)) fail("starline answer rejected"); if (m.clues.length !== m.lines.length) fail("clue count"); },
-  8: (m) => { const o = storyOrdersMatching(m); if (o.length !== 1 || o[0] !== "012345") fail("story order not unique: " + o.length); if (m.start.join("") === "012345") fail("story starts solved"); },
+  8: (m) => {
+    const keys = m.accepted.map((o) => o.join(""));
+    if (keys[0] !== "012345") fail("canonical story order must come first in accepted");
+    if (new Set(keys).size !== keys.length) fail("duplicate accepted story order");
+    for (const o of m.accepted) if (o.length !== 6 || [...o].sort().join("") !== "012345") fail("accepted order is not a permutation: " + o);
+    if (!storyAccepted(m, [0, 1, 2, 3, 4, 5]) || storyAccepted(m, m.start)) fail("story starts solved or canonical rejected");
+    if (m.cards.some((c) => "clues" in c)) fail("story cards still carry link clues");
+  },
   9: (m) => { if (!alchemyMatch(m, m.target)) fail("recipe rejected"); if (alchemyMatch(m, m.bases.map(() => 0))) fail("empty pot matches"); },
   10: (m) => { if (!mirrorSolved(m, m.solution)) fail("mirror solution fails"); if (mirrorSolved(m, {})) fail("mirrors not needed"); if (Object.keys(m.solution).length !== m.budget) fail("mirror budget"); },
   11: (m) => { if (!validSix(m.sol)) fail("bad sudoku"); if (m.givens.some((v, i) => v && v !== m.sol[i])) fail("bad givens"); if (sixCount(m.givens) !== 1) fail("sudoku not unique"); },
@@ -53,4 +60,9 @@ difficulty = 1; day = "2026-05-04"; data = { games: {} };
 for (const i of Object.keys(models)) { openSpark(+i); if (!$("#rules").textContent || !$("#board").innerHTML) fail("render " + i); }
 out.join(" ");
 `, context);
+vm.runInContext(`for (const st of STORIES) {
+  if (!st.accepted || st.accepted[0].join("") !== "012345") throw Error("story needs accepted orders starting with the canonical one: " + st.title);
+  for (const o of st.accepted) if (o.length !== 6 || [...o].sort().join("") !== "012345") throw Error("bad accepted order in " + st.title);
+  if (st.beats.some(([tag, body]) => /Right (after|before)|Two cards after/.test(body))) throw Error("clue text left in " + st.title);
+}`, context);
 console.log(`PASS: 10 feed games × 3 levels × 366 days — solvable, deterministic, unique where promised (${((Date.now() - t0) / 1000).toFixed(1)}s). Distinct puzzles per 61 days: ${summary}`);
