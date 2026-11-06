@@ -15,6 +15,7 @@
         <button class="pill" id="todayPill" type="button" aria-label="Jump to a day"><span class="todaylabel">Today · </span><b id="todayCount">0/16</b><span id="revealCount" class="revealcount" hidden></span></button>
         <button class="pill soundpill" id="soundPill" type="button" aria-pressed="true" aria-label="Sound on. Turn chimes off"><span aria-hidden="true">🔔</span></button>
         <button class="pill" id="levelPill" type="button" aria-label="Change difficulty">Medium</button>
+        <button class="pill lbpill" id="lbPill" type="button" aria-label="Leaderboard" hidden><span aria-hidden="true">🏆</span></button>
       </div>
       <div id="flowBar" class="flowbar" role="meter" aria-label="Flow: solve without hints to fill it" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0"><i></i></div>
     </header>
@@ -34,6 +35,26 @@
       <p>Today and the previous 30 days, at your own pace.</p>
       <div id="days"></div>
     </dialog>
+    <dialog id="lbSheet" class="sheet">
+      <div class="modalhead"><h2>Leaderboard</h2><button class="quiet" data-close aria-label="Close">✕</button></div>
+      <div id="lbTabs" class="lbtabs" role="tablist" aria-label="Period">
+        <button type="button" role="tab" data-period="day" aria-selected="true">Day</button>
+        <button type="button" role="tab" data-period="week" aria-selected="false">Week</button>
+        <button type="button" role="tab" data-period="month" aria-selected="false">Month</button>
+      </div>
+      <ol id="lbList" class="lblist" aria-live="polite"></ol>
+      <p id="lbMe" class="lbme"></p>
+      <p class="lbnote"><span id="lbPending"></span> Each first solve earns Gentle 1 · Medium 3 · Tricky 5 points. India time; weeks start on Monday.</p>
+    </dialog>
+    <dialog id="nameSheet" class="sheet">
+      <div class="modalhead"><h2>Hello there ✳</h2><button class="quiet" data-close aria-label="Not now">✕</button></div>
+      <form id="lbNameForm" class="lbform">
+        <label for="lbName">What name should appear on the little leaderboard?</label>
+        <input id="lbName" type="text" autofocus maxlength="20" autocomplete="nickname" autocapitalize="words" enterkeyhint="done" required />
+        <p id="lbNameError" class="lberror" role="alert"></p>
+        <button type="submit" class="lbsave">Save my name</button>
+      </form>
+    </dialog>
     <script src="valid-words.js"></script>
     <script src="app.js"></script>
     <script src="daily-content.js"></script>
@@ -43,6 +64,8 @@
     <script src="ladders.js"></script>
     <script src="sparks.js"></script>
     <script src="aha.js"></script>
+    <script src="leaderboard-config.js"></script>
+    <script src="leaderboard.js"></script>
     <script src="feed.js"></script>
   </body>
 </html>

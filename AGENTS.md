@@ -28,6 +28,7 @@ Prefer `npm run smoke` over manual screenshots. Take screenshots only when a hum
 | `dist/sparks.js` | Games 8–16 (`SPARKS[i]`): pure `*Model(d)` generators plus renderers. |
 | `dist/aha.js` | Logical-reasoning track: `AHA_SLOTS = [3,17,18,19,20]`, category generators, `ahaModel(d,slot)`, legacy Aha card. |
 | `dist/feed.js` | Feed (`FEED_PLAN`, `FEED_FAMILIES`), live card, celebrations, rewards, flow, shiny cards, ↺ clear, Reveal answer. |
+| `dist/leaderboard.js`, `dist/leaderboard-config.js` | Optional Supabase leaderboard (🏆, name sheet, offline queue). Hidden while the config is empty; keep it empty in commits unless the owner says otherwise. Schema: `supabase/schema.sql`, setup: `docs/SUPABASE_SETUP.md`. |
 | `dist/style.css` | All styles; respects `prefers-reduced-motion`. |
 | `dist/valid-words.js`, `WORD-LIST-LICENSE.txt` | Word list for Letterlight and Ladder validation. |
 | `verify*.cjs` | Node vm checks (see the README table). `tests/smoke.mjs` is the browser smoke test. |
@@ -51,6 +52,7 @@ Prefer `npm run smoke` over manual screenshots. Take screenshots only when a hum
 
 ## Levels, storage and migration
 - Levels are 0 Gentle, 1 Medium, 2 Tricky (`little-sparks-difficulty`). Progress lives in `little-sparks-v1` as `all[progressKey(d)].games[i]`. Medium uses the bare date as its key; the other levels use `d-level-N`.
+- The leaderboard lives in `little-sparks-leaderboard-v1`: `{id, name, synced, asked, sent, queue}`. Points (1/3/5) come only from feed.js's first-solve branch (`lbSolved`), never from reveals or replays.
 - Rewards live in `little-sparks-rewards-v1`: `{muted, flow, stickers, reveals:{date, used:[[],[],[]]}}`.
 - Never rename keys or change the meaning of saved fields. Migrate by reading old shapes, for example:
   - Story Shuffle `order`.

@@ -93,18 +93,66 @@ for (const [engine, launch, ctxOpts] of engines) {
     if (lv) check(await pillReveals() === ["", "· 🔑 4", "· 🔑 2"][lv], `${engine} L${lv} header reveal count drops after a reveal`, await pillReveals());
   }
   // A real solve by touch: Pocket Sudoku on Gentle → solved badge and header count.
+  const solvePocket = async () => {
+    await goTo(1);
+    const sol = await page.evaluate(() => sudokuModel(day).sol);
+    const empties = await page.evaluate(() => [...document.querySelectorAll(".spark.live input.cell")].map((e, i) => (e.readOnly ? -1 : i)).filter((i) => i >= 0));
+    for (const i of empties) { await page.locator(".spark.live input.cell").nth(i).tap(); await page.keyboard.type(String(sol[i])); }
+    await page.waitForTimeout(400);
+  };
   await fresh(0);
-  await goTo(1);
-  const sol = await page.evaluate(() => sudokuModel(day).sol);
-  const empties = await page.evaluate(() => [...document.querySelectorAll(".spark.live input.cell")].map((e, i) => (e.readOnly ? -1 : i)).filter((i) => i >= 0));
-  for (const i of empties) { await page.locator(".spark.live input.cell").nth(i).tap(); await page.keyboard.type(String(sol[i])); }
-  await page.waitForTimeout(400);
+  check(await page.locator("#lbPill").isHidden(), `${engine} leaderboard hidden without config`);
+  await solvePocket();
   check(await page.locator(".spark.live .donebadge:not([hidden])").count() === 1, `${engine} Pocket Sudoku solves by touch`);
   check(/·\s*1\/\d+/.test(await page.locator("#todayPill").innerText()), `${engine} header counts the solve`);
   // The brand returns to today's first card.
   await page.locator(".brand").tap();
   await page.waitForTimeout(1000);
   check(await page.evaluate(() => feed.scrollTop <= 2), `${engine} brand scrolls back to the top`);
+  // Leaderboard against a mocked Supabase (route interception): name, offline queue, sync, tabs.
+  const calls = [];
+  let offline = false;
+  await page.route("**/leaderboard-config.js", (r) => r.fulfill({ contentType: "text/javascript", body: 'const SUPABASE_URL = "https://lb.test"; const SUPABASE_ANON_KEY = "eyJtest";' }));
+  await page.route("https://lb.test/**", async (r) => {
+    if (offline) return r.abort("internetdisconnected");
+    const fn = r.request().url().split("/rpc/")[1], body = JSON.parse(r.request().postData() || "{}");
+    calls.push({ fn, body, auth: r.request().headers().authorization });
+    const json = fn === "leaderboard" ? [{ rank: 1, name: "Asha <b>", points: 9, is_me: false }, { rank: 2, name: "Nidhi", points: 1, is_me: true }] : fn === "record_solve" ? 1 : null;
+    return r.fulfill({ status: json === null ? 204 : 200, contentType: "application/json", body: json === null ? "" : JSON.stringify(json) });
+  });
+  await fresh(0);
+  const lbStore = () => page.evaluate(() => JSON.parse(localStorage.getItem("little-sparks-leaderboard-v1") || "{}"));
+  check(await page.locator("#lbPill").isVisible(), `${engine} 🏆 shown with config`);
+  check(await page.evaluate(() => { const r = document.querySelector("#lbPill").getBoundingClientRect(); return document.documentElement.scrollWidth <= innerWidth && r.right <= innerWidth && r.right > innerWidth - 80; }), `${engine} 🏆 sits top-right without overflow`);
+  try { await page.waitForSelector("#nameSheet[open]", { timeout: 3000 }); } catch { check(false, `${engine} first visit asks for a name`); }
+  await page.locator("#lbName").fill("   ");
+  await page.locator(".lbsave").tap();
+  check(await page.locator("#nameSheet[open]").count() === 1 && /1 to 20/.test(await page.locator("#lbNameError").innerText()), `${engine} blank name is refused`);
+  await page.locator("#lbName").fill("  Nidhi  ");
+  await page.locator(".lbsave").tap();
+  await page.waitForTimeout(300);
+  check(calls.some((c) => c.fn === "upsert_player" && c.body.p_name === "Nidhi" && c.auth === "Bearer eyJtest"), `${engine} name saved to Supabase (trimmed)`);
+  offline = true;
+  await solvePocket();
+  const reveal = await page.evaluate(() => feedOrder()[2]);
+  await goTo(reveal);
+  await page.locator(".spark.live .revealbtn").tap();
+  await page.locator(".spark.live [data-yes]").tap();
+  await page.waitForTimeout(300);
+  const queued = (await lbStore()).queue || [];
+  check(queued.length === 1 && queued[0].lv === 0 && queued[0].g === 1 && queued[0].p === 1, `${engine} offline solve queued once (Gentle = 1 point), reveal gives none`, JSON.stringify(queued));
+  offline = false;
+  await page.locator("#lbPill").tap();
+  await page.waitForSelector("#lbList li.me", { timeout: 4000 }).catch(() => {});
+  check(calls.filter((c) => c.fn === "record_solve").length === 1 && calls.some((c) => c.fn === "record_solve" && c.body.p_level === 0 && c.body.p_game === 1), `${engine} queued solve syncs once when back online`);
+  check(((await lbStore()).queue || []).length === 0, `${engine} queue empties after sync`);
+  check(/Nidhi/.test(await page.locator("#lbList li.me").innerText().catch(() => "")) && (await page.locator("#lbList").innerHTML()).includes("Asha &lt;b&gt;"), `${engine} board highlights you and escapes names`);
+  await page.locator('#lbTabs [data-period="week"]').tap();
+  await page.waitForTimeout(300);
+  check(calls.at(-1)?.fn === "leaderboard" && calls.at(-1).body.p_period === "week" && (await page.getAttribute('#lbTabs [data-period="week"]', "aria-selected")) === "true", `${engine} Week tab loads the weekly board`);
+  await page.locator("#lbSheet [data-close]").tap();
+  await page.unroute("**/leaderboard-config.js");
+  await page.unroute("https://lb.test/**");
   check(errors.length === 0, `${engine} no page errors`, errors.slice(0, 3).join(" | "));
   if (failures > before) await shot("last-state");
   summary.push(`${engine}: ${cards} cards checked at 3 levels, ${failures - before ? `${failures - before} problem(s)` : "ok"}`);

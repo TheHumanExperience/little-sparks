@@ -500,7 +500,7 @@ if (document.getElementById?.("feed")) {
     if (live) {
       const done = !!state(+live.dataset.idx).done;
       refreshCard(live);
-      if (done && !liveWasDone) { liveWasDone = true; refreshHeader(); const st = state(+live.dataset.idx); if (st.credit || st.revealed) celebrateReplay(live, !st.credit); else celebrate(live); }
+      if (done && !liveWasDone) { liveWasDone = true; refreshHeader(); const st = state(+live.dataset.idx); if (st.credit || st.revealed) celebrateReplay(live, !st.credit); else { celebrate(live); if (typeof lbSolved === "function") lbSolved(live.dataset.day, difficulty, +live.dataset.idx); } }
     }
     refreshHeader();
   };
