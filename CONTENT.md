@@ -46,4 +46,4 @@ Run `node verify-window.cjs`, `node verify-levels.cjs` and `node verify-sparks.c
 
 Entry fields: `image`, `year`, `title`, `alt`, `story`, `credit`, `source`, `licenseUrl`, `sourceDate`, `india`, plus `clue` (required for active photos; shown before the guess and must not contain a year), optional `iconic`, `why` (one-line "why it mattered", shown after the guess) and `retired`. Keep the first 183 entries in their original order (legacy schedules depend on it) and append new photos. Only freely licensed images (public domain, CC0, CC BY, CC BY-SA, GODL-India, Flickr Commons no known restrictions) are allowed; press-agency photos (AP, Reuters, Getty, etc.) and fair-use files are not. `tools/fetch-historic.py` checks the Commons licence, then downloads and resizes an image (800 px, JPEG q80) and prints its credit metadata.
 
-Do not overwrite the manifest with the old six-photo starter script. `prepare_photos.py` now verifies the full local collection instead.
+Do not overwrite the manifest with the old six-photo starter script. `python3 tools/check-photos.py` verifies the full local collection instead (needs Pillow).

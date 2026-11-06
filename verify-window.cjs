@@ -34,7 +34,7 @@ const oldIds=state(5).photoIds.slice();openExtra(5);if(JSON.stringify(state(5).p
 // Fresh puzzle remains the same after marking it started and after reloading state.
 day='2026-11-25';setup();const a=wordAnswer(day),q=JSON.stringify(logicModel(day));state(0).started=true;state(3).started=true;all=JSON.parse(JSON.stringify(all));setup();
 if(wordAnswer(day)!==a||JSON.stringify(logicModel(day))!==q)throw Error('Fresh content changed on resume');
-$('#past').onclick();if(($('#days').innerHTML.match(/data-date=/g)||[]).length!==31)throw Error('Archive must include today plus 30 days');
+// The 31-day archive (today plus 30 days) is checked in verify-feed.cjs.
 `,ctx);
 const bank=vm.runInContext('PHOTO_BANK',ctx);const hashes=new Set();const crypto=require('crypto');for(const p of bank){const f=path.join('dist',p.image);assert(fs.existsSync(f),f);const hash=crypto.createHash('sha256').update(fs.readFileSync(f)).digest('hex');assert(!hashes.has(hash),'Duplicate image bytes');hashes.add(hash)}
 console.log('PASS: 61-day windows at all levels; 183 active of '+bank.length+' distinct local photos (retired kept for saves); history-shaping and Indian photo daily; unique words/questions; legacy and new save continuity; 30-day archive.');

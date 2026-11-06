@@ -1,7 +1,7 @@
 """Validate the canonical bundled photo collection without overwriting it."""
 import json, pathlib, hashlib
 from PIL import Image
-root=pathlib.Path(__file__).resolve().parent
+root=pathlib.Path(__file__).resolve().parent.parent
 bank=json.loads((root/'dist/photos.js').read_text().split('=',1)[1].strip().rstrip(';'))
 seen=set()
 for item in bank:

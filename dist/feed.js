@@ -232,6 +232,12 @@ if (document.getElementById?.("feed")) {
   function refreshHeader() {
     const n = feedCount(feedToday);
     $("#todayCount").textContent = `${n}/${feedOrder().length}`;
+    const left = revealsLeft(rewards.reveals, difficulty, today()), rc = $("#revealCount");
+    rc.hidden = left === Infinity;
+    $("#todayPill").classList.toggle("hasreveals", left !== Infinity);
+    rc.textContent = left === Infinity ? "" : ` · 🔑 ${left}`;
+    rc.title = `${left} reveal${left === 1 ? "" : "s"} left today`;
+    $("#todayPill").setAttribute("aria-label", `Today: ${n} of ${feedOrder().length} solved${left === Infinity ? "" : `, ${left} reveal${left === 1 ? "" : "s"} left`}. Jump to a day`);
     $("#levelPill").textContent = levelName();
     feed.querySelectorAll(".todaycountnum").forEach((b) => (b.textContent = n));
   }
@@ -474,6 +480,7 @@ if (document.getElementById?.("feed")) {
       persist();
       rerender(card);
       refreshRewards();
+      refreshHeader();
       const after = revealsLeft(rewards.reveals, lv, today());
       retryBar(card, after === Infinity ? "Answer revealed." : `Answer revealed · ${after} left today.`);
       undoTimer = setTimeout(() => retryBar(card, ""), 3000);

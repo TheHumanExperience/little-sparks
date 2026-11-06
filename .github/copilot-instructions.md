@@ -1,0 +1,1 @@
+Read [AGENTS.md](../AGENTS.md) first: it covers the app intent, file map, game registry, storage and determinism rules, and commands. Use [REVIEW.md](../REVIEW.md) as the pre-handoff checklist. Prefer `npm run smoke` over manual screenshots.

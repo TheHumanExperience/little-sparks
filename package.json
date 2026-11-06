@@ -1,0 +1,12 @@
+{
+  "name": "little-sparks",
+  "private": true,
+  "description": "Dev tooling only. The app in dist/ has no build step and no runtime dependencies.",
+  "scripts": {
+    "verify": "for f in verify*.cjs; do node \"$f\" || exit 1; done",
+    "smoke": "node tests/smoke.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.65.0"
+  }
+}

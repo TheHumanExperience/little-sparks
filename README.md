@@ -11,7 +11,7 @@ Tap the Little Sparks logo at any time to go back to the first card of today.
 - **Flow bar.** The thin bar under the header fills by 1 for each puzzle you solve without a hint, up to 5. The first hint you use on a puzzle drains 2, never below 0, and that puzzle can no longer add flow. When the bar is full, cards turn golden for the rest of the day and stay golden even if you use hints. The bar resets at midnight.
 - **Shiny cards.** About 1 card in 20 has a holographic look. Which cards are shiny depends only on the date and the game, so reloading the page doesn't change them. Solving a shiny card gives you a sticker, shown in a toast and counted on the note card.
 - **Reveal answer.** A quiet "Reveal answer" button at the bottom-right of each card shows the full solution after a confirm.
-  - Gentle has unlimited reveals. Medium allows 5 cards and Tricky 3 cards per calendar day, per level; the confirm shows how many are left.
+  - Gentle has unlimited reveals. Medium allows 5 cards and Tricky 3 cards per calendar day, per level; the confirm and the header pill next to the solved count (e.g. `3/16 · 🔑 4`) both show how many are left.
   - A revealed card counts as revealed, not solved. It gives no solve credit, streak, flow, sticker or milestone, and drains the flow meter like a hint.
   - ↺ lets you replay a revealed card, but solving it still doesn't count. Showing the same card's answer again that day is free.
   - Usage is stored in the rewards storage as `reveals: { date, used: [[…], […], […]] }` and resets on a new day.
@@ -101,6 +101,10 @@ Requires Node.js:
 ```sh
 for f in verify*.cjs; do node "$f"; done
 ```
+
+Or run `npm run verify`. For a headless browser smoke test of every card at all three levels in WebKit and Chromium, run `npm install && npm run smoke`. Add `-- --shots` to save screenshots to `tests/shots/`; by default it saves them only on failure.
+
+Contributors and coding agents should start with [AGENTS.md](AGENTS.md) and check [REVIEW.md](REVIEW.md) before handing off.
 
 | Script | Checks |
 | --- | --- |
