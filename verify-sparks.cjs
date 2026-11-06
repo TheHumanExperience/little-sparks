@@ -26,6 +26,9 @@ const checks = {
     for (const o of m.accepted) if (o.length !== 6 || [...o].sort().join("") !== "012345") fail("accepted order is not a permutation: " + o);
     if (!storyAccepted(m, [0, 1, 2, 3, 4, 5]) || storyAccepted(m, m.start)) fail("story starts solved or canonical rejected");
     if (m.cards.some((c) => "clues" in c)) fail("story cards still carry link clues");
+    let o = m.start, hints = 0, step;
+    while ((step = storyHintStep(m, o))) { o = step.order; if (++hints > 5) fail("hints don't finish the story"); }
+    if (!storyAccepted(m, o)) fail("hints end on an unaccepted order");
   },
   9: (m) => { if (!alchemyMatch(m, m.target)) fail("recipe rejected"); if (alchemyMatch(m, m.bases.map(() => 0))) fail("empty pot matches"); },
   10: (m) => { if (!mirrorSolved(m, m.solution)) fail("mirror solution fails"); if (mirrorSolved(m, {})) fail("mirrors not needed"); if (Object.keys(m.solution).length !== m.budget) fail("mirror budget"); },
@@ -64,6 +67,12 @@ difficulty = 1;
 difficulty = 1; day = "2026-05-04"; data = { games: {} };
 for (const i of Object.keys(models)) { openSpark(+i); if (!$("#rules").textContent || !$("#board").innerHTML) fail("render " + i); }
 out.join(" ");
+`, context);
+vm.runInContext(`const eq = (a, b) => a.join("") === b.join("");
+if (!eq(storyMove([1, 2, 3, 4, 5, 6], 3, 1), [1, 4, 2, 3, 5, 6])) throw Error("story move up should insert and shift");
+if (!eq(storyMove([1, 2, 3, 4, 5, 6], 1, 4), [1, 3, 4, 5, 2, 6])) throw Error("story move down should insert and shift");
+if (!eq(storyMove([1, 2, 3, 4, 5, 6], 2, 2), [1, 2, 3, 4, 5, 6])) throw Error("story move in place");
+const base = [1, 2, 3, 4, 5, 6]; storyMove(base, 0, 5); if (!eq(base, [1, 2, 3, 4, 5, 6])) throw Error("story move mutates input");
 `, context);
 vm.runInContext(`if (typeof starModel !== "undefined" || SPARKS[7]) throw Error("Starlines should be retired");
 for (const st of STORIES) {

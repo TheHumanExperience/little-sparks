@@ -91,25 +91,95 @@ function storyBest(m, order) {
     return [o, placed, run];
   }).sort((x, y) => y[1] - x[1] || y[2] - x[2])[0];
 }
+// Move the card at `from` to `to`; the cards in between shift by one (4→2: 1,4,2,3,5,6).
+function storyMove(order, from, to) {
+  const o = order.slice(), [k] = o.splice(from, 1);
+  o.splice(to, 0, k);
+  return o;
+}
+// One hint: follow the accepted order with the longest correct opening and slide its next
+// card into place, so the opening grows by one each time. Null when already in order.
+function storyHintStep(m, order) {
+  const o = m.accepted.map((a) => { let r = 0; while (r < 6 && a[r] === order[r]) r++; return [a, r]; }).sort((x, y) => y[1] - x[1])[0][0];
+  const pos = o.findIndex((v, p) => v !== order[p]);
+  return pos < 0 ? null : { order: storyMove(order, order.indexOf(o[pos]), pos), card: o[pos], pos };
+}
+const calmMotion = () => !!globalThis.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 function storyShuffle(i) {
   const m = storyModel(day), s = state(i), titles = difficulty < 2;
   s.order ||= m.start.slice();
   let pick = null;
-  $("#rules").textContent = "Put the six moments in order, top to bottom. Tap one card, then another, to swap them. Read for time and cause: what has to happen before what?" + (titles ? "" : " On Tricky the cards have no titles.");
+  $("#rules").textContent = "Put the six moments in order, top to bottom. Tap a card, then tap the spot it belongs in: it slides there and the others shift along. Or drag it by its ⠿ grip. Read for time and cause: what has to happen before what?" + (titles ? "" : " On Tricky the cards have no titles.");
   const label = (k) => titles ? `“${m.cards[k].tag}”` : `“${m.cards[k].body.split(" ").slice(0, 5).join(" ")}…”`;
+  const commit = (order) => {
+    s.order = order;
+    pick = null;
+    persist();
+    if (storyAccepted(m, s.order)) sparkSolved("The story flows! Every moment in its place.");
+    draw();
+  };
   function draw() {
+    const board = $("#board"), before = new Map([...board.querySelectorAll(".storycards li[data-k]")].map((li) => [li.dataset.k, li.getBoundingClientRect().top]));
     const placed = storyBest(m, s.order)[1];
-    $("#board").innerHTML = `<p class="storytitle">${m.title}</p><ol class="storycards">${s.order.map((k, p) => `<li><button class="storycard ${pick === p ? "picked" : ""} ${s.done ? "placed" : ""}" data-pos="${p}">${titles ? `<b>${m.cards[k].tag}</b>` : ""}<span>${m.cards[k].body}</span></button></li>`).join("")}</ol>` + (difficulty === 0 && !s.done ? `<p class="small">${placed} of 6 in a sensible place</p>` : "");
-    $("#board").querySelectorAll("[data-pos]").forEach((b) => (b.onclick = () => {
+    board.innerHTML = `<p class="storytitle">${m.title}</p><ol class="storycards">${s.order.map((k, p) => `<li data-k="${k}"><button class="storycard ${pick === p ? "picked" : ""} ${s.done ? "placed" : ""}" data-pos="${p}" aria-pressed="${pick === p}">${titles ? `<b>${m.cards[k].tag}</b>` : ""}<span>${m.cards[k].body}</span></button>${s.done ? "" : `<span class="storygrip" data-grip="${p}" aria-hidden="true">⠿</span>`}</li>`).join("")}</ol>` + (difficulty === 0 && !s.done ? `<p class="small">${placed} of 6 in a sensible place</p>` : "");
+    // FLIP: cards that changed place glide from their old spot.
+    if (before.size && !calmMotion()) board.querySelectorAll(".storycards li[data-k]").forEach((li) => {
+      const dy = (before.get(li.dataset.k) ?? 0) - li.getBoundingClientRect().top;
+      if (!dy) return;
+      li.style.transition = "none"; li.style.transform = `translateY(${dy}px)`;
+      li.getBoundingClientRect();
+      li.style.transition = "transform .22s ease"; li.style.transform = "";
+    });
+    board.querySelectorAll("[data-pos]").forEach((b) => (b.onclick = () => {
       if (s.done) return;
       const p = +b.dataset.pos;
       if (pick === null || pick === p) { pick = pick === p ? null : p; return draw(); }
-      [s.order[pick], s.order[p]] = [s.order[p], s.order[pick]];
-      pick = null;
-      persist();
-      if (storyAccepted(m, s.order)) sparkSolved("The story flows! Every moment in its place.");
-      draw();
+      commit(storyMove(s.order, pick, p));
     }));
+    board.querySelectorAll("[data-grip]").forEach((g) => (g.onpointerdown = (e) => storyDrag(e, +g.dataset.grip)));
+  }
+  // Drag a card by its grip. The grip (and the list while dragging) has touch-action: none,
+  // so the feed doesn't scroll; the rest of each card still scrolls the feed normally.
+  function storyDrag(e, from) {
+    if (s.done || e.button > 0) return;
+    e.preventDefault();
+    const list = $("#board .storycards"), items = [...list.children], li = items[from];
+    const tops = items.map((x) => x.getBoundingClientRect().top), step = items.length > 1 ? tops[1] - tops[0] : li.offsetHeight;
+    // Near the top or bottom edge, the card's own scroll area glides so off-screen spots are reachable.
+    const box = li.closest(".sparkinner") || document.scrollingElement, s0 = box.scrollTop, calm = calmMotion();
+    let to = from, moved = false, y = e.clientY, raf = 0;
+    const y0 = e.clientY;
+    list.classList.add("dragging"); li.classList.add("lifted");
+    items.forEach((x) => (x.style.transition = calm ? "none" : "transform .18s ease"));
+    li.style.transition = "none";
+    const place = () => {
+      const dy = y - y0 + box.scrollTop - s0;
+      li.style.transform = `translateY(${dy}px)`;
+      to = Math.max(0, Math.min(items.length - 1, Math.round((tops[from] + dy - tops[0]) / step)));
+      items.forEach((x, k) => { if (x !== li) x.style.transform = from < to && k > from && k <= to ? `translateY(${-step}px)` : from > to && k >= to && k < from ? `translateY(${step}px)` : ""; });
+    };
+    const edge = () => {
+      const r = box.getBoundingClientRect(), top = Math.max(r.top, 0), bottom = Math.min(r.bottom, innerHeight), zone = 56;
+      const v = y > bottom - zone ? Math.min(1, (y - bottom + zone) / zone) : y < top + zone ? -Math.min(1, (top + zone - y) / zone) : 0;
+      if (v) { const before = box.scrollTop; box.scrollTop += v * 9; if (box.scrollTop !== before) place(); }
+      raf = requestAnimationFrame(edge);
+    };
+    const move = (ev) => {
+      y = ev.clientY;
+      if (!moved && Math.abs(y - y0) < 6) return;
+      if (!moved) { moved = true; raf = requestAnimationFrame(edge); }
+      place();
+    };
+    const end = () => {
+      cancelAnimationFrame(raf);
+      removeEventListener("pointermove", move); removeEventListener("pointerup", end); removeEventListener("pointercancel", end);
+      list.classList.remove("dragging");
+      items.forEach((x) => { x.style.transition = "none"; x.style.transform = ""; });
+      li.classList.remove("lifted");
+      if (!moved) { pick = pick === from ? null : from; return draw(); }
+      if (to !== from) commit(storyMove(s.order, from, to)); else draw();
+    };
+    addEventListener("pointermove", move); addEventListener("pointerup", end); addEventListener("pointercancel", end);
   }
   draw();
   action("Check order", () => {
@@ -119,15 +189,10 @@ function storyShuffle(i) {
   }, true);
   action("A gentle hint", () => {
     if (s.done) return msg("It's all in order!");
-    const [o] = storyBest(m, s.order), k = o.findIndex((v, p) => v !== s.order[p]);
-    if (k < 0) return msg("It's all in order!");
-    const j = s.order.indexOf(o[k]);
-    [s.order[k], s.order[j]] = [s.order[j], s.order[k]];
-    pick = null;
-    persist();
-    if (storyAccepted(m, s.order)) sparkSolved("The story flows! Every moment in its place.");
-    draw();
-    if (!s.done) msg(`Placed ${label(o[k])} as card ${k + 1}.`);
+    const step = storyHintStep(m, s.order);
+    if (!step) return msg("It's all in order!");
+    commit(step.order);
+    if (!s.done) msg(`Placed ${label(step.card)} as card ${step.pos + 1}.`);
   }, true);
 }
 SPARKS[8] = { name: "Story Shuffle", blurb: "Six little moments. One story.", type: "Stories", art: "❶ ❸ ❷", render: storyShuffle };

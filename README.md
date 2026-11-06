@@ -59,6 +59,8 @@ Each date and level shows five consecutive categories from the ten, and the wind
 
 **Swipe to draw.** In Bloom Trail and Bloom Trail 5×5 you can press a square and slide your finger (or mouse) across neighbouring squares to draw the trail. Sliding back onto the previous square undoes a step. Tapping squares one by one still works. The grid uses `touch-action: none`, so drawing never scrolls the feed.
 
+**Story Shuffle moves, it doesn't swap.** Tap a card, then tap the spot it belongs in: the card slides there and the cards in between shift by one (moving card 4 to spot 2 gives 1, 4, 2, 3, 5, 6). You can also drag a card by its ⠿ grip; holding near the top or bottom edge scrolls the card so every spot is reachable. Only the grip has `touch-action: none`, so swiping on the story text still scrolls the feed. Cards glide into place, except with reduced motion. The hint slides one card into its correct place the same way.
+
 Mobile browsers are the main target, and the feed was tested at 320, 360, 375 and 390 px wide:
 
 - Each card is exactly one screen tall. Taller games scroll inside their own card, so in-card scrolling never moves the feed.
@@ -93,7 +95,7 @@ for f in verify*.cjs; do node "$f"; done
 
 | Script | Checks |
 | --- | --- |
-| `verify-sparks.cjs` | The nine feed games, every level, a full year of dates. Each puzzle must be deterministic, solvable by its own checker, unique where promised, and varied. For Story Shuffle it also checks that every accepted order is a valid permutation, that the canonical order is listed first, and that the starting shuffle is never already solved. |
+| `verify-sparks.cjs` | The nine feed games, every level, a full year of dates. Each puzzle must be deterministic, solvable by its own checker, unique where promised, and varied. For Story Shuffle it also checks that every accepted order is a valid permutation, that the canonical order is listed first, that the starting shuffle is never already solved, that a move inserts and shifts (4 → 2 gives 1, 4, 2, 3, 5, 6), and that repeated hints always finish the story. |
 | `verify-aha.cjs` | Every Aha category at all three levels over 366 days. Each question must be deterministic, have exactly one answer (confirmed by brute force), have unique options that include the answer, and rarely repeat its wording within 61 days. Also checks the old slot-3 saves, the skill counts, and that clear & retry keeps credit. |
 | `verify-feed.cjs` | Feed order, the 31-day window, and that `feed.js` does nothing on a page without the feed. |
 | `verify-rewards.cjs` | Which cards are shiny never changes, and about 5% of cards are shiny across 366 days. Also checks the flow-meter rules, burst and milestone sizes, the rising chime, and that clear & retry only affects that one puzzle on that day and level. |
