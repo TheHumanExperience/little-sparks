@@ -575,7 +575,7 @@ function ahaSkillCounts(store = all) {
       difficulty = mm[2] ? +mm[2] : 1;
       if (progressKey(mm[1]) !== key) continue;
       const cats = ahaCategories(mm[1]);
-      AHA_SLOTS.forEach((i, slot) => { const g = rec?.games?.[i]; if ((g?.done || g?.credit) && g.aha) out[cats[slot]]++; });
+      AHA_SLOTS.forEach((i, slot) => { const g = rec?.games?.[i]; if (((g?.done && !g.revealed) || g?.credit) && g.aha) out[cats[slot]]++; });
     }
   } finally { difficulty = lv; }
   return out;

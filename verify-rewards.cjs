@@ -78,9 +78,47 @@ if (snap(all[progressKey(A)].games[8]) !== snap({ credit: true }) || feedCount(A
 if (snap({ b: all[progressKey(B)], t: all[A + "-level-2"], g9: all[progressKey(A)].games[9] }) !== other) fail("clear touched another day, level or game");
 clearPuzzle(all, "2026-05-01", 3);
 if (snap(all[progressKey("2026-05-01")]) !== snap({ games: {} })) fail("clearing an untouched puzzle must be harmless");
+// Reveal answer: Gentle unlimited, Medium 5, Tricky 3 per calendar day and level; never counts.
+const T = "2026-05-06";
+let rv = null;
+for (let k = 0; k < 40; k++) { const st = revealStep(rv, 0, A + ":" + k, T); if (!st.ok) fail("Gentle reveals must be unlimited"); rv = st.r; }
+if (revealsLeft(rv, 0, T) !== Infinity) fail("Gentle should show no reveal count");
+for (const [lv, lim] of [[1, 5], [2, 3]]) {
+  if (revealsLeft(rv, lv, T) !== lim) fail("level " + lv + " should start with " + lim + " reveals");
+  for (let k = 0; k < lim; k++) { const st = revealStep(rv, lv, A + ":" + k, T); if (!st.ok) fail("reveal " + k + " refused early"); rv = st.r; }
+  if (revealsLeft(rv, lv, T) !== 0 || revealStep(rv, lv, A + ":99", T).ok) fail("level " + lv + " must stop at " + lim);
+  if (!revealStep(rv, lv, A + ":0", T).ok || revealsLeft(rv, lv, T, A + ":0") <= 0) fail("re-revealing the same card must be free");
+}
+const rvBefore = snap(rv); revealStep(rv, 1, A + ":50", T);
+if (snap(rv) !== rvBefore) fail("revealStep must not mutate its input");
+if (revealsLeft(rv, 2, "2026-05-07") !== 3 || !revealStep(rv, 2, A + ":99", "2026-05-07").ok) fail("reveals must refresh on a new calendar day");
+const R = "2026-05-08";
+for (const lv of [0, 1, 2]) {
+  difficulty = lv;
+  for (let o = 0; o < 20; o++) {
+    const t = new Date("2026-03-01T12:00:00"); t.setDate(t.getDate() + o * 3);
+    const d = t.getFullYear() + "-" + String(t.getMonth() + 1).padStart(2, "0") + "-" + String(t.getDate()).padStart(2, "0");
+    for (const i of feedOrder()) {
+      const st = revealState(d, i, {});
+      if (!st.done || st.revealed !== 1 || "stars" in st) fail("revealState " + d + " #" + i + " L" + lv);
+      if (i === 2 && !(st.slots?.length === 4)) fail("domino reveal found no layout " + d);
+      if (i === 1 && snap(st.values) !== snap(sudokuModel(d).sol)) fail("sudoku reveal mismatch");
+      if (i === 0 && st.guesses.at(-1) !== wordAnswer(d)) fail("word reveal mismatch");
+    }
+  }
+}
+difficulty = 1;
+all[progressKey(R)] = { games: { 9: revealState(R, 9, { started: true, pot: [1, 0, 0] }), 13: { done: true } } };
+if (feedDone(R, 9) || feedCount(R) !== 1) fail("a revealed card must not count as solved");
+clearPuzzle(all, R, 9);
+if (snap(all[progressKey(R)].games[9]) !== snap({ revealed: 1 })) fail("clear on a revealed card must keep only the revealed marker");
+all[progressKey(R)].games[9].done = true;
+if (feedDone(R, 9) || feedCount(R) !== 1) fail("solving after a reveal must still not count");
+all[progressKey(R)].games[13] = { credit: true, aha: 1, done: true, revealed: 1 }; clearPuzzle(all, R, 13);
+if (snap(all[progressKey(R)].games[13]) !== snap({ credit: true, aha: 1, revealed: 1 }) || !feedDone(R, 13)) fail("earned credit must survive a later reveal");
 difficulty = lvl;
 (rate * 100).toFixed(2) + "% shiny (" + shiny + "/" + total + ")";
 `, context);
 const html = fs.readFileSync("dist/index.html", "utf8");
 for (const id of ["soundPill", "flowBar"]) if (!html.includes(`id="${id}"`)) throw Error("missing #" + id);
-console.log("PASS: rewards —", result, "; flow meter, bursts, milestones, chimes and clear & retry isolation");
+console.log("PASS: rewards —", result, "; flow meter, bursts, milestones, chimes, clear & retry isolation and reveal limits");

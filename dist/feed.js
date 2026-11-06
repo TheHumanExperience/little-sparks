@@ -22,13 +22,20 @@ function feedDate(offset, from = today()) {
   d.setDate(d.getDate() - offset);
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 }
-const feedDone = (d, i) => { const g = all[progressKey(d)]?.games?.[i]; return !!(g?.done || g?.credit); };
+/* A card counts once it was solved for real. A revealed answer ({ revealed: 1 }) never counts. */
+const feedDone = (d, i) => { const g = all[progressKey(d)]?.games?.[i]; return !!((g?.done && !g.revealed) || g?.credit); };
 /* Clear & retry: wipes one puzzle (this date + level only). A solved puzzle keeps a
-   { credit: true } marker so its solve still counts and can't be earned twice. */
+   { credit: true } marker so its solve still counts and can't be earned twice; a revealed
+   puzzle keeps { revealed: 1 } so solving it again still earns nothing. */
 function clearPuzzle(store, d, i) {
   const key = progressKey(d), games = (store[key] ||= { games: {} }).games ||= {}, prev = games[i];
-  if (prev?.done || prev?.credit) games[i] = prev.aha ? { credit: true, aha: 1 } : { credit: true };
-  else delete games[i];
+  const credit = !!(prev?.credit || (prev?.done && !prev.revealed));
+  if (credit || prev?.revealed) {
+    games[i] = {};
+    if (credit) games[i].credit = true;
+    if (prev.aha) games[i].aha = 1;
+    if (prev.revealed) games[i].revealed = 1;
+  } else delete games[i];
   return { key, i, prev: prev === undefined ? undefined : JSON.parse(JSON.stringify(prev)) };
 }
 const feedCount = (d) => feedOrder().filter((i) => feedDone(d, i)).length;
@@ -52,6 +59,52 @@ function flowStep(f, ev, date) {
   f.golden = f.value >= FLOW_MAX;
   return f;
 }
+/* Reveal answer: Gentle unlimited, Medium 5 and Tricky 3 cards per calendar day and level.
+   rewards.reveals = { date, used: [[keys], [keys], [keys]] }. A card already revealed today
+   (e.g. after ↺) can be shown again without using another reveal. */
+const REVEAL_LIMIT = [Infinity, 5, 3];
+const revealUse = (r, date) => (r && r.date === date ? { date, used: [0, 1, 2].map((k) => [...(r.used?.[k] || [])]) } : { date, used: [[], [], []] });
+const revealsLeft = (r, lv, date, key) => (key && revealUse(r, date).used[lv].includes(key) ? Infinity : REVEAL_LIMIT[lv] - revealUse(r, date).used[lv].length);
+function revealStep(r, lv, key, date) {
+  r = revealUse(r, date);
+  const u = r.used[lv];
+  if (u.includes(key)) return { r, ok: true };
+  if (u.length >= REVEAL_LIMIT[lv]) return { r, ok: false };
+  u.push(key);
+  return { r, ok: true };
+}
+/* The finished state each game draws as solved, built from that day's own model. */
+function revealState(d, i, s = {}) {
+  const set = (o) => Object.assign(s, o, { started: true, done: true, revealed: 1 });
+  delete s.stars;
+  if (i === 0) { const a = wordAnswer(d), n = [8, 6, 5][difficulty]; return set({ guesses: [...(s.guesses || []).filter((g) => g !== a).slice(0, n - 1), a] }); }
+  if (i === 1) return set({ values: sudokuModel(d).sol.slice() });
+  if (i === 2) {
+    const m = dominoModel(d), t = (o) => o.map((k) => m.tiles[k]);
+    const fits = (o) => { const x = t(o); return x[0][0] + x[0][1] + x[1][0] + x[1][1] === m.row[0] && x[2][0] + x[2][1] + x[3][0] + x[3][1] === m.row[1] && [x[0][0] + x[2][0], x[0][1] + x[2][1], x[1][0] + x[3][0], x[1][1] + x[3][1]].every((v, k) => v === m.col[k]); };
+    const perms = [[]];
+    for (let n = 0; n < 4; n++) perms.splice(0, perms.length, ...perms.flatMap((p) => [0, 1, 2, 3].filter((k) => !p.includes(k)).map((k) => [...p, k])));
+    return set({ slots: perms.filter(fits).sort((a, b) => (b[0] === m.first) - (a[0] === m.first))[0] });
+  }
+  if (i === 3 && ahaLegacy(d, 3)) return set({ answer: logicModel(d).a });
+  if (AHA_SLOTS.includes(i)) { const m = ahaModel(d, AHA_SLOTS.indexOf(i)); return set({ aha: 1, answer: m.kind === "choice" ? m.a : String(m.a) }); }
+  if (i === 4) return set({ path: trailModel(d).path.slice() });
+  if (i === 5) {
+    const ids = s.photoIds || (s.answers?.length ? shuffle(PHOTO_BANK.slice(0, 6), rng(d + "photographs")).slice(0, 3) : photoSet(d)).map((p) => p.image);
+    return set({ photoIds: ids, answers: ids.map((id) => ({ guess: PHOTO_BANK.find((p) => p.image === id).year, points: 0, revealed: 1 })) });
+  }
+  if (i === 6) return set({ mode: "challenge", board: neighbourModel(d).solution.slice(), history: [] });
+  if (i === 8) return set({ order: [0, 1, 2, 3, 4, 5] });
+  if (i === 9) { const m = alchemyModel(d); return set({ pot: m.target.slice(), drops: [] }); }
+  if (i === 10) return set({ mirrors: { ...mirrorModel(d).solution } });
+  if (i === 11) return set({ values: sudokuSixModel(d).sol.slice() });
+  if (i === 12) return set({ values: savedKiller(d, s).sol.slice() });
+  if (i === 13) return set({ steps: ladderModel(d).route.slice() });
+  if (i === 14) return set({ path: bloomFiveModel(d).path.slice() });
+  if (i === 15) { const m = savedDuel(d, s); return set({ picks: m.order.slice(), ordered: true, guess: m.decade }); }
+  if (i === 16) return set({ board: goalModel(d).good.slice(), history: [] });
+  return set({});
+}
 const burstSize = (streak) => Math.min(28 + 8 * (Math.max(1, streak) - 1), 76);
 const milestoneFor = (n) => (n === feedOrder().length ? "all" : n === 10 ? "ten" : n === 5 ? "five" : null);
 /* Soft chime: a pentatonic note that climbs one step per consecutive solve. */
@@ -68,9 +121,10 @@ if (document.getElementById?.("feed")) {
   const saveRewards = () => { try { localStorage.setItem(REWARD_KEY, JSON.stringify(rewards)); } catch {} };
   const flowNow = () => flowStep(rewards.flow, {}, today());
 
+  const revealedNow = (d, i) => { const g = all[progressKey(d)]?.games?.[i]; return !!(g?.revealed && g.done); };
   const cardHtml = (d, offset, i, n) => {
     const g = feedGame(i, d), done = feedDone(d, i), shiny = isShiny(d, i);
-    return `<section class="spark ${done ? "is-done" : ""} ${shiny ? "shiny" : ""}" data-day="${d}" data-idx="${i}" aria-label="${g.name}, ${feedDayName(offset, d)}"><div class="sparkinner"><div class="sparkhead"><span>${String(n + 1).padStart(2, "0")} / ${feedOrder().length} · ${g.type}</span><span class="sparkday">${shiny ? `<b class="shinytag">✧ Shiny</b> ` : ""}${feedDayName(offset, d)}</span></div><h2 class="sparktitle">${g.name} <span class="donebadge" ${done ? "" : "hidden"}>✓</span></h2><div class="stage">${coverHtml(g, done)}</div><div class="sparkfoot"><button class="retry" type="button" aria-label="Clear and retry ${g.name}" title="Clear &amp; retry"><span aria-hidden="true">↺</span></button><span class="retrybar" role="status"></span><button class="nextspark" type="button">Next spark ↓</button></div></div></section>`;
+    return `<section class="spark ${done ? "is-done" : ""} ${shiny ? "shiny" : ""}" data-day="${d}" data-idx="${i}" aria-label="${g.name}, ${feedDayName(offset, d)}"><div class="sparkinner"><div class="sparkhead"><span>${String(n + 1).padStart(2, "0")} / ${feedOrder().length} · ${g.type}</span><span class="sparkday">${shiny ? `<b class="shinytag">✧ Shiny</b> ` : ""}${feedDayName(offset, d)}</span></div><h2 class="sparktitle">${g.name} <span class="donebadge" ${done ? "" : "hidden"}>✓</span></h2><div class="stage">${coverHtml(g, done)}</div><div class="sparkfoot"><button class="retry" type="button" aria-label="Clear and retry ${g.name}" title="Clear &amp; retry"><span aria-hidden="true">↺</span></button><button class="revealbtn" type="button" ${done || revealedNow(d, i) ? "hidden" : ""}>Reveal answer</button><span class="retrybar" role="status"></span><button class="nextspark" type="button">Next spark ↓</button></div></div></section>`;
   };
   const coverHtml = (g, done) => `<div class="cover"><div class="coverart" aria-hidden="true">${g.art}</div><p>${g.blurb}</p><span class="coverhint">${done ? "✓ Solved — scroll here to see it again" : "Settle here to play"}</span></div>`;
   const introHtml = (d, offset) => `<section class="spark dayintro" data-day="${d}" data-intro="1"><div class="sparkinner"><span class="eyebrow">${offset === 1 ? "Yesterday" : offset + " days ago"}</span><h2>${new Date(d + "T12:00:00").toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" })}</h2><p class="introcount"><b>${feedCount(d)}</b> of ${feedOrder().length} sparks solved</p><div class="introdots">${feedOrder().map((i) => `<i class="${feedDone(d, i) ? "done" : ""}"></i>`).join("")}</div><p class="small">Every puzzle from that day, waiting just below. ↓</p></div></section>`;
@@ -121,6 +175,11 @@ if (document.getElementById?.("feed")) {
       msg("This puzzle couldn't load. Try another level or day.");
     }
     liveWasDone = !!state(i).done;
+    if (state(i).revealed && state(i).done) {
+      card.classList.add("is-revealed");
+      const why = AHA_SLOTS.includes(i) && !ahaLegacy(day, i) ? " " + ahaModel(day, AHA_SLOTS.indexOf(i)).why : "";
+      msg("Answer revealed — it doesn't count as solved. Tap ↺ to try it yourself." + why);
+    } else card.classList.remove("is-revealed");
   }
 
   function current() {
@@ -180,6 +239,7 @@ if (document.getElementById?.("feed")) {
     const done = feedDone(card.dataset.day, +card.dataset.idx);
     card.classList.toggle("is-done", done);
     card.querySelector(".donebadge").hidden = !done;
+    card.querySelector(".revealbtn").hidden = done || revealedNow(card.dataset.day, +card.dataset.idx);
     const intro = feed.querySelector(`.dayintro[data-day="${card.dataset.day}"]`);
     if (intro) {
       intro.querySelector(".introcount b").textContent = feedCount(card.dataset.day);
@@ -222,15 +282,15 @@ if (document.getElementById?.("feed")) {
     card.append(makeBurst(burstSize(streak), 1 + Math.min(streak - 1, 6) * 0.12));
   }
 
-  function celebrateReplay(card) {
+  function celebrateReplay(card, revealed) {
     card.classList.remove("celebrating");
     void card.offsetWidth;
     card.classList.add("celebrating");
     setTimeout(() => card.classList.remove("celebrating"), 1600);
-    $("#announce").textContent = "Solved again! Your original solve was already counted.";
+    $("#announce").textContent = revealed ? "Solved! The answer was revealed earlier, so this one doesn't count." : "Solved again! Your original solve was already counted.";
     const chip = document.createElement("div");
     chip.className = "solvedchip";
-    chip.textContent = "✦ Solved again";
+    chip.textContent = revealed ? "✦ Solved · not counted" : "✦ Solved again";
     card.querySelector(".sparkinner").append(chip);
     setTimeout(() => chip.remove(), 2200);
     chime([chimeFreq(1)]);
@@ -380,12 +440,46 @@ if (document.getElementById?.("feed")) {
     const r = e.target.closest(".retry");
     if (!r) return;
     const card = r.closest(".spark"), g = all[progressKey(card.dataset.day)]?.games?.[card.dataset.idx];
-    if (g?.done) {
+    if (g?.done && !g.revealed) {
       retryBar(card, `Replay? Your solve stays counted. <button type="button" data-yes="1">Replay</button><button type="button" data-no="1">Keep</button>`);
       card.querySelector("[data-yes]").onclick = () => doClear(card);
       card.querySelector("[data-no]").onclick = () => retryBar(card, "");
       undoTimer = setTimeout(() => retryBar(card, ""), 8000);
     } else doClear(card);
+  });
+
+  /* Reveal answer */
+  feed.addEventListener("click", (e) => {
+    const btn = e.target.closest(".revealbtn");
+    if (!btn) return;
+    const card = btn.closest(".spark"), d = card.dataset.day, i = +card.dataset.idx, key = `${d}:${i}`, lv = difficulty;
+    if (card !== live) activate(card);
+    const left = revealsLeft(rewards.reveals, lv, today(), key);
+    if (left <= 0) {
+      retryBar(card, `No reveals left today on ${levelName()}. Fresh ones arrive tomorrow.`);
+      undoTimer = setTimeout(() => retryBar(card, ""), 4000);
+      return;
+    }
+    const note = left === Infinity ? "" : ` ${left} reveal${left === 1 ? "" : "s"} left today.`;
+    retryBar(card, `Show the answer? It won't count as solved.${note} <button type="button" data-yes="1">Reveal</button><button type="button" data-no="1">Keep trying</button>`);
+    card.querySelector("[data-no]").onclick = () => retryBar(card, "");
+    card.querySelector("[data-yes]").onclick = () => {
+      const step = revealStep(rewards.reveals, lv, key, today());
+      if (!step.ok) return retryBar(card, "No reveals left today.");
+      rewards.reveals = step.r;
+      rewards.flow = flowStep(rewards.flow, { type: "hint", key }, today());
+      saveRewards();
+      const games = (all[progressKey(d)] ||= { games: {} }).games;
+      games[i] = revealState(d, i, games[i] || {});
+      persist();
+      rerender(card);
+      refreshRewards();
+      const after = revealsLeft(rewards.reveals, lv, today());
+      retryBar(card, after === Infinity ? "Answer revealed." : `Answer revealed · ${after} left today.`);
+      undoTimer = setTimeout(() => retryBar(card, ""), 3000);
+      $("#announce").textContent = "Answer revealed. It doesn't count as solved.";
+    };
+    undoTimer = setTimeout(() => retryBar(card, ""), 8000);
   });
 
   const legacySetup = setup;
@@ -399,7 +493,7 @@ if (document.getElementById?.("feed")) {
     if (live) {
       const done = !!state(+live.dataset.idx).done;
       refreshCard(live);
-      if (done && !liveWasDone) { liveWasDone = true; refreshHeader(); if (state(+live.dataset.idx).credit) celebrateReplay(live); else celebrate(live); }
+      if (done && !liveWasDone) { liveWasDone = true; refreshHeader(); const st = state(+live.dataset.idx); if (st.credit || st.revealed) celebrateReplay(live, !st.credit); else celebrate(live); }
     }
     refreshHeader();
   };

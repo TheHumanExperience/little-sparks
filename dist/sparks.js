@@ -266,7 +266,7 @@ function colourAlchemy(i) {
     $("#board").innerHTML = `<div class="swatches"><figure><div class="swatch" style="background:${rgbCss(m.rgb)}"></div><figcaption>Target</figcaption></figure><figure><div class="swatch pot ${s.done ? "matched" : ""}" style="background:${rgbCss(rgb)}"></div><figcaption>Your pot · ${drops} drop${drops === 1 ? "" : "s"}</figcaption></figure></div>` +
       (!s.done ? `<div class="meter" aria-label="Match ${close}%"><i style="width:${close}%"></i></div>` : "") +
       `<div class="pigments">${m.bases.map((k, j) => `<button class="pigment" data-pig="${j}" style="--pig:${rgbCss(k === "W" ? [1, 1, 1] : rybToRgb(PIGMENTS[k][1]))}" ${s.done ? "disabled" : ""}><span></span>${PIGMENTS[k][0]}<small>${s.pot[j]}</small></button>`).join("")}</div>` +
-      (s.done ? `<p class="stars">${s.stars === 3 ? "★★★" : "★★☆"}</p><p class="small">Recipe: ${m.bases.map((k, j) => m.target[j] ? m.target[j] + " " + PIGMENTS[k][0].toLowerCase() : "").filter(Boolean).join(" + ")}</p>` : "");
+      (s.done ? `${s.revealed ? "" : `<p class="stars">${s.stars === 3 ? "★★★" : "★★☆"}</p>`}<p class="small">Recipe: ${m.bases.map((k, j) => m.target[j] ? m.target[j] + " " + PIGMENTS[k][0].toLowerCase() : "").filter(Boolean).join(" + ")}</p>` : "");
     $("#board").querySelectorAll("[data-pig]").forEach((b) => (b.onclick = () => {
       if (s.done) return;
       const j = +b.dataset.pig;
@@ -844,7 +844,7 @@ function timeDuel(i) {
       return `<button class="duelphoto ${at >= 0 ? "picked" : ""} ${ordered && k === m.middle ? "middle" : ""}" data-duel="${k}" ${ordered ? "disabled" : ""}><img src="${p.image}" alt="${hideYears(p.alt)}" loading="lazy"><span class="duelbadge">${ordered ? rank + 1 : at >= 0 ? at + 1 : ""}</span>${s.done ? `<span class="duelyear">${p.year}</span>` : ""}</button>`;
     }).join("")}</div>` +
       (ordered && !s.done ? `<p class="instruction">Now: which decade is the middle photo (<b>2</b>) from?</p><div class="decades">${m.options.map((y) => `<button class="btn secondary" data-decade="${y}">${y}s</button>`).join("")}</div>` : "") +
-      (s.done ? `<div class="reveal"><p>${s.guess === m.decade ? "Right decade! ★★★" : `It was the ${m.decade}s.${s.misses ? "" : " Your order was perfect though!"}`}</p>${m.order.map((k) => `<p class="small"><b>${m.photos[k].year} · ${m.photos[k].title}</b> — ${m.photos[k].story}${m.photos[k].why ? ` <i>Why it mattered: ${m.photos[k].why}</i>` : ""}<br><a href="${m.photos[k].source}" target="_blank" rel="noopener">${m.photos[k].credit}</a></p>`).join("")}</div>` : "") +
+      (s.done ? `<div class="reveal"><p>${s.revealed ? `The middle photo is from the ${m.decade}s.` : s.guess === m.decade ? "Right decade! ★★★" : `It was the ${m.decade}s.${s.misses ? "" : " Your order was perfect though!"}`}</p>${m.order.map((k) => `<p class="small"><b>${m.photos[k].year} · ${m.photos[k].title}</b> — ${m.photos[k].story}${m.photos[k].why ? ` <i>Why it mattered: ${m.photos[k].why}</i>` : ""}<br><a href="${m.photos[k].source}" target="_blank" rel="noopener">${m.photos[k].credit}</a></p>`).join("")}</div>` : "") +
       (!ordered ? `<p class="small">${s.picks.length ? `${s.picks.length} of 3 chosen` : "Tap the oldest first"}${s.misses ? ` · ${s.misses} reshuffle${s.misses === 1 ? "" : "s"}` : ""}</p>` : "");
     $("#board").querySelectorAll("[data-duel]").forEach((b) => (b.onclick = () => {
       if (ordered) return;
