@@ -56,7 +56,7 @@ Prefer `npm run smoke` over manual screenshots. Take screenshots only when a hum
   - Story Shuffle `order`.
   - The legacy Killer save without `hard`.
   - The legacy Aha card at index 3 (`ahaLegacy`).
-  - Time Lens `photoIds`.
+  - Time Lens `photoIds`; its old `answers[].points` are ignored (Time Lens has no score).
 - Markers:
   - `{credit:true}` means solved before a ↺ clear; it still counts.
   - `{revealed:1}` means the answer was revealed; it never counts, even after a re-solve.
