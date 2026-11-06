@@ -38,7 +38,7 @@ for (const [engine, launch, ctxOpts] of engines) {
   const browser = await launch(), page = await (await browser.newContext(ctxOpts)).newPage();
   const errors = [], before = failures;
   // Never touch the live Supabase project from tests: start with an empty config and block real calls.
-  await page.route("**/leaderboard-config.js", (r) => r.fulfill({ contentType: "text/javascript", body: 'const SUPABASE_URL = ""; const SUPABASE_ANON_KEY = "";' }));
+  await page.route("**/leaderboard-config.js*", (r) => r.fulfill({ contentType: "text/javascript", body: 'const SUPABASE_URL = ""; const SUPABASE_ANON_KEY = "";' }));
   await page.route("https://*.supabase.co/**", (r) => r.abort());
   page.on("pageerror", (e) => errors.push(e.message));
   const shot = async (name) => { await mkdir(shotsDir, { recursive: true }); await page.screenshot({ path: join(shotsDir, `${engine}-${name}.png`) }); };
@@ -115,7 +115,7 @@ for (const [engine, launch, ctxOpts] of engines) {
   // Leaderboard against a mocked Supabase (route interception): name, offline queue, sync, tabs.
   const calls = [];
   let offline = false;
-  await page.route("**/leaderboard-config.js", (r) => r.fulfill({ contentType: "text/javascript", body: 'const SUPABASE_URL = "https://lb.test"; const SUPABASE_ANON_KEY = "sb_publishable_test";' }));
+  await page.route("**/leaderboard-config.js*", (r) => r.fulfill({ contentType: "text/javascript", body: 'const SUPABASE_URL = "https://lb.test"; const SUPABASE_ANON_KEY = "sb_publishable_test";' }));
   await page.route("https://lb.test/**", async (r) => {
     if (offline) return r.abort("internetdisconnected");
     const fn = r.request().url().split("/rpc/")[1], body = JSON.parse(r.request().postData() || "{}");
@@ -154,7 +154,7 @@ for (const [engine, launch, ctxOpts] of engines) {
   await page.waitForTimeout(300);
   check(calls.at(-1)?.fn === "leaderboard" && calls.at(-1).body.p_period === "week" && (await page.getAttribute('#lbTabs [data-period="week"]', "aria-selected")) === "true", `${engine} Week tab loads the weekly board`);
   await page.locator("#lbSheet [data-close]").tap();
-  await page.unroute("**/leaderboard-config.js");
+  await page.unroute("**/leaderboard-config.js*");
   await page.unroute("https://lb.test/**");
   check(errors.length === 0, `${engine} no page errors`, errors.slice(0, 3).join(" | "));
   if (failures > before) await shot("last-state");

@@ -24,6 +24,8 @@ jobs:
           node-version: 20
       - name: Validate puzzles and content
         run: for f in verify*.cjs; do echo "== $f"; node "$f"; done
+      - name: Stamp asset versions (cache-bust)
+        run: sed -i "s/__BUILD__/${GITHUB_SHA::7}/g" dist/index.html && ! grep -q __BUILD__ dist/index.html
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -18,7 +18,7 @@ Prefer `npm run smoke` over manual screenshots. Take screenshots only when a hum
 ## File map
 | File | Role |
 |---|---|
-| `dist/index.html` | Shell: header (brand, today pill, sound, level), `#feed`, level and day sheets. Script order matters. |
+| `dist/index.html` | Shell: header (brand, today pill, sound, level), `#feed`, level and day sheets. Script order matters. Every local CSS/JS is referenced as `file?v=__BUILD__` (CI stamps the commit SHA; checked by verify-assets). |
 | `dist/app.js` | Minified core: `LEVELS`, `difficulty`, storage (`all`, `persist`, `state`), `rng`/`shuffle`/`puzzleSeed`, games 0–4 (`games` array). |
 | `dist/daily-content.js` | Day-indexed content windows (`calendarIndex`, `freshContent`, `wordAnswer`). |
 | `dist/photos.js` | `PHOTO_BANK` (credits, licences, clues). `retired: true` entries stay for old saves. |
