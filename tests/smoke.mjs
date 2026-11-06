@@ -114,12 +114,13 @@ for (const [engine, launch, ctxOpts] of engines) {
   check(await page.evaluate(() => feed.scrollTop <= 2), `${engine} brand scrolls back to the top`);
   // Leaderboard against a mocked Supabase (route interception): name, offline queue, sync, tabs.
   const calls = [];
-  let offline = false;
+  let offline = false, fkOnce = false;
   await page.route("**/leaderboard-config.js*", (r) => r.fulfill({ contentType: "text/javascript", body: 'const SUPABASE_URL = "https://lb.test"; const SUPABASE_ANON_KEY = "sb_publishable_test";' }));
   await page.route("https://lb.test/**", async (r) => {
     if (offline) return r.abort("internetdisconnected");
     const fn = r.request().url().split("/rpc/")[1], body = JSON.parse(r.request().postData() || "{}");
     calls.push({ fn, body, auth: r.request().headers().authorization, apikey: r.request().headers().apikey });
+    if (fn === "record_solve" && fkOnce) { fkOnce = false; return r.fulfill({ status: 409, contentType: "application/json", body: JSON.stringify({ code: "23503", message: 'insert or update on table "solves" violates foreign key constraint "solves_player_id_fkey"' }) }); }
     const json = fn === "leaderboard" ? [{ rank: 1, name: "Asha <b>", points: 9, is_me: false }, { rank: 2, name: "Nidhi", points: 1, is_me: true }] : fn === "record_solve" ? 1 : null;
     return r.fulfill({ status: json === null ? 204 : 200, contentType: "application/json", body: json === null ? "" : JSON.stringify(json) });
   });
@@ -154,6 +155,28 @@ for (const [engine, launch, ctxOpts] of engines) {
   await page.waitForTimeout(300);
   check(calls.at(-1)?.fn === "leaderboard" && calls.at(-1).body.p_period === "week" && (await page.getAttribute('#lbTabs [data-period="week"]', "aria-selected")) === "true", `${engine} Week tab loads the weekly board`);
   await page.locator("#lbSheet [data-close]").tap();
+  // Catch-up + recovery: a Tricky solve saved by a feed that never reported it, and a player row
+  // deleted on the server (FK error) → re-create the player and still record the solve, once.
+  const tricky = await page.evaluate(() => feedOrder(2)[1]);
+  await page.evaluate((g) => {
+    const d = today(), lb = JSON.parse(localStorage.getItem("little-sparks-leaderboard-v1"));
+    localStorage.setItem("little-sparks-leaderboard-v1", JSON.stringify({ ...lb, queue: [] }));
+    const p = JSON.parse(localStorage.getItem("little-sparks-v1") || "{}");
+    p[d + "-level-2"] = { games: { [g]: { done: true }, [feedOrder(2)[2]]: { done: true, revealed: 1 } } };
+    localStorage.setItem("little-sparks-v1", JSON.stringify(p));
+  }, tricky);
+  calls.length = 0;
+  fkOnce = true;
+  await page.reload();
+  await page.waitForSelector(".spark.live .stage");
+  await page.waitForTimeout(800);
+  const seq = calls.map((c) => c.fn + (c.fn === "record_solve" ? `:${c.body.p_level}/${c.body.p_game}` : "")).join(",");
+  check(seq === `record_solve:2/${tricky},upsert_player,record_solve:2/${tricky}`, `${engine} unsent Tricky solve is caught up; deleted player is re-created and the solve retried (revealed card skipped)`, seq);
+  check(((await lbStore()).queue || []).length === 0, `${engine} catch-up queue drains`);
+  await page.reload();
+  await page.waitForSelector(".spark.live .stage");
+  await page.waitForTimeout(500);
+  check(!calls.slice(3).some((c) => c.fn === "record_solve"), `${engine} caught-up solve is never sent twice`);
   await page.unroute("**/leaderboard-config.js*");
   await page.unroute("https://lb.test/**");
   check(errors.length === 0, `${engine} no page errors`, errors.slice(0, 3).join(" | "));

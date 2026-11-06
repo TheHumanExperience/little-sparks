@@ -31,14 +31,40 @@ function lbPrune(st, today) {
   const min = lbAddDays(today, -1), old = lbAddDays(today, -7);
   return { ...st, queue: st.queue.filter((q) => q.d >= min), sent: Object.fromEntries(Object.entries(st.sent).filter(([k]) => k.slice(0, 10) >= old)) };
 }
+/* Catch-up: queue every real first solve saved in little-sparks-v1 (all levels) that the server
+   would still accept (±1 day) and that was never sent — e.g. a solve made while an old cached
+   feed.js without the hook was running. Same rule as feedDone: revealed answers never count, a ↺
+   reset keeps { credit: true } for the original solve, and `sent` stops any double claim. */
+const lbProgressKey = (d, lv) => (lv === 1 ? d : d + "-level-" + lv);
+function lbCatchUp(st, progress, today, orderFor) {
+  for (const lv of [0, 1, 2]) for (const n of [-1, 0, 1]) {
+    const d = lbAddDays(today, n), games = progress?.[lbProgressKey(d, lv)]?.games || {};
+    const order = orderFor ? orderFor(lv) : Object.keys(games).map(Number);
+    for (const g of order) {
+      const s = games[g];
+      if (s && ((s.done && !s.revealed) || s.credit)) st = lbAward(st, d, lv, g, today).st;
+    }
+  }
+  return st;
+}
+/* How to treat a failed record_solve: "player" = the player row is missing (FK), recreate it and
+   retry; "drop" = the server will never accept this item; anything else waits and retries later. */
+function lbErrorKind(status, body) {
+  const code = body?.code || "", text = String(body?.message || "");
+  if (code === "23503" || /foreign key|unknown player/i.test(text)) return "player";
+  if (/date out of range|bad level/i.test(text) || code === "23514" || code === "22P02" || code === "22007" || code === "22008") return "drop";
+  return "retry";
+}
 const lbEsc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
 
 let lbSolved = () => {};
-(() => {
+function lbInit() {
   const url = (typeof SUPABASE_URL === "string" ? SUPABASE_URL : "").trim().replace(/\/+$/, "");
   const key = (typeof SUPABASE_ANON_KEY === "string" ? SUPABASE_ANON_KEY : "").trim();
   const pill = typeof document !== "undefined" && document.querySelector?.("#lbPill");
   if (!url || !key || !pill || typeof fetch !== "function") return;
+  // Guard: only run next to a feed.js that reports solves (a stale cached copy would lose points).
+  if (typeof FEED_LB_HOOK === "undefined") { pill.hidden = true; return; }
   const $ = (q) => document.querySelector(q);
   let st = lbLoad(localStorage.getItem(LB_KEY));
   const save = () => { try { localStorage.setItem(LB_KEY, JSON.stringify(st)); } catch {} };
@@ -50,21 +76,38 @@ let lbSolved = () => {};
     const headers = { apikey: key, "Content-Type": "application/json" };
     if (key.startsWith("eyJ")) headers.Authorization = `Bearer ${key}`;
     const r = await fetch(`${url}/rest/v1/rpc/${fn}`, { method: "POST", headers, body: JSON.stringify(body) });
-    if (!r.ok) { const e = new Error(`${fn} ${r.status}`); e.status = r.status; throw e; }
+    if (!r.ok) {
+      const e = new Error(`${fn} ${r.status}`);
+      e.status = r.status;
+      try { e.body = await r.json(); } catch {}
+      throw e;
+    }
     const t = await r.text();
     return t ? JSON.parse(t) : null;
   }
-  const permanent = (e) => e.status >= 400 && e.status < 500 && e.status !== 408 && e.status !== 429;
+  const upsert = async () => { await rpc("upsert_player", { p_id: st.id, p_name: st.name }); st.synced = true; save(); };
+  const catchUp = () => {
+    let progress = {};
+    try { progress = JSON.parse(localStorage.getItem("little-sparks-v1") || "{}") || {}; } catch {}
+    const before = st.queue.length;
+    st = lbCatchUp(st, progress, istDate(), typeof feedOrder === "function" ? (lv) => feedOrder(lv) : null);
+    if (st.queue.length !== before) save();
+  };
   let flushing = null;
   function flush() {
     if (!st.name) return Promise.resolve();
     return (flushing ||= (async () => {
       try {
         st = lbPrune(st, istDate());
-        if (!st.synced) { await rpc("upsert_player", { p_id: st.id, p_name: st.name }); st.synced = true; save(); }
+        if (!st.synced) await upsert();
         for (const q of st.queue.slice()) {
-          try { await rpc("record_solve", { p_player: st.id, p_date: q.d, p_level: q.lv, p_game: q.g }); }
-          catch (e) { if (!permanent(e)) throw e; }
+          const send = () => rpc("record_solve", { p_player: st.id, p_date: q.d, p_level: q.lv, p_game: q.g });
+          try { await send(); }
+          catch (e) {
+            const kind = e.status ? lbErrorKind(e.status, e.body) : "retry";
+            if (kind === "player") { st.synced = false; await upsert(); await send(); }
+            else if (kind === "retry") throw e;
+          }
           st = lbAck(st, q.k);
           save();
         }
@@ -99,6 +142,7 @@ let lbSolved = () => {};
     st = { ...st, name: n, synced: n === st.name && st.synced, asked: true };
     save();
     nameSheet.close();
+    catchUp();
     flush().then(() => $("#lbSheet").open && show(current));
     renderMe();
   };
@@ -145,6 +189,10 @@ let lbSolved = () => {};
   addEventListener("online", flush);
   document.addEventListener("visibilitychange", () => document.visibilityState === "visible" && flush());
   setInterval(() => st.queue.length && flush(), 60000);
+  catchUp();
   flush();
   if (!st.name && !st.asked) setTimeout(askName, 600);
-})();
+}
+// Runs once every script (including feed.js) has loaded.
+if (typeof document !== "undefined" && document.readyState === "loading") document.addEventListener("DOMContentLoaded", lbInit);
+else lbInit();

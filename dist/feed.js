@@ -11,6 +11,8 @@ const FEED_PLAN = [0, "sudoku", 8, 3, 17, 18, 19, 20, 2, 9, "bloom", 5, 10, 13, 
 const feedOrder = (lv = difficulty) => FEED_PLAN.map((x) => (typeof x === "string" ? FEED_FAMILIES[x][lv] : x));
 const feedSibling = (i, lv = difficulty) => Object.values(FEED_FAMILIES).find((f) => f.includes(i))?.[lv] ?? i;
 const FEED_DAYS = 31;
+// Tells leaderboard.js this feed reports first solves through lbSolved (see the setup override).
+const FEED_LB_HOOK = 1;
 function feedGame(i, d) {
   if (AHA_SLOTS.includes(i)) { const c = d && ahaMeta(d, i); if (c) return { name: c.name, blurb: c.blurb, type: "Aha · " + c.type, art: c.art }; if (i !== 3) return { name: "Aha Moment", blurb: "A fresh reasoning puzzle.", type: "Aha", art: "✧ ? ✧" }; }
   if (i < 5) return { name: games[i][0], blurb: games[i][1], type: games[i][2], art: games[i][5] };
