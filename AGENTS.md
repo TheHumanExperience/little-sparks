@@ -28,7 +28,7 @@ Prefer `npm run smoke` over manual screenshots. Take screenshots only when a hum
 | `dist/sparks.js` | Games 8–16 (`SPARKS[i]`): pure `*Model(d)` generators plus renderers. |
 | `dist/aha.js` | Logical-reasoning track: `AHA_SLOTS = [3,17,18,19,20]`, category generators, `ahaModel(d,slot)`, legacy Aha card. |
 | `dist/feed.js` | Feed (`FEED_PLAN`, `FEED_FAMILIES`), live card, celebrations, rewards, flow, shiny cards, ↺ clear, Reveal answer. |
-| `dist/leaderboard.js`, `dist/leaderboard-config.js` | Optional Supabase leaderboard (🏆, name sheet, offline queue). Hidden while the config is empty; keep it empty in commits unless the owner says otherwise. Schema: `supabase/schema.sql`, setup: `docs/SUPABASE_SETUP.md`. |
+| `dist/leaderboard.js`, `dist/leaderboard-config.js` | Optional Supabase leaderboard (🏆, name sheet, offline queue). Config holds the live project URL and its public `sb_publishable_` key (sent only as `apikey`, never as Bearer); never commit a secret/service_role key. Empty config hides it. Tests stub the config and never call the live project. Schema: `supabase/schema.sql`, setup: `docs/SUPABASE_SETUP.md`. |
 | `dist/style.css` | All styles; respects `prefers-reduced-motion`. |
 | `dist/valid-words.js`, `WORD-LIST-LICENSE.txt` | Word list for Letterlight and Ladder validation. |
 | `verify*.cjs` | Node vm checks (see the README table). `tests/smoke.mjs` is the browser smoke test. |

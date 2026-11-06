@@ -37,6 +37,9 @@ const check = (ok, name, detail = "") => { if (!ok) { failures++; lines.push(`  
 for (const [engine, launch, ctxOpts] of engines) {
   const browser = await launch(), page = await (await browser.newContext(ctxOpts)).newPage();
   const errors = [], before = failures;
+  // Never touch the live Supabase project from tests: start with an empty config and block real calls.
+  await page.route("**/leaderboard-config.js", (r) => r.fulfill({ contentType: "text/javascript", body: 'const SUPABASE_URL = ""; const SUPABASE_ANON_KEY = "";' }));
+  await page.route("https://*.supabase.co/**", (r) => r.abort());
   page.on("pageerror", (e) => errors.push(e.message));
   const shot = async (name) => { await mkdir(shotsDir, { recursive: true }); await page.screenshot({ path: join(shotsDir, `${engine}-${name}.png`) }); };
   const fresh = async (lv) => {
@@ -112,11 +115,11 @@ for (const [engine, launch, ctxOpts] of engines) {
   // Leaderboard against a mocked Supabase (route interception): name, offline queue, sync, tabs.
   const calls = [];
   let offline = false;
-  await page.route("**/leaderboard-config.js", (r) => r.fulfill({ contentType: "text/javascript", body: 'const SUPABASE_URL = "https://lb.test"; const SUPABASE_ANON_KEY = "eyJtest";' }));
+  await page.route("**/leaderboard-config.js", (r) => r.fulfill({ contentType: "text/javascript", body: 'const SUPABASE_URL = "https://lb.test"; const SUPABASE_ANON_KEY = "sb_publishable_test";' }));
   await page.route("https://lb.test/**", async (r) => {
     if (offline) return r.abort("internetdisconnected");
     const fn = r.request().url().split("/rpc/")[1], body = JSON.parse(r.request().postData() || "{}");
-    calls.push({ fn, body, auth: r.request().headers().authorization });
+    calls.push({ fn, body, auth: r.request().headers().authorization, apikey: r.request().headers().apikey });
     const json = fn === "leaderboard" ? [{ rank: 1, name: "Asha <b>", points: 9, is_me: false }, { rank: 2, name: "Nidhi", points: 1, is_me: true }] : fn === "record_solve" ? 1 : null;
     return r.fulfill({ status: json === null ? 204 : 200, contentType: "application/json", body: json === null ? "" : JSON.stringify(json) });
   });
@@ -131,7 +134,7 @@ for (const [engine, launch, ctxOpts] of engines) {
   await page.locator("#lbName").fill("  Nidhi  ");
   await page.locator(".lbsave").tap();
   await page.waitForTimeout(300);
-  check(calls.some((c) => c.fn === "upsert_player" && c.body.p_name === "Nidhi" && c.auth === "Bearer eyJtest"), `${engine} name saved to Supabase (trimmed)`);
+  check(calls.some((c) => c.fn === "upsert_player" && c.body.p_name === "Nidhi" && c.auth === undefined && c.apikey === "sb_publishable_test"), `${engine} name saved to Supabase (trimmed; publishable key only in apikey, no Bearer)`);
   offline = true;
   await solvePocket();
   const reveal = await page.evaluate(() => feedOrder()[2]);

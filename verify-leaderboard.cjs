@@ -1,9 +1,12 @@
 const fs = require("fs"), vm = require("vm");
 const fail = (m) => { throw Error(m); };
 let fetched = 0;
+const cfgSrc = fs.readFileSync("dist/leaderboard-config.js", "utf8");
 const ctx = { console, crypto: require("crypto").webcrypto, fetch: () => { fetched++; return Promise.reject(Error("offline")); }, document: { querySelector: () => null }, localStorage: { getItem: () => null, setItem() {} } };
 vm.createContext(ctx);
-for (const f of ["leaderboard-config.js", "leaderboard.js"]) vm.runInContext(fs.readFileSync("dist/" + f, "utf8"), ctx);
+// Tests run against an empty config so nothing ever reaches the live project.
+vm.runInContext(cfgSrc.replace(/(SUPABASE_URL|SUPABASE_ANON_KEY) = "[^"]*"/g, '$1 = ""'), ctx);
+vm.runInContext(fs.readFileSync("dist/leaderboard.js", "utf8"), ctx);
 const run = (code) => vm.runInContext(code, ctx);
 
 // Points mapping: Gentle 1, Medium 3, Tricky 5; anything else 0.
@@ -50,7 +53,14 @@ if (run(`lbCleanName("Ni\\u202Edhi\\u0000 \\u200B")`) !== "Nidhi") fail("hidden 
 if (run(`lbEsc('<img src=x onerror="1">')`).includes("<")) fail("escape");
 
 // Empty config: hidden, inert, no network.
-if (run("SUPABASE_URL") !== "" || run("SUPABASE_ANON_KEY") !== "") fail("committed config must stay empty");
+// The committed config is either empty or a project URL plus a public (publishable or anon) key — never a secret.
+const cfg = vm.createContext({}); vm.runInContext(cfgSrc + ";globalThis.c=[SUPABASE_URL,SUPABASE_ANON_KEY]", cfg);
+const [url, key] = cfg.c;
+if (url || key) {
+  if (!/^https:\/\/[a-z0-9]+\.supabase\.co$/.test(url)) fail("SUPABASE_URL must be https://<ref>.supabase.co");
+  const role = key.startsWith("eyJ") ? JSON.parse(Buffer.from(key.split(".")[1] || "", "base64url").toString() || "{}").role : null;
+  if (!(key.startsWith("sb_publishable_") || role === "anon")) fail("SUPABASE_ANON_KEY must be a publishable/anon key, never service_role or sb_secret_");
+}
 if (run(`lbSolved("2026-11-07", 1, 1)`) !== undefined || fetched) fail("disabled leaderboard must do nothing");
 
 // The feed awards points only from the first-solve branch; schema agrees on the rules.
@@ -58,4 +68,4 @@ const feed = fs.readFileSync("dist/feed.js", "utf8");
 if (!/if \(st\.credit \|\| st\.revealed\) celebrateReplay\([^;]*\); else \{ celebrate\(live\); if \(typeof lbSolved === "function"\) lbSolved\(/.test(feed) || feed.split("lbSolved(").length !== 2) fail("feed must call lbSolved only for first solves");
 const sql = fs.readFileSync("supabase/schema.sql", "utf8");
 for (const s of ["primary key (player_id, date, level, game)", "points in (1, 3, 5)", "case p_level when 0 then 1 when 1 then 3 when 2 then 5", "'Asia/Kolkata'", "date_trunc('week'", "ist_today() - 1 and ist_today() + 1", "enable row level security", "security definer", "set search_path = public", "from public, anon, authenticated", "[[:cntrl:]"]) if (!sql.includes(s)) fail("schema.sql missing: " + s);
-console.log("PASS: leaderboard — points 1/3/5, dedupe per date×level×game, IST day/week(Mon)/month boundaries, offline queue round trip and pruning, inert without config");
+console.log("PASS: leaderboard — points 1/3/5, dedupe per date×level×game, IST day/week(Mon)/month boundaries, offline queue round trip and pruning, inert without config, committed key is public-only");

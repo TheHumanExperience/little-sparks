@@ -17,7 +17,7 @@ The leaderboard is optional. While `dist/leaderboard-config.js` is empty, the �
 4. **Fill in the config.** Edit `dist/leaderboard-config.js`:
    ```js
    const SUPABASE_URL = "https://abcd1234.supabase.co";
-   const SUPABASE_ANON_KEY = "eyJ…";
+   const SUPABASE_ANON_KEY = "sb_publishable_…"; // or the legacy anon "eyJ…" key
    ```
    Commit and push to `main`. GitHub Pages redeploys in about a minute.
 5. **Check it.**
@@ -42,6 +42,6 @@ The leaderboard is optional. While `dist/leaderboard-config.js` is empty, the �
 - **Name rules.** Names must be 1–20 characters with no control or hidden characters. They are escaped before display.
 - **Spam limits.** Without logins, a determined person could still script fake players. Two caps limit this: 60 solves per player per day and 60 new players per hour. If that ever matters, enable Supabase anonymous sign-ins with a captcha.
 - **Housekeeping (SQL Editor).**
-  - Remove a player: `delete from players where name = '…';`
+  - Remove a player (their solves go too, via cascade): `delete from public.players where name = '…';`
   - Reset the board: `truncate solves;`
 - **Free projects pause** after about a week without traffic. Open the dashboard to resume. While paused, solves wait in each browser's queue for up to a day.
