@@ -44,6 +44,10 @@
       </div>
       <ol id="lbList" class="lblist" aria-live="polite"></ol>
       <p id="lbMe" class="lbme"></p>
+      <div class="lbsync" id="lbSync" hidden>
+        <button type="button" class="linkish" id="lbSyncBtn">Use on another device</button>
+        <div id="lbSyncBox" class="lbsyncbox" hidden aria-live="polite"></div>
+      </div>
       <p class="lbnote"><span id="lbPending"></span> Each first solve earns Gentle 1 · Medium 3 · Tricky 5 points. India time; weeks start on Monday.</p>
     </dialog>
     <dialog id="nameSheet" class="sheet">
@@ -53,6 +57,15 @@
         <input id="lbName" type="text" autofocus maxlength="20" autocomplete="nickname" autocapitalize="words" enterkeyhint="done" required />
         <p id="lbNameError" class="lberror" role="alert"></p>
         <button type="submit" class="lbsave">Save my name</button>
+        <button type="button" class="linkish" id="lbLinkToggle">Already playing on another device? Use a sync code</button>
+      </form>
+      <form id="lbLinkForm" class="lbform" hidden>
+        <p id="lbLinkLead" class="lblead"></p>
+        <label for="lbCodeIn">Sync code</label>
+        <input id="lbCodeIn" type="text" maxlength="12" autocomplete="one-time-code" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="ABCD-EFGH" enterkeyhint="go" />
+        <p id="lbCodeError" class="lberror" role="alert"></p>
+        <button type="submit" class="lbsave">Link this device</button>
+        <button type="button" class="linkish" id="lbPickOther">Pick a different name</button>
       </form>
     </dialog>
     <script src="valid-words.js?v=__BUILD__"></script>

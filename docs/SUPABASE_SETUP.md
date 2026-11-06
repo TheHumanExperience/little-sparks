@@ -25,6 +25,17 @@ The leaderboard is optional. While `dist/leaderboard-config.js` is empty, the �
    2. Solve a puzzle, then tap 🏆.
    3. In Supabase, **Table Editor → solves** should show the row.
 
+## Upgrading: unique names and sync codes
+This adds unique names and device sync codes, and merges existing duplicate names. Do it in this order:
+
+1. In Supabase, open **SQL Editor → New query**, paste all of the new [`supabase/schema.sql`](../supabase/schema.sql), and press **Run**.
+   - Players with the same name (ignoring case and extra spaces) are merged into the oldest one. Their solves move across, and a puzzle solved on both counts once.
+   - Running it again is safe. The current site keeps working in the meantime.
+2. Push the new site code to `main`.
+3. On a browser whose player was merged away, the site will say the name is taken. To keep playing as the same player:
+   1. On the browser that still owns the name, tap 🏆 → **Use on another device** to get a code like `K7QM-2XPA`.
+   2. On the other browser, enter that code under "Is it you?".
+
 ## How it works
 - **Points.** A first solve earns Gentle 1, Medium 3, Tricky 5 points.
   - Reveals, replays and re-solves after ↺ earn nothing.
@@ -32,13 +43,22 @@ The leaderboard is optional. While `dist/leaderboard-config.js` is empty, the �
 - **Time.** Day, Week (starting Monday) and Month follow India time. Only puzzles dated today ±1 day count, so archive days don't.
 - **Offline.** Points earned offline are queued in the browser and sent later.
 - **Identity.** Each browser gets a random id kept in localStorage. There is no login, and clearing site data starts a new player.
+- **Unique names.** Names are unique, ignoring case and extra spaces. Renaming yourself to a different case of your own name is fine.
+- **Sync codes.** 🏆 → **Use on another device** makes an 8-character code.
+  - Entering it on another device links that device to the same player and name.
+  - Any points the device already had move across, and duplicates count once.
+  - Each code works once, for 24 hours. Asking again makes a new one.
 
 ## Security notes
-- **Restricted access.** The browser can only call three functions: `upsert_player`, `record_solve` and `leaderboard`.
+- **Restricted access.** The browser can only call five functions: `upsert_player`, `record_solve`, `leaderboard`, `sync_code` and `claim_code`.
   - The tables have row-level security with no policies, and anon has no table rights.
   - The functions use fixed SQL with typed parameters, so there is no SQL injection, and they pin `search_path`.
   - Points are computed on the server.
 - **Ids stay private.** Player ids are never returned, so nobody can rename someone else.
+- **Sync codes.**
+  - Codes are 8 random characters (40 bits). The server stores only a SHA-256 hash, and never stores or shows the player id.
+  - Codes are single-use and expire after 24 hours.
+  - Wrong guesses are logged, and claiming pauses for everyone after 100 misses in an hour. Someone could abuse this to block linking for an hour, but they can't steal a player.
 - **Name rules.** Names must be 1–20 characters with no control or hidden characters. They are escaped before display.
 - **Spam limits.** Without logins, a determined person could still script fake players. Two caps limit this: 60 solves per player per day and 60 new players per hour. If that ever matters, enable Supabase anonymous sign-ins with a captcha.
 - **Housekeeping (SQL Editor).**

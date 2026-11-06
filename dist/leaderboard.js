@@ -15,7 +15,7 @@ const lbUuid = () => (crypto.randomUUID ? crypto.randomUUID() : "10000000-1000-4
 function lbLoad(raw) {
   let s = {};
   try { s = JSON.parse(raw || "{}") || {}; } catch {}
-  return { id: s.id || lbUuid(), name: lbCleanName(s.name), synced: !!s.synced, asked: !!s.asked, sent: { ...(s.sent || {}) }, queue: Array.isArray(s.queue) ? s.queue.slice() : [] };
+  return { id: s.id || lbUuid(), name: lbCleanName(s.name), synced: !!s.synced, asked: !!s.asked, taken: !!s.taken, sent: { ...(s.sent || {}) }, queue: Array.isArray(s.queue) ? s.queue.slice() : [] };
 }
 /* Queue one first solve. Only today's, yesterday's or tomorrow's puzzles (India time) count,
    matching the server's ±1 day rule; anything already claimed is ignored. */
@@ -55,6 +55,10 @@ function lbErrorKind(status, body) {
   if (/date out of range|bad level/i.test(text) || code === "23514" || code === "22P02" || code === "22007" || code === "22008") return "drop";
   return "retry";
 }
+/* Sync codes: 8 Crockford base32 characters shown as XXXX-XXXX; lookalikes fold (O→0, I/L→1). */
+const lbNormCode = (c) => String(c || "").toUpperCase().replace(/[^0-9A-Z]/g, "").replace(/O/g, "0").replace(/[IL]/g, "1");
+const lbFmtCode = (c) => { const n = lbNormCode(c); return n.length === 8 ? n.slice(0, 4) + "-" + n.slice(4) : n; };
+const lbIsTaken = (body) => body?.code === "23505" || /name taken/i.test(String(body?.message || ""));
 const lbEsc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
 
 let lbSolved = () => {};
@@ -85,7 +89,13 @@ function lbInit() {
     const t = await r.text();
     return t ? JSON.parse(t) : null;
   }
-  const upsert = async () => { await rpc("upsert_player", { p_id: st.id, p_name: st.name }); st.synced = true; save(); };
+  const upsert = async () => {
+    try { await rpc("upsert_player", { p_id: st.id, p_name: st.name }); }
+    catch (e) { if (lbIsTaken(e.body)) { st.taken = true; st.synced = false; save(); } throw e; }
+    st.synced = true;
+    st.taken = false;
+    save();
+  };
   const catchUp = () => {
     let progress = {};
     try { progress = JSON.parse(localStorage.getItem("little-sparks-v1") || "{}") || {}; } catch {}
@@ -97,6 +107,7 @@ function lbInit() {
   function flush() {
     if (!st.name) return Promise.resolve();
     return (flushing ||= (async () => {
+      await 0; // yield first, so `finally` can't clear `flushing` before it's assigned
       try {
         st = lbPrune(st, istDate());
         if (!st.synced) await upsert();
@@ -111,7 +122,7 @@ function lbInit() {
           st = lbAck(st, q.k);
           save();
         }
-      } catch {} finally { flushing = null; }
+      } catch { if (st.taken) promptTaken(); } finally { flushing = null; }
     })());
   }
 
@@ -129,22 +140,61 @@ function lbInit() {
   };
 
   /* Name: asked once on the first visit, editable from the leaderboard sheet. */
-  const nameSheet = $("#nameSheet"), nameInput = $("#lbName");
-  function askName() {
-    nameInput.value = st.name;
+  const nameSheet = $("#nameSheet"), nameInput = $("#lbName"), nameForm = $("#lbNameForm"), linkForm = $("#lbLinkForm"), codeIn = $("#lbCodeIn");
+  // "name" = pick a name; "link" = enter a sync code; "taken" = link, because the name is in use.
+  function mode(m) {
+    nameForm.hidden = m !== "name";
+    linkForm.hidden = m === "name";
     $("#lbNameError").textContent = "";
-    if (!nameSheet.open) nameSheet.showModal();
+    $("#lbCodeError").textContent = "";
+    $("#lbLinkLead").textContent = m === "taken"
+      ? `That name's taken. Is it you? Enter your sync code`
+      : "Enter the sync code from your other device (🏆 → Use on another device).";
+    (m === "name" ? nameInput : codeIn).focus?.();
   }
-  $("#lbNameForm").onsubmit = (e) => {
+  function askName(m = "name") {
+    nameInput.value = st.name;
+    codeIn.value = "";
+    if (!nameSheet.open) nameSheet.showModal();
+    mode(m);
+  }
+  let promptedTaken = false;
+  function promptTaken() {
+    if (promptedTaken || document.querySelector("dialog[open]")) return;
+    promptedTaken = true;
+    askName("taken");
+  }
+  const after = () => { nameSheet.close(); catchUp(); flush().then(() => $("#lbSheet").open && show(current)); renderMe(); };
+  nameForm.onsubmit = async (e) => {
     e.preventDefault();
     const n = lbCleanName(nameInput.value);
     if (!n) { $("#lbNameError").textContent = "Pick a name with 1 to 20 characters."; return; }
-    st = { ...st, name: n, synced: n === st.name && st.synced, asked: true };
+    st = { ...st, name: n, synced: n === st.name && st.synced, asked: true, taken: false };
     save();
-    nameSheet.close();
-    catchUp();
-    flush().then(() => $("#lbSheet").open && show(current));
-    renderMe();
+    if (!st.synced) {
+      try { await upsert(); }
+      catch (err) { if (st.taken) { mode("taken"); return; } } // offline: keep the name, sync later
+    }
+    after();
+  };
+  $("#lbLinkToggle").onclick = () => mode("link");
+  $("#lbPickOther").onclick = () => { nameInput.value = ""; mode("name"); };
+  linkForm.onsubmit = async (e) => {
+    e.preventDefault();
+    const code = lbNormCode(codeIn.value), err = $("#lbCodeError");
+    if (code.length !== 8) { err.textContent = "Sync codes have 8 letters and numbers, like ABCD-EFGH."; return; }
+    err.textContent = "Linking…";
+    try {
+      const rows = await rpc("claim_code", { p_code: code, p_from: st.id });
+      const p = rows?.[0];
+      if (!p?.id) { err.textContent = "That code didn't match. Codes work once, for 24 hours. Make a fresh one on your other device."; return; }
+      // Same player everywhere now: pending solves and `sent` keys carry over; the server dedupes overlaps.
+      st = { ...st, id: p.id, name: lbCleanName(p.name), synced: true, taken: false, asked: true };
+      save();
+      after();
+    } catch (x) {
+      err.textContent = /too many/i.test(String(x.body?.message || "")) ? "Too many tries just now. Please try again in a while." : "Can't reach the leaderboard right now. Try again in a moment.";
+    }
   };
   nameSheet.addEventListener("close", () => { if (!st.asked) { st.asked = true; save(); } });
 
@@ -155,7 +205,10 @@ function lbInit() {
     $("#lbMe").innerHTML = st.name
       ? `Playing as <b>${lbEsc(st.name)}</b> <button type="button" class="linkish" id="lbEdit">Edit name</button>`
       : `<button type="button" class="linkish" id="lbEdit">Add your name to join the board</button>`;
-    $("#lbEdit").onclick = askName;
+    $("#lbEdit").onclick = () => askName(st.taken ? "taken" : "name");
+    if (st.taken) $("#lbMe").insertAdjacentHTML("beforeend", ` <span class="lberror">That name is in use, so your points are waiting.</span>`);
+    $("#lbSync").hidden = !(st.name && st.synced);
+    $("#lbSyncBox").hidden = true;
     const n = st.queue.length;
     $("#lbPending").textContent = n ? `${n} solve${n > 1 ? "s" : ""} waiting to sync.` : "";
   }
@@ -178,6 +231,17 @@ function lbInit() {
     }
   }
   tabs.forEach((t) => (t.onclick = () => show(t.dataset.period)));
+  // A fresh, single-use code each time; it's never stored on this device.
+  $("#lbSyncBtn").onclick = async () => {
+    const box = $("#lbSyncBox");
+    box.hidden = false;
+    box.textContent = "Making a code…";
+    try {
+      const code = await rpc("sync_code", { p_id: st.id });
+      if (!code) { st.synced = false; save(); flush(); box.textContent = "Couldn't find you on the board yet. Try again in a moment."; return; }
+      box.innerHTML = `Your sync code<b class="lbcode">${lbEsc(lbFmtCode(code))}</b>On your other phone or browser, open 🏆 → name → “Use a sync code”. It works once, for 24 hours. Keep it to yourself.`;
+    } catch { box.textContent = "Can't reach the leaderboard right now. Try again in a moment."; }
+  };
   pill.onclick = () => {
     document.querySelectorAll("dialog.sheet[open]").forEach((d) => d.close());
     pill.setAttribute("aria-label", "Leaderboard");

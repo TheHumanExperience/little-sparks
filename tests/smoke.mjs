@@ -121,6 +121,9 @@ for (const [engine, launch, ctxOpts] of engines) {
     const fn = r.request().url().split("/rpc/")[1], body = JSON.parse(r.request().postData() || "{}");
     calls.push({ fn, body, auth: r.request().headers().authorization, apikey: r.request().headers().apikey });
     if (fn === "record_solve" && fkOnce) { fkOnce = false; return r.fulfill({ status: 409, contentType: "application/json", body: JSON.stringify({ code: "23503", message: 'insert or update on table "solves" violates foreign key constraint "solves_player_id_fkey"' }) }); }
+    if (fn === "upsert_player" && body.p_name.toLowerCase() === "devansh") return r.fulfill({ status: 409, contentType: "application/json", body: JSON.stringify({ code: "23505", message: "name taken" }) });
+    if (fn === "sync_code") return r.fulfill({ status: 200, contentType: "application/json", body: '"K7QM2XPA"' });
+    if (fn === "claim_code") return r.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(body.p_code === "K7QM2XPA" ? [{ id: "11111111-1111-4111-8111-111111111111", name: "Devansh" }] : []) });
     const json = fn === "leaderboard" ? [{ rank: 1, name: "Asha <b>", points: 9, is_me: false }, { rank: 2, name: "Nidhi", points: 1, is_me: true }] : fn === "record_solve" ? 1 : null;
     return r.fulfill({ status: json === null ? 204 : 200, contentType: "application/json", body: json === null ? "" : JSON.stringify(json) });
   });
@@ -130,10 +133,10 @@ for (const [engine, launch, ctxOpts] of engines) {
   check(await page.evaluate(() => { const r = document.querySelector("#lbPill").getBoundingClientRect(); return document.documentElement.scrollWidth <= innerWidth && r.right <= innerWidth && r.right > innerWidth - 80; }), `${engine} 🏆 sits top-right without overflow`);
   try { await page.waitForSelector("#nameSheet[open]", { timeout: 3000 }); } catch { check(false, `${engine} first visit asks for a name`); }
   await page.locator("#lbName").fill("   ");
-  await page.locator(".lbsave").tap();
+  await page.locator("#lbNameForm .lbsave").tap();
   check(await page.locator("#nameSheet[open]").count() === 1 && /1 to 20/.test(await page.locator("#lbNameError").innerText()), `${engine} blank name is refused`);
   await page.locator("#lbName").fill("  Nidhi  ");
-  await page.locator(".lbsave").tap();
+  await page.locator("#lbNameForm .lbsave").tap();
   await page.waitForTimeout(300);
   check(calls.some((c) => c.fn === "upsert_player" && c.body.p_name === "Nidhi" && c.auth === undefined && c.apikey === "sb_publishable_test"), `${engine} name saved to Supabase (trimmed; publishable key only in apikey, no Bearer)`);
   offline = true;
@@ -148,7 +151,7 @@ for (const [engine, launch, ctxOpts] of engines) {
   offline = false;
   await page.locator("#lbPill").tap();
   await page.waitForSelector("#lbList li.me", { timeout: 4000 }).catch(() => {});
-  check(calls.filter((c) => c.fn === "record_solve").length === 1 && calls.some((c) => c.fn === "record_solve" && c.body.p_level === 0 && c.body.p_game === 1), `${engine} queued solve syncs once when back online`);
+  check(calls.filter((c) => c.fn === "record_solve").length === 1 && calls.some((c) => c.fn === "record_solve" && c.body.p_level === 0 && c.body.p_game === 1), `${engine} queued solve syncs once when back online`, JSON.stringify(calls.map((c) => c.fn + ":" + JSON.stringify(c.body))) + " open=" + await page.evaluate(() => [...document.querySelectorAll("dialog[open]")].map((d) => d.id)));
   check(((await lbStore()).queue || []).length === 0, `${engine} queue empties after sync`);
   check(/Nidhi/.test(await page.locator("#lbList li.me").innerText().catch(() => "")) && (await page.locator("#lbList").innerHTML()).includes("Asha &lt;b&gt;"), `${engine} board highlights you and escapes names`);
   await page.locator('#lbTabs [data-period="week"]').tap();
@@ -177,6 +180,44 @@ for (const [engine, launch, ctxOpts] of engines) {
   await page.waitForSelector(".spark.live .stage");
   await page.waitForTimeout(500);
   check(!calls.slice(3).some((c) => c.fn === "record_solve"), `${engine} caught-up solve is never sent twice`);
+  // Sync code: the 🏆 sheet makes a fresh code (never stored on the device).
+  await page.locator("#lbPill").tap();
+  await page.locator("#lbSyncBtn").tap();
+  await page.waitForSelector(".lbcode", { timeout: 3000 }).catch(() => {});
+  const myId = (await lbStore()).id;
+  check((await page.locator(".lbcode").innerText().catch(() => "")) === "K7QM-2XPA" && calls.at(-1)?.fn === "sync_code" && calls.at(-1).body.p_id === myId && !JSON.stringify(await lbStore()).includes("K7QM"), `${engine} "Use on another device" shows a sync code`);
+  // Unique names: renaming to a taken name asks "Is it you?"; a wrong code is refused; the right one links.
+  await page.locator("#lbEdit").tap();
+  await page.locator("#lbName").fill("devansh");
+  await page.locator("#lbNameForm .lbsave").tap();
+  await page.waitForTimeout(300);
+  check(await page.locator("#lbLinkForm").isVisible() && /That name's taken\. Is it you\? Enter your sync code/.test(await page.locator("#lbLinkLead").innerText()) && await page.locator("#lbPickOther").isVisible(), `${engine} taken name offers the sync code or another name`);
+  check(await page.evaluate(() => { const r = document.querySelector("#lbCodeIn").getBoundingClientRect(), b = document.querySelector("#lbLinkForm .lbsave").getBoundingClientRect(); return r.height >= 44 && b.height >= 44 && getComputedStyle(document.querySelector("#lbCodeIn")).fontSize === "16px"; }), `${engine} sync code field is touch-friendly`);
+  await page.locator("#lbCodeIn").fill("zzzz-zzzz");
+  await page.locator("#lbLinkForm .lbsave").tap();
+  await page.waitForTimeout(300);
+  check(/didn't match/.test(await page.locator("#lbCodeError").innerText()) && (await lbStore()).id === myId, `${engine} wrong sync code is refused`);
+  await page.locator("#lbCodeIn").fill("k7qm-2xpa");
+  await page.locator("#lbLinkForm .lbsave").tap();
+  await page.waitForTimeout(500);
+  const linked = await lbStore();
+  check(linked.id === "11111111-1111-4111-8111-111111111111" && linked.name === "Devansh" && linked.synced && !linked.taken && (await page.locator("#nameSheet[open]").count()) === 0 && calls.some((c) => c.fn === "claim_code" && c.body.p_code === "K7QM2XPA" && c.body.p_from === myId), `${engine} right sync code links this device to the same player`);
+  calls.length = 0;
+  await page.evaluate(() => lbSolved(istDate(), 1, feedOrder(1)[0]));
+  await page.waitForTimeout(400);
+  check(calls.some((c) => c.fn === "record_solve" && c.body.p_player === "11111111-1111-4111-8111-111111111111"), `${engine} solves after linking go to the linked player`);
+  await page.locator("#lbSheet [data-close]").tap().catch(() => {});
+  // Pick a different name instead.
+  await page.evaluate(() => { const lb = JSON.parse(localStorage.getItem("little-sparks-leaderboard-v1")); localStorage.setItem("little-sparks-leaderboard-v1", JSON.stringify({ ...lb, id: "22222222-2222-4222-8222-222222222222", name: "Devansh", synced: false })); });
+  await page.reload();
+  await page.waitForSelector("#nameSheet[open]", { timeout: 4000 }).catch(() => {});
+  check(await page.locator("#lbLinkForm").isVisible(), `${engine} a device whose name became taken is asked once on load`);
+  await page.locator("#lbPickOther").tap();
+  await page.locator("#lbName").fill("Devansh 2");
+  await page.locator("#lbNameForm .lbsave").tap();
+  await page.waitForTimeout(400);
+  const picked = await lbStore();
+  check(picked.name === "Devansh 2" && picked.synced && !picked.taken && (await page.locator("#nameSheet[open]").count()) === 0, `${engine} picking a different name saves it`);
   await page.unroute("**/leaderboard-config.js*");
   await page.unroute("https://lb.test/**");
   check(errors.length === 0, `${engine} no page errors`, errors.slice(0, 3).join(" | "));

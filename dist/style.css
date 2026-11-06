@@ -298,3 +298,9 @@ body.golden .feedbar .brand span { color: #c8901f; }
 .lberror { min-height: 1em; margin: 0; color: #a4532f; font-size: 14px; }
 @media (max-width: 430px) { .feedbar .brand { font-size: 17px; } .pills { gap: 4px; } .feedbar .pill { padding-left: 9px; padding-right: 9px; } }
 .lbsave { -webkit-appearance: none; appearance: none; font: inherit; cursor: pointer; min-height: 48px; border: 0; border-radius: 999px; background: #385f48; color: #fff; font-weight: 700; font-size: 16px; }
+.lblead { margin: 0; font-weight: 600; }
+.lbsync { margin: 0 0 4px; }
+.lbsyncbox { margin: 4px 0 8px; padding: 12px 14px; border-radius: 14px; background: #f3f1e8; font-size: 14px; color: #55634f; }
+.lbcode { display: block; margin: 4px 0 6px; font-size: 26px; letter-spacing: .12em; color: var(--ink); font-variant-numeric: tabular-nums; user-select: all; -webkit-user-select: all; }
+#lbCodeIn { text-transform: uppercase; letter-spacing: .12em; }
+.lbform[hidden], .lbsync[hidden], .lbsyncbox[hidden] { display: none; }
