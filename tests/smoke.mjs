@@ -112,18 +112,18 @@ for (const [engine, launch, ctxOpts] of engines) {
   await page.locator(".brand").tap();
   await page.waitForTimeout(1000);
   check(await page.evaluate(() => feed.scrollTop <= 2), `${engine} brand scrolls back to the top`);
-  // Leaderboard against a mocked Supabase (route interception): name, offline queue, sync, tabs.
+  // Leaderboard against a mocked Supabase (route interception): name, offline queue, sync, tabs, same-name join.
   const calls = [];
   let offline = false, fkOnce = false;
+  const DEV = "11111111-1111-4111-8111-111111111111";
   await page.route("**/leaderboard-config.js*", (r) => r.fulfill({ contentType: "text/javascript", body: 'const SUPABASE_URL = "https://lb.test"; const SUPABASE_ANON_KEY = "sb_publishable_test";' }));
   await page.route("https://lb.test/**", async (r) => {
     if (offline) return r.abort("internetdisconnected");
     const fn = r.request().url().split("/rpc/")[1], body = JSON.parse(r.request().postData() || "{}");
     calls.push({ fn, body, auth: r.request().headers().authorization, apikey: r.request().headers().apikey });
     if (fn === "record_solve" && fkOnce) { fkOnce = false; return r.fulfill({ status: 409, contentType: "application/json", body: JSON.stringify({ code: "23503", message: 'insert or update on table "solves" violates foreign key constraint "solves_player_id_fkey"' }) }); }
-    if (fn === "upsert_player" && body.p_name.toLowerCase() === "devansh") return r.fulfill({ status: 409, contentType: "application/json", body: JSON.stringify({ code: "23505", message: "name taken" }) });
-    if (fn === "sync_code") return r.fulfill({ status: 200, contentType: "application/json", body: '"K7QM2XPA"' });
-    if (fn === "claim_code") return r.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(body.p_code === "K7QM2XPA" ? [{ id: "11111111-1111-4111-8111-111111111111", name: "Devansh" }] : []) });
+    // Same name = same player: "Devansh" already exists (any case, any spaces).
+    if (fn === "join_or_create") return r.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify([body.p_name.replace(/\s/g, "").toLowerCase() === "devansh" ? { id: DEV, name: "Devansh" } : { id: body.p_from, name: body.p_name }]) });
     const json = fn === "leaderboard" ? [{ rank: 1, name: "Asha <b>", points: 9, is_me: false }, { rank: 2, name: "Nidhi", points: 1, is_me: true }] : fn === "record_solve" ? 1 : null;
     return r.fulfill({ status: json === null ? 204 : 200, contentType: "application/json", body: json === null ? "" : JSON.stringify(json) });
   });
@@ -138,7 +138,7 @@ for (const [engine, launch, ctxOpts] of engines) {
   await page.locator("#lbName").fill("  Nidhi  ");
   await page.locator("#lbNameForm .lbsave").tap();
   await page.waitForTimeout(300);
-  check(calls.some((c) => c.fn === "upsert_player" && c.body.p_name === "Nidhi" && c.auth === undefined && c.apikey === "sb_publishable_test"), `${engine} name saved to Supabase (trimmed; publishable key only in apikey, no Bearer)`);
+  check(calls.some((c) => c.fn === "join_or_create" && c.body.p_name === "Nidhi" && c.auth === undefined && c.apikey === "sb_publishable_test"), `${engine} name saved to Supabase (trimmed; publishable key only in apikey, no Bearer)`);
   offline = true;
   await solvePocket();
   const reveal = await page.evaluate(() => feedOrder()[2]);
@@ -174,50 +174,39 @@ for (const [engine, launch, ctxOpts] of engines) {
   await page.waitForSelector(".spark.live .stage");
   await page.waitForTimeout(800);
   const seq = calls.map((c) => c.fn + (c.fn === "record_solve" ? `:${c.body.p_level}/${c.body.p_game}` : "")).join(",");
-  check(seq === `record_solve:2/${tricky},upsert_player,record_solve:2/${tricky}`, `${engine} unsent Tricky solve is caught up; deleted player is re-created and the solve retried (revealed card skipped)`, seq);
+  check(seq === `record_solve:2/${tricky},join_or_create,record_solve:2/${tricky}`, `${engine} unsent Tricky solve is caught up; deleted player is re-created and the solve retried (revealed card skipped)`, seq);
   check(((await lbStore()).queue || []).length === 0, `${engine} catch-up queue drains`);
   await page.reload();
   await page.waitForSelector(".spark.live .stage");
   await page.waitForTimeout(500);
   check(!calls.slice(3).some((c) => c.fn === "record_solve"), `${engine} caught-up solve is never sent twice`);
-  // Sync code: the 🏆 sheet makes a fresh code (never stored on the device).
-  await page.locator("#lbPill").tap();
-  await page.locator("#lbSyncBtn").tap();
-  await page.waitForSelector(".lbcode", { timeout: 3000 }).catch(() => {});
+  // Same name on another device joins that player: the id switches, queue and sent carry over.
   const myId = (await lbStore()).id;
-  check((await page.locator(".lbcode").innerText().catch(() => "")) === "K7QM-2XPA" && calls.at(-1)?.fn === "sync_code" && calls.at(-1).body.p_id === myId && !JSON.stringify(await lbStore()).includes("K7QM"), `${engine} "Use on another device" shows a sync code`);
-  // Unique names: renaming to a taken name asks "Is it you?"; a wrong code is refused; the right one links.
+  await page.locator("#lbPill").tap();
   await page.locator("#lbEdit").tap();
-  await page.locator("#lbName").fill("devansh");
+  check(/Same name on another device\? You'll share one score\./.test(await page.locator("#nameSheet").innerText()) && (await page.locator("#lbSync, #lbLinkForm, #lbCodeIn").count()) === 0, `${engine} name sheet explains shared names; no sync-code UI`);
+  check(await page.evaluate(() => { const r = document.querySelector("#lbName").getBoundingClientRect(), b = document.querySelector("#lbNameForm .lbsave").getBoundingClientRect(); return r.height >= 44 && b.height >= 44 && getComputedStyle(document.querySelector("#lbName")).fontSize === "16px"; }), `${engine} name field is touch-friendly`);
+  const pend = await page.evaluate(() => feedOrder(0)[5]);
+  offline = true;
+  await page.evaluate((g) => lbSolved(istDate(), 0, g), pend);
+  await page.waitForTimeout(200);
+  offline = false;
+  await page.locator("#lbName").fill(" de VANSH ");
   await page.locator("#lbNameForm .lbsave").tap();
-  await page.waitForTimeout(300);
-  check(await page.locator("#lbLinkForm").isVisible() && /That name's taken\. Is it you\? Enter your sync code/.test(await page.locator("#lbLinkLead").innerText()) && await page.locator("#lbPickOther").isVisible(), `${engine} taken name offers the sync code or another name`);
-  check(await page.evaluate(() => { const r = document.querySelector("#lbCodeIn").getBoundingClientRect(), b = document.querySelector("#lbLinkForm .lbsave").getBoundingClientRect(); return r.height >= 44 && b.height >= 44 && getComputedStyle(document.querySelector("#lbCodeIn")).fontSize === "16px"; }), `${engine} sync code field is touch-friendly`);
-  await page.locator("#lbCodeIn").fill("zzzz-zzzz");
-  await page.locator("#lbLinkForm .lbsave").tap();
-  await page.waitForTimeout(300);
-  check(/didn't match/.test(await page.locator("#lbCodeError").innerText()) && (await lbStore()).id === myId, `${engine} wrong sync code is refused`);
-  await page.locator("#lbCodeIn").fill("k7qm-2xpa");
-  await page.locator("#lbLinkForm .lbsave").tap();
   await page.waitForTimeout(500);
-  const linked = await lbStore();
-  check(linked.id === "11111111-1111-4111-8111-111111111111" && linked.name === "Devansh" && linked.synced && !linked.taken && (await page.locator("#nameSheet[open]").count()) === 0 && calls.some((c) => c.fn === "claim_code" && c.body.p_code === "K7QM2XPA" && c.body.p_from === myId), `${engine} right sync code links this device to the same player`);
-  calls.length = 0;
-  await page.evaluate(() => lbSolved(istDate(), 1, feedOrder(1)[0]));
-  await page.waitForTimeout(400);
-  check(calls.some((c) => c.fn === "record_solve" && c.body.p_player === "11111111-1111-4111-8111-111111111111"), `${engine} solves after linking go to the linked player`);
+  const joined = await lbStore();
+  check(joined.id === DEV && joined.name === "Devansh" && joined.synced && (await page.locator("#nameSheet[open]").count()) === 0 && calls.some((c) => c.fn === "join_or_create" && c.body.p_from === myId && c.body.p_name === "de VANSH"), `${engine} same name (any case/spaces) joins the existing player`);
+  check(/Welcome back, Devansh/.test(await page.locator(".toast").last().innerText().catch(() => "")), `${engine} welcome-back toast`);
+  check(calls.some((c) => c.fn === "record_solve" && c.body.p_player === DEV && c.body.p_game === pend) && (joined.queue || []).length === 0, `${engine} pending solves carry over to the joined player`);
   await page.locator("#lbSheet [data-close]").tap().catch(() => {});
-  // Pick a different name instead.
-  await page.evaluate(() => { const lb = JSON.parse(localStorage.getItem("little-sparks-leaderboard-v1")); localStorage.setItem("little-sparks-leaderboard-v1", JSON.stringify({ ...lb, id: "22222222-2222-4222-8222-222222222222", name: "Devansh", synced: false })); });
+  // A device stuck in the old sync-code "taken" state recovers on load with no steps.
+  calls.length = 0;
+  await page.evaluate(() => { const lb = JSON.parse(localStorage.getItem("little-sparks-leaderboard-v1")); localStorage.setItem("little-sparks-leaderboard-v1", JSON.stringify({ ...lb, id: "22222222-2222-4222-8222-222222222222", name: "Devansh", synced: false, taken: true })); });
   await page.reload();
-  await page.waitForSelector("#nameSheet[open]", { timeout: 4000 }).catch(() => {});
-  check(await page.locator("#lbLinkForm").isVisible(), `${engine} a device whose name became taken is asked once on load`);
-  await page.locator("#lbPickOther").tap();
-  await page.locator("#lbName").fill("Devansh 2");
-  await page.locator("#lbNameForm .lbsave").tap();
-  await page.waitForTimeout(400);
-  const picked = await lbStore();
-  check(picked.name === "Devansh 2" && picked.synced && !picked.taken && (await page.locator("#nameSheet[open]").count()) === 0, `${engine} picking a different name saves it`);
+  await page.waitForSelector(".spark.live .stage");
+  await page.waitForTimeout(600);
+  const healed = await lbStore();
+  check(healed.id === DEV && healed.synced && !("taken" in healed) && (await page.locator("dialog[open]").count()) === 0, `${engine} old "name taken" device rejoins automatically on load`);
   await page.unroute("**/leaderboard-config.js*");
   await page.unroute("https://lb.test/**");
   check(errors.length === 0, `${engine} no page errors`, errors.slice(0, 3).join(" | "));

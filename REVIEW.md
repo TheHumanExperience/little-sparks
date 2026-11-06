@@ -23,6 +23,6 @@ Run `npm run verify` and `npm run smoke` first. Then check:
   - No exam labels ("CAT", "Quant", "LRDI", "MCQ", "TITA"). Present cards as logical reasoning puzzles.
   - The note reads "Created with love from Devansh".
 - **Photos:** only free licences (public domain or CC). Each has `credit`, `source` and `licenseUrl`, and hints never show the year.
-- **Leaderboard:** `dist/leaderboard-config.js` holds only the project URL and the public publishable/anon key. Never commit a service_role or secret key, and escape every name before using innerHTML. Anon may only execute the SECURITY DEFINER RPCs, with no table rights. Player ids and sync codes are never returned in lists or stored as plain text on the server.
+- **Leaderboard:** `dist/leaderboard-config.js` holds only the project URL and the public publishable/anon key. Never commit a service_role or secret key, and escape every name before using innerHTML. Anon may only execute the SECURITY DEFINER RPCs, with no table rights. Player ids are never returned in lists.
 - **Static app:** no build step, no script CDNs or frameworks, relative URLs only (GitHub Pages subpath).
 - **Docs:** README, CONTENT and AGENTS are updated when rules, files or storage change.
