@@ -33,6 +33,7 @@ Like the original games, the nine feed games are built from the date and the dif
   | Tricky | 4–7 | 124 |
 
 - **Mirror Garden**, **Sudoku Six**, **Killer Six**, **Bloom Trail 5×5** and **Neighbours Goal** are generated from scratch each day.
+- **Killer Six on Tricky** uses its own generator (`hardKillerModel`): cages of 3–4 cells (never a single cell), at most 2 given digits when possible (never more than 3), a unique solution, and naked singles alone never finish it. Over 2026 it averages about 1.6 givens and 10 cages; Gentle and Medium keep the original generator. Tricky Killers started before this change keep their original puzzle (`savedKiller`).
 - **Time Lens Duel** reuses the active Time Lens photos in `dist/photos.js`, always includes at least one history-shaping photo and never uses today's Time Lens photos. A started Duel pins its photo IDs; Duels saved before pinning use the original 183-photo model (`legacyDuelModel`).
 - Shiny cards are picked with `rng(`${date}|shiny|${game}`)() < 0.05`, so the same cards are shiny every time you load a day. Changing that formula changes which past cards are shiny.
 - The feed counts 16 cards for each day and level: 11 games (one per family: Pocket Sudoku / Sudoku Six / Killer Six, Bloom Trail / 5×5 / 5×5, Little Neighbours / Neighbours Goal / Neighbours Goal) plus five Aha track cards in one block, generated in `dist/aha.js`. The original five games keep their own progress records, so older saves still work.

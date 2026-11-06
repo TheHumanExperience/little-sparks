@@ -260,11 +260,11 @@ function colourAlchemy(i) {
   const m = alchemyModel(day), s = state(i);
   s.pot ||= m.bases.map(() => 0);
   s.drops ||= [];
-  $("#rules").textContent = `Add drops of colour to your pot until it matches the target swatch exactly. Fewest drops earns three stars. ${difficulty === 0 ? `This recipe uses ${m.par} drops.` : difficulty === 1 ? "The match meter shows how close you are." : "White softens any colour."}`;
+  $("#rules").textContent = `Add drops of colour to your pot until it matches the target swatch exactly. Fewest drops earns three stars. ${difficulty === 0 ? `This recipe uses ${m.par} drops.` : difficulty === 1 ? "The match meter shows how close you are." : "The match meter shows how close you are. White softens any colour."}`;
   function draw() {
     const rgb = mixRgb(m.bases, s.pot), drops = s.pot.reduce((a, b) => a + b, 0), close = Math.max(0, Math.round(100 - rgbGap(rgb, m.rgb) * 120));
     $("#board").innerHTML = `<div class="swatches"><figure><div class="swatch" style="background:${rgbCss(m.rgb)}"></div><figcaption>Target</figcaption></figure><figure><div class="swatch pot ${s.done ? "matched" : ""}" style="background:${rgbCss(rgb)}"></div><figcaption>Your pot · ${drops} drop${drops === 1 ? "" : "s"}</figcaption></figure></div>` +
-      (difficulty < 2 && !s.done ? `<div class="meter" aria-label="Match ${close}%"><i style="width:${close}%"></i></div>` : "") +
+      (!s.done ? `<div class="meter" aria-label="Match ${close}%"><i style="width:${close}%"></i></div>` : "") +
       `<div class="pigments">${m.bases.map((k, j) => `<button class="pigment" data-pig="${j}" style="--pig:${rgbCss(k === "W" ? [1, 1, 1] : rybToRgb(PIGMENTS[k][1]))}" ${s.done ? "disabled" : ""}><span></span>${PIGMENTS[k][0]}<small>${s.pot[j]}</small></button>`).join("")}</div>` +
       (s.done ? `<p class="stars">${s.stars === 3 ? "★★★" : "★★☆"}</p><p class="small">Recipe: ${m.bases.map((k, j) => m.target[j] ? m.target[j] + " " + PIGMENTS[k][0].toLowerCase() : "").filter(Boolean).join(" + ")}</p>` : "");
     $("#board").querySelectorAll("[data-pig]").forEach((b) => (b.onclick = () => {
@@ -393,48 +393,96 @@ function sixSolution(r) {
   });
 }
 // Counts solutions (stopping at `limit`). Optional cages add sum + distinct rules.
-function sixCount(grid, cages = null, limit = 2) {
+// SIX_SETS[n][sum] lists the digit masks (bit v = digit v) of n distinct digits 1–6 adding to sum.
+const SIX_SETS = (() => {
+  const t = [...Array(7)].map(() => ({}));
+  for (let m = 0; m < 64; m++) {
+    let n = 0, sum = 0;
+    for (let v = 1; v <= 6; v++) if (m & (1 << (v - 1))) { n++; sum += v; }
+    (t[n][sum] ||= []).push(m << 1);
+  }
+  return t;
+})();
+function sixCount(grid, cages = null, limit = 2, found = null) {
   const g = grid.slice(), rowM = Array(6).fill(0), colM = Array(6).fill(0), boxM = Array(6).fill(0);
-  const cageOf = [], cageSum = [], cageMask = [], cageLeft = [];
-  if (cages) cages.forEach((c, k) => { cageSum[k] = 0; cageMask[k] = 0; cageLeft[k] = c.cells.length; c.cells.forEach((i) => (cageOf[i] = k)); });
-  const place = (i, v, on) => {
-    const b = 1 << v, sgn = on ? 1 : -1;
-    rowM[Math.floor(i / 6)] ^= b; colM[i % 6] ^= b; boxM[BOX6(i)] ^= b;
-    if (cages) { const k = cageOf[i]; cageMask[k] ^= b; cageSum[k] += sgn * v; cageLeft[k] -= sgn; }
-  };
-  for (let i = 0; i < 36; i++) if (g[i]) place(i, g[i], true);
-  const fits = (i, v) => {
+  const cageOf = [], cageMask = [], cageSets = [];
+  if (cages) cages.forEach((c, k) => { cageMask[k] = 0; cageSets[k] = SIX_SETS[c.cells.length]?.[c.sum] || []; c.cells.forEach((i) => (cageOf[i] = k)); });
+  const place = (i, v) => {
     const b = 1 << v;
-    if ((rowM[Math.floor(i / 6)] | colM[i % 6] | boxM[BOX6(i)]) & b) return false;
-    if (!cages) return true;
-    const k = cageOf[i], c = cages[k];
-    if (cageMask[k] & b) return false;
-    const sum = cageSum[k] + v, left = cageLeft[k] - 1;
-    if (!left) return sum === c.sum;
-    let lo = 0, hi = 0;
-    for (let x = 1, n = 0; x <= 6 && n < left; x++) if (!((cageMask[k] | b) & (1 << x))) { lo += x; n++; }
-    for (let x = 6, n = 0; x >= 1 && n < left; x--) if (!((cageMask[k] | b) & (1 << x))) { hi += x; n++; }
-    return sum + lo <= c.sum && sum + hi >= c.sum;
+    rowM[Math.floor(i / 6)] ^= b; colM[i % 6] ^= b; boxM[BOX6(i)] ^= b;
+    if (cages) cageMask[cageOf[i]] ^= b;
+  };
+  for (let i = 0; i < 36; i++) if (g[i]) place(i, g[i]);
+  // Digits a cage can still take: those in some digit set that holds every digit already in it.
+  const cageAllow = (k) => {
+    const used = cageMask[k];
+    let m = 0;
+    for (const set of cageSets[k]) if (!(used & ~set)) m |= set;
+    return m & ~used;
   };
   let count = 0;
   const go = () => {
-    let best = -1, bestOpts = null;
+    const allow = cages ? cages.map((_, k) => cageAllow(k)) : null;
+    let best = -1, bestMask = 0, bestN = 7;
     for (let i = 0; i < 36; i++) if (!g[i]) {
-      const opts = [];
-      for (let v = 1; v <= 6; v++) if (fits(i, v)) opts.push(v);
-      if (!opts.length) return;
-      if (!bestOpts || opts.length < bestOpts.length) { best = i; bestOpts = opts; if (opts.length === 1) break; }
+      let m = 126 & ~(rowM[Math.floor(i / 6)] | colM[i % 6] | boxM[BOX6(i)]);
+      if (allow) m &= allow[cageOf[i]];
+      if (!m) return;
+      let n = 0;
+      for (let x = m; x; x &= x - 1) n++;
+      if (n < bestN) { best = i; bestMask = m; bestN = n; if (n === 1) break; }
     }
-    if (best < 0) { count++; return; }
-    for (const v of bestOpts) {
-      g[best] = v; place(best, v, true);
+    if (best < 0) { count++; found?.push(g.slice()); return; }
+    for (let v = 1; v <= 6; v++) if (bestMask & (1 << v)) {
+      g[best] = v; place(best, v);
       go();
-      place(best, v, false); g[best] = 0;
+      place(best, v); g[best] = 0;
       if (count >= limit) return;
     }
   };
   go();
   return count;
+}
+// Human-style solve: repeatedly fill singles. A candidate must avoid its row, column, box and
+// cage digits, and leave a cage sum the remaining cells can still reach with distinct digits.
+// Naked singles only, or with `hidden` also hidden singles. Returns how many cells stay empty.
+function sixSingles(givens, cages = null, hidden = false) {
+  const g = givens.slice(), cageOf = [];
+  if (cages) cages.forEach((c, k) => c.cells.forEach((i) => (cageOf[i] = k)));
+  const reach = (left, need, used) => {
+    if (!left) return need === 0;
+    for (let x = 1; x <= 6; x++) if (!(used & (1 << x)) && x <= need && reach(left - 1, need - x, used | (1 << x))) return true;
+    return false;
+  };
+  const cands = (i) => {
+    const out = [], r = Math.floor(i / 6), c = i % 6;
+    for (let v = 1; v <= 6; v++) {
+      let ok = true;
+      for (let j = 0; j < 36 && ok; j++) if (g[j] === v && (Math.floor(j / 6) === r || j % 6 === c || BOX6(j) === BOX6(i))) ok = false;
+      if (ok && cages) {
+        const cage = cages[cageOf[i]];
+        let used = 1 << v, sum = v, left = 0;
+        for (const j of cage.cells) if (j !== i) { if (g[j]) { if (used & (1 << g[j])) ok = false; used |= 1 << g[j]; sum += g[j]; } else left++; }
+        ok = ok && reach(left, cage.sum - sum, used);
+      }
+      if (ok) out.push(v);
+    }
+    return out;
+  };
+  const units = [];
+  for (let k = 0; k < 6; k++) units.push([0, 1, 2, 3, 4, 5].map((c) => k * 6 + c), [0, 1, 2, 3, 4, 5].map((r) => r * 6 + k), [...Array(36).keys()].filter((i) => BOX6(i) === k));
+  for (let progress = true; progress; ) {
+    progress = false;
+    const cs = g.map((v, i) => (v ? null : cands(i)));
+    for (let i = 0; i < 36; i++) if (cs[i] && cs[i].length === 1) { g[i] = cs[i][0]; progress = true; }
+    if (progress || !hidden) continue;
+    for (const u of units) for (let v = 1; v <= 6 && !progress; v++) {
+      if (u.some((i) => g[i] === v)) continue;
+      const spots = u.filter((i) => cs[i] && cs[i].includes(v));
+      if (spots.length === 1) { g[spots[0]] = v; progress = true; }
+    }
+  }
+  return g.filter((v) => !v).length;
 }
 function sudokuSixModel(d) {
   const r = rng(puzzleSeed(d) + "sudoku-six"), sol = sixSolution(r), givens = sol.slice(), want = [20, 15, 11][difficulty];
@@ -447,7 +495,12 @@ function sudokuSixModel(d) {
   return { sol, givens, cages: null };
 }
 function killerSixModel(d) {
-  const lvl = difficulty, r = rng(puzzleSeed(d) + "killer-six"), sol = sixSolution(r), sizes = [[2, 2, 3], [2, 3, 3], [2, 3, 4]][lvl];
+  const lvl = difficulty;
+  return lvl === 2 ? hardKillerModel(d) : legacyKillerModel(d, lvl);
+}
+// Gentle and Medium (and Tricky games started before the harder generator) use this one.
+function legacyKillerModel(d, lvl = difficulty) {
+  const r = rng(puzzleSeed(d) + "killer-six"), sol = sixSolution(r), sizes = [[2, 2, 3], [2, 3, 3], [2, 3, 4]][lvl];
   const cageId = Array(36).fill(-1), cages = [];
   for (const start of shuffle([...Array(36).keys()], r)) {
     if (cageId[start] >= 0) continue;
@@ -467,6 +520,64 @@ function killerSixModel(d) {
   for (; n < [6, 2, 0][lvl]; n++) givens[order[n]] = sol[order[n]];
   while (sixCount(givens, cages) !== 1) { givens[order[n]] = sol[order[n]]; n++; }
   return { sol, givens, cages, cageId };
+}
+// Tricky: big cages (3–4 cells, never a single), very few givens, unique, and naked
+// singles alone must stall. Seeded attempts run in order, so the pick is deterministic:
+// the first attempt with ≤2 givens wins, otherwise the one with the fewest givens.
+const KILLER_HARD = { sizes: [3, 3, 3, 4], maxGivens: 2, cap: 6, attempts: 30 };
+function hardKillerModel(d) {
+  let best = null;
+  for (let attempt = 0; attempt < KILLER_HARD.attempts; attempt++) {
+    const r = rng(puzzleSeed(d) + "killer-hard-" + attempt), sol = sixSolution(r);
+    const cageId = Array(36).fill(-1), cages = [];
+    for (const start of shuffle([...Array(36).keys()], r)) {
+      if (cageId[start] >= 0) continue;
+      const size = KILLER_HARD.sizes[Math.floor(r() * KILLER_HARD.sizes.length)], cells = [start];
+      cageId[start] = cages.length;
+      while (cells.length < size) {
+        const opts = cells.flatMap((c) => adjacent(c, 6, 36)).filter((c) => cageId[c] < 0 && !cells.some((x) => sol[x] === sol[c]));
+        if (!opts.length) break;
+        const c = opts[Math.floor(r() * opts.length)];
+        cageId[c] = cages.length; cells.push(c);
+      }
+      cages.push({ cells });
+    }
+    // Fold any one- or two-cell leftovers into a neighbouring cage that can take them.
+    let ok = true;
+    for (let k = 0; k < cages.length && ok; k++) {
+      if (cages[k].cells.length > 2 || !cages[k].cells.length) continue;
+      const near = [...new Set(cages[k].cells.flatMap((c) => adjacent(c, 6, 36)).map((c) => cageId[c]))].filter((j) => j !== k && cages[j].cells.length && cages[j].cells.length + cages[k].cells.length <= 6 && !cages[j].cells.some((x) => cages[k].cells.some((y) => sol[x] === sol[y])));
+      if (!near.length) { ok = false; break; }
+      const j = near.sort((a, b) => cages[a].cells.length - cages[b].cells.length)[0];
+      for (const c of cages[k].cells) { cageId[c] = j; cages[j].cells.push(c); }
+      cages[k].cells = [];
+    }
+    if (!ok) continue;
+    const live = cages.filter((c) => c.cells.length), id = Array(36);
+    live.forEach((c, k) => { c.cells.sort((a, b) => a - b); c.sum = c.cells.reduce((t, x) => t + sol[x], 0); c.cells.forEach((x) => (id[x] = k)); });
+    const givens = Array(36).fill(0);
+    let n = 0, unique = false;
+    for (; n <= KILLER_HARD.cap; n++) {
+      const found = [];
+      if (sixCount(givens, live, 2, found) === 1) { unique = true; break; }
+      if (n === KILLER_HARD.cap) break;
+      const diff = [...Array(36).keys()].filter((i) => found[0][i] !== found[1][i]);
+      const i = diff[Math.floor(r() * diff.length)];
+      givens[i] = sol[i];
+    }
+    if (!unique) continue;
+    const m = { sol, givens, cages: live, cageId: id };
+    const stall = sixSingles(givens, live) > 0, score = n + (stall ? 0 : 100);
+    if (stall && n <= KILLER_HARD.maxGivens) return m;
+    if (!best || score < best.score) best = { score, m };
+  }
+  return best ? best.m : legacyKillerModel(d, 2);
+}
+// A Killer Six game keeps the generator it was started with.
+function savedKiller(d, s) {
+  if (difficulty === 2 && s.values && !s.hard) return legacyKillerModel(d, 2);
+  if (difficulty === 2) s.hard = 1;
+  return killerSixModel(d);
 }
 function sixGame(i, m, intro) {
   const s = state(i);
@@ -517,7 +628,7 @@ SPARKS[11] = {
 };
 SPARKS[12] = {
   name: "Killer Six", blurb: "Sums in dotted cages.", type: "Numbers", art: "⁽¹¹⁾ ┆ ⁽⁷⁾",
-  render: (i) => sixGame(i, killerSixModel(day), "Fill the 6 × 6 grid with 1–6 so each row, column and 2 × 3 box holds every number once. The digits in each dotted cage add up to its small number, with no repeats inside a cage."),
+  render: (i) => sixGame(i, savedKiller(day, state(i)), "Fill the 6 × 6 grid with 1–6 so each row, column and 2 × 3 box holds every number once. The digits in each dotted cage add up to its small number, with no repeats inside a cage."),
 };
 
 /* ───────────── 13 · Letterlight Ladder ───────────── */
