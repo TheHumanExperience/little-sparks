@@ -125,9 +125,9 @@ dialog.sheet h2 { font-size: 26px; margin: 0; }
 .pigment span { width: 34px; height: 34px; border-radius: 50%; background: var(--pig); border: 2px solid #0001; }
 .pigment small { color: #8a9686; }
 .stars { text-align: center; font-size: 28px; color: #e0a92e; margin: 4px 0; letter-spacing: 4px; }
-.mirrorgrid { display: grid; gap: 3px; max-width: 340px; margin: 8px auto; }
-.mirrorgrid > * { aspect-ratio: 1; display: grid; place-items: center; }
-.lamp { font-size: 22px; color: #e3a530; }
+.mirrorgrid { display: grid; gap: 3px; max-width: 360px; aspect-ratio: 1; margin: 8px auto; }
+.mirrorgrid > * { display: grid; place-items: center; min-height: 0; }
+.lamp { font-size: 18px; color: #e3a530; }
 .mcell { border: 1px solid #d3dccb; background: #fffdf8; border-radius: 6px; font-size: 22px; color: #3c5a76; padding: 0; min-width: 0; transition: background 0.25s; }
 .mcell.lit { background: #fbefc4; }
 .mcell.mflower { color: #b88; }

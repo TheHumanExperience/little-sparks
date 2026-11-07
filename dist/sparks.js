@@ -306,8 +306,9 @@ function mirrorSolved(m, mirrors) {
   const lit = new Set(mirrorTrace(m, mirrors));
   return Object.keys(mirrors).length <= m.budget && m.flowers.every((f) => lit.has(f));
 }
-function mirrorModel(d) {
-  const lvl = difficulty, n = [4, 5, 6][lvl], budget = [2, 3, 4][lvl], r = rng(puzzleSeed(d) + "mirrors");
+// The first generator, kept so games started on it keep their puzzle.
+function legacyMirrorModel(d, lvl = difficulty) {
+  const n = [4, 5, 6][lvl], budget = [2, 3, 4][lvl], r = rng(puzzleSeed(d) + "mirrors");
   const DIRS4 = [[1, 0], [0, 1], [-1, 0], [0, -1]];
   for (let attempt = 0; attempt < 2000; attempt++) {
     const side = Math.floor(r() * 4), k = Math.floor(r() * n), dir = DIRS4[side];
@@ -340,14 +341,120 @@ function mirrorModel(d) {
   }
   throw Error("Mirror Garden generation failed for " + d);
 }
+/* Counts the mirror layouts (on the beam's path, within budget) that light every flower.
+   Prunes when the unlit flowers off the current ray need more lines than mirrors are left:
+   each mirror starts one new row or column run, so that's a row/column cover (König matching). */
+function mirrorSolve(m, limit = 2) {
+  const n = m.n, isFlower = new Uint8Array(n * n), isRock = new Uint8Array(n * n);
+  m.flowers.forEach((f) => (isFlower[f] = 1));
+  m.rocks.forEach((c) => (isRock[c] = 1));
+  const D = [[1, 0], [0, 1], [-1, 0], [0, -1]], TURN = [[3, 2, 1, 0], [1, 0, 3, 2]];
+  const placed = new Int8Array(n * n).fill(-1), litN = new Uint8Array(n * n), seen = new Uint8Array(n * n * 4);
+  let lit = 0, count = 0, nodes = 0, first = null;
+  function linesNeeded(x, y, k) {
+    const adj = new Map();
+    for (const f of m.flowers) {
+      if (litN[f]) continue;
+      const fx = f % n, fy = (f / n) | 0;
+      if (D[k][0] ? fy === y && (fx - x) * D[k][0] >= 0 : fx === x && (fy - y) * D[k][1] >= 0) continue;
+      if (!adj.has(fy)) adj.set(fy, []);
+      adj.get(fy).push(fx);
+    }
+    const match = new Map();
+    const augment = (row, vis) => adj.get(row).some((c) => !vis.has(c) && vis.add(c) && (!match.has(c) || augment(match.get(c), vis)) && match.set(c, row));
+    let size = 0;
+    for (const row of adj.keys()) if (augment(row, new Set())) size++;
+    return size;
+  }
+  function go(x, y, k, left) {
+    nodes++;
+    const undoSeen = [], undoLit = [];
+    for (;;) {
+      const c = y * n + x;
+      if (x < 0 || y < 0 || x >= n || y >= n || isRock[c] || seen[c * 4 + k]) {
+        if (lit === m.flowers.length && ++count === 1) {
+          first = {};
+          placed.forEach((t, cell) => { if (t > 0) first[cell] = t === 1 ? "/" : "\\"; });
+        }
+        break;
+      }
+      if (linesNeeded(x, y, k) > left) break;
+      seen[c * 4 + k] = 1; undoSeen.push(c * 4 + k);
+      if (isFlower[c]) { if (!litN[c]++) lit++; undoLit.push(c); }
+      if (placed[c] < 0 && !isFlower[c]) {
+        for (const t of left ? [0, 1, 2] : [0]) {
+          placed[c] = t;
+          const nk = t ? TURN[t - 1][k] : k;
+          go(x + D[nk][0], y + D[nk][1], nk, left - (t ? 1 : 0));
+          if (count >= limit) break;
+        }
+        placed[c] = -1;
+        break;
+      }
+      if (placed[c] > 0) k = TURN[placed[c] - 1][k];
+      x += D[k][0]; y += D[k][1];
+    }
+    undoSeen.forEach((v) => (seen[v] = 0));
+    undoLit.forEach((f) => { if (!--litN[f]) lit--; });
+  }
+  go(m.entry.x, m.entry.y, D.findIndex(([dx, dy]) => dx === m.entry.dir[0] && dy === m.entry.dir[1]), m.budget);
+  return { count, nodes, first };
+}
+/* Bigger gardens, more mirrors and stones, and only puzzles with exactly one way to light
+   them all. Of the first few unique candidates, the one that takes the solver longest wins. */
+const mirrorCache = new Map();
+function mirrorModel(d, lvl = difficulty) {
+  const key = d + "|" + lvl;
+  if (mirrorCache.has(key)) return mirrorCache.get(key);
+  const n = [5, 6, 7][lvl], budget = [3, 4, 5][lvl], stones = [1, 3, 5][lvl], wanted = [4, 6, 8][lvl];
+  const r = rng(puzzleSeed(d) + "mirrors-v2"), DIRS4 = [[1, 0], [0, 1], [-1, 0], [0, -1]];
+  let best = null, found = 0;
+  for (let attempt = 0; attempt < 3000 && found < wanted; attempt++) {
+    const dir = DIRS4[Math.floor(r() * 4)], k = Math.floor(r() * n);
+    const entry = { x: dir[0] === 1 ? 0 : dir[0] === -1 ? n - 1 : k, y: dir[1] === 1 ? 0 : dir[1] === -1 ? n - 1 : k, dir };
+    let x = entry.x, y = entry.y, dx = dir, left = budget, fail = false;
+    const seen = new Set(), mirrors = {}, segs = [[]];
+    while (x >= 0 && y >= 0 && x < n && y < n) {
+      const c = y * n + x;
+      if (seen.has(c)) { fail = true; break; }
+      seen.add(c);
+      if (left && segs.at(-1).length >= 1 && r() < 0.45) {
+        const type = r() < 0.5 ? "/" : "\\", nd = BOUNCE[type](dx), nx = x + nd[0], ny = y + nd[1];
+        if (nx >= 0 && ny >= 0 && nx < n && ny < n && !seen.has(ny * n + nx)) {
+          mirrors[c] = type; dx = nd; left--; segs.push([]);
+          x = nx; y = ny; continue;
+        }
+      }
+      segs.at(-1).push(c);
+      x += dx[0]; y += dx[1];
+    }
+    if (fail || left || segs.some((sg) => !sg.length)) continue;
+    const flowers = segs.map((sg) => sg[Math.floor(r() * sg.length)]);
+    const rocks = shuffle([...Array(n * n).keys()].filter((c) => !seen.has(c)), r).slice(0, stones).sort((a, b) => a - b);
+    const m = { n, budget, entry, flowers, rocks, solution: mirrors };
+    if (mirrorSolve(m, 2).count !== 1) continue;
+    const nodes = mirrorSolve(m, Infinity).nodes;
+    found++;
+    if (!best || nodes > best.nodes) best = { ...m, nodes };
+  }
+  if (!best) throw Error("Mirror Garden generation failed for " + d);
+  mirrorCache.set(key, best);
+  return best;
+}
+// A garden keeps the generator it was started on.
+function savedMirror(d, s) {
+  if (!s.v2 && (s.done || Object.keys(s.mirrors || {}).length)) return legacyMirrorModel(d);
+  s.v2 = 1;
+  return mirrorModel(d);
+}
 function mirrorGarden(i) {
-  const m = mirrorModel(day), s = state(i);
+  const s = state(i), m = savedMirror(day, s);
   s.mirrors ||= {};
   $("#rules").textContent = `Light shines in from the lamp. Tap a square to place a mirror (tap again to turn it, a third time to remove it). Use up to ${m.budget} mirrors so the beam reaches every flower.${m.rocks.length ? " Stones block the light." : ""}`;
   function draw() {
     const lit = new Set(mirrorTrace(m, s.mirrors)), used = Object.keys(s.mirrors).length, N = m.n + 2;
     const lampX = m.entry.x - m.entry.dir[0] + 1, lampY = m.entry.y - m.entry.dir[1] + 1;
-    let html = `<div class="mirrorgrid ${s.done ? "solved" : ""}" style="grid-template-columns:repeat(${N},1fr)">`;
+    let html = `<div class="mirrorgrid ${s.done ? "solved" : ""}" style="grid-template-columns:.6fr repeat(${m.n},1fr) .6fr;grid-template-rows:.6fr repeat(${m.n},1fr) .6fr">`;
     for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
       const inside = x > 0 && y > 0 && x <= m.n && y <= m.n, c = (y - 1) * m.n + (x - 1);
       if (!inside) { html += x === lampX && y === lampY ? `<span class="lamp" aria-label="Lamp">☀</span>` : "<span></span>"; continue; }

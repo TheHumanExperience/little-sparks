@@ -120,6 +120,17 @@ for (const [engine, launch, ctxOpts] of engines) {
     await page.setViewportSize(size); await fresh(0); await goTo(13);
     check(await ladderSubmitVisible(), `${engine} ${size.width}×${size.height} ladder Submit word visible without scrolling`);
   }
+  // Mirror Garden on Tricky (7 × 7): fits an iPhone SE card with roomy cells, and solves by tap.
+  await page.setViewportSize({ width: 375, height: 667 }); await fresh(2); await goTo(10);
+  const mg = await page.evaluate(() => { const g = document.querySelector(".spark.live .mirrorgrid"), c = document.querySelector(".spark.live .mcell").getBoundingClientRect(), card = document.querySelector(".spark.live").getBoundingClientRect(), r = g.getBoundingClientRect();
+    return { cells: document.querySelectorAll(".spark.live .mcell").length, w: c.width, inside: r.left >= card.left && r.right <= card.right, overflow: document.documentElement.scrollWidth > innerWidth }; });
+  check(mg.cells === 49 && mg.w >= 36 && mg.inside && !mg.overflow, `${engine} 375×667 Tricky Mirror Garden fits (${mg.cells} cells, ${mg.w.toFixed(0)}px)`);
+  for (const [c, t] of Object.entries(await page.evaluate(() => mirrorModel(day).solution))) {
+    for (let k = 0; k < (t === "/" ? 1 : 2); k++) await page.locator(`.spark.live [data-mc="${c}"]`).tap();
+  }
+  await page.waitForTimeout(300);
+  check(await page.evaluate(() => state(10).done && state(10).v2 === 1), `${engine} Mirror Garden solves by tap`);
+  await page.setViewportSize(vp); await fresh(0); await goTo(13);
   const ladderNextWord = () => page.evaluate(() => { const m = ladderModel(day), s = state(13); return ladderNext(s.steps.at(-1), m.end); });
   for (const ch of await ladderNextWord()) await page.locator(`.spark.live .keys [data-key="${ch}"]`).tap();
   check(await page.locator(".spark.live .ladsubmit.ready").count() === 1, `${engine} ladder Submit lights up at 5 letters`);

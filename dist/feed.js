@@ -99,7 +99,7 @@ function revealState(d, i, s = {}) {
   if (i === 6) return set({ mode: "challenge", board: neighbourModel(d).solution.slice(), history: [] });
   if (i === 8) return set({ order: [0, 1, 2, 3, 4, 5] });
   if (i === 9) { const m = alchemyModel(d); return set({ pot: m.target.slice(), drops: [] }); }
-  if (i === 10) return set({ mirrors: { ...mirrorModel(d).solution } });
+  if (i === 10) return set({ mirrors: { ...savedMirror(d, s).solution } });
   if (i === 11) return set({ values: sudokuSixModel(d).sol.slice() });
   if (i === 21) return set({ values: hardSixModel(d).sol.slice() });
   if (i === 12) return set({ values: savedKiller(d, s).sol.slice() });

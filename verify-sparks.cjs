@@ -21,6 +21,7 @@ const models = {
 // Sudoku Six · Hard only appears on Tricky and ignores the level, so it is checked once.
 const onlyTricky = new Set(["21"]);
 const validSix = (g) => [0, 1, 2, 3, 4, 5].every((k) => [[0, 1, 2, 3, 4, 5].map((c) => g[k * 6 + c]), [0, 1, 2, 3, 4, 5].map((r) => g[r * 6 + k]), g.filter((_, i) => BOX6(i) === k)].every((grp) => new Set(grp).size === 6 && grp.every((v) => v >= 1 && v <= 6)));
+const mirrorStats = [0, 1, 2].map(() => ({ nodes: 0, oldNodes: 0, oldUnique: 0 }));
 const killerStats = { givens: 0, cages: 0, hidden: 0, n: 0 }, hardSix = { givens: 0, hidden: 0, n: 0, max: 0 }, killerGivens = [0, 0, 0];
 const checks = {
   8: (m) => {
@@ -35,7 +36,13 @@ const checks = {
     if (!storyAccepted(m, o)) fail("hints end on an unaccepted order");
   },
   9: (m) => { if (!alchemyMatch(m, m.target)) fail("recipe rejected"); if (alchemyMatch(m, m.bases.map(() => 0))) fail("empty pot matches"); },
-  10: (m) => { if (!mirrorSolved(m, m.solution)) fail("mirror solution fails"); if (mirrorSolved(m, {})) fail("mirrors not needed"); if (Object.keys(m.solution).length !== m.budget) fail("mirror budget"); },
+  10: (m, d) => { if (!mirrorSolved(m, m.solution)) fail("mirror solution fails"); if (mirrorSolved(m, {})) fail("mirrors not needed"); if (Object.keys(m.solution).length !== m.budget) fail("mirror budget");
+    if (m.n !== [5, 6, 7][difficulty]) fail("mirror garden size");
+    // Exactly one layout of on-beam mirrors lights every flower, and it is the stored answer.
+    const r = mirrorSolve(m, 2);
+    if (r.count !== 1 || JSON.stringify(Object.entries(r.first).sort()) !== JSON.stringify(Object.entries(m.solution).sort())) fail("mirror garden not unique (" + r.count + ")");
+    const all = mirrorSolve(m, Infinity), old = mirrorSolve(legacyMirrorModel(d), Infinity);
+    mirrorStats[difficulty].nodes += all.nodes; mirrorStats[difficulty].oldNodes += old.nodes; mirrorStats[difficulty].oldUnique += old.count === 1 ? 1 : 0; },
   11: (m) => { if (!validSix(m.sol)) fail("bad sudoku"); if (m.givens.some((v, i) => v && v !== m.sol[i])) fail("bad givens"); if (sixCount(m.givens) !== 1) fail("sudoku not unique"); },
   12: (m) => { if (!validSix(m.sol)) fail("bad killer"); if (m.cages.flatMap((c) => c.cells).length !== 36) fail("cages incomplete"); if (m.cages.some((c) => c.sum !== c.cells.reduce((t, i) => t + m.sol[i], 0))) fail("cage sum"); if (sixCount(m.givens, m.cages) !== 1) fail("killer not unique");
     killerGivens[difficulty] += m.givens.filter(Boolean).length;
@@ -67,7 +74,7 @@ for (const lvl of [0, 1, 2]) {
     for (const d of days) {
       let m;
       try { m = make(d); checks[i](m, d); } catch (e) { fail("game " + i + " level " + lvl + " " + d + ": " + e.message); }
-      SHUFFLE_CACHE.clear();
+      SHUFFLE_CACHE.clear(); mirrorCache.clear();
       if (JSON.stringify(make(d)) !== JSON.stringify(m)) fail("game " + i + " not deterministic on " + d);
       recent.push(JSON.stringify(m));
     }
@@ -91,6 +98,17 @@ difficulty = 2;
 { const d = "2026-05-04", old = { values: legacyKillerModel(d, 2).givens.slice() }, fresh = {};
   if (JSON.stringify(savedKiller(d, old)) !== JSON.stringify(legacyKillerModel(d, 2))) fail("legacy killer changed");
   if (JSON.stringify(savedKiller(d, fresh)) !== JSON.stringify(killerSixModel(d)) || !fresh.hard) fail("fresh killer should use the hard model"); }
+// Gardens started on the first generator keep their puzzle; new ones use the harder one.
+{ const d = "2026-05-04", old = { mirrors: { 7: "/" } }, done = { done: true, mirrors: {} }, fresh = {};
+  if (JSON.stringify(savedMirror(d, old)) !== JSON.stringify(legacyMirrorModel(d, 2)) || old.v2) fail("legacy mirror save changed");
+  if (JSON.stringify(savedMirror(d, done)) !== JSON.stringify(legacyMirrorModel(d, 2))) fail("solved legacy mirror changed");
+  if (JSON.stringify(savedMirror(d, fresh)) !== JSON.stringify(mirrorModel(d)) || !fresh.v2) fail("fresh mirror should use the new model");
+  fresh.mirrors = { 3: "/" };
+  if (JSON.stringify(savedMirror(d, fresh)) !== JSON.stringify(mirrorModel(d))) fail("v2 mirror save switched back"); }
+const mirrorAvg = mirrorStats.map((x) => x.nodes / days.length);
+if (!(mirrorAvg[0] < mirrorAvg[1] && mirrorAvg[1] < mirrorAvg[2])) fail("mirror search effort must rise Gentle < Medium < Tricky: " + mirrorAvg);
+mirrorStats.forEach((x, l) => { if (x.nodes < 2 * x.oldNodes) fail("mirror level " + l + " not noticeably harder than before"); });
+out.push("mirrorSolverNodes{before:" + mirrorStats.map((x) => (x.oldNodes / days.length).toFixed(0)).join("/") + ",after:" + mirrorAvg.map((v) => v.toFixed(0)).join("/") + ",uniqueBefore:" + mirrorStats.map((x) => x.oldUnique).join("/") + ",uniqueAfter:366/366/366}");
 if (!(killerGivens[0] > killerGivens[1] && killerGivens[1] > killerGivens[2])) fail("killer givens must fall Gentle > Medium > Tricky: " + killerGivens);
 out.push("killerAvgGivens{" + killerGivens.map((g) => (g / days.length).toFixed(2)).join("/") + "}");
 out.push("sudokuHard{avgGivens:" + (hardSix.givens / hardSix.n).toFixed(2) + ",maxGivens:" + hardSix.max + ",hiddenSinglesSolve:" + hardSix.hidden + "/" + hardSix.n + ",nakedSinglesSolve:0}");
