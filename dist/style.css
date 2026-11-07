@@ -162,6 +162,8 @@ dialog.sheet h2 { font-size: 26px; margin: 0; }
 .keys div { display: flex; gap: 4px; justify-content: center; }
 .keys button { flex: 1; max-width: 36px; padding: 11px 0; font-size: 14px; }
 .keys button.wide { max-width: 54px; flex: 1.5; }
+.ladsubmit { display: block; width: 100%; max-width: 360px; min-height: 48px; margin: 10px auto 0; font-size: 17px; font-weight: 700; opacity: .6; transition: opacity .2s, box-shadow .2s; }
+.ladsubmit.ready { opacity: 1; box-shadow: 0 0 0 3px #f6e3b5; }
 .bloomfive { max-width: 320px; gap: 5px; }
 .bloomfive .cell { font-size: 17px; }
 .cell.turn { color: #a45a2b; font-weight: 700; }

@@ -112,6 +112,24 @@ for (const [engine, launch, ctxOpts] of engines) {
   await page.locator(".brand").tap();
   await page.waitForTimeout(1000);
   check(await page.evaluate(() => feed.scrollTop <= 2), `${engine} brand scrolls back to the top`);
+  // Letterlight Ladder: a big Submit word button, on screen without scrolling (iPhone SE too), by tap and by Enter.
+  const ladderSubmitVisible = () => page.evaluate(() => { const b = document.querySelector(".spark.live .ladsubmit"), r = b.getBoundingClientRect(), c = document.querySelector(".spark.live").getBoundingClientRect();
+    return r.height >= 44 && r.top >= c.top && r.bottom <= Math.min(innerHeight, c.bottom) + 0.5 && b.textContent.includes("Submit word"); });
+  const vp = page.viewportSize();
+  for (const size of [{ width: 375, height: 667 }, vp]) {
+    await page.setViewportSize(size); await fresh(0); await goTo(13);
+    check(await ladderSubmitVisible(), `${engine} ${size.width}×${size.height} ladder Submit word visible without scrolling`);
+  }
+  const ladderNextWord = () => page.evaluate(() => { const m = ladderModel(day), s = state(13); return ladderNext(s.steps.at(-1), m.end); });
+  for (const ch of await ladderNextWord()) await page.locator(`.spark.live .keys [data-key="${ch}"]`).tap();
+  check(await page.locator(".spark.live .ladsubmit.ready").count() === 1, `${engine} ladder Submit lights up at 5 letters`);
+  await page.locator(".spark.live .ladsubmit").tap();
+  check(await page.evaluate(() => state(13).steps.length) === 2, `${engine} ladder Submit word tap adds a step`);
+  const w2 = await ladderNextWord();
+  if (w2 && !(await page.evaluate(() => state(13).done))) {
+    await page.keyboard.type(w2.toLowerCase()); await page.keyboard.press("Enter");
+    check(await page.evaluate(() => state(13).steps.length) === 3, `${engine} ladder Enter key still submits`);
+  }
   // Leaderboard against a mocked Supabase (route interception): name, offline queue, sync, tabs, same-name join.
   const calls = [];
   let offline = false, fkOnce = false;

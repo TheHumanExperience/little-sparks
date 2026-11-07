@@ -716,7 +716,8 @@ function letterLadder(i) {
     $("#board").innerHTML = `<div class="ladder">${s.steps.map((w, k) => `<div class="rung ${k ? "" : "first"} ${w === m.end ? "goal" : ""}">${[...w].map((ch, j) => `<span class="${k && ch !== s.steps[k - 1][j] ? "changed" : ""}">${ch}</span>`).join("")}</div>`).join("")}` +
       (s.done ? "" : `<div class="rung typing">${[0, 1, 2, 3, 4].map((j) => `<span class="${buf[j] && buf[j] !== last[j] ? "changed" : ""}">${buf[j] || ""}</span>`).join("")}</div><div class="rung target">${[...m.end].map((ch) => `<span>${ch}</span>`).join("")}</div>`) +
       `</div><p class="small">${s.steps.length - 1} step${s.steps.length === 2 ? "" : "s"} · par ${m.par}</p>` +
-      (s.done ? "" : `<div class="keys">${["QWERTYUIOP", "ASDFGHJKL", "⏎ZXCVBNM⌫"].map((row) => `<div>${[...row].map((k) => `<button data-key="${k === "⏎" ? "ENTER" : k}" class="${k === "⏎" || k === "⌫" ? "wide" : ""}" aria-label="${k === "⏎" ? "Enter" : k === "⌫" ? "Delete" : k}">${k}</button>`).join("")}</div>`).join("")}</div>`);
+      (s.done ? "" : `<div class="keys">${["QWERTYUIOP", "ASDFGHJKL", "ZXCVBNM⌫"].map((row) => `<div>${[...row].map((k) => `<button data-key="${k}" class="${k === "⌫" ? "wide" : ""}" aria-label="${k === "⌫" ? "Delete" : k}">${k}</button>`).join("")}</div>`).join("")}</div>` +
+        `<button class="btn ladsubmit${buf.length === 5 ? " ready" : ""}" data-key="ENTER">Submit word ⏎</button>`);
     $("#board").querySelectorAll("[data-key]").forEach((b) => (b.onclick = () => type(b.dataset.key)));
   }
   window.sparkKeys = (e) => {
