@@ -53,7 +53,7 @@ Each level has 19 cards. The families are set in `FEED_FAMILIES` in `dist/feed.j
 
 Every card still gets harder from Gentle to Tricky, and progress is saved in the browser.
 
-**The Aha track** replaces the old single Aha Moment card. Each day has five logical-reasoning cards, placed together as one block (cards 4–8) so the reasoning flow isn't broken up. They are drawn from ten categories that alternate between number puzzles and logic puzzles:
+**The Aha track** replaces the old single Aha Moment card. Each day has five logical-reasoning cards, placed together as one block (cards 4–8) so the reasoning flow isn't broken up. They are drawn from nineteen categories, mixing number puzzles and logic puzzles:
 
 - Percentages and profit
 - Arrangements
@@ -65,12 +65,21 @@ Every card still gets harder from Gentle to Tricky, and progress is saved in the
 - 3×3 logic grids
 - Pigeonhole and guarantee
 - Clocks and calendars
+- Blood relations ("Pointing at a photo, Riya says…")
+- Directions (walks, turns and morning/evening shadows)
+- Cube painting (paint the outside, cut it up, count the pieces)
+- Odd one out (numbers, number pairs and letter trios)
+- Number series (find the next term)
+- Coins and weighings (the fake coin, and balance weights)
+- Matchsticks (move one stick to fix a seven-segment equation, drawn as a board)
+- Tournaments (knockouts, leagues and who can still top the table)
+- Is the info enough? (would statement 1, 2, either or both pin the answer down?)
 
-Each date and level shows five consecutive categories from the ten, and the window rotates daily. Every question is generated in `dist/aha.js` from the date and difficulty. Its names and numbers are drawn fresh each time. A brute-force solver confirms the question has exactly one answer, and each question comes with a hint and a "why" explanation.
+Each date and level shows five consecutive categories from a fixed ring of all nineteen (`AHA_RING`, which alternates number and logic groups except at one wrap-around), and the window rotates daily, so every category comes up about equally often. Every question is generated in `dist/aha.js` from the date and difficulty. Its names and numbers are drawn fresh each time. A brute-force solver confirms the question has exactly one answer, and each question comes with a hint and a "why" explanation.
 
 - **Formats.** Gentle and Medium are multiple choice. Tricky asks you to type the answer in a numeric field, or a name picker for grids and liars.
 - **Skill badges.** A small badge on each card shows how many questions of that category you have solved.
-- **Older saves.** Past days that have an old Aha Moment save in slot 3 still open the original puzzle.
+- **Older saves.** Past days that have an old Aha Moment save in slot 3 still open the original puzzle. A date × level whose Aha cards were played before the ring grew to nineteen (saves with `aha: 1`, or no flag) keeps its original ten-category rotation and questions; new plays are stamped `aha: 2`.
 
 **Swipe to draw.** In Bloom Trail and Bloom Trail 5×5 you can press a square and slide your finger (or mouse) across neighbouring squares to draw the trail. Sliding back onto the previous square undoes a step. Tapping squares one by one still works. The grid uses `touch-action: none`, so drawing never scrolls the feed.
 
@@ -123,7 +132,7 @@ Contributors and coding agents should start with [AGENTS.md](AGENTS.md) and chec
 | `verify-sparks.cjs` | The nine feed games plus Sudoku Six · Hard, every level, a full year of dates. Each puzzle must be deterministic, solvable by its own checker, unique where promised, and varied. For Story Shuffle it also checks that every accepted order is a valid permutation, that the canonical order is listed first, that the starting shuffle is never already solved, that a move inserts and shifts (4 → 2 gives 1, 4, 2, 3, 5, 6), and that repeated hints always finish the story. For Mirror Garden it checks every garden has exactly one solution, that solver effort rises Gentle < Medium < Tricky and is at least double the old generator, and that old saves keep their garden. For Killer Six on Tricky it checks there are no single-cell cages, at most 3 givens, and that naked singles alone stall; it prints the average givens, cages and how many fall to hidden singles. |
 | `verify-lanterns.cjs` | Lantern Lanes at every level over 366 days: deterministic, varied, solved by its stored answer and by nothing else (solver-checked), Gentle's budget is the true minimum, numbers and counter per level, solver effort rising Gentle < Medium < Tricky, the clash and number rules, the tutorial and reveal. |
 | `verify-beds.cjs` | Garden Beds at every level over 366 days: deterministic, varied, packet sizes per level, solved by its stored beds and by nothing else (solver-checked), Gentle never needs a guess, solver effort and decoy beds rising Gentle < Medium < Tricky, the bed verdicts, the How to play example, and reveal. |
-| `verify-aha.cjs` | Every Aha category at all three levels over 366 days. Each question must be deterministic, have exactly one answer (confirmed by brute force), have unique options that include the answer, and rarely repeat its wording within 61 days. Also checks the old slot-3 saves, the skill counts, and that clear & retry keeps credit. |
+| `verify-aha.cjs` | Every Aha category at all three levels over 366 days. Each question must be deterministic, have exactly one answer (confirmed by brute force), have unique options that include the answer, and rarely repeat its wording within 61 days. Also checks no exam labels, the old slot-3 saves, that days played before the 19-category ring keep their original rotation, the skill counts, and that clear & retry keeps credit. |
 | `verify-feed.cjs` | Feed order, the 31-day window, and that `feed.js` does nothing on a page without the feed. |
 | `verify-leaderboard.cjs` | Points 1/3/5, one claim per date × level × game, India-time day, Monday-week and month boundaries, the offline queue (round trip, pruning), name cleaning and escaping, same name = same player, the committed config being empty or a public publishable/anon key only, and that schema.sql keeps the same rules and lock-down. |
 | `verify-assets.cjs` | Every local CSS/JS in `index.html` uses `?v=__BUILD__` and exists; the Pages workflow stamps the commit SHA in before upload, so returning visitors never get stale files. |

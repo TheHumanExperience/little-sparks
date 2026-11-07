@@ -28,7 +28,7 @@ Prefer `npm run smoke` over manual screenshots. Take screenshots only when a hum
 | `dist/sparks.js` | Games 8–16 and 21 (`SPARKS[i]`): pure `*Model(d)` generators plus renderers. |
 | `dist/lanterns.js` | Lantern Lanes (`SPARKS[22]`): `lanternModel(d,lvl)`, `lanternSolve`, `lanternCheck`, renderer. Loaded after sparks.js. |
 | `dist/beds.js` | Garden Beds (`SPARKS[23]`): `bedsModel(d,lvl)`, `bedsSolve`, `bedsCheck`, drag-to-mark renderer. Loaded after lanterns.js. |
-| `dist/aha.js` | Logical-reasoning track: `AHA_SLOTS = [3,17,18,19,20]`, category generators, `ahaModel(d,slot)`, legacy Aha card. |
+| `dist/aha.js` | Logical-reasoning track: `AHA_SLOTS = [3,17,18,19,20]`, 19 category generators + brute-force solvers, `ahaCategories` (rotation 1 = old 10-window, 2 = `AHA_RING`, chosen per date×level from saved `aha` flags), `ahaModel(d,slot)`, legacy Aha card. |
 | `dist/feed.js` | Feed (`FEED_PLAN`, `FEED_FAMILIES`), live card, celebrations, rewards, flow, shiny cards, ↺ clear, Reveal answer. |
 | `dist/leaderboard.js`, `dist/leaderboard-config.js` | Optional Supabase leaderboard (🏆, name sheet, offline queue, same name = same player). Config holds the live project URL and its public `sb_publishable_` key (sent only as `apikey`, never as Bearer); never commit a secret/service_role key. Empty config hides it. Tests stub the config and never call the live project. Schema: `supabase/schema.sql`, setup: `docs/SUPABASE_SETUP.md`. |
 | `dist/style.css` | All styles; respects `prefers-reduced-motion`. |

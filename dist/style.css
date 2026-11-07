@@ -310,6 +310,12 @@ body.golden .feedbar .brand span { color: #c8901f; }
 .ahachoices { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .ahachoices .choice { margin: 0; min-height: 44px; padding: 10px 12px; text-align: center; font-size: 15px; font-variant-numeric: tabular-nums; }
 .choice.right, .choice.right:disabled { background: #52775a; border-color: #52775a; color: #fff; opacity: 1; }
+.ahachoices.wide { grid-template-columns: 1fr; }
+.ahachoices.wide .choice { text-align: left; }
+.ahamatch { margin: 6px 0 10px; padding: 12px 10px; border-radius: 12px; background: #2f3a33; text-align: center; }
+.matchsvg { width: 100%; max-width: 320px; height: auto; display: inline-block; }
+.matchsvg .stick { stroke: #e7c98f; stroke-width: 4.2; stroke-linecap: round; }
+.matchsvg .head { fill: #d2563f; }
 .ahaentry { display: flex; align-items: center; gap: 8px; margin: 6px 0; font-size: 16px; }
 .ahaentry input { flex: 1; min-width: 0; height: 48px; font-size: 18px; padding: 0 12px; border: 1px solid #bac6b4; border-radius: 10px; background: #fff; color: var(--ink); font-variant-numeric: tabular-nums; }
 .ahatable { overflow-x: auto; margin: 6px 0 10px; }

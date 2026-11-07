@@ -1,7 +1,8 @@
 // Checks the logical-reasoning Aha track (dist/aha.js): every category × level × 366 days generates
 // deterministically, the brute-force solver finds exactly one answer and it matches, multiple-choice
 // options are unique and contain the answer, each day shows five different categories,
-// wording barely repeats within 61 days, and old index-3 progress stays on the legacy card.
+// wording barely repeats within 61 days, old index-3 progress stays on the legacy card,
+// and days played before the nineteen-category ring keep their original rotation.
 const fs = require("fs"), vm = require("vm");
 function element() {
   return { textContent: "", innerHTML: "", value: "", open: false, children: [], dataset: {}, querySelectorAll: () => [], classList: { add() {}, remove() {}, toggle() {} }, append(b) { this.children.push(b); }, showModal() {}, close() {} };
@@ -82,6 +83,18 @@ const skill = ahaSkillCounts(), cats = ahaCategories(d);
 if (skill.reduce((a, b) => a + b, 0) !== 2 || skill[cats[1]] !== 1 || skill[cats[2]] !== 1) fail("skill badges miscounted: " + skill);
 clearPuzzle(all, d, 17);
 if (!all[key].games[17].credit || !all[key].games[17].aha || ahaSkillCounts()[cats[1]] !== 1) fail("reset must keep solved credit and the skill badge");
-({ questions, repeats });
+// Days played before the ring grew keep their original ten-category rotation.
+for (const dd of dates.slice(0, 40)) {
+  const k = progressKey(dd), oldStart = mod(calendarIndex(dd) * 3 + difficulty * 7, 10);
+  const old = shuffle([0, 1, 2, 3, 4].map((j) => mod(oldStart + j, 10)), rng(puzzleSeed(dd) + "|aha-order"));
+  for (const g of [{ aha: 1, started: true }, { started: true }, { done: true, revealed: 1 }]) {
+    all = { [k]: { games: { [AHA_SLOTS[2]]: g } } };
+    if (ahaRotation(dd) !== 1 || JSON.stringify(ahaCategories(dd)) !== JSON.stringify(old)) fail("old Aha progress must keep the ten-category rotation " + dd);
+  }
+  all = { [k]: { games: { [AHA_SLOTS[2]]: { aha: 2, started: true } } } };
+  if (ahaRotation(dd) !== 2) fail("rotation 2 saves stay on the ring");
+}
+all = {};
+({ questions, repeats, N });
 `, context);
-console.log(`Aha track OK: ${result.questions} generated questions (10 categories × 3 levels × 366 days), ${result.repeats} wording repeats within 61 days, in ${Date.now() - t0} ms`);
+console.log(`Aha track OK: ${result.questions} generated questions (${result.N} categories × 3 levels × 366 days), ${result.repeats} wording repeats within 61 days, in ${Date.now() - t0} ms`);

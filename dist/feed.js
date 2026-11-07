@@ -36,7 +36,7 @@ function clearPuzzle(store, d, i) {
   if (credit || prev?.revealed) {
     games[i] = {};
     if (credit) games[i].credit = true;
-    if (prev.aha) games[i].aha = 1;
+    if (prev.aha) games[i].aha = prev.aha;
     if (prev.revealed) games[i].revealed = 1;
   } else delete games[i];
   return { key, i, prev: prev === undefined ? undefined : JSON.parse(JSON.stringify(prev)) };
@@ -90,7 +90,7 @@ function revealState(d, i, s = {}) {
     return set({ slots: perms.filter(fits).sort((a, b) => (b[0] === m.first) - (a[0] === m.first))[0] });
   }
   if (i === 3 && ahaLegacy(d, 3)) return set({ answer: logicModel(d).a });
-  if (AHA_SLOTS.includes(i)) { const m = ahaModel(d, AHA_SLOTS.indexOf(i)); return set({ aha: 1, answer: m.kind === "choice" ? m.a : String(m.a) }); }
+  if (AHA_SLOTS.includes(i)) { const rot = s.aha || ahaRotation(d), m = ahaModel(d, AHA_SLOTS.indexOf(i)); return set({ aha: rot, answer: m.kind === "choice" ? m.a : String(m.a) }); }
   if (i === 4) return set({ path: trailModel(d).path.slice() });
   if (i === 5) {
     const ids = s.photoIds || (s.answers?.length ? shuffle(PHOTO_BANK.slice(0, 6), rng(d + "photographs")).slice(0, 3) : photoSet(d)).map((p) => p.image);

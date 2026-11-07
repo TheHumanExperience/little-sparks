@@ -1,5 +1,5 @@
 /* Aha track — five logical-reasoning questions a day (state indexes 3, 17, 18, 19, 20), drawn
-   from ten category generators (number and logic groups alternate). Gentle/Medium are multiple
+   from nineteen category generators (number and logic groups alternate). Gentle/Medium are multiple
    choice; Tricky asks you to type the answer. A question is a pure function of (date, difficulty, slot).
    Every generator builds a puzzle, then brute-forces it with ahaSolve() and retries until
    exactly one answer survives. verify-aha.cjs re-runs the same solvers. */
@@ -15,6 +15,15 @@ const AHA_CATS = [
   { id: "grid", name: "Logic Grid", group: "logic", type: "Logical reasoning", art: "✓ ✗ ✗", blurb: "Cross out the impossible." },
   { id: "guarantee", name: "Counting & Chance", group: "numbers", type: "Logical reasoning", art: "● ● ○", blurb: "Plan for the unluckiest draw." },
   { id: "clock", name: "Clocks & Calendars", group: "logic", type: "Logical reasoning", art: "◷ ▦", blurb: "Hands, hours and weekdays." },
+  { id: "blood", name: "Blood Relations", group: "logic", type: "Logical reasoning", art: "♂ ♀ ⌂", blurb: "Whose photo is it? Untangle the family tree." },
+  { id: "directions", name: "Directions", group: "logic", type: "Logical reasoning", art: "N ↑ ↱", blurb: "Left, right, sunrise shadows and the way home." },
+  { id: "cube", name: "Cube Painting", group: "numbers", type: "Logical reasoning", art: "▣ ³", blurb: "Paint the outside, cut it up, count the pieces." },
+  { id: "oddone", name: "Odd One Out", group: "logic", type: "Logical reasoning", art: "○ ○ ● ○", blurb: "Four follow a rule. One doesn't." },
+  { id: "series", name: "Number Series", group: "numbers", type: "Logical reasoning", art: "2 4 8 ?", blurb: "Spot the pattern, find what comes next." },
+  { id: "coins", name: "Coins & Weighings", group: "numbers", type: "Logical reasoning", art: "⚖", blurb: "One fake coin and a trusty pan balance." },
+  { id: "matchsticks", name: "Matchsticks", group: "logic", type: "Logical reasoning", art: "| ‒ |", blurb: "Move one stick to make the sum true." },
+  { id: "tournaments", name: "Tournaments", group: "numbers", type: "Logical reasoning", art: "⚑ vs ⚑", blurb: "Fixtures, knockouts and who can still top the table." },
+  { id: "sufficiency", name: "Is the Info Enough?", group: "logic", type: "Logical reasoning", art: "① ② ?", blurb: "You don't need the answer, just whether you could get it." },
 ];
 const AHA_NAMES = ["Asha", "Bilal", "Chitra", "Dev", "Esha", "Farhan", "Gauri", "Hari", "Ira", "Jai", "Kavya", "Leela", "Manav", "Neel", "Ojas", "Pari", "Rhea", "Sahil", "Tara", "Uma", "Vikram", "Zoya", "Anya", "Kabir", "Meera", "Rohan", "Sana", "Arjun", "Diya", "Ishaan", "Naina", "Vihaan", "Aditi", "Kiran", "Mira", "Noor", "Tanvi", "Yash", "Ved", "Riya", "Om", "Lata", "Nikhil", "Pooja", "Sameer", "Tejas"];
 const WEEKDAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
@@ -31,11 +40,18 @@ function ahaPerms(n) {
 const AHA_PERMS = new Map();
 const permsOf = (n) => AHA_PERMS.get(n) || (AHA_PERMS.set(n, ahaPerms(n)), AHA_PERMS.get(n));
 
-/* Which five categories a date shows: a window sliding through all ten (number and logic
-   groups alternate in AHA_CATS, so every day mixes both), shuffled into slots. */
-function ahaCategories(d) {
-  const N = AHA_CATS.length, start = mod(calendarIndex(d) * 3 + difficulty * 7, N);
-  return shuffle([0, 1, 2, 3, 4].map((j) => mod(start + j, N)), rng(puzzleSeed(d) + "|aha-order"));
+/* Which five categories a date shows: a window sliding round AHA_RING (number and logic
+   groups alternate, so every day mixes both), shuffled into slots. Rotation 1 is the original
+   ten-category window; a date × level keeps it if its Aha cards were played before the ring grew. */
+const AHA_RING = [10, 0, 1, 12, 11, 2, 3, 14, 13, 4, 5, 15, 16, 6, 7, 17, 18, 8, 9];
+function ahaRotation(d, store = all) {
+  const games = store[progressKey(d)]?.games || {};
+  return AHA_SLOTS.some((i) => { const g = games[i]; return g && (g.aha === 1 || (!g.aha && (g.started || g.done || g.credit || g.revealed || g.answer !== undefined))); }) ? 1 : 2;
+}
+function ahaCategories(d, store = all) {
+  if (ahaRotation(d, store) === 1) { const start = mod(calendarIndex(d) * 3 + difficulty * 7, 10); return shuffle([0, 1, 2, 3, 4].map((j) => mod(start + j, 10)), rng(puzzleSeed(d) + "|aha-order")); }
+  const N = AHA_RING.length, start = mod(calendarIndex(d) * 3 + difficulty * 7, N);
+  return shuffle([0, 1, 2, 3, 4].map((j) => AHA_RING[mod(start + j, N)]), rng(puzzleSeed(d) + "|aha-order-v2"));
 }
 
 /* ───────── Solvers: every one returns the list of distinct answers the data allows ───────── */
@@ -527,11 +543,525 @@ function genDi(r, lv) {
   }
 }
 
-const AHA_GEN = [genPercent, genOrder, genTsd, genLiars, genNumbers, genDi, genRatio, genGrid, genGuarantee, genClock];
+/* ───────── Nine more categories (AHA_CATS 10–18) ───────── */
+const KIN_F = ["Asha", "Chitra", "Esha", "Gauri", "Ira", "Kavya", "Leela", "Pari", "Rhea", "Tara", "Uma", "Zoya", "Anya", "Meera", "Sana", "Diya", "Naina", "Aditi", "Mira", "Noor", "Tanvi", "Riya", "Lata", "Pooja"];
+const KIN_M = ["Bilal", "Dev", "Farhan", "Hari", "Jai", "Manav", "Neel", "Ojas", "Sahil", "Vikram", "Kabir", "Rohan", "Arjun", "Ishaan", "Vihaan", "Yash", "Ved", "Om", "Nikhil", "Sameer", "Tejas"];
+const KIN_STEP = { father: ["f", "M"], mother: ["m", "F"], husband: ["sp", "M"], wife: ["sp", "F"], son: ["c", "M"], daughter: ["c", "F"], brother: ["s", "M"], sister: ["s", "F"] };
+const KIN_POOL = { M: ["father", "grandfather", "uncle", "brother", "cousin brother", "nephew", "son", "grandson", "brother-in-law", "father-in-law", "son-in-law"], F: ["mother", "grandmother", "aunt", "sister", "cousin sister", "niece", "daughter", "granddaughter", "sister-in-law", "mother-in-law", "daughter-in-law"] };
+const KIN_GRAPHS = {};
+/* A whole extended family around the speaker ("me"), labelled by how each person is related to them. */
+function kinGraph(g) {
+  if (KIN_GRAPHS[g]) return KIN_GRAPHS[g];
+  const o = g === "M" ? "F" : "M", n = {}, add = (id, sex, label, f, m, sp) => (n[id] = { sex, label, f, m, sp });
+  add("pgf", "M", "grandfather", 0, 0, "pgm"); add("pgm", "F", "grandmother", 0, 0, "pgf");
+  add("mgf", "M", "grandfather", 0, 0, "mgm"); add("mgm", "F", "grandmother", 0, 0, "mgf");
+  add("fa", "M", "father", "pgf", "pgm", "mo"); add("mo", "F", "mother", "mgf", "mgm", "fa");
+  add("pu", "M", "uncle", "pgf", "pgm", "puw"); add("puw", "F", "aunt", 0, 0, "pu");
+  add("pa", "F", "aunt", "pgf", "pgm", "pah"); add("pah", "M", "uncle", 0, 0, "pa");
+  add("mu", "M", "uncle", "mgf", "mgm", "muw"); add("muw", "F", "aunt", 0, 0, "mu");
+  add("ma", "F", "aunt", "mgf", "mgm", "mah"); add("mah", "M", "uncle", 0, 0, "ma");
+  for (const [p, q] of [["pu", "puw"], ["pah", "pa"], ["mu", "muw"], ["mah", "ma"]]) { add(p + "S", "M", "cousin brother", p, q, 0); add(p + "D", "F", "cousin sister", p, q, 0); }
+  add("me", g, "themselves", "fa", "mo", "sp");
+  add("sp", o, o === "M" ? "husband" : "wife", "fil", "mil", "me");
+  add("fil", "M", "father-in-law", 0, 0, "mil"); add("mil", "F", "mother-in-law", 0, 0, "fil");
+  add("sb", "M", "brother-in-law", "fil", "mil", 0); add("ss", "F", "sister-in-law", "fil", "mil", 0);
+  add("br", "M", "brother", "fa", "mo", "brw"); add("brw", "F", "sister-in-law", 0, 0, "br");
+  add("si", "F", "sister", "fa", "mo", "sih"); add("sih", "M", "brother-in-law", 0, 0, "si");
+  const [hf, hm] = g === "M" ? ["me", "sp"] : ["sp", "me"];
+  add("so", "M", "son", hf, hm, "sow"); add("sow", "F", "daughter-in-law", 0, 0, "so");
+  add("da", "F", "daughter", hf, hm, "dah"); add("dah", "M", "son-in-law", 0, 0, "da");
+  add("brS", "M", "nephew", "br", "brw", 0); add("brD", "F", "niece", "br", "brw", 0);
+  add("siS", "M", "nephew", "sih", "si", 0); add("siD", "F", "niece", "sih", "si", 0);
+  add("soS", "M", "grandson", "so", "sow", 0); add("soD", "F", "granddaughter", "so", "sow", 0);
+  return (KIN_GRAPHS[g] = n);
+}
+function kinStep(n, xs, step) {
+  const out = new Set(), [k, sex] = KIN_STEP[step];
+  for (const x of xs) {
+    if (k === "f" || k === "m") { if (n[x][k]) out.add(n[x][k]); continue; }
+    if (k === "sp") { const y = n[x].sp; if (y && n[y].sex === sex) out.add(y); continue; }
+    for (const [y, p] of Object.entries(n)) if (p.sex === sex && (k === "c" ? p.f === x || p.m === x : y !== x && n[x].f && p.f === n[x].f)) out.add(y);
+  }
+  return [...out];
+}
+const kinLabels = (n, xs) => ahaUniq(xs.map((x) => n[x].label));
+
+const DIRS4 = ["North", "East", "South", "West"];
+const dirLabel = (x, y) => { const ns = y > 0 ? "North" : y < 0 ? "South" : "", ew = x > 0 ? "East" : x < 0 ? "West" : ""; return ns && ew ? ns + "-" + ew : ns || ew; };
+function dirWalk(d) {
+  let h = d.h0, x = 0, y = 0;
+  d.legs.forEach(([turn, len], k) => { if (k) h = mod(h + turn, 4); x += [0, 1, 0, -1][h] * len; y += [1, 0, -1, 0][h] * len; });
+  return { h, x, y };
+}
+
+function cubeCounts(d) {
+  let n = 0;
+  for (let x = 0; x < d.a; x++) for (let y = 0; y < d.b; y++) for (let z = 0; z < d.c; z++) {
+    const cols = [z === d.c - 1 && d.p[0], z === 0 && d.p[1], y === 0 && d.p[2], y === d.b - 1 && d.p[3], x === 0 && d.p[4], x === d.a - 1 && d.p[5]].filter(Boolean);
+    if (d.ask === "both" ? cols.includes(1) && cols.includes(2) : d.ask === "atleast" ? cols.length >= d.k : cols.length === d.k) n++;
+  }
+  return n;
+}
+
+const ahaPrime = (n) => { if (n < 2) return false; for (let k = 2; k * k <= n; k++) if (n % k === 0) return false; return true; };
+const ODD_NUM_RULES = [
+  ["are even", (n) => n % 2 === 0], ["are odd", (n) => n % 2 === 1],
+  ...[3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 25].map((k) => [`are multiples of ${k}`, (n) => n % k === 0]),
+  ["are perfect squares", (n) => Number.isInteger(Math.sqrt(n))], ["are perfect cubes", (n) => Math.round(Math.cbrt(n)) ** 3 === n],
+  ["are prime", ahaPrime], ["read the same backwards", (n) => n > 9 && String(n) === [...String(n)].reverse().join("")],
+  ["have digits that climb from left to right", (n) => n > 9 && [...String(n)].every((c, i, a) => !i || c > a[i - 1])],
+  ["have an even digit sum", (n) => [...String(n)].reduce((s, c) => s + +c, 0) % 2 === 0],
+  ["have two digits", (n) => n > 9 && n < 100], ["have three digits", (n) => n > 99 && n < 1000], ["end in 5", (n) => n % 10 === 5],
+];
+const ODD_PAIR_RULES = [
+  ["the second number is the first one squared", (a) => a * a], ["the second number is the first one cubed", (a) => a ** 3],
+  ["the second number is one more than the first squared", (a) => a * a + 1], ["the second number is one less than the first squared", (a) => a * a - 1],
+  ["the second number is double the first, plus one", (a) => 2 * a + 1], ["the second number is double the first, minus one", (a) => 2 * a - 1],
+  ["the second number is the first times the next number", (a) => a * (a + 1)],
+  ...[2, 3, 4, 5, 6, 7, 8, 9].map((k) => [`the second number is ${k} times the first`, (a) => k * a]),
+  ...[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((k) => [`the second number is ${k} more than the first`, (a) => a + k]),
+];
+const ODD_ABC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+/* Every item that some simple rule singles out. One answer = one defensible odd one out. */
+function oddCandidates(d) {
+  const out = new Set(), items = d.items, N = items.length;
+  if (d.t === "num") {
+    for (const [, f] of ODD_NUM_RULES) { const sat = items.filter(f); if (sat.length === N - 1) out.add(items.find((x) => !f(x))); if (sat.length === 1) out.add(sat[0]); }
+    return [...out].map(String);
+  }
+  if (d.t === "pair") {
+    for (const [, f] of ODD_PAIR_RULES) { const bad = items.filter(([a, b]) => f(a) !== b); if (bad.length === 1) out.add(bad[0].join(" → ")); }
+    return [...out];
+  }
+  for (let k = 1; k <= 8; k++) { const bad = items.filter((w) => !(ODD_ABC.indexOf(w[1]) - ODD_ABC.indexOf(w[0]) === k && ODD_ABC.indexOf(w[2]) - ODD_ABC.indexOf(w[1]) === k)); if (bad.length === 1) out.add(bad[0]); }
+  const vow = (w) => /[AEIOU]/.test(w), sat = items.filter(vow);
+  if (sat.length === 1) out.add(sat[0]);
+  if (sat.length === N - 1) out.add(items.find((w) => !vow(w)));
+  return [...out];
+}
+
+/* Every simple rule that fits all the terms shown, and the next term it predicts. */
+function seriesFits(t) {
+  const L = t.length, out = new Map(), diff = (a) => a.slice(1).map((x, i) => x - a[i]), last = t[L - 1], allEq = (a) => a.every((x) => x === a[0]);
+  const add = (v, why) => { if (Number.isInteger(v) && !out.has(String(v))) out.set(String(v), why); };
+  const lev = [t]; for (let k = 1; k <= 3; k++) lev.push(diff(lev[k - 1]));
+  for (let k = 1; k <= 3; k++) if (lev[k].length >= 2 && allEq(lev[k])) { let v = lev[k][0]; for (let j = k - 1; j >= 0; j--) v = lev[j][lev[j].length - 1] + v; add(v, "poly" + k); }
+  if (t[0] && Number.isInteger(t[1] / t[0]) && Math.abs(t[1] / t[0]) >= 2) { const r = t[1] / t[0]; if (t.every((x, i) => !i || x === t[i - 1] * r)) add(last * r, "geo"); }
+  for (let r = 2; r <= 5; r++) { const c = t[1] - r * t[0]; if (L >= 4 && t.every((x, i) => !i || x === t[i - 1] * r + c)) add(last * r + c, "affine"); }
+  if (L >= 4 && t.every((x, i) => i < 2 || x === t[i - 1] + t[i - 2])) add(last + t[L - 2], "fib");
+  if (L >= 4 && t[0] && Number.isInteger(t[1] / t[0]) && t[1] / t[0] >= 1) { const k = t[1] / t[0]; if (t.every((x, i) => !i || x === t[i - 1] * (k + i - 1))) add(last * (k + L - 1), "incmul"); }
+  if (L >= 5) for (const order of [0, 1]) {
+    const isAdd = (i) => (i + order) % 2 === 0, ia = isAdd(0) ? 0 : 1, im = 1 - ia, a = t[ia + 1] - t[ia], b = t[im] ? t[im + 1] / t[im] : NaN;
+    if (Number.isInteger(b) && b >= 2 && t.every((x, i) => !i || x === (isAdd(i - 1) ? t[i - 1] + a : t[i - 1] * b))) add(isAdd(L - 1) ? last + a : last * b, "alt");
+  }
+  if (L >= 6) {
+    const ev = t.filter((_, i) => i % 2 === 0), od = t.filter((_, i) => i % 2 === 1);
+    if (allEq(diff(ev)) && allEq(diff(od))) { const s = L % 2 === 0 ? ev : od; add(s[s.length - 1] + s[1] - s[0], "inter"); }
+  }
+  const d1 = lev[1];
+  if (L >= 5 && d1[0] && Number.isInteger(d1[1] / d1[0]) && d1[1] / d1[0] >= 2) { const r = d1[1] / d1[0]; if (d1.every((x, i) => !i || x === d1[i - 1] * r)) add(last + d1[d1.length - 1] * r, "geodiff"); }
+  return out;
+}
+
+function coinsSolve(d) {
+  if (d.t === "min") { let k = 0; while (3 ** k < d.n) k++; return [String(k)]; }
+  if (d.t === "weights") {
+    const S = new Set(), go = (i, s) => { if (i === d.w.length) { if (s > 0) S.add(s); return; } go(i + 1, s); go(i + 1, s + d.w[i]); if (d.two) go(i + 1, s - d.w[i]); };
+    go(0, 0);
+    return [String(S.size)];
+  }
+  const out = new Set();
+  for (let c = 0; c < d.n; c++) for (const s of d.heavy === null ? [1, -1] : [d.heavy ? 1 : -1]) {
+    if (d.ws.every((w) => Math.sign(s * ((w.L.includes(c) ? 1 : 0) - (w.R.includes(c) ? 1 : 0))) === w.res)) out.add(ODD_ABC[c] + (d.heavy === null ? (s > 0 ? ", heavier" : ", lighter") : ""));
+  }
+  return [...out];
+}
+
+/* Matchsticks: seven-segment digits (bits a–g) and operator slots (h = middle bar, v = upright, l = second bar). */
+const MATCH_DIGITS = ["abcdef", "bc", "abdeg", "abcdg", "bcfg", "acdfg", "acdefg", "abc", "abcdefg", "abcdfg"].map((s) => [...s].reduce((m, c) => m | (1 << "abcdefg".indexOf(c)), 0));
+const MATCH_OPS = { "+": 3, "-": 1, "=": 5 };
+const matchMask = (ch) => (/\d/.test(ch) ? MATCH_DIGITS[+ch] : MATCH_OPS[ch]);
+const matchChar = (isDigit, m) => (isDigit ? (MATCH_DIGITS.indexOf(m) >= 0 ? String(MATCH_DIGITS.indexOf(m)) : null) : Object.keys(MATCH_OPS).find((k) => MATCH_OPS[k] === m) || null);
+function matchTrue(s) {
+  const parts = s.split("=");
+  if (parts.length !== 2) return false;
+  const ev = (side) => { const toks = side.split(/([+-])/); if (toks.some((x, i) => i % 2 === 0 && (!x || (x.length > 1 && x[0] === "0")))) return NaN; let v = +toks[0]; for (let i = 1; i < toks.length; i += 2) v += toks[i] === "+" ? +toks[i + 1] : -toks[i + 1]; return v; };
+  const l = ev(parts[0]), r = ev(parts[1]);
+  return Number.isFinite(l) && l === r;
+}
+/* Every equation reachable by moving exactly one stick: [{to, from:[slot,bit], add:[slot,bit]}]. */
+function matchMoves(s) {
+  const chars = [...s], dig = chars.map((c) => /\d/.test(c)), masks = chars.map(matchMask), out = [];
+  for (let i = 0; i < chars.length; i++) for (let b = 0; b < 7; b++) {
+    if (!(masks[i] >> b & 1)) continue;
+    for (let j = 0; j < chars.length; j++) for (let b2 = 0; b2 < (dig[j] ? 7 : 3); b2++) {
+      if (i === j && b === b2) continue;
+      const m = masks.slice();
+      m[i] &= ~(1 << b);
+      if (m[j] >> b2 & 1) continue;
+      m[j] |= 1 << b2;
+      const next = m.map((x, k) => matchChar(dig[k], x));
+      if (next.includes(null)) continue;
+      out.push({ to: next.join(""), i, j });
+    }
+  }
+  return out;
+}
+const matchPretty = (s) => s.replace(/([+=-])/g, " $1 ").replace(/-/g, "−");
+function matchSvg(s) {
+  const W = { d: 34, o: 30 }, gap = 6, stick = (x1, y1, x2, y2) => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" class="stick"/><circle cx="${x2}" cy="${y2}" r="3.4" class="head"/>`;
+  const SEG = [[7, 5, 27, 5], [31, 8, 31, 28], [31, 34, 31, 54], [7, 57, 27, 57], [3, 34, 3, 54], [3, 8, 3, 28], [7, 31, 27, 31]];
+  let x = 4, body = "";
+  for (const ch of s) {
+    const m = matchMask(ch);
+    if (/\d/.test(ch)) { SEG.forEach((g, b) => { if (m >> b & 1) body += stick(x + g[0], g[1], x + g[2], g[3]); }); x += W.d + gap; continue; }
+    const twin = m & 4;
+    if (m & 1) body += stick(x + 4, twin ? 25 : 31, x + 24, twin ? 25 : 31);
+    if (m & 2) body += stick(x + 14, 21, x + 14, 41);
+    if (twin) body += stick(x + 4, 37, x + 24, 37);
+    x += W.o + gap;
+  }
+  return `<svg viewBox="0 0 ${x - gap + 4} 62" class="matchsvg" aria-hidden="true" focusable="false">${body}</svg>`;
+}
+
+/* Tournaments */
+function koMatches(n, third) { let m = 0; while (n > 1) { const k = Math.floor(n / 2); m += k; n -= k; } return m + (third ? 1 : 0); }
+function rrMatches(n, legs) { let m = 0; for (let i = 0; i < n; i++) for (let j = i + 1; j < n; j++) m += legs; return m; }
+function topSet(d) {
+  const can = new Set(), k = d.rem.length, outs = d.draws ? 3 : 2;
+  for (let code = 0; code < outs ** k; code++) {
+    const pts = d.pts.slice();
+    let c = code;
+    for (const [i, j] of d.rem) { const o = c % outs; c = Math.floor(c / outs); if (o === 0) pts[i] += d.wp; else if (o === 1) pts[j] += d.wp; else { pts[i]++; pts[j]++; } }
+    const best = Math.max(...pts), top = pts.map((p, t) => (p === best ? t : -1)).filter((t) => t >= 0);
+    if (!d.outright || top.length === 1) top.forEach((t) => can.add(t));
+  }
+  return can;
+}
+
+/* Is the info enough? Each statement is a filter on a small universe of possibilities. */
+const SUF_LABELS = ["Statement 1 alone is enough", "Statement 2 alone is enough", "Either statement alone is enough", "Both together are needed", "Not enough even together"];
+const SUF_UNIVERSE = { age: () => [...Array(90).keys()].map((x) => x + 1), sweets: () => { const u = []; for (let x = 1; x <= 40; x++) for (let y = 1; y <= 40; y++) u.push([x, y]); return u; }, height: () => permsOf(4) };
+const SUF_UNI_CACHE = {};
+const sufUni = (u) => SUF_UNI_CACHE[u] || (SUF_UNI_CACHE[u] = SUF_UNIVERSE[u]());
+function sufPred(s, z) {
+  switch (s.k) {
+    case "mul": return z % s.v === 0;
+    case "between": return z > s.lo && z < s.hi;
+    case "sq": return Number.isInteger(Math.sqrt(z));
+    case "prime": return ahaPrime(z);
+    case "lt": return z < s.v;
+    case "twice": return z + s.v === 2 * (z - s.v);
+    case "dsum": return [...String(z)].reduce((a, c) => a + +c, 0) === s.v;
+    case "decade": return Math.floor(z / 10) === s.v;
+    case "par": return z % 2 === s.v;
+    case "sum": return z[0] + z[1] === s.v;
+    case "diff": return z[0] - z[1] === s.v;
+    case "times": return z[0] === s.v * z[1];
+    case "ylt": return z[1] < s.v;
+    case "xpar": return z[0] % 2 === s.v;
+    case "ygt": return z[1] > s.v;
+    case "taller": return z[s.p] < z[s.q];
+    case "taller2": return z[s.p] < z[s.q] && z[s.p] < z[s.r];
+    case "short": return z[s.p] === 3;
+    case "nottop": return z[s.p] !== 0;
+  }
+}
+function sufAsk(q, z) {
+  if (q.k === "val") return z;
+  if (q.k === "older") return z > q.v ? "yes" : "no";
+  if (q.k === "x") return z[0];
+  if (q.k === "tot") return z[0] + z[1];
+  if (q.k === "more") return z[0] > z[1] ? "yes" : "no";
+  if (q.k === "tallest") return z.indexOf(0);
+  return z.indexOf(3);
+}
+function sufValues(d, ss) { const vals = new Set(); for (const z of sufUni(d.u)) if (ss.every((s) => sufPred(s, z))) vals.add(String(sufAsk(d.q, z))); return [...vals]; }
+function sufLabel(d) {
+  const one = sufValues(d, [d.s1]).length === 1, two = sufValues(d, [d.s2]).length === 1;
+  return one && two ? SUF_LABELS[2] : one ? SUF_LABELS[0] : two ? SUF_LABELS[1] : sufValues(d, [d.s1, d.s2]).length === 1 ? SUF_LABELS[3] : SUF_LABELS[4];
+}
+
+Object.assign(AHA_SOLVE, {
+  blood: (d) => { const n = kinGraph(d.g); let xs = ["me"]; for (const s of d.steps) xs = kinStep(n, xs, s); return kinLabels(n, xs); },
+  directions: (d) => {
+    if (d.t === "shadow") {
+      const out = new Set();
+      for (let f = 0; f < 4; f++) { if (mod((d.sun === "morning" ? 3 : 1) - f, 4) !== d.rel) continue; let h = f; for (const t of d.turns) h = mod(h + t, 4); out.add(DIRS4[h]); }
+      return [...out];
+    }
+    const { h, x, y } = dirWalk(d);
+    if (d.ask === "face") return [DIRS4[h]];
+    if (!x && !y) return [];
+    if (d.ask === "dir") return [dirLabel(x, y)];
+    const dist = Math.hypot(x, y);
+    return Number.isInteger(dist) ? [String(dist)] : [];
+  },
+  cube: (d) => [String(cubeCounts(d))],
+  oddone: (d) => oddCandidates(d),
+  series: (d) => [...seriesFits(d.t).keys()],
+  coins: (d) => coinsSolve(d),
+  matchsticks: (d) => (matchTrue(d.s) ? [] : ahaUniq(matchMoves(d.s).filter((mv) => matchTrue(mv.to)).map((mv) => matchPretty(mv.to)))),
+  tournaments: (d) => {
+    if (d.t === "ko") return [String(koMatches(d.n, d.third))];
+    if (d.t === "rr") return [String(rrMatches(d.n, d.legs))];
+    if (d.t === "groups") return [String(d.g * rrMatches(d.k, 1) + koMatches(2 * d.g, false))];
+    const can = topSet(d);
+    if (d.ask === "which") return d.names.filter((_, t) => !can.has(t));
+    return [String(can.size)];
+  },
+  sufficiency: (d) => (sufValues(d, [d.s1, d.s2]).length ? [sufLabel(d)] : []),
+});
+
+/* ───────── Generators for the nine ───────── */
+const KIN_CTX = ["Pointing at a photo, {S} says", "At the Diwali get-together, {S} nods at a guest and says", "Flipping through the wedding album, {S} says", "Waving at someone on the station platform, {S} says", "Introducing a guest at the Holi party, {S} says", "Pointing at the family tree on the wall, {S} says", "At the temple fair, {S} spots someone and says", "Holding up a video call on the phone, {S} says"];
+function genBlood(r, lv) {
+  const steps0 = Object.keys(KIN_STEP);
+  for (;;) {
+    const g = r() < 0.5 ? "M" : "F", S = ahaPick(r, g === "M" ? KIN_M : KIN_F), len = lv === 0 ? 2 : lv === 1 ? 3 : ahaInt(r, 3, 4);
+    const steps = [...Array(len)].map(() => ahaPick(r, steps0)), data = { g, steps }, sol = AHA_SOLVE.blood(data);
+    if (sol.length !== 1 || sol[0] === "themselves") continue;
+    const n = kinGraph(g), a = sol[0], sex = KIN_POOL.M.includes(a) || a === "husband" ? "M" : "F", He = sex === "M" ? "He" : "She";
+    const rev = steps.slice().reverse(), phrase = lv === 2 && r() < 0.5 ? rev.slice(0, -1).map((s) => "the " + s).join(" of ") + " of my " + rev[rev.length - 1] : "my " + steps.join("'s ");
+    let xs = ["me"], prev = S + "'s";
+    const chain = steps.map((s) => { xs = kinStep(n, xs, s); const lab = kinLabels(n, xs).join(" or "), line = `${prev} ${s}${lab === s && prev === S + "'s" ? "" : ` = ${lab === "themselves" ? S : S + "'s " + lab}`}`; prev = KIN_STEP[s][1] === "M" ? "his" : "her"; return line; });
+    const options = shuffle([a, ...shuffle(KIN_POOL[sex].filter((x) => x !== a), r).slice(0, 3)], r);
+    return { data, kind: "name", a, options, intro: `${ahaPick(r, KIN_CTX).replace("{S}", S)}: “${He} is ${phrase}.”`, ask: `How is that person related to ${S}?`, hint: `Start from ${S} and take one step at a time: first ${S}'s ${steps[0]}, then that person's ${steps[1]}, and so on.`, why: `${chain.join(" → ")}. So ${He.toLowerCase()} is ${S}'s ${a}.` };
+  }
+}
+
+const DIR_CTX = ["leaves home for the sabzi market", "sets off on a morning walk in Cubbon Park", "cycles out from the temple gate", "starts from the school gate", "wanders through Lodhi Garden", "heads out from the bus stop", "starts a treasure hunt at the banyan tree", "jogs along the Marine Drive promenade"];
+function genDirections(r, lv) {
+  const A = ahaPick(r, AHA_NAMES), t = ahaPick(r, [["dist", "dir", "dist", "face"], ["dist", "dir", "shadow", "dir"], ["dist", "dir", "shadow", "dist"]][lv]);
+  if (t === "shadow") {
+    const sun = r() < 0.5 ? "morning" : "evening", rel = ahaInt(r, 0, 3), turns = [...Array(lv + 1)].map(() => ahaPick(r, [1, -1, 1, -1, 2])), data = { t, sun, rel, turns }, a = AHA_SOLVE.directions(data)[0];
+    const relTxt = ["falls straight in front of", "falls to the right of", "falls right behind", "falls to the left of"][rel], tt = (x) => (x === 2 ? "turns around" : x > 0 ? "turns right" : "turns left");
+    return { data, kind: "name", a, options: DIRS4.slice(), intro: `${sun === "morning" ? "Just after sunrise" : "Just before sunset"}, ${A}'s shadow ${relTxt} ${A}. Then ${A} ${turns.map(tt).join(", then ")}.`, ask: `Which direction is ${A} facing now?`, hint: `The sun rises in the east and sets in the west, and a shadow points away from the sun. So in the ${sun} shadows point ${sun === "morning" ? "west" : "east"}.`, why: `In the ${sun} the shadow points ${sun === "morning" ? "west" : "east"}, so ${A} first faced ${DIRS4[mod((sun === "morning" ? 3 : 1) - rel, 4)]}. After the turns: ${a}.` };
+  }
+  const km = r() < 0.5, unit = km ? "km" : "m", place = ahaPick(r, DIR_CTX);
+  for (;;) {
+    const n = lv === 0 ? 3 : lv === 1 ? ahaInt(r, 3, 4) : ahaInt(r, 4, 5), h0 = ahaInt(r, 0, 3);
+    const legs = [...Array(n)].map((_, k) => [k ? ahaPick(r, lv === 2 ? [1, -1, 1, -1, 2] : [1, -1]) : 0, km ? ahaInt(r, 1, 12) : ahaInt(r, 1, 12) * 5]), data = { t: "walk", h0, legs, ask: t }, sol = AHA_SOLVE.directions(data);
+    if (sol.length !== 1) continue;
+    const { x, y } = dirWalk(data), total = legs.reduce((s, l) => s + l[1], 0);
+    if (t === "dist" && (+sol[0] === total || (lv > 0 && (x === 0 || y === 0) && r() < 0.6))) continue;
+    const walk = legs.map(([turn, len], k) => (k ? `${turn === 2 ? "turns around" : turn > 0 ? "turns right" : "turns left"} and goes ${len} ${unit}` : `walks ${len} ${unit} ${DIRS4[h0].toLowerCase()}`)).join(", ");
+    const net = `${Math.abs(x)} ${unit} ${x >= 0 ? "east" : "west"} and ${Math.abs(y)} ${unit} ${y >= 0 ? "north" : "south"}`;
+    const base = { data, intro: `${A} ${place}: ${A} ${walk}.`, hint: "Sketch it on paper. Add up the east–west parts and the north–south parts separately." };
+    if (t === "dist") { const a = +sol[0]; return { ...base, kind: "number", a, unit, near: [Math.abs(x) + Math.abs(y), total, a + (km ? 1 : 5)], ask: `How far is ${A} from the starting point in a straight line?`, why: `Overall ${A} ended up ${net} of the start. Straight-line distance = √(${x * x} + ${y * y}) = ${a} ${unit}.` }; }
+    const a = sol[0], others = t === "face" ? DIRS4 : ["North", "South", "East", "West", "North-East", "North-West", "South-East", "South-West"];
+    return { ...base, kind: "name", a, options: shuffle([a, ...shuffle(others.filter((o) => o !== a), r).slice(0, 3)], r), ask: t === "face" ? `Which direction is ${A} facing at the end?` : `In which direction is ${A} now from the starting point?`, why: t === "face" ? `Follow the turns from ${DIRS4[h0]}: the last leg heads ${a}.` : `Overall ${A} ended up ${net} of the start, which is ${a}.` };
+  }
+}
+
+const CUBE_OBJ = [["wooden block", "painted", "paint"], ["cube-shaped cake", "iced", "icing"], ["clay block", "glazed", "glaze"], ["slab of kaju barfi", "covered in silver varq", "varq"], ["block of jaggery", "dusted with cocoa", "cocoa"]];
+const CUBE_FACE = [["on all six faces", [1, 1, 1, 1, 1, 1]], ["on every face except the bottom", [1, 0, 1, 1, 1, 1]], ["on the top and bottom only", [1, 1, 0, 0, 0, 0]], ["on the top and one side only", [1, 0, 1, 0, 0, 0]], ["on three faces that meet at one corner", [1, 0, 1, 0, 1, 0]], ["on two opposite sides and the top", [1, 0, 0, 0, 1, 1]]];
+function genCube(r, lv) {
+  const A = ahaPick(r, AHA_NAMES), [obj, verb, coat] = ahaPick(r, CUBE_OBJ), why0 = "Corner pieces touch 3 outside faces, edge pieces 2, face-centre pieces 1, and the hidden core 0.";
+  for (;;) {
+    const cube = lv === 0 || r() < 0.5, n = ahaInt(r, lv === 0 ? 3 : 4, lv === 0 ? 6 : 8), a0 = cube ? n : ahaInt(r, 2, 7), b0 = cube ? n : ahaInt(r, 3, 7), c0 = cube ? n : ahaInt(r, 2, 6);
+    const face = lv === 2 ? ahaPick(r, CUBE_FACE) : CUBE_FACE[0], two = lv === 2 && face[1].every(Boolean) && r() < 0.5;
+    const p = two ? [2, 2, 1, 1, 1, 1] : face[1], ask = two ? "both" : lv === 1 && r() < 0.3 ? "atleast" : "exact", k = ask === "atleast" ? 1 : ahaInt(r, 0, 3);
+    const data = { a: a0, b: b0, c: c0, p, ask, k }, a = +AHA_SOLVE.cube(data)[0];
+    if (!a && r() < 0.8) continue;
+    const size = `${a0}×${b0}×${c0}`, near = [0, 1, 2, 3].filter((x) => x !== k).map((x) => cubeCounts({ ...data, ask: "exact", k: x })).concat(a0 * b0 * c0 - a);
+    const what = ask === "both" ? "show both colours" : ask === "atleast" ? `have at least one face ${verb}` : k === 0 ? `have no ${coat} at all` : `have exactly ${k} face${k > 1 ? "s" : ""} ${verb}`;
+    return { data, kind: "number", a, near, intro: `${A} makes a ${size} ${obj} for the school fair. It is ${two ? `${verb} red on the top and bottom and blue on the four sides` : `${verb} ${face[0]}`}, then cut into ${a0 * b0 * c0} equal little cubes.`, ask: `How many little cubes ${what}?`, hint: two ? "A little cube shows both colours only if it touches the top or bottom AND a side, which means it sits on a top or bottom edge." : why0, why: cube && ask === "exact" && p.every(Boolean) ? `${why0} On a ${size} cube that's ${["(n−2)³", "6 × (n−2)²", "12 × (n−2)", "the 8 corners"][k].replace(/n/g, n)}${k < 3 ? ` = ${a}` : ""}.` : `${why0} Counting the ${size} ${obj} piece by piece gives ${a}.` };
+  }
+}
+
+function genOddone(r, lv) {
+  const A = ahaPick(r, AHA_NAMES), t = lv === 0 ? "num" : lv === 1 ? ahaPick(r, ["num", "num", "abc"]) : ahaPick(r, ["pair", "pair", "abc", "num"]);
+  const pool = lv === 0 ? [0, 1, 2, 4, 5, 10, 13] : [2, 4, 6, 8, 9, 13, 14, 15, 16, 17];
+  for (;;) {
+    let items, odd, rule;
+    if (t === "num") {
+      const [desc, f] = ODD_NUM_RULES[ahaPick(r, pool)], hi = lv === 0 ? 60 : 200, good = [], bad = [];
+      for (let x = 2; x <= hi; x++) (f(x) ? good : bad).push(x);
+      if (good.length < 4 || !bad.length) continue;
+      odd = ahaPick(r, bad); items = shuffle([...shuffle(good, r).slice(0, 4), odd], r); rule = `All the others ${desc}; ${odd} ${desc.startsWith("are ") ? "isn't" : "doesn't"}.`;
+    } else if (t === "pair") {
+      const [desc, f] = ahaPick(r, ODD_PAIR_RULES), as = shuffle([...Array(11).keys()].map((x) => x + 2), r).slice(0, 5), shift = ahaPick(r, [-2, -1, 1, 2, 3]);
+      items = as.map((x, k) => [x, f(x) + (k === 4 ? shift : 0)]);
+      if (items.some(([, b]) => b <= 0)) continue;
+      odd = items[4].join(" → "); items = shuffle(items, r); rule = `In all the others ${desc}; in ${odd} it isn't.`;
+    } else {
+      const k = ahaInt(r, 1, lv === 1 ? 3 : 5), make = (g1, g2) => { const s = ahaInt(r, 0, 25 - g1 - g2); return ODD_ABC[s] + ODD_ABC[s + g1] + ODD_ABC[s + g1 + g2]; };
+      const good = ahaUniq([...Array(4)].map(() => make(k, k))), bump = r() < 0.5 ? [k, k + 1] : [k + 1, k];
+      if (good.length < 4) continue;
+      odd = make(...bump); items = shuffle([...good, odd], r); rule = `In all the others the letters jump ${k} place${k > 1 ? "s" : ""} each time; in ${odd} they don't.`;
+    }
+    const data = { t, items }, sol = AHA_SOLVE.oddone(data), shown = items.map((x) => (Array.isArray(x) ? x.join(" → ") : String(x)));
+    if (sol.length !== 1 || sol[0] !== String(odd) || new Set(shown).size !== 5) continue;
+    return { data, kind: "name", a: String(odd), options: shown, intro: `${A} lays five cards on the table: ${shown.join(", ")}.`, ask: "Which card is the odd one out?", hint: t === "abc" ? "Count the jumps between neighbouring letters." : t === "pair" ? "Find the rule that turns the first number into the second." : "Think even and odd, multiples, squares and primes.", why: rule };
+  }
+}
+
+const SERIES_PLACE = ["on the classroom board", "in chalk on the courtyard floor", "on the kitchen whiteboard", "on a foggy train window", "in her maths notebook", "on the back of a bus ticket", "with rangoli dots", "on the fridge with magnets"];
+function genSeries(r, lv) {
+  const A = ahaPick(r, AHA_NAMES), t = ahaPick(r, [["arith", "geo", "inc"], ["sq", "cube", "affine", "geodiff"], ["inter", "fib", "incmul", "alt", "affine"]][lv]), L = lv === 2 ? 6 : 5;
+  for (;;) {
+    let s = [], why;
+    if (t === "arith") { const a = ahaInt(r, 1, 40), d = ahaPick(r, [2, 3, 4, 5, 6, 7, 8, 9, 11, 12, -3, -4, -5]); s = [...Array(L)].map((_, i) => a + (d < 0 ? 60 : 0) + d * i); why = `It goes ${d > 0 ? "up" : "down"} by ${Math.abs(d)} each time.`; }
+    if (t === "geo") { const a = ahaInt(r, 1, 7), q = ahaInt(r, 2, 3); s = [...Array(L)].map((_, i) => a * q ** i); why = `Each term is ${q} times the one before.`; }
+    if (t === "inc") { const a = ahaInt(r, 1, 30), d0 = ahaInt(r, 1, 5), st = ahaInt(r, 1, 3); s = [a]; for (let i = 1; i < L; i++) s.push(s[i - 1] + d0 + st * (i - 1)); why = `The gaps grow by ${st}: ${s.slice(1).map((x, i) => x - s[i]).join(", ")}, then ${d0 + st * (L - 1)}.`; }
+    if (t === "sq") { const o = ahaInt(r, 1, 7), c = ahaInt(r, -3, 4); s = [...Array(L)].map((_, i) => (i + o) ** 2 + c); why = `They are the squares ${o}², ${o + 1}², ${o + 2}², … ${c ? (c > 0 ? "plus " + c : "minus " + -c) : ""}`.trim() + "."; }
+    if (t === "cube") { const o = ahaInt(r, 1, 3), c = ahaInt(r, -2, 2); s = [...Array(L)].map((_, i) => (i + o) ** 3 + c); why = `They are the cubes ${o}³, ${o + 1}³, ${o + 2}³, … ${c ? (c > 0 ? "plus " + c : "minus " + -c) : ""}`.trim() + "."; }
+    if (t === "affine") { const a = ahaInt(r, 1, 6), q = ahaInt(r, 2, 3), c = ahaPick(r, [-2, -1, 1, 2, 3, 4]); s = [a]; for (let i = 1; i < L; i++) s.push(s[i - 1] * q + c); why = `Each term is ${q} × the previous one ${c > 0 ? "plus " + c : "minus " + -c}.`; }
+    if (t === "geodiff") { const a = ahaInt(r, 1, 20), d0 = ahaInt(r, 1, 3), q = ahaInt(r, 2, 3); s = [a]; for (let i = 1; i < L; i++) s.push(s[i - 1] + d0 * q ** (i - 1)); why = `The gaps multiply by ${q} each time: ${s.slice(1).map((x, i) => x - s[i]).join(", ")}, then ${d0 * q ** (L - 1)}.`; }
+    if (t === "inter") { const a1 = ahaInt(r, 1, 20), d1 = ahaInt(r, 2, 9), a2 = ahaInt(r, 20, 60), d2 = ahaPick(r, [-5, -4, -3, -2, 2, 3, 4, 5]); s = [...Array(L)].map((_, i) => (i % 2 ? a2 + d2 * ((i - 1) / 2) : a1 + d1 * (i / 2))); why = `Two patterns take turns: the 1st, 3rd and 5th terms go up by ${d1}, the others ${d2 > 0 ? "go up" : "go down"} by ${Math.abs(d2)}.`; }
+    if (t === "fib") { const a = ahaInt(r, 1, 6), b = ahaInt(r, 1, 9); s = [a, b]; for (let i = 2; i < L; i++) s.push(s[i - 1] + s[i - 2]); why = "Each term is the sum of the two before it."; }
+    if (t === "incmul") { const a = ahaInt(r, 1, 3), k = ahaInt(r, 1, 2); s = [a]; for (let i = 1; i < L; i++) s.push(s[i - 1] * (k + i - 1)); why = `Multiply by ${k}, then ${k + 1}, then ${k + 2}, and so on.`; }
+    if (t === "alt") { const a = ahaInt(r, 1, 9), q = ahaInt(r, 2, 3), st = ahaInt(r, 1, 6), add1 = r() < 0.5; s = [st]; for (let i = 1; i < L; i++) s.push((i - 1) % 2 === (add1 ? 0 : 1) ? s[i - 1] + a : s[i - 1] * q); why = `It alternates: ${add1 ? `add ${a}, then multiply by ${q}` : `multiply by ${q}, then add ${a}`}.`; }
+    const data = { t: s }, sol = AHA_SOLVE.series(data);
+    if (sol.length !== 1 || s.some((x) => x < 0 || x > 9999) || +sol[0] < 0 || +sol[0] > 99999 || new Set(s).size < 4) continue;
+    const a = +sol[0], last = s[L - 1];
+    return { data, kind: "number", a, near: [last + (last - s[L - 2]), a + 2, a - 2, a + (last - s[L - 2])], intro: `${A} writes a pattern ${ahaPick(r, SERIES_PLACE)}: ${s.join(", ")}, …`, ask: "What comes next?", hint: lv === 0 ? "Look at the gaps between neighbours, or what each one is multiplied by." : lv === 1 ? "Try squares and cubes, or 'multiply then add'. If the gaps don't settle, look at the gaps of the gaps." : "Try splitting it into odd and even positions, adding the last two, or alternating operations.", why: `${why} Next: ${a}.` };
+  }
+}
+
+const COIN_ITEMS = [["gold coins", "coin"], ["laddoos (one hides an extra cashew)", "laddoo"], ["marbles", "marble"], ["silver anklet bells", "bell"], ["rice sacks", "sack"]];
+function genCoins(r, lv) {
+  const A = ahaPick(r, AHA_NAMES), t = ahaPick(r, [["min", "which", "which"], ["which", "weights", "min"], ["which", "weights", "which"]][lv]), [items, one] = ahaPick(r, COIN_ITEMS);
+  if (t === "min") {
+    const n = ahaInt(r, lv ? 10 : 4, lv ? 90 : 30), data = { t, n }, a = +AHA_SOLVE.coins(data)[0];
+    return { data, kind: "number", a, near: [Math.ceil(Math.log2(n)), a + 1, Math.max(1, a - 1)], intro: `${A} has ${n} ${items} that look identical, but one ${one} is a little heavier.`, ask: "Using only a pan balance, what is the fewest weighings that always finds the heavy one?", hint: "Each weighing has three outcomes: left heavier, right heavier, or balanced. So split into three groups, not two.", why: `One weighing can sort up to 3 suspects, two up to 9, three up to 27, four up to 81. ${n} needs ${a}.` };
+  }
+  if (t === "weights") {
+    const two = lv === 2;
+    for (;;) {
+      const w = [...new Set([...Array(lv === 2 ? ahaInt(r, 3, 4) : 3)].map(() => ahaInt(r, 1, lv === 2 ? 15 : 12)))].sort((x, y) => x - y);
+      if (w.length < 3) continue;
+      const data = { t, w, two }, a = +AHA_SOLVE.coins(data)[0];
+      return { data, kind: "number", a, near: [2 ** w.length - 1, a + 2, a - 1, w.reduce((x, y) => x + y, 0)], intro: `${A}'s shop balance comes with weights of ${w.slice(0, -1).join(", ")} and ${w[w.length - 1]} kg. ${two ? "Weights may go on either pan, even next to the load." : "Weights may only go on the pan opposite the load."}`, ask: "How many different whole-kilogram loads can be weighed exactly?", hint: two ? "Each weight can sit with the load (subtract), on the other pan (add), or stay off." : "Each weight is either used or not. List the sums and drop repeats.", why: `${two ? "Taking each weight as +, − or unused" : "Adding up every group of weights"} gives ${a} different positive totals.` };
+    }
+  }
+  const unknown = lv === 2, heavy = unknown ? null : r() < 0.6;
+  for (;;) {
+    const n = lv === 0 ? 6 : lv === 1 ? ahaInt(r, 8, 9) : ahaInt(r, 6, 9), fake = ahaInt(r, 0, n - 1), s = unknown ? (r() < 0.5 ? 1 : -1) : heavy ? 1 : -1, ws = [];
+    for (let k = 0; k < (lv === 2 ? 3 : 2); k++) {
+      const order = shuffle([...Array(n).keys()], r), sz = ahaInt(r, 1, Math.floor(n / 2)), L = order.slice(0, sz).sort((x, y) => x - y), R = order.slice(sz, 2 * sz).sort((x, y) => x - y);
+      ws.push({ L, R, res: Math.sign(s * ((L.includes(fake) ? 1 : 0) - (R.includes(fake) ? 1 : 0))) });
+    }
+    const data = { t, n, heavy, ws }, sol = AHA_SOLVE.coins(data);
+    if (sol.length !== 1) continue;
+    const a = sol[0], labels = [...Array(n).keys()].map((c) => ODD_ABC[c]), opts = unknown ? labels.flatMap((c) => [c + ", heavier", c + ", lighter"]) : labels;
+    const lab = (xs) => xs.map((c) => ODD_ABC[c]).join(" "), res = (w) => (w.res ? `the ${w.res > 0 ? "left" : "right"} pan goes down` : "they balance");
+    return { data, kind: "name", a, options: shuffle([a, ...shuffle(opts.filter((o) => o !== a), r).slice(0, 3)], r), intro: `${A} has ${n} ${items}, labelled ${labels[0]} to ${labels[n - 1]}. One is fake: ${unknown ? "it is either heavier or lighter, nobody knows which" : `it is a little ${heavy ? "heavier" : "lighter"}`}. The pan balance shows:`, clues: ws.map((w) => `${lab(w.L)} vs ${lab(w.R)}: ${res(w)}.`), ask: unknown ? "Which one is fake, and is it heavier or lighter?" : "Which one is fake?", hint: "A balance clears everything on both pans. If a pan goes down, the fake is on that pan (heavy) or the other one (light).", why: `Only ${a} fits every weighing: each result is exactly what ${a.split(",")[0]} being ${unknown ? a.split(", ")[1] : heavy ? "heavier" : "lighter"} would produce.` };
+  }
+}
+
+function genMatchsticks(r, lv) {
+  const A = ahaPick(r, AHA_NAMES), spot = ahaPick(r, ["on the dining table", "on the train's foldaway tray", "on the verandah floor", "during the power cut", "on a carrom board", "at the chai stall"]);
+  for (;;) {
+    const shape = ahaPick(r, [[[1, 1, 1]], [[1, 1, 1], [1, 1, 2], [2, 1, 1]], [[2, 1, 2], [2, 2, 2], [1, 1, 2], [2, 1, 1]]][lv]), op = r() < 0.5 ? "+" : "-";
+    const num = (len) => (len === 1 ? ahaInt(r, 0, 9) : ahaInt(r, 10, 99)), x = num(shape[0]), y = num(shape[1]), z = op === "+" ? x + y : x - y;
+    if (z < 0 || String(z).length !== shape[2]) continue;
+    const truth = `${x}${op}${y}=${z}`, moves = matchMoves(truth).filter((mv) => !matchTrue(mv.to) && (mv.to.match(/=/g) || []).length === 1);
+    if (!moves.length) continue;
+    const s = ahaPick(r, moves).to, data = { s }, sol = AHA_SOLVE.matchsticks(data);
+    if (sol.length !== 1) continue;
+    const a = sol[0], wrong = ahaUniq(matchMoves(s).filter((mv) => !matchTrue(mv.to) && (mv.to.match(/=/g) || []).length === 1).map((mv) => matchPretty(mv.to))).filter((o) => o !== a);
+    const opts = shuffle(wrong, r).slice(0, 3);
+    for (let k = 1; opts.length < 3; k++) { const alt = a.replace(/(\d+)$/, (m) => String(+m + (k % 2 ? k : -k))); if (alt !== a && !opts.includes(alt) && !/−\d*$/.test(alt) && !/ -/.test(alt)) opts.push(alt); }
+    const mv = matchMoves(s).find((m) => matchPretty(m.to) === a), before = [...s], after = [...mv.to], nm = (c) => (c === "-" ? "minus sign" : c === "+" ? "plus sign" : c === "=" ? "equals sign" : `“${c}”`), an = (c) => (c === "8" ? "an " : "a ") + nm(c);
+    const how = mv.i === mv.j ? `Move one stick inside the ${nm(before[mv.i])} to turn it into ${an(after[mv.i])}` : `Take a stick from the ${nm(before[mv.i])} (it becomes ${an(after[mv.i])}) and add it to the ${nm(before[mv.j])} (it becomes ${an(after[mv.j])})`;
+    return { data, kind: "name", a, options: shuffle([a, ...opts], r), svg: matchSvg(s), shows: matchPretty(s), intro: `${A} lays out matchsticks ${spot}: ${matchPretty(s)}. That isn't true!`, ask: "Move exactly one matchstick to make it true. What does it say now?", hint: "Taking a stick from 8 can leave 0, 6 or 9; adding one to 5 can make 6 or 9. The plus sign can lend its upright stick and become a minus.", why: `${how}: ${a} ✓` };
+  }
+}
+
+const TEAM_NAMES = ["Sunrise XI", "Banyan Strikers", "Mango Lane", "Chai Champions", "Lotus United", "Monsoon Riders", "Peacock Blues", "Gulmohar Greens", "Kite Flyers", "Tiffin Tigers"];
+const TOURNEY_SPORT = ["carrom", "chess", "table-tennis", "badminton", "kabaddi", "gully-cricket", "antakshari"];
+function genTournaments(r, lv) {
+  const A = ahaPick(r, AHA_NAMES), sport = ahaPick(r, TOURNEY_SPORT), t = ahaPick(r, [["ko", "rr", "ko"], ["groups", "top", "rr", "ko"], ["top", "top", "ko", "groups"]][lv]);
+  if (t === "ko") {
+    const n = ahaInt(r, lv ? 9 : 6, lv ? 70 : 32), third = lv > 0 && r() < 0.5, data = { t, n, third }, a = +AHA_SOLVE.tournaments(data)[0];
+    return { data, kind: "number", a, near: [Math.ceil(n / 2), n, a + 1, Math.max(1, a - 1)], unit: "matches", intro: `${A} runs a knockout ${sport} tournament for ${n} players. Losers go out; when a round has an odd number, one player gets a free pass.${third ? " There's also a match for third place." : ""}`, ask: "How many matches are played in all?", hint: "Every match knocks out exactly one player. How many have to be knocked out?", why: `${n} players, one champion: ${n - 1} players must lose once each, so ${third ? `${n - 1} matches plus the third-place match = ${a}` : `${a} matches`}.` };
+  }
+  if (t === "rr") {
+    const n = ahaInt(r, 4, lv ? 14 : 10), legs = lv && r() < 0.5 ? 2 : 1, data = { t, n, legs }, a = +AHA_SOLVE.tournaments(data)[0];
+    return { data, kind: "number", a, unit: "matches", near: [n * n, n * (n - 1), a + n, legs === 2 ? a / 2 : a * 2], intro: `In ${A}'s colony ${sport} league, ${n} teams each play every other team ${legs === 2 ? "twice (home and away)" : "exactly once"}.`, ask: "How many matches are there in total?", hint: "Each team meets the other teams; count each pairing once.", why: `Pairs of teams = ${n} × ${n - 1} ÷ 2 = ${n * (n - 1) / 2}${legs === 2 ? ", played twice" : ""}, so ${a}.` };
+  }
+  if (t === "groups") {
+    const g = ahaInt(r, 2, 4), k = ahaInt(r, 3, 6), data = { t, g, k }, a = +AHA_SOLVE.tournaments(data)[0];
+    return { data, kind: "number", a, unit: "matches", near: [g * k * (k - 1) / 2, a + 1, a + g, rrMatches(g * k, 1)], intro: `${A}'s ${sport} cup has ${g} groups of ${k} teams. In each group everyone plays everyone once; the top two of each group go into a knockout until one champion is left.`, ask: "How many matches are played in the whole cup?", hint: "Group matches first, then a knockout: each knockout match sends one team home.", why: `Groups: ${g} × (${k} × ${k - 1} ÷ 2) = ${g * k * (k - 1) / 2}. Knockout of ${2 * g} teams: ${2 * g - 1}. Total ${a}.` };
+  }
+  const draws = lv === 2, wp = draws ? 3 : 2, names = shuffle(TEAM_NAMES, r).slice(0, 4);
+  for (;;) {
+    const pairs = shuffle([[0, 1], [0, 2], [0, 3], [1, 2], [1, 3], [2, 3]], r), k = lv === 2 ? 3 : ahaInt(r, 2, 3), rem = pairs.slice(0, k).map((p) => p.slice().sort()), played = pairs.slice(k), pts = [0, 0, 0, 0], gp = [0, 0, 0, 0];
+    for (const [i, j] of played) { const o = ahaInt(r, 0, draws ? 2 : 1); gp[i]++; gp[j]++; if (o === 0) pts[i] += wp; else if (o === 1) pts[j] += wp; else { pts[i]++; pts[j]++; } }
+    const ask = lv === 2 ? ahaPick(r, ["which", "count", "outright"]) : "count", data = { t, pts, rem, wp, draws, outright: ask === "outright", ask: ask === "which" ? "which" : "count", names }, sol = AHA_SOLVE.tournaments(data);
+    if (sol.length !== 1 || (ask !== "which" && (sol[0] === "4" && r() < 0.7))) continue;
+    const can = topSet(data), table = { head: ["Team", "Played", "Points"], rows: names.map((nm, t2) => [nm, gp[t2], pts[t2]]).sort((x, y) => y[2] - x[2]) };
+    const base = { data, table, intro: `The ${sport} league table, with every team due to play every other once (win ${wp}, ${draws ? "draw 1, " : ""}loss 0):`, clues: rem.map(([i, j]) => `Still to play: ${names[i]} vs ${names[j]}`), hint: "Try the best case for each team in turn: let it win everything left, and have its rivals' other matches go its way." };
+    if (ask === "which") return { ...base, kind: "name", a: sol[0], options: names.slice(), ask: "Which team can no longer finish top, even sharing first place?", why: `Even winning all its games, ${sol[0]} can't catch the leaders; every other team has a way to finish top.` };
+    const a = +sol[0];
+    return { ...base, kind: "number", a, unit: "teams", near: [4, a + 1, a - 1, 1], ask: ask === "outright" ? "How many teams can still finish top on their own (no sharing)?" : "How many teams can still finish top (sharing first place counts)?", why: `Trying every result of the ${k} matches left, these can finish top: ${names.filter((_, t2) => can.has(t2)).join(", ")}. That's ${a}.` };
+  }
+}
+
+function sufText(s, X, Y, nm) {
+  switch (s.k) {
+    case "mul": return `${X}'s age is a multiple of ${s.v}.`;
+    case "between": return `${X} is older than ${s.lo} but younger than ${s.hi}.`;
+    case "sq": return `${X}'s age is a perfect square.`;
+    case "prime": return `${X}'s age is a prime number.`;
+    case "lt": return `${X} is younger than ${s.v}.`;
+    case "twice": return `In ${s.v} years ${X} will be twice as old as ${X} was ${s.v} years ago.`;
+    case "dsum": return `The digits of ${X}'s age add up to ${s.v}.`;
+    case "decade": return s.v ? `${X} is in the ${s.v}0s (between ${s.v}0 and ${s.v}9).` : `${X} is not yet ten.`;
+    case "par": return `${X}'s age is ${s.v ? "odd" : "even"}.`;
+    case "sum": return `Together they have ${s.v} sweets.`;
+    case "diff": return s.v >= 0 ? `${X} has ${s.v} more than ${Y}.` : `${X} has ${-s.v} fewer than ${Y}.`;
+    case "times": return `${X} has ${s.v} times as many as ${Y}.`;
+    case "ylt": return `${Y} has fewer than ${s.v}.`;
+    case "ygt": return `${Y} has more than ${s.v}.`;
+    case "xpar": return `${X} has an ${s.v ? "odd" : "even"} number.`;
+    case "taller": return `${nm[s.p]} is taller than ${nm[s.q]}.`;
+    case "taller2": return `${nm[s.p]} is taller than both ${nm[s.q]} and ${nm[s.r]}.`;
+    case "short": return `${nm[s.p]} is the shortest of the four.`;
+    case "nottop": return `${nm[s.p]} is not the tallest.`;
+  }
+}
+function sufStatement(r, u, z) {
+  for (;;) {
+    if (u === "age") {
+      const k = ahaPick(r, ["mul", "between", "sq", "prime", "lt", "twice", "dsum", "decade", "par"]);
+      const s = k === "mul" ? { k, v: ahaInt(r, 2, 12) } : k === "between" ? { k, lo: z - ahaInt(r, 1, 6), hi: z + ahaInt(r, 1, 6) } : k === "lt" ? { k, v: z + ahaInt(r, 1, 15) } : k === "twice" ? { k, v: z / 3 } : k === "dsum" ? { k, v: [...String(z)].reduce((a, c) => a + +c, 0) } : k === "decade" ? { k, v: Math.floor(z / 10) } : k === "par" ? { k, v: z % 2 } : { k };
+      if (sufPred(s, z) && (k !== "twice" || Number.isInteger(s.v))) return s;
+    } else if (u === "sweets") {
+      const k = ahaPick(r, ["sum", "diff", "times", "ylt", "ygt", "xpar"]), [x, y] = z;
+      const s = k === "sum" ? { k, v: x + y } : k === "diff" ? { k, v: x - y } : k === "times" ? { k, v: x / y } : k === "ylt" ? { k, v: y + ahaInt(r, 1, 8) } : k === "ygt" ? { k, v: y - ahaInt(r, 1, 8) } : { k, v: x % 2 };
+      if (Number.isInteger(s.v) && (k !== "times" || s.v >= 2) && sufPred(s, z)) return s;
+    } else {
+      const k = ahaPick(r, ["taller", "taller", "taller2", "short", "nottop"]), [p, q, w] = shuffle([0, 1, 2, 3], r), s = k === "taller" ? { k, p, q } : k === "taller2" ? { k, p, q, r: w } : { k, p };
+      if (sufPred(s, z)) return s;
+    }
+  }
+}
+function genSufficiency(r, lv) {
+  const [X, Y, C, D] = shuffle(AHA_NAMES, r), u = ahaPick(r, [["age", "sweets"], ["age", "sweets", "sweets"], ["sweets", "height", "age", "height"]][lv]), want = ahaPick(r, SUF_LABELS);
+  const q = u === "age" ? (lv === 2 && r() < 0.6 ? { k: "older", v: ahaInt(r, 20, 50) } : { k: "val" }) : u === "sweets" ? { k: lv === 2 && r() < 0.5 ? "more" : r() < 0.5 ? "x" : "tot" } : { k: r() < 0.6 ? "tallest" : "shortest" };
+  let best = null;
+  for (let tries = 0; ; tries++) {
+    const z = u === "age" ? ahaInt(r, 6, 80) : u === "sweets" ? [ahaInt(r, 2, 30), ahaInt(r, 1, 20)] : ahaPick(r, permsOf(4)), s1 = sufStatement(r, u, z), s2 = sufStatement(r, u, z);
+    if (JSON.stringify(s1) === JSON.stringify(s2) || s1.k === s2.k && u !== "height") continue;
+    const data = { u, q, s1, s2 }, sol = AHA_SOLVE.sufficiency(data);
+    if (sol.length !== 1) continue;
+    best = { data, a: sol[0] };
+    if (sol[0] === want || tries > 80) break;
+  }
+  const { data, a } = best, nm = [X, Y, C, D], txt = (s) => sufText(s, X, Y, nm), label = (vals, pl) => (vals.length === 1 ? `pin${pl ? "" : "s"} it down (${q.k === "tallest" || q.k === "shortest" ? nm[vals[0]] : vals[0]})` : `still leave${pl ? "" : "s"} ${vals.length > 3 ? "many options" : vals.map((v) => (q.k === "tallest" || q.k === "shortest" ? nm[v] : v)).join(" or ")}`);
+  const ask0 = q.k === "val" ? `How old is ${X}?` : q.k === "older" ? `Is ${X} older than ${q.v}?` : q.k === "x" ? `How many sweets does ${X} have?` : q.k === "tot" ? `How many sweets do ${X} and ${Y} have together?` : q.k === "more" ? `Does ${X} have more sweets than ${Y}?` : `Who is the ${q.k} of ${X}, ${Y}, ${C} and ${D}?`;
+  const v1 = sufValues(data, [data.s1]), v2 = sufValues(data, [data.s2]), v12 = sufValues(data, [data.s1, data.s2]);
+  return { data, kind: "name", a, options: SUF_LABELS.slice(), wide: true, intro: `${u === "sweets" ? `${X} and ${Y} share a box of sweets. ` : ""}The question: “${ask0}”`, clues: [`Statement 1: ${txt(data.s1)}`, `Statement 2: ${txt(data.s2)}`], ask: "Is the information enough to answer it?", hint: "Test each statement on its own first: does it allow exactly one answer? Only then try them together.", why: `Statement 1 alone ${label(v1)}. Statement 2 alone ${label(v2)}. Together they ${label(v12, true)}. So: ${a.toLowerCase()}.` };
+}
+
+const AHA_GEN = [genPercent, genOrder, genTsd, genLiars, genNumbers, genDi, genRatio, genGrid, genGuarantee, genClock, genBlood, genDirections, genCube, genOddone, genSeries, genCoins, genMatchsticks, genTournaments, genSufficiency];
 const AHA_CACHE = new Map();
 /* The question for a date's slot (0–4) at the current difficulty. */
 function ahaModel(d, slot) {
-  const key = `${puzzleSeed(d)}|${slot}`;
+  const key = `${puzzleSeed(d)}|${slot}|${ahaRotation(d)}`;
   if (AHA_CACHE.has(key)) return AHA_CACHE.get(key);
   const cat = ahaCategories(d)[slot], r = rng(`${puzzleSeed(d)}|aha|${slot}|${AHA_CATS[cat].id}`), m = { cat, ...AHA_GEN[cat](r, difficulty) };
   if (m.kind === "number" && difficulty < 2) {
@@ -574,7 +1104,7 @@ function ahaSkillCounts(store = all) {
       if (!mm) continue;
       difficulty = mm[2] ? +mm[2] : 1;
       if (progressKey(mm[1]) !== key) continue;
-      const cats = ahaCategories(mm[1]);
+      const cats = ahaCategories(mm[1], store);
       AHA_SLOTS.forEach((i, slot) => { const g = rec?.games?.[i]; if (((g?.done && !g.revealed) || g?.credit) && g.aha) out[cats[slot]]++; });
     }
   } finally { difficulty = lv; }
@@ -583,18 +1113,19 @@ function ahaSkillCounts(store = all) {
 
 function ahaRender(i) {
   const slot = AHA_SLOTS.indexOf(i), m = ahaModel(day, slot), s = state(i), cat = AHA_CATS[m.cat];
-  s.aha = 1;
+  s.aha ||= 1;
   persist();
   $("#rules").textContent = `Logical reasoning · ${m.kind === "number" ? "Type your answer, no options to lean on." : "Pick the one right answer."}`;
   const label = (v) => (m.numeric ? `${m.pre || ""}${Number(v).toLocaleString("en-IN")}${m.unit ? (/^[%°]$/.test(m.unit) ? "" : " ") + m.unit : ""}` : v);
+  const board = m.svg ? `<div class="ahamatch" role="img" aria-label="Matchsticks: ${m.shows}">${m.svg}</div>` : "";
   const table = m.table ? `<div class="ahatable"><table><thead><tr>${m.table.head.map((h) => `<th scope="col">${h}</th>`).join("")}</tr></thead><tbody>${m.table.rows.map((row) => `<tr>${row.map((c, k) => (k ? `<td>${c}</td>` : `<th scope="row">${c}</th>`)).join("")}</tr>`).join("")}</tbody></table></div>` : "";
   function draw() {
     const skill = ahaSkillCounts()[m.cat], done = !!s.done;
     const clues = m.clues ? `<ul class="ahaclues">${m.clues.map((c) => `<li>${c}</li>`).join("")}</ul>` : "";
     const answer = m.kind === "choice"
-      ? `<div class="ahachoices">${m.options.map((v, k) => `<button class="choice ${s.answer === v ? "selected" : ""} ${done && v === m.a ? "right" : ""}" data-aha="${k}" ${done ? "disabled" : ""}>${label(v)}</button>`).join("")}</div>`
+      ? `<div class="ahachoices${m.wide ? " wide" : ""}">${m.options.map((v, k) => `<button class="choice ${s.answer === v ? "selected" : ""} ${done && v === m.a ? "right" : ""}" data-aha="${k}" ${done ? "disabled" : ""}>${label(v)}</button>`).join("")}</div>`
       : `<label class="ahaentry"><span class="visually-hidden">Your answer</span><input id="ahaInput" type="text" inputmode="${m.a < 0 || m.unit === "%" ? "text" : "numeric"}" autocomplete="off" enterkeyhint="done" value="${s.answer ?? ""}" ${done ? "disabled" : ""} placeholder="Your answer">${m.unit ? `<span>${m.unit}</span>` : ""}</label>`.replace("<input", `${m.pre ? `<span>${m.pre}</span>` : ""}<input`);
-    $("#board").innerHTML = `<p class="ahabadge" title="Aha cards solved in this category">✦ ${cat.type} · ${skill} solved</p><p class="ahaintro">${m.intro}</p>${table}${clues}<h3 class="ahaask">${m.ask}</h3>${answer}`;
+    $("#board").innerHTML = `<p class="ahabadge" title="Aha cards solved in this category">✦ ${cat.type} · ${skill} solved</p><p class="ahaintro">${m.intro}</p>${board}${table}${clues}<h3 class="ahaask">${m.ask}</h3>${answer}`;
     $("#board").querySelectorAll("[data-aha]").forEach((b) => (b.onclick = () => {
       if (s.done) return;
       s.answer = m.options[+b.dataset.aha];
@@ -628,7 +1159,9 @@ function ahaRender(i) {
 function openAha(i) {
   if (ahaLegacy(day, i)) return openGame(3);
   active = i;
-  state(i).started = true;
+  const s = state(i);
+  if (!s.aha) s.aha = ahaRotation(day);
+  s.started = true;
   persist();
   $("#board").innerHTML = "";
   $("#actions").innerHTML = "";
