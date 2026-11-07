@@ -2,7 +2,7 @@
 
 - The archive offers today plus the previous 30 calendar days.
 - Date-based generators supply future daily puzzles without a server job.
-- Letterlight cycles through a fixed shuffled word list; no word repeats within a 61-day window at one difficulty.
+- Letterlight cycles through `WORD_ANSWERS` in `dist/daily-content.js`: 424 everyday, cosy 5-letter words, shuffled once. No word repeats within 365 days at one difficulty, and the levels sit 141 days apart in the cycle. Answers must be words a fluent non-native reader knows. Skip rare or archaic words, plurals, sad or violent words, and rhyme traps like -IGHT/-OUND. Avoid Q/X/Z/J unless the word is very familiar. `verify-words.cjs` checks all of this with a denylist. Puzzles that are already started keep their word: the old 96-word cycle uses `contentVersion:2` without `words:3`, and the older random pick has no `contentVersion`. Dropped answers stay valid guesses.
 - Reasoning uses eight templates with date-specific values, hints, and worked answers. Templates recur; the questions vary.
 - Sudoku, dominoes, and Little Neighbours are generated from the date and difficulty. Bloom Trail rotates through full paths with distinct clue layouts, without repeats within 61 days at each difficulty.
 - Time Lens uses 183 active local photos in a fixed 61-day cycle, three per day: one history-shaping photo (`iconic: true`, for example the first flight, the Solvay Conference, Earthrise, independence in 1947, Kargil, Chandrayaan-3), one Indian-context photo and one more scene, shown in a shuffled order. No image repeats within any 61 consecutive dates for newly started rounds. The same date uses the same photos across difficulty levels; the clues change.

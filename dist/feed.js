@@ -80,6 +80,7 @@ function revealStep(r, lv, key, date) {
 function revealState(d, i, s = {}) {
   const set = (o) => Object.assign(s, o, { started: true, done: true, revealed: 1 });
   delete s.stars;
+  if (!s.started) { s.contentVersion = 2; if (i === 0) s.words = 3; }
   if (i === 0) { const a = wordAnswer(d), n = [8, 6, 5][difficulty]; return set({ guesses: [...(s.guesses || []).filter((g) => g !== a).slice(0, n - 1), a] }); }
   if (i === 1) return set({ values: sudokuModel(d).sol.slice() });
   if (i === 2) {
