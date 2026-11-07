@@ -848,13 +848,13 @@ function duelModel(d) {
   const skip = new Set(photoSet(d).map((p) => p.image));
   return duelPick(d, ACTIVE_PHOTOS.filter((p) => !skip.has(p.image)), true);
 }
-// Duels saved before photo IDs were pinned keep the original 183-photo model.
+// Duels saved before photo IDs were pinned keep the original v3 photo model.
 function legacyDuelModel(d) {
   const skip = new Set(legacyPhotoSet(d).map((p) => p.image));
   return duelPick(d, LEGACY_PHOTO_BANK.filter((p) => !skip.has(p.image)), false);
 }
 function savedDuel(d, s) {
-  if (s.duelIds) return duelFrom(s.duelIds.map((id) => PHOTO_BANK.find((p) => p.image === id)), s.duelDecade, s.duelOptions);
+  if (s.duelIds) return duelFrom(s.duelIds.map(photoById), s.duelDecade, s.duelOptions);
   const m = s.picks?.length || s.misses || s.ordered || s.done ? legacyDuelModel(d) : duelModel(d);
   Object.assign(s, { duelIds: m.photos.map((p) => p.image), duelDecade: m.decade, duelOptions: m.options });
   return m;

@@ -82,7 +82,10 @@ difficulty = 1;
 { const d = "2026-05-04", legacy = { picks: [0], misses: 0 }, fresh = {};
   if (JSON.stringify(savedDuel(d, legacy)) !== JSON.stringify(legacyDuelModel(d))) fail("legacy duel changed");
   if (JSON.stringify(savedDuel(d, fresh)) !== JSON.stringify(duelModel(d))) fail("fresh duel");
-  if (JSON.stringify(savedDuel(d, JSON.parse(JSON.stringify(fresh)))) !== JSON.stringify(duelModel(d))) fail("pinned duel changed"); }
+  if (JSON.stringify(savedDuel(d, JSON.parse(JSON.stringify(fresh)))) !== JSON.stringify(duelModel(d))) fail("pinned duel changed");
+  // A save pinned to a photo since deleted from the bank still loads, with its same-year stand-in.
+  const gone = Object.keys(REMOVED_PHOTOS)[0], pin = { duelIds: [gone, ...fresh.duelIds.slice(1)], duelDecade: fresh.duelDecade, duelOptions: fresh.duelOptions };
+  if (savedDuel(d, pin).photos.some((p) => !p || p.image === gone)) fail("removed photo save must fall back"); }
 // Tricky Killer saves started before the harder generator keep their original puzzle.
 difficulty = 2;
 { const d = "2026-05-04", old = { values: legacyKillerModel(d, 2).givens.slice() }, fresh = {};

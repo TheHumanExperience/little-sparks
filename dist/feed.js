@@ -94,7 +94,7 @@ function revealState(d, i, s = {}) {
   if (i === 4) return set({ path: trailModel(d).path.slice() });
   if (i === 5) {
     const ids = s.photoIds || (s.answers?.length ? shuffle(PHOTO_BANK.slice(0, 6), rng(d + "photographs")).slice(0, 3) : photoSet(d)).map((p) => p.image);
-    return set({ photoIds: ids, answers: ids.map((id) => ({ guess: PHOTO_BANK.find((p) => p.image === id).year, revealed: 1 })) });
+    return set({ photoIds: ids, answers: ids.map((id) => ({ guess: photoById(id).year, revealed: 1 })) });
   }
   if (i === 6) return set({ mode: "challenge", board: neighbourModel(d).solution.slice(), history: [] });
   if (i === 8) return set({ order: [0, 1, 2, 3, 4, 5] });
