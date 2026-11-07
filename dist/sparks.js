@@ -494,11 +494,34 @@ function sudokuSixModel(d) {
   }
   return { sol, givens, cages: null };
 }
+// Sudoku Six · Hard (Tricky): strip clues down to a minimal unique grid, and keep only grids that
+// naked singles alone can't finish. Seeded attempts run in order, so the pick is deterministic:
+// the first stalling grid with ≤ maxGivens wins, otherwise the stalling one with the fewest givens.
+const SIX_HARD = { maxGivens: 10, attempts: 24 };
+function hardSixModel(d) {
+  let best = null;
+  for (let attempt = 0; attempt < SIX_HARD.attempts; attempt++) {
+    const r = rng(puzzleSeed(d) + "sudoku-six-hard-" + attempt), sol = sixSolution(r), givens = sol.slice();
+    for (const i of shuffle([...Array(36).keys()], r)) {
+      const keep = givens[i];
+      givens[i] = 0;
+      if (sixCount(givens) !== 1) givens[i] = keep;
+    }
+    const n = givens.filter(Boolean).length, stall = sixSingles(givens) > 0, m = { sol, givens, cages: null };
+    if (stall && n <= SIX_HARD.maxGivens) return m;
+    const score = n + (stall ? 0 : 100);
+    if (!best || score < best.score) best = { score, m };
+  }
+  return best.m;
+}
 function killerSixModel(d) {
   const lvl = difficulty;
   return lvl === 2 ? hardKillerModel(d) : legacyKillerModel(d, lvl);
 }
 // Gentle and Medium (and Tricky games started before the harder generator) use this one.
+// Gentle/Medium Killer. Gentle starts from 12 givens (same seed, cages and give order as before, so
+// older Gentle grids stay a subset); both add givens until the puzzle is unique, and Gentle
+// keeps adding until naked singles alone can finish it.
 function legacyKillerModel(d, lvl = difficulty) {
   const r = rng(puzzleSeed(d) + "killer-six"), sol = sixSolution(r), sizes = [[2, 2, 3], [2, 3, 3], [2, 3, 4]][lvl];
   const cageId = Array(36).fill(-1), cages = [];
@@ -517,8 +540,8 @@ function legacyKillerModel(d, lvl = difficulty) {
   }
   const givens = Array(36).fill(0), order = shuffle([...Array(36).keys()], r);
   let n = 0;
-  for (; n < [6, 2, 0][lvl]; n++) givens[order[n]] = sol[order[n]];
-  while (sixCount(givens, cages) !== 1) { givens[order[n]] = sol[order[n]]; n++; }
+  for (; n < [12, 2, 0][lvl]; n++) givens[order[n]] = sol[order[n]];
+  while (sixCount(givens, cages) !== 1 || (lvl === 0 && sixSingles(givens, cages))) { givens[order[n]] = sol[order[n]]; n++; }
   return { sol, givens, cages, cageId };
 }
 // Tricky: big cages (3–4 cells, never a single), very few givens, unique, and naked
@@ -625,6 +648,10 @@ function sixGame(i, m, intro) {
 SPARKS[11] = {
   name: "Sudoku Six", blurb: "A roomier grid for a calm mind.", type: "Numbers", art: "1 6 ┃ 4",
   render: (i) => sixGame(i, sudokuSixModel(day), "Fill the 6 × 6 grid with 1–6. Each row, column and 2 × 3 box holds every number once. Tap a square, then a number."),
+};
+SPARKS[21] = {
+  name: "Sudoku Six · Hard", blurb: "Fewer clues. Deeper thinking.", type: "Numbers", art: "6 ┃ · ┃ 1",
+  render: (i) => sixGame(i, hardSixModel(day), "Fill the 6 × 6 grid with 1–6. Each row, column and 2 × 3 box holds every number once. Only a few clues, so look for the one place a number can go. Tap a square, then a number."),
 };
 SPARKS[12] = {
   name: "Killer Six", blurb: "Sums in dotted cages.", type: "Numbers", art: "⁽¹¹⁾ ┆ ⁽⁷⁾",

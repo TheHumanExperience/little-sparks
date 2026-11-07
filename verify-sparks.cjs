@@ -1,4 +1,4 @@
-// Checks the ten feed games (state 7–16): every level, every day of a year is
+// Checks the feed games (state 8–16 and 21): every level, every day of a year is
 // deterministic, solvable by its own checker, unique where promised, and varied.
 const fs = require("fs"), vm = require("vm");
 const nodes = new Map();
@@ -16,9 +16,12 @@ const days = Array.from({ length: 366 }, (_, n) => new Date(Date.UTC(2026, 0, 1 
 const models = {
   8: storyModel, 9: alchemyModel, 10: mirrorModel, 11: sudokuSixModel,
   12: killerSixModel, 13: ladderModel, 14: bloomFiveModel, 15: duelModel, 16: goalModel,
+  21: hardSixModel,
 };
+// Sudoku Six · Hard only appears on Tricky and ignores the level, so it is checked once.
+const onlyTricky = new Set(["21"]);
 const validSix = (g) => [0, 1, 2, 3, 4, 5].every((k) => [[0, 1, 2, 3, 4, 5].map((c) => g[k * 6 + c]), [0, 1, 2, 3, 4, 5].map((r) => g[r * 6 + k]), g.filter((_, i) => BOX6(i) === k)].every((grp) => new Set(grp).size === 6 && grp.every((v) => v >= 1 && v <= 6)));
-const killerStats = { givens: 0, cages: 0, hidden: 0, n: 0 };
+const killerStats = { givens: 0, cages: 0, hidden: 0, n: 0 }, hardSix = { givens: 0, hidden: 0, n: 0, max: 0 }, killerGivens = [0, 0, 0];
 const checks = {
   8: (m) => {
     const keys = m.accepted.map((o) => o.join(""));
@@ -35,6 +38,9 @@ const checks = {
   10: (m) => { if (!mirrorSolved(m, m.solution)) fail("mirror solution fails"); if (mirrorSolved(m, {})) fail("mirrors not needed"); if (Object.keys(m.solution).length !== m.budget) fail("mirror budget"); },
   11: (m) => { if (!validSix(m.sol)) fail("bad sudoku"); if (m.givens.some((v, i) => v && v !== m.sol[i])) fail("bad givens"); if (sixCount(m.givens) !== 1) fail("sudoku not unique"); },
   12: (m) => { if (!validSix(m.sol)) fail("bad killer"); if (m.cages.flatMap((c) => c.cells).length !== 36) fail("cages incomplete"); if (m.cages.some((c) => c.sum !== c.cells.reduce((t, i) => t + m.sol[i], 0))) fail("cage sum"); if (sixCount(m.givens, m.cages) !== 1) fail("killer not unique");
+    killerGivens[difficulty] += m.givens.filter(Boolean).length;
+    // Gentle stays friendly: plenty of givens, and naked singles alone finish it.
+    if (difficulty === 0 && (m.givens.filter(Boolean).length < 12 || sixSingles(m.givens, m.cages))) fail("gentle killer too hard");
     // Tricky must be genuinely harder: big cages, at most three givens, and naked singles alone stall.
     if (difficulty === 2) {
       const givens = m.givens.filter(Boolean).length, singles = m.cages.filter((c) => c.cells.length === 1).length;
@@ -43,6 +49,10 @@ const checks = {
       if (!sixSingles(m.givens, m.cages)) fail("tricky killer falls to naked singles");
       killerStats.givens += givens; killerStats.cages += m.cages.length; killerStats.hidden += sixSingles(m.givens, m.cages, true) ? 0 : 1; killerStats.n++;
     } },
+  21: (m) => { checks[11](m); const n = m.givens.filter(Boolean).length;
+    if (n > 11) fail("hard sudoku gives " + n + " digits");
+    if (!sixSingles(m.givens)) fail("hard sudoku falls to naked singles");
+    hardSix.givens += n; hardSix.max = Math.max(hardSix.max, n); hardSix.hidden += sixSingles(m.givens, null, true) ? 0 : 1; hardSix.n++; },
   13: (m) => { for (let k = 1; k < m.route.length; k++) if (ladderStepError(m.route[k - 1], m.route[k], m.route.slice(0, k))) fail("bad ladder step " + m.route); if (m.par !== [3, 4, 5][difficulty]) fail("ladder par"); },
   14: (m) => { if (!bloomFiveValid(m, m.path)) fail("bloom path invalid"); if (m.turns.length !== [4, 3, 2][difficulty]) fail("turn count"); },
   15: (m, d) => { const skip = photoSet(d).map((p) => p.image); if (new Set(m.photos).size !== 3 || m.photos.some((p) => skip.includes(p.image) || p.retired)) fail("duel photos"); if (!m.photos.some((p) => p.iconic)) fail("duel needs a history-shaping photo"); const old = legacyDuelModel(d); if (old.photos.some((p) => !LEGACY_PHOTO_BANK.includes(p) || legacyPhotoSet(d).includes(p))) fail("legacy duel photos"); if (!m.options.includes(m.decade)) fail("decade option"); },
@@ -52,6 +62,7 @@ const out = [];
 for (const lvl of [0, 1, 2]) {
   difficulty = lvl;
   for (const [i, make] of Object.entries(models)) {
+    if (onlyTricky.has(i) && lvl !== 2) continue;
     const seen = new Set(), recent = [];
     for (const d of days) {
       let m;
@@ -77,6 +88,9 @@ difficulty = 2;
 { const d = "2026-05-04", old = { values: legacyKillerModel(d, 2).givens.slice() }, fresh = {};
   if (JSON.stringify(savedKiller(d, old)) !== JSON.stringify(legacyKillerModel(d, 2))) fail("legacy killer changed");
   if (JSON.stringify(savedKiller(d, fresh)) !== JSON.stringify(killerSixModel(d)) || !fresh.hard) fail("fresh killer should use the hard model"); }
+if (!(killerGivens[0] > killerGivens[1] && killerGivens[1] > killerGivens[2])) fail("killer givens must fall Gentle > Medium > Tricky: " + killerGivens);
+out.push("killerAvgGivens{" + killerGivens.map((g) => (g / days.length).toFixed(2)).join("/") + "}");
+out.push("sudokuHard{avgGivens:" + (hardSix.givens / hardSix.n).toFixed(2) + ",maxGivens:" + hardSix.max + ",hiddenSinglesSolve:" + hardSix.hidden + "/" + hardSix.n + ",nakedSinglesSolve:0}");
 out.push("killerTricky{avgGivens:" + (killerStats.givens / killerStats.n).toFixed(2) + ",avgCages:" + (killerStats.cages / killerStats.n).toFixed(1) + ",hiddenSinglesSolve:" + killerStats.hidden + "/" + killerStats.n + ",nakedSinglesSolve:0}");
 // Smoke-render each game into the fake DOM and play a scripted solve.
 difficulty = 1; day = "2026-05-04"; data = { games: {} };
@@ -95,4 +109,4 @@ for (const st of STORIES) {
   for (const o of st.accepted) if (o.length !== 6 || [...o].sort().join("") !== "012345") throw Error("bad accepted order in " + st.title);
   if (st.beats.some(([tag, body]) => /Right (after|before)|Two cards after/.test(body))) throw Error("clue text left in " + st.title);
 }`, context);
-console.log(`PASS: 9 feed games × 3 levels × 366 days — solvable, deterministic, unique where promised (${((Date.now() - t0) / 1000).toFixed(1)}s). Distinct puzzles per 61 days: ${summary}`);
+console.log(`PASS: 9 feed games × 3 levels + Sudoku Six · Hard on Tricky × 366 days — solvable, deterministic, unique where promised (${((Date.now() - t0) / 1000).toFixed(1)}s). Distinct puzzles per 61 days: ${summary}`);

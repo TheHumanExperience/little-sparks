@@ -1,18 +1,18 @@
 # Little Sparks
 
-A daily puzzle app laid out as a vertical, snap-scrolling feed, like Reels. Each full-screen card holds a game you can play right there. Today's 16 sparks come first (11 games plus a block of five Aha reasoning cards), then a short "you made it" note. After that the feed keeps going into yesterday, the day before, and so on back 30 days. Each earlier day is loaded as you reach it. Every solve sets off a short celebration: a sparkle burst, a card glow, a "Solved n/21" count-up, and a vibration on phones that support it. With reduced motion turned on, you get a calm glow instead.
+A daily puzzle app laid out as a vertical, snap-scrolling feed, like Reels. Each full-screen card holds a game you can play right there. Today's 17 sparks come first (12 games plus a block of five Aha reasoning cards), then a short "you made it" note. After that the feed keeps going into yesterday, the day before, and so on back 30 days. Each earlier day is loaded as you reach it. Every solve sets off a short celebration: a sparkle burst, a card glow, a "Solved n/21" count-up, and a vibration on phones that support it. With reduced motion turned on, you get a calm glow instead.
 
 Tap the Little Sparks logo at any time to go back to the first card of today.
 
 ### Small rewards while playing
 
-- **Escalating celebrations.** Solves less than 15 minutes apart build a streak. Each streak step adds more confetti to the burst. You also get bigger celebrations at the 5th and 10th solve of a day and when all 16 are solved.
+- **Escalating celebrations.** Solves less than 15 minutes apart build a streak. Each streak step adds more confetti to the burst. You also get bigger celebrations at the 5th and 10th solve of a day and when all 17 are solved.
 - **Chimes.** Each solve plays a soft chime made with the Web Audio API. Its pitch climbs a pentatonic scale as your streak grows, up to a streak of 10. The 🔔 button in the header mutes it, and that setting is saved. Sound only starts after your first tap or key press, which iOS requires.
 - **Flow bar.** The thin bar under the header fills by 1 for each puzzle you solve without a hint, up to 5. The first hint you use on a puzzle drains 2, never below 0, and that puzzle can no longer add flow. When the bar is full, cards turn golden for the rest of the day and stay golden even if you use hints. The bar resets at midnight.
 - **Shiny cards.** About 1 card in 20 has a holographic look. Which cards are shiny depends only on the date and the game, so reloading the page doesn't change them. Solving a shiny card gives you a sticker, shown in a toast and counted on the note card.
 - **Leaderboard (optional).** 🏆 at the top right opens Day / Week / Month rankings. You pick a name once. Using the same name on another device shares one score (ignoring case and spaces). Each first solve earns Gentle 1 · Medium 3 · Tricky 5 points (reveals and replays earn none), in India time with weeks starting Monday. It needs a free Supabase project: see [docs/SUPABASE_SETUP.md](docs/SUPABASE_SETUP.md). With the config empty it stays hidden.
 - **Reveal answer.** A quiet "Reveal answer" button at the bottom-right of each card shows the full solution after a confirm.
-  - Gentle has unlimited reveals. Medium allows 5 cards and Tricky 3 cards per calendar day, per level; the confirm and the header pill next to the solved count (e.g. `3/16 · 🔑 4`) both show how many are left.
+  - Gentle has unlimited reveals. Medium allows 5 cards and Tricky 3 cards per calendar day, per level; the confirm and the header pill next to the solved count (e.g. `3/17 · 🔑 4`) both show how many are left.
   - A revealed card counts as revealed, not solved. It gives no solve credit, streak, flow, sticker or milestone, and drains the flow meter like a hint.
   - ↺ lets you replay a revealed card, but solving it still doesn't count. Showing the same card's answer again that day is free.
   - Usage is stored in the rewards storage as `reveals: { date, used: [[…], […], […]] }` and resets on a new day.
@@ -30,19 +30,20 @@ The games, in feed order. Each level shows one game from each family, so Gentle,
 | # | Gentle | Medium | Tricky |
 |---|--------|--------|--------|
 | 1 | Letterlight | Letterlight | Letterlight |
-| 2 | Pocket Sudoku | Sudoku Six | Killer Six |
-| 3 | Story Shuffle | Story Shuffle | Story Shuffle |
-| 4–8 | **Aha track** (5 cards) | **Aha track** (5 cards) | **Aha track** (5 cards) |
-| 9 | Dot & Match | Dot & Match | Dot & Match |
-| 10 | Colour Alchemy | Colour Alchemy | Colour Alchemy |
-| 11 | Bloom Trail | Bloom Trail 5×5 | Bloom Trail 5×5 |
-| 12 | Time Lens | Time Lens | Time Lens |
-| 13 | Mirror Garden | Mirror Garden | Mirror Garden |
-| 14 | Letterlight Ladder | Letterlight Ladder | Letterlight Ladder |
-| 15 | Little Neighbours | Neighbours Goal | Neighbours Goal |
-| 16 | Time Lens Duel | Time Lens Duel | Time Lens Duel |
+| 2 | Pocket Sudoku | Sudoku Six | Sudoku Six · Hard |
+| 3 | Killer Six (easy) | Killer Six | Killer Six (hard) |
+| 4 | Story Shuffle | Story Shuffle | Story Shuffle |
+| 5–9 | **Aha track** (5 cards) | **Aha track** (5 cards) | **Aha track** (5 cards) |
+| 10 | Dot & Match | Dot & Match | Dot & Match |
+| 11 | Colour Alchemy | Colour Alchemy | Colour Alchemy |
+| 12 | Bloom Trail | Bloom Trail 5×5 | Bloom Trail 5×5 |
+| 13 | Time Lens | Time Lens | Time Lens |
+| 14 | Mirror Garden | Mirror Garden | Mirror Garden |
+| 15 | Letterlight Ladder | Letterlight Ladder | Letterlight Ladder |
+| 16 | Little Neighbours | Neighbours Goal | Neighbours Goal |
+| 17 | Time Lens Duel | Time Lens Duel | Time Lens Duel |
 
-Each level has 16 cards. The families are set in `FEED_FAMILIES` in `dist/feed.js`. Starlines has been retired; old Starlines saves are simply ignored. Every card still gets harder from Gentle to Tricky, and progress is saved in the browser.
+Each level has 17 cards. The families are set in `FEED_FAMILIES` in `dist/feed.js`. Starlines has been retired; old Starlines saves are simply ignored. Every card still gets harder from Gentle to Tricky, and progress is saved in the browser.
 
 **The Aha track** replaces the old single Aha Moment card. Each day has five logical-reasoning cards, placed together as one block (cards 4–8) so the reasoning flow isn't broken up. They are drawn from ten categories that alternate between number puzzles and logic puzzles:
 
@@ -65,7 +66,7 @@ Each date and level shows five consecutive categories from the ten, and the wind
 
 **Swipe to draw.** In Bloom Trail and Bloom Trail 5×5 you can press a square and slide your finger (or mouse) across neighbouring squares to draw the trail. Sliding back onto the previous square undoes a step. Tapping squares one by one still works. The grid uses `touch-action: none`, so drawing never scrolls the feed.
 
-**Sudokus finish themselves.** Pocket Sudoku, Sudoku Six and Killer Six celebrate the moment the last correct number goes in, with no "check" button. A full grid with a clash says so gently.
+**Sudokus finish themselves.** Pocket Sudoku, Sudoku Six, Sudoku Six · Hard and Killer Six celebrate the moment the last correct number goes in, with no "check" button. A full grid with a clash says so gently.
 
 **Colour Alchemy always shows the match meter**, on every level.
 
@@ -109,7 +110,7 @@ Contributors and coding agents should start with [AGENTS.md](AGENTS.md) and chec
 
 | Script | Checks |
 | --- | --- |
-| `verify-sparks.cjs` | The nine feed games, every level, a full year of dates. Each puzzle must be deterministic, solvable by its own checker, unique where promised, and varied. For Story Shuffle it also checks that every accepted order is a valid permutation, that the canonical order is listed first, that the starting shuffle is never already solved, that a move inserts and shifts (4 → 2 gives 1, 4, 2, 3, 5, 6), and that repeated hints always finish the story. For Killer Six on Tricky it checks there are no single-cell cages, at most 3 givens, and that naked singles alone stall; it prints the average givens, cages and how many fall to hidden singles. |
+| `verify-sparks.cjs` | The nine feed games plus Sudoku Six · Hard, every level, a full year of dates. Each puzzle must be deterministic, solvable by its own checker, unique where promised, and varied. For Story Shuffle it also checks that every accepted order is a valid permutation, that the canonical order is listed first, that the starting shuffle is never already solved, that a move inserts and shifts (4 → 2 gives 1, 4, 2, 3, 5, 6), and that repeated hints always finish the story. For Killer Six on Tricky it checks there are no single-cell cages, at most 3 givens, and that naked singles alone stall; it prints the average givens, cages and how many fall to hidden singles. |
 | `verify-aha.cjs` | Every Aha category at all three levels over 366 days. Each question must be deterministic, have exactly one answer (confirmed by brute force), have unique options that include the answer, and rarely repeat its wording within 61 days. Also checks the old slot-3 saves, the skill counts, and that clear & retry keeps credit. |
 | `verify-feed.cjs` | Feed order, the 31-day window, and that `feed.js` does nothing on a page without the feed. |
 | `verify-leaderboard.cjs` | Points 1/3/5, one claim per date × level × game, India-time day, Monday-week and month boundaries, the offline queue (round trip, pruning), name cleaning and escaping, same name = same player, the committed config being empty or a public publishable/anon key only, and that schema.sql keeps the same rules and lock-down. |

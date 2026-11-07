@@ -1,13 +1,14 @@
 /* Little Sparks feed — a vertical, snap-scrolling stream of playable cards.
-   Today's 16 cards (11 games + a 5-card Aha track) come first, then each earlier day back to 30 days ago.
+   Today's 17 cards (12 games + a 5-card Aha track) come first, then each earlier day back to 30 days ago.
    Exactly one card is "live" at a time: it owns the #rules/#board/#feedback/#actions
    ids the game renderers draw into. Other cards are frozen snapshots or covers. */
 /* Each level shows one game per family, so Gentle/Medium/Tricky feel distinct:
-   Sudoku → Pocket Sudoku / Sudoku Six / Killer Six; Bloom → Bloom Trail / 5×5 / 5×5;
+   Sudoku → Pocket Sudoku / Sudoku Six / Sudoku Six · Hard; Killer Six on every level (graded);
+   Bloom → Bloom Trail / 5×5 / 5×5;
    Neighbours → Little Neighbours / Neighbours Goal / Neighbours Goal.
    The five Aha cards (3, 17–20) sit together as one block. */
-const FEED_FAMILIES = { sudoku: [1, 11, 12], bloom: [4, 14, 14], neighbours: [6, 16, 16] };
-const FEED_PLAN = [0, "sudoku", 8, 3, 17, 18, 19, 20, 2, 9, "bloom", 5, 10, 13, "neighbours", 15];
+const FEED_FAMILIES = { sudoku: [1, 11, 21], killer: [12, 12, 12], bloom: [4, 14, 14], neighbours: [6, 16, 16] };
+const FEED_PLAN = [0, "sudoku", "killer", 8, 3, 17, 18, 19, 20, 2, 9, "bloom", 5, 10, 13, "neighbours", 15];
 const feedOrder = (lv = difficulty) => FEED_PLAN.map((x) => (typeof x === "string" ? FEED_FAMILIES[x][lv] : x));
 const feedSibling = (i, lv = difficulty) => Object.values(FEED_FAMILIES).find((f) => f.includes(i))?.[lv] ?? i;
 const FEED_DAYS = 31;
@@ -100,6 +101,7 @@ function revealState(d, i, s = {}) {
   if (i === 9) { const m = alchemyModel(d); return set({ pot: m.target.slice(), drops: [] }); }
   if (i === 10) return set({ mirrors: { ...mirrorModel(d).solution } });
   if (i === 11) return set({ values: sudokuSixModel(d).sol.slice() });
+  if (i === 21) return set({ values: hardSixModel(d).sol.slice() });
   if (i === 12) return set({ values: savedKiller(d, s).sol.slice() });
   if (i === 13) return set({ steps: ladderModel(d).route.slice() });
   if (i === 14) return set({ path: bloomFiveModel(d).path.slice() });

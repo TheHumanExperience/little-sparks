@@ -53,7 +53,7 @@ if (next.golden || next.value !== 0 || next.hinted.length) fail("flow must reset
 let prev = 0;
 for (let s = 1; s <= 30; s++) { const b = burstSize(s); if (b < prev || b > 76) fail("burst not monotonic/capped"); prev = b; }
 if (burstSize(1) !== 28 || burstSize(30) !== 76) fail("burst bounds changed");
-if (milestoneFor(5) !== "five" || milestoneFor(10) !== "ten" || milestoneFor(feedOrder().length) !== "all" || milestoneFor(17) || milestoneFor(4) || milestoneFor(11)) fail("milestones wrong");
+if (milestoneFor(5) !== "five" || milestoneFor(10) !== "ten" || milestoneFor(feedOrder().length) !== "all" || milestoneFor(feedOrder().length + 1) || milestoneFor(16) || milestoneFor(4) || milestoneFor(11)) fail("milestones wrong");
 for (let s = 2; s <= 10; s++) if (!(chimeFreq(s) > chimeFreq(s - 1))) fail("chime must rise up to streak 10");
 if (chimeFreq(15) !== chimeFreq(10)) fail("chime must cap at streak 10");
 // Clear & retry isolation

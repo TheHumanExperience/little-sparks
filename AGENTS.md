@@ -25,7 +25,7 @@ Prefer `npm run smoke` over manual screenshots. Take screenshots only when a hum
 | `dist/extras.js` | Games 5 (Time Lens) and 6 (Little Neighbours); `photoSet`. |
 | `dist/stories.js` | Story Shuffle stories with `accepted` beat orders. |
 | `dist/ladders.js` | Generated word-ladder routes (do not hand-edit). |
-| `dist/sparks.js` | Games 8–16 (`SPARKS[i]`): pure `*Model(d)` generators plus renderers. |
+| `dist/sparks.js` | Games 8–16 and 21 (`SPARKS[i]`): pure `*Model(d)` generators plus renderers. |
 | `dist/aha.js` | Logical-reasoning track: `AHA_SLOTS = [3,17,18,19,20]`, category generators, `ahaModel(d,slot)`, legacy Aha card. |
 | `dist/feed.js` | Feed (`FEED_PLAN`, `FEED_FAMILIES`), live card, celebrations, rewards, flow, shiny cards, ↺ clear, Reveal answer. |
 | `dist/leaderboard.js`, `dist/leaderboard-config.js` | Optional Supabase leaderboard (🏆, name sheet, offline queue, same name = same player). Config holds the live project URL and its public `sb_publishable_` key (sent only as `apikey`, never as Bearer); never commit a secret/service_role key. Empty config hides it. Tests stub the config and never call the live project. Schema: `supabase/schema.sql`, setup: `docs/SUPABASE_SETUP.md`. |
@@ -35,11 +35,12 @@ Prefer `npm run smoke` over manual screenshots. Take screenshots only when a hum
 | `tools/` | Offline content tools. `history/*.bundle` holds the original Sites commits (archival). |
 
 ## Game registry (state index → game)
-0 Letterlight · 1 Pocket Sudoku · 2 Dot & Match · 3 Aha (legacy single card / track slot 0) · 4 Bloom Trail · 5 Time Lens · 6 Little Neighbours · 7 *retired (Starlines; ignore old saves)* · 8 Story Shuffle · 9 Colour Alchemy · 10 Mirror Garden · 11 Sudoku Six · 12 Killer Six · 13 Letterlight Ladder · 14 Bloom Trail 5×5 · 15 Time Lens Duel · 16 Neighbours Goal · 17–20 Aha track slots 1–4.
+0 Letterlight · 1 Pocket Sudoku · 2 Dot & Match · 3 Aha (legacy single card / track slot 0) · 4 Bloom Trail · 5 Time Lens · 6 Little Neighbours · 7 *retired (Starlines; ignore old saves)* · 8 Story Shuffle · 9 Colour Alchemy · 10 Mirror Garden · 11 Sudoku Six · 12 Killer Six · 13 Letterlight Ladder · 14 Bloom Trail 5×5 · 15 Time Lens Duel · 16 Neighbours Goal · 17–20 Aha track slots 1–4 · 21 Sudoku Six · Hard.
 
-- **Feed order** comes from `FEED_PLAN` in feed.js. It has 16 cards per level, and the five Aha cards sit together as one block.
+- **Feed order** comes from `FEED_PLAN` in feed.js. It has 17 cards per level, and the five Aha cards sit together as one block.
 - **Families:** one game per level (`FEED_FAMILIES`), as [Gentle, Medium, Tricky]:
-  - sudoku: [1, 11, 12]
+  - sudoku: [1, 11, 21]
+  - killer: [12, 12, 12] (Killer Six on every level, graded by `killerSixModel`; placed right after sudoku)
   - bloom: [4, 14, 14]
   - neighbours: [6, 16, 16]
 - **Add a game:**
