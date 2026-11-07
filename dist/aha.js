@@ -707,6 +707,8 @@ function matchMoves(s) {
   }
   return out;
 }
+/* A typed equation, tidied: spaces, −/–/—, ×/x/*, ÷ and full-width signs all read the same. */
+const matchNorm = (raw) => String(raw).normalize("NFKC").replace(/[−–—]/g, "-").replace(/[×✕xX*]/g, "×").replace(/[÷/]/g, "÷").replace(/\s+/g, "").replace(/=+/g, "=");
 const matchPretty = (s) => s.replace(/([+=-])/g, " $1 ").replace(/-/g, "−");
 function matchSvg(s) {
   const W = { d: 34, o: 30 }, gap = 6, stick = (x1, y1, x2, y2) => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" class="stick"/><circle cx="${x2}" cy="${y2}" r="3.4" class="head"/>`;
@@ -961,12 +963,10 @@ function genMatchsticks(r, lv) {
     if (!moves.length) continue;
     const s = ahaPick(r, moves).to, data = { s }, sol = AHA_SOLVE.matchsticks(data);
     if (sol.length !== 1) continue;
-    const a = sol[0], wrong = ahaUniq(matchMoves(s).filter((mv) => !matchTrue(mv.to) && (mv.to.match(/=/g) || []).length === 1).map((mv) => matchPretty(mv.to))).filter((o) => o !== a);
-    const opts = shuffle(wrong, r).slice(0, 3);
-    for (let k = 1; opts.length < 3; k++) { const alt = a.replace(/(\d+)$/, (m) => String(+m + (k % 2 ? k : -k))); if (alt !== a && !opts.includes(alt) && !/−\d*$/.test(alt) && !/ -/.test(alt)) opts.push(alt); }
+    const a = sol[0];
     const mv = matchMoves(s).find((m) => matchPretty(m.to) === a), before = [...s], after = [...mv.to], nm = (c) => (c === "-" ? "minus sign" : c === "+" ? "plus sign" : c === "=" ? "equals sign" : `“${c}”`), an = (c) => (c === "8" ? "an " : "a ") + nm(c);
     const how = mv.i === mv.j ? `Move one stick inside the ${nm(before[mv.i])} to turn it into ${an(after[mv.i])}` : `Take a stick from the ${nm(before[mv.i])} (it becomes ${an(after[mv.i])}) and add it to the ${nm(before[mv.j])} (it becomes ${an(after[mv.j])})`;
-    return { data, kind: "name", a, options: shuffle([a, ...opts], r), svg: matchSvg(s), shows: matchPretty(s), intro: `${A} lays out matchsticks ${spot}: ${matchPretty(s)}. That isn't true!`, ask: "Move exactly one matchstick to make it true. What does it say now?", hint: "Taking a stick from 8 can leave 0, 6 or 9; adding one to 5 can make 6 or 9. The plus sign can lend its upright stick and become a minus.", why: `${how}: ${a} ✓` };
+    return { data, kind: "equation", a, svg: matchSvg(s), shows: matchPretty(s), intro: `${A} lays out matchsticks ${spot}: ${matchPretty(s)}. That isn't true!`, ask: "Move exactly one matchstick to make it true. What does it say now?", hint: "Taking a stick from 8 can leave 0, 6 or 9; adding one to 5 can make 6 or 9. The plus sign can lend its upright stick and become a minus.", why: `${how}: ${a} ✓` };
   }
 }
 
@@ -1081,6 +1081,7 @@ function ahaModel(d, slot) {
 /* Typed answers: units, commas and ₹ are ignored; the number must match exactly. */
 function ahaCheck(m, raw) {
   if (m.kind === "choice") return String(raw) === m.a;
+  if (m.kind === "equation") return matchNorm(raw) === matchNorm(m.a);
   const txt = String(raw).replace(/[−–]/g, "-").replace(/[^\d.\-]/g, ""), v = Number(txt);
   if (!Number.isFinite(v) || txt === "" || txt === "-") return false;
   return v === m.a;
@@ -1115,7 +1116,7 @@ function ahaRender(i) {
   const slot = AHA_SLOTS.indexOf(i), m = ahaModel(day, slot), s = state(i), cat = AHA_CATS[m.cat];
   s.aha ||= 1;
   persist();
-  $("#rules").textContent = `Logical reasoning · ${m.kind === "number" ? "Type your answer, no options to lean on." : "Pick the one right answer."}`;
+  $("#rules").textContent = `Logical reasoning · ${m.kind === "number" ? "Type your answer, no options to lean on." : m.kind === "equation" ? "Type the true equation after your one move." : "Pick the one right answer."}`;
   const label = (v) => (m.numeric ? `${m.pre || ""}${Number(v).toLocaleString("en-IN")}${m.unit ? (/^[%°]$/.test(m.unit) ? "" : " ") + m.unit : ""}` : v);
   const board = m.svg ? `<div class="ahamatch" role="img" aria-label="Matchsticks: ${m.shows}">${m.svg}</div>` : "";
   const table = m.table ? `<div class="ahatable"><table><thead><tr>${m.table.head.map((h) => `<th scope="col">${h}</th>`).join("")}</tr></thead><tbody>${m.table.rows.map((row) => `<tr>${row.map((c, k) => (k ? `<td>${c}</td>` : `<th scope="row">${c}</th>`)).join("")}</tr>`).join("")}</tbody></table></div>` : "";
@@ -1124,6 +1125,8 @@ function ahaRender(i) {
     const clues = m.clues ? `<ul class="ahaclues">${m.clues.map((c) => `<li>${c}</li>`).join("")}</ul>` : "";
     const answer = m.kind === "choice"
       ? `<div class="ahachoices${m.wide ? " wide" : ""}">${m.options.map((v, k) => `<button class="choice ${s.answer === v ? "selected" : ""} ${done && v === m.a ? "right" : ""}" data-aha="${k}" ${done ? "disabled" : ""}>${label(v)}</button>`).join("")}</div>`
+      : m.kind === "equation"
+      ? `<label class="ahaentry eq"><span class="visually-hidden">The equation after your move</span><input id="ahaInput" type="text" inputmode="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" value="${s.answer ?? ""}" ${done ? "disabled" : ""} placeholder="e.g. 4 + 5 = 9"></label><p class="ahaeqhint">Type the whole new equation with + − =. Spaces don't matter.</p>`
       : `<label class="ahaentry"><span class="visually-hidden">Your answer</span><input id="ahaInput" type="text" inputmode="${m.a < 0 || m.unit === "%" ? "text" : "numeric"}" autocomplete="off" enterkeyhint="done" value="${s.answer ?? ""}" ${done ? "disabled" : ""} placeholder="Your answer">${m.unit ? `<span>${m.unit}</span>` : ""}</label>`.replace("<input", `${m.pre ? `<span>${m.pre}</span>` : ""}<input`);
     $("#board").innerHTML = `<p class="ahabadge" title="Aha cards solved in this category">✦ ${cat.type} · ${skill} solved</p><p class="ahaintro">${m.intro}</p>${board}${table}${clues}<h3 class="ahaask">${m.ask}</h3>${answer}`;
     $("#board").querySelectorAll("[data-aha]").forEach((b) => (b.onclick = () => {
@@ -1148,6 +1151,8 @@ function ahaRender(i) {
     } else {
       s.tries = (s.tries || 0) + 1;
       persist();
+      const t = matchNorm(s.answer).replace(/×/g, "*");
+      if (m.kind === "equation" && /^[\d+\-=]+$/.test(t) && matchTrue(t)) return msg("That's true, but it takes more than one stick to get there. Try again!");
       msg(s.tries > 1 ? "Not quite. The hint below might unlock it." : "Not quite. Try a different angle.");
     }
   }

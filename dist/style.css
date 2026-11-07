@@ -318,6 +318,8 @@ body.golden .feedbar .brand span { color: #c8901f; }
 .matchsvg .head { fill: #d2563f; }
 .ahaentry { display: flex; align-items: center; gap: 8px; margin: 6px 0; font-size: 16px; }
 .ahaentry input { flex: 1; min-width: 0; height: 48px; font-size: 18px; padding: 0 12px; border: 1px solid #bac6b4; border-radius: 10px; background: #fff; color: var(--ink); font-variant-numeric: tabular-nums; }
+.ahaentry.eq input { letter-spacing: .04em; font-variant-numeric: tabular-nums; }
+.ahaeqhint { margin: 0 0 6px; font-size: 13px; color: #6b7468; }
 .ahatable { overflow-x: auto; margin: 6px 0 10px; }
 .ahatable table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
 .ahatable th, .ahatable td { padding: 6px 8px; border-bottom: 1px solid #e0e3d6; text-align: right; }

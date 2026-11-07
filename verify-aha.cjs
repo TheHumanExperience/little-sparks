@@ -20,7 +20,7 @@ for (let o = 0; o < 366; o++) { const t = new Date(start); t.setDate(t.getDate()
 if (AHA_GEN.length !== N || new Set(AHA_CATS.map((c) => c.id)).size !== N) fail("one generator per category");
 for (const c of AHA_CATS) if (!["numbers", "logic"].includes(c.group) || !c.blurb || /CAT|Quant|LRDI|MCQ|TITA/.test(c.name + c.type + c.blurb)) fail("category needs a group, a blurb and no exam labels: " + c.id);
 const text = (q) => [q.intro, JSON.stringify(q.table || ""), ...(q.clues || []), q.ask].join(" | ");
-let questions = 0, repeats = 0;
+let questions = 0, repeats = 0, eqChecked = 0;
 for (let lv = 0; lv < 3; lv++) {
   difficulty = lv;
   const seenCats = new Set();
@@ -55,6 +55,15 @@ for (let lv = 0; lv < 3; lv++) {
       const m = ahaModel(d, slot);
       if (JSON.stringify(m) !== first[slot]) fail("ahaModel not deterministic " + d + " slot " + slot);
       if (m.cat !== cats[slot]) fail("slot category mismatch " + d);
+      if (AHA_CATS[m.cat].id === "matchsticks") {
+        // Matchsticks is typed on every level: no options to give the answer away.
+        if (m.kind !== "equation" || m.options) fail("matchsticks must be a typed equation: " + d);
+        const raw = m.a.replace(/−/g, "-").replace(/ /g, ""), others = ahaUniq(matchMoves(m.data.s).map((mv) => mv.to)).filter((t) => t !== raw);
+        for (const ok of [m.a, raw, " " + raw.replace(/-/g, " – ") + " ", raw.split("=").join("＝").split("+").join("＋")]) if (!ahaCheck(m, ok)) fail("matchsticks should accept " + JSON.stringify(ok) + " for " + m.a);
+        for (const bad of [m.data.s, "", raw + "1", ...others]) if (ahaCheck(m, bad)) fail("matchsticks accepted a wrong equation " + bad + " for " + m.a);
+        eqChecked++;
+        continue;
+      }
       if (lv < 2 && m.kind !== "choice") fail("Gentle/Medium must be multiple choice: " + d + " " + AHA_CATS[m.cat].id);
       if (m.kind === "choice") {
         if (m.options.length < 3 || new Set(m.options).size !== m.options.length || !m.options.includes(m.a)) fail("bad options " + d + " " + AHA_CATS[m.cat].id + " " + JSON.stringify(m.options) + " a=" + m.a);
@@ -95,6 +104,7 @@ for (const dd of dates.slice(0, 40)) {
   if (ahaRotation(dd) !== 2) fail("rotation 2 saves stay on the ring");
 }
 all = {};
-({ questions, repeats, N });
+if (!eqChecked) fail("no Matchsticks card was checked");
+({ questions, repeats, N, eqChecked });
 `, context);
-console.log(`Aha track OK: ${result.questions} generated questions (${result.N} categories × 3 levels × 366 days), ${result.repeats} wording repeats within 61 days, in ${Date.now() - t0} ms`);
+console.log(`Aha track OK: ${result.questions} generated questions (${result.N} categories × 3 levels × 366 days), ${result.repeats} wording repeats within 61 days, ${result.eqChecked} typed Matchsticks cards accept only the one-move answer, in ${Date.now() - t0} ms`);

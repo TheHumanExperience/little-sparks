@@ -180,6 +180,19 @@ for (const [engine, launch, ctxOpts] of engines) {
   }
   await page.waitForTimeout(300);
   check(await page.evaluate(() => state(23).done && !state(23).revealed), `${engine} Garden Beds solves itself by drag` + (await page.evaluate(() => state(23).done ? "" : " " + JSON.stringify(state(23).beds) + " want " + JSON.stringify(bedsModel(day).rects))));
+  // Matchsticks (Medium, iPhone SE): no options, a typed equation that fits, rejects a wrong one and accepts any spacing/signs.
+  await page.setViewportSize({ width: 375, height: 667 }); await fresh(1);
+  const ms = await page.evaluate(() => { const cat = AHA_CATS.findIndex((c) => c.id === "matchsticks"), d = today(), m = { cat, ...AHA_GEN[cat](rng(puzzleSeed(d) + "|smoke"), 1) };
+    AHA_CACHE.set(`${puzzleSeed(d)}|0|${ahaRotation(d)}`, m); return { idx: AHA_SLOTS[0], a: m.a, s: m.data.s }; });
+  await goTo(ms.idx);
+  const mf = await page.evaluate(() => { const inp = document.querySelector(".spark.live #ahaInput"), r = inp.getBoundingClientRect(), card = document.querySelector(".spark.live").getBoundingClientRect(), svg = document.querySelector(".spark.live .matchsvg").getBoundingClientRect();
+    return { choices: document.querySelectorAll(".spark.live [data-aha]").length, fs: parseFloat(getComputedStyle(inp).fontSize), h: r.height, inside: r.left >= card.left && r.right <= card.right && svg.right <= card.right, overflow: document.documentElement.scrollWidth > innerWidth, ph: inp.placeholder }; });
+  check(mf.choices === 0 && mf.fs >= 16 && mf.h >= 44 && mf.inside && !mf.overflow && /=/.test(mf.ph), `${engine} 375×667 Matchsticks is a typed equation that fits`, JSON.stringify(mf));
+  await page.locator(".spark.live #ahaInput").tap(); await page.keyboard.type(ms.s); await page.keyboard.press("Enter");
+  check(await page.evaluate((i) => !state(i).done, ms.idx), `${engine} Matchsticks rejects the untouched equation`);
+  await page.locator(".spark.live #ahaInput").fill(" " + ms.a.replace(/−/g, "-").replace(/ /g, "") + " "); await page.locator(".spark.live #ahaInput").press("Enter");
+  await page.waitForTimeout(200);
+  check(await page.evaluate((i) => state(i).done && !state(i).revealed, ms.idx), `${engine} Matchsticks solves by typing ${ms.a}`);
   await page.setViewportSize(vp); await fresh(0); await goTo(13);
   const ladderNextWord = () => page.evaluate(() => { const m = ladderModel(day), s = state(13); return ladderNext(s.steps.at(-1), m.end); });
   for (const ch of await ladderNextWord()) await page.locator(`.spark.live .keys [data-key="${ch}"]`).tap();

@@ -77,7 +77,7 @@ Every card still gets harder from Gentle to Tricky, and progress is saved in the
 
 Each date and level shows five consecutive categories from a fixed ring of all nineteen (`AHA_RING`, which alternates number and logic groups except at one wrap-around), and the window rotates daily, so every category comes up about equally often. Every question is generated in `dist/aha.js` from the date and difficulty. Its names and numbers are drawn fresh each time. A brute-force solver confirms the question has exactly one answer, and each question comes with a hint and a "why" explanation.
 
-- **Formats.** Gentle and Medium are multiple choice. Tricky asks you to type the answer in a numeric field, or a name picker for grids and liars.
+- **Formats.** Gentle and Medium are multiple choice. Tricky asks you to type the answer in a numeric field, or a name picker for grids and liars. Matchsticks has no options on any level, because they gave the answer away. You type the corrected equation instead. Spaces, −/–, ×/x/* and full-width signs all count the same, and only the one-move answer is accepted.
 - **Skill badges.** A small badge on each card shows how many questions of that category you have solved.
 - **Older saves.** Past days that have an old Aha Moment save in slot 3 still open the original puzzle. A date × level whose Aha cards were played before the ring grew to nineteen (saves with `aha: 1`, or no flag) keeps its original ten-category rotation and questions; new plays are stamped `aha: 2`.
 
