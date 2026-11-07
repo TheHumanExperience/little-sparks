@@ -26,6 +26,7 @@ Prefer `npm run smoke` over manual screenshots. Take screenshots only when a hum
 | `dist/stories.js` | Story Shuffle stories with `accepted` beat orders. |
 | `dist/ladders.js` | Generated word-ladder routes (do not hand-edit). |
 | `dist/sparks.js` | Games 8–16 and 21 (`SPARKS[i]`): pure `*Model(d)` generators plus renderers. |
+| `dist/lanterns.js` | Lantern Lanes (`SPARKS[22]`): `lanternModel(d,lvl)`, `lanternSolve`, `lanternCheck`, renderer. Loaded after sparks.js. |
 | `dist/aha.js` | Logical-reasoning track: `AHA_SLOTS = [3,17,18,19,20]`, category generators, `ahaModel(d,slot)`, legacy Aha card. |
 | `dist/feed.js` | Feed (`FEED_PLAN`, `FEED_FAMILIES`), live card, celebrations, rewards, flow, shiny cards, ↺ clear, Reveal answer. |
 | `dist/leaderboard.js`, `dist/leaderboard-config.js` | Optional Supabase leaderboard (🏆, name sheet, offline queue, same name = same player). Config holds the live project URL and its public `sb_publishable_` key (sent only as `apikey`, never as Bearer); never commit a secret/service_role key. Empty config hides it. Tests stub the config and never call the live project. Schema: `supabase/schema.sql`, setup: `docs/SUPABASE_SETUP.md`. |
@@ -35,9 +36,9 @@ Prefer `npm run smoke` over manual screenshots. Take screenshots only when a hum
 | `tools/` | Offline content tools. `history/*.bundle` holds the original Sites commits (archival). |
 
 ## Game registry (state index → game)
-0 Letterlight · 1 Pocket Sudoku · 2 Dot & Match · 3 Aha (legacy single card / track slot 0) · 4 Bloom Trail · 5 Time Lens · 6 Little Neighbours · 7 *retired (Starlines; ignore old saves)* · 8 Story Shuffle · 9 Colour Alchemy · 10 Mirror Garden · 11 Sudoku Six · 12 Killer Six · 13 Letterlight Ladder · 14 Bloom Trail 5×5 · 15 Time Lens Duel · 16 Neighbours Goal · 17–20 Aha track slots 1–4 · 21 Sudoku Six · Hard.
+0 Letterlight · 1 Pocket Sudoku · 2 Dot & Match · 3 Aha (legacy single card / track slot 0) · 4 Bloom Trail · 5 Time Lens · 6 Little Neighbours · 7 *retired (Starlines; ignore old saves)* · 8 Story Shuffle · 9 Colour Alchemy · 10 Mirror Garden · 11 Sudoku Six · 12 Killer Six · 13 Letterlight Ladder · 14 Bloom Trail 5×5 · 15 Time Lens Duel · 16 Neighbours Goal · 17–20 Aha track slots 1–4 · 21 Sudoku Six · Hard · 22 Lantern Lanes.
 
-- **Feed order** comes from `FEED_PLAN` in feed.js. It has 17 cards per level, and the five Aha cards sit together as one block.
+- **Feed order** comes from `FEED_PLAN` in feed.js. It has 18 cards per level (Lantern Lanes, 22, sits right after Mirror Garden), and the five Aha cards sit together as one block.
 - **Families:** one game per level (`FEED_FAMILIES`), as [Gentle, Medium, Tricky]:
   - sudoku: [1, 11, 21]
   - killer: [12, 12, 12] (Killer Six on every level, graded by `killerSixModel`; placed right after sudoku)
@@ -48,7 +49,7 @@ Prefer `npm run smoke` over manual screenshots. Take screenshots only when a hum
   2. Register it as `SPARKS[n]` with the next unused index (never reuse 7).
   3. Add it to `FEED_PLAN`.
   4. Add a reveal branch in `revealState` (feed.js).
-  5. Add checks for it in verify-sparks.cjs and update the expected card counts in verify-feed.cjs.
+  5. Add checks for it in verify-sparks.cjs (or its own verify file, like verify-lanterns.cjs) and update the expected card counts in verify-feed.cjs.
 - **Remove a game:** take it out of `FEED_PLAN` and its code, and retire its index forever. Old saves must load harmlessly and must not count.
 
 ## Levels, storage and migration

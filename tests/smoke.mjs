@@ -130,6 +130,26 @@ for (const [engine, launch, ctxOpts] of engines) {
   }
   await page.waitForTimeout(300);
   check(await page.evaluate(() => state(10).done && state(10).v2 === 1), `${engine} Mirror Garden solves by tap`);
+  // Lantern Lanes on Tricky (7 × 7): 44px squares on an iPhone SE; tap cycles bulb → dot → empty, long press drops a dot.
+  await fresh(2); await goTo(22);
+  const ll = await page.evaluate(() => { const c = document.querySelector(".spark.live .lcell").getBoundingClientRect(), g = document.querySelector(".spark.live .lantgrid").getBoundingClientRect(), card = document.querySelector(".spark.live").getBoundingClientRect();
+    return { w: c.width, h: c.height, inside: g.left >= card.left && g.right <= card.right, overflow: document.documentElement.scrollWidth > innerWidth }; });
+  check(ll.w >= 44 && ll.h >= 44 && ll.inside && !ll.overflow, `${engine} 375×667 Tricky Lantern Lanes squares ${ll.w.toFixed(0)}px, fits`);
+  const firstCell = page.locator(".spark.live .lcell").first(), lc = await firstCell.getAttribute("data-lc");
+  await firstCell.tap(); check(await page.evaluate((c) => state(22).bulbs.includes(+c), lc), `${engine} lantern tap places a bulb`);
+  await page.locator(`.spark.live [data-lc="${lc}"]`).tap(); check(await page.evaluate((c) => !state(22).bulbs.includes(+c) && state(22).dots.includes(+c), lc), `${engine} lantern second tap leaves a dot`);
+  await page.locator(`.spark.live [data-lc="${lc}"]`).tap(); check(await page.evaluate((c) => !state(22).dots.includes(+c), lc), `${engine} lantern third tap clears`);
+  const box = await page.locator(`.spark.live [data-lc="${lc}"]`).boundingBox();
+  await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2); await page.mouse.down(); await page.waitForTimeout(650); await page.mouse.up();
+  await page.waitForTimeout(100);
+  check(await page.evaluate((c) => state(22).dots.includes(+c) && !state(22).bulbs.includes(+c), lc), `${engine} lantern long press drops a dot`);
+  await page.setViewportSize(vp); await fresh(1); await goTo(22);
+  check(await page.locator(".spark.live #rules .lanstep").count() === 3 && /not diagonals/.test(await page.locator(".spark.live #rules").innerText()), `${engine} lantern How to play has the 3 steps`);
+  const lsol = await page.evaluate(() => lanternModel(day).solution);
+  for (const c of lsol.slice(0, -1)) await page.locator(`.spark.live [data-lc="${c}"]`).tap();
+  check(await page.evaluate(() => !state(22).done), `${engine} lantern not solved early`);
+  await page.locator(`.spark.live [data-lc="${lsol.at(-1)}"]`).tap(); await page.waitForTimeout(300);
+  check(await page.evaluate(() => state(22).done && !state(22).revealed), `${engine} Lantern Lanes solves itself by tap`);
   await page.setViewportSize(vp); await fresh(0); await goTo(13);
   const ladderNextWord = () => page.evaluate(() => { const m = ladderModel(day), s = state(13); return ladderNext(s.steps.at(-1), m.end); });
   for (const ch of await ladderNextWord()) await page.locator(`.spark.live .keys [data-key="${ch}"]`).tap();
