@@ -1,5 +1,5 @@
 /* Little Sparks feed — a vertical, snap-scrolling stream of playable cards.
-   Today's 18 cards (13 games + a 5-card Aha track) come first, then each earlier day back to 30 days ago.
+   Today's 19 cards (14 games + a 5-card Aha track) come first, then each earlier day back to 30 days ago.
    Exactly one card is "live" at a time: it owns the #rules/#board/#feedback/#actions
    ids the game renderers draw into. Other cards are frozen snapshots or covers. */
 /* Each level shows one game per family, so Gentle/Medium/Tricky feel distinct:
@@ -8,7 +8,7 @@
    Neighbours → Little Neighbours / Neighbours Goal / Neighbours Goal.
    The five Aha cards (3, 17–20) sit together as one block. */
 const FEED_FAMILIES = { sudoku: [1, 11, 21], killer: [12, 12, 12], bloom: [4, 14, 14], neighbours: [6, 16, 16] };
-const FEED_PLAN = [0, "sudoku", "killer", 8, 3, 17, 18, 19, 20, 2, 9, "bloom", 5, 10, 22, 13, "neighbours", 15];
+const FEED_PLAN = [0, "sudoku", "killer", 8, 3, 17, 18, 19, 20, 2, 9, "bloom", 5, 10, 22, 13, 23, "neighbours", 15];
 const feedOrder = (lv = difficulty) => FEED_PLAN.map((x) => (typeof x === "string" ? FEED_FAMILIES[x][lv] : x));
 const feedSibling = (i, lv = difficulty) => Object.values(FEED_FAMILIES).find((f) => f.includes(i))?.[lv] ?? i;
 const FEED_DAYS = 31;
@@ -108,6 +108,7 @@ function revealState(d, i, s = {}) {
   if (i === 15) { const m = savedDuel(d, s); return set({ picks: m.order.slice(), ordered: true, guess: m.decade }); }
   if (i === 16) return set({ board: goalModel(d).good.slice(), history: [] });
   if (i === 22) return set({ bulbs: lanternModel(d).solution.slice(), dots: [] });
+  if (i === 23) return set({ beds: bedsModel(d).rects.map((b) => b.slice()) });
   return set({});
 }
 const burstSize = (streak) => Math.min(28 + 8 * (Math.max(1, streak) - 1), 76);

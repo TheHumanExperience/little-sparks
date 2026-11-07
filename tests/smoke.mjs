@@ -150,6 +150,36 @@ for (const [engine, launch, ctxOpts] of engines) {
   check(await page.evaluate(() => !state(22).done), `${engine} lantern not solved early`);
   await page.locator(`.spark.live [data-lc="${lsol.at(-1)}"]`).tap(); await page.waitForTimeout(300);
   check(await page.evaluate(() => state(22).done && !state(22).revealed), `${engine} Lantern Lanes solves itself by tap`);
+  // Garden Beds on Tricky (7 × 7): 44px squares on an iPhone SE; drag corner to corner, the feed stays put, tap clears.
+  await page.setViewportSize({ width: 375, height: 667 }); await fresh(2); await goTo(23);
+  const gb = await page.evaluate(() => { const c = document.querySelector(".spark.live .bcell").getBoundingClientRect(), g = document.querySelector(".spark.live .bedgrid"), r = g.getBoundingClientRect(), card = document.querySelector(".spark.live").getBoundingClientRect();
+    return { w: c.width, h: c.height, inside: r.left >= card.left && r.right <= card.right, overflow: document.documentElement.scrollWidth > innerWidth, ta: getComputedStyle(g).touchAction }; });
+  check(gb.w >= 44 && gb.h >= 44 && gb.inside && !gb.overflow && gb.ta === "none", `${engine} 375×667 Tricky Garden Beds squares ${gb.w.toFixed(0)}px, fits, touch-action none`);
+  const bedDrag = async (a, b) => {
+    await page.locator(`.spark.live [data-bc="${b}"]`).scrollIntoViewIfNeeded(); await page.locator(`.spark.live [data-bc="${a}"]`).scrollIntoViewIfNeeded();
+    const p = await page.locator(`.spark.live [data-bc="${a}"]`).boundingBox(), q = await page.locator(`.spark.live [data-bc="${b}"]`).boundingBox();
+    await page.mouse.move(p.x + p.width / 2, p.y + p.height / 2); await page.mouse.down();
+    await page.mouse.move(q.x + q.width / 2, q.y + q.height / 2, { steps: 6 }); await page.mouse.up(); await page.waitForTimeout(80);
+  };
+  const scroller = await page.evaluate(() => feed.scrollTop);
+  await bedDrag(0, 8);
+  check(await page.evaluate(() => JSON.stringify(state(23).beds) === "[[0,0,2,2]]"), `${engine} beds drag marks a 2 × 2 bed`);
+  check(await page.evaluate((y) => (feed.scrollTop) === y, scroller), `${engine} beds drag doesn't scroll the feed`);
+  await bedDrag(1, 2);
+  check(await page.evaluate(() => JSON.stringify(state(23).beds) === "[[0,1,1,2]]"), `${engine} an overlapping drag replaces the old bed`);
+  check(await page.evaluate(() => { const m = bedsModel(day), ok = bedsCheck(m, state(23).beds).verdict[0]; return document.querySelectorAll(".spark.live .bed." + (ok ? "ok" : "bad")).length === 1; }), `${engine} bed shows its verdict`);
+  await page.locator('.spark.live [data-bc="2"]').tap(); await page.waitForTimeout(80);
+  check(await page.evaluate(() => state(23).beds.length === 0), `${engine} tapping a bed clears it`);
+  await page.setViewportSize(vp); await fresh(1); await goTo(23);
+  check(/seed packet/.test(await page.locator(".spark.live #rules").innerText()) && await page.locator(".spark.live #rules .bmini").count() === 2, `${engine} beds How to play has the sentence and the 3 × 3 example`);
+  const rects = await page.evaluate(() => bedsModel(day).rects), bn = await page.evaluate(() => bedsModel(day).n);
+  for (const [k, [y, x, h, w]] of rects.entries()) {
+    if (k === rects.length - 1) check(await page.evaluate(() => !state(23).done), `${engine} beds not solved early`);
+    const a = y * bn + x, b = (y + h - 1) * bn + x + w - 1;
+    if (a === b) { await page.locator(`.spark.live [data-bc="${a}"]`).tap(); await page.waitForTimeout(60); } else await bedDrag(a, b);
+  }
+  await page.waitForTimeout(300);
+  check(await page.evaluate(() => state(23).done && !state(23).revealed), `${engine} Garden Beds solves itself by drag` + (await page.evaluate(() => state(23).done ? "" : " " + JSON.stringify(state(23).beds) + " want " + JSON.stringify(bedsModel(day).rects))));
   await page.setViewportSize(vp); await fresh(0); await goTo(13);
   const ladderNextWord = () => page.evaluate(() => { const m = ladderModel(day), s = state(13); return ladderNext(s.steps.at(-1), m.end); });
   for (const ch of await ladderNextWord()) await page.locator(`.spark.live .keys [data-key="${ch}"]`).tap();

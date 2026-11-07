@@ -159,6 +159,23 @@ dialog.sheet h2 { font-size: 26px; margin: 0; }
 #rules .lmini .ldiag { opacity: 0.45; }
 #rules .lmini .lw { background: #3f4a45; border-color: #3f4a45; color: #f4efe2; font-weight: 700; }
 #rules .lmini .lwok { background: #3f7a55; border-color: #3f7a55; }
+/* Garden Beds: squares sit on an explicit grid; beds are wooden frames laid over them. */
+.bedgrid { display: grid; gap: 3px; max-width: 360px; margin: 8px auto; aspect-ratio: 1; touch-action: none; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+.bcell { position: relative; z-index: 1; min-width: 0; min-height: 0; border: 1px dashed #c9bfa6; border-radius: 6px; background: #f4ecd9; font-size: 20px; padding: 0; display: grid; place-items: center; color: #5b4630; -webkit-touch-callout: none; }
+.bcell.packet b { display: grid; place-items: center; width: 70%; height: 74%; border-radius: 5px; background: #fffdf8; border: 1.5px solid #b98a52; box-shadow: 0 1px 0 #b98a52; font-size: 18px; color: #6a4523; }
+.bcell.anchor { outline: 3px solid #b98a52; outline-offset: -3px; }
+.bed { z-index: 2; pointer-events: none; border: 4px solid #a8743f; border-radius: 9px; background: rgba(168, 116, 63, 0.08); box-shadow: inset 0 0 0 1px #d9b07a; }
+.bed.ok { border-color: #7c5a2f; background: rgba(120, 170, 90, 0.18); }
+.bed.bad { border-color: #c4473a; background: rgba(196, 71, 58, 0.08); animation: bedwobble 0.5s ease-in-out 2; }
+.bed.preview { border-style: dashed; border-color: #a8743f; background: rgba(233, 196, 106, 0.22); }
+.bedgrid.solved .bcell { background: #e3efd2; border-color: transparent; }
+@keyframes bedwobble { 25% { transform: rotate(-1.2deg); } 75% { transform: rotate(1.2deg); } }
+#rules .bedrule { display: block; margin-bottom: 8px; }
+#rules .bedpair { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+#rules .bedarrow { font-size: 20px; color: #7c5a2f; }
+#rules .bmini { display: grid; grid-template: repeat(3, 26px) / repeat(3, 26px); gap: 2px; }
+#rules .bmini > span { display: grid; place-items: center; border-radius: 4px; border: 1px dashed #c9bfa6; background: #f4ecd9; font-size: 13px; font-weight: 700; color: #6a4523; }
+#rules .bmini > i { border: 3px solid #7c5a2f; border-radius: 6px; background: rgba(120, 170, 90, 0.18); }
 .sixgrid { display: grid; grid-template-columns: repeat(6, 1fr); max-width: 330px; margin: 6px auto; border: 2px solid #6b7f62; border-radius: 8px; overflow: hidden; }
 .six { position: relative; aspect-ratio: 1; border: 0; border-right: 1px solid #cdd6c4; border-bottom: 1px solid #cdd6c4; background: #fffdf8; color: #3c5a76; font-size: 20px; padding: 0; min-width: 0; }
 .six:nth-child(6n) { border-right: 0; }
@@ -266,6 +283,7 @@ body.golden .spark:not(.dayintro):not(.shiny) .sparkinner { background: linear-g
 body.golden .feedbar .brand span { color: #c8901f; }
 @media (prefers-reduced-motion: reduce) {
   .lcell.clash { animation: none; }
+  .bed.bad { animation: none; }
   .spark.shiny .sparkinner { animation: none; }
   .toast, .milestone .mscard { animation: none; }
   .flowbar i { transition: none; }
