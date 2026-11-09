@@ -241,5 +241,148 @@
   "description": "Toronto skyline as viewed from Ireland Park}}",
   "source": "https://commons.wikimedia.org/wiki/File:Toronto_skyline_as_viewed_from_Ireland_Park.jpg",
   "bytes": 85557
+ },
+ "g-moai": {
+  "level": 0,
+  "country": "Chile",
+  "file": "File:Ahu Tongariki quince moais.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Rocío Mantis",
+  "description": "Ahu Tongariki is the largest ahu on Easter Island. Its moai were toppled during the island's civil wars and in the twentieth century the ahu was swept inland by a tsunami.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Ahu_Tongariki_quince_moais.jpg",
+  "bytes": 95994
+ },
+ "g-petronas": {
+  "level": 0,
+  "country": "Malaysia",
+  "file": "File:Kuala Lumpur Malaysia Skyline-03.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "CEphoto, Uwe Aranas",
+  "description": "Kuala Lumpur, Malaysia: Skyline of KL, seen from the pedestrian flyover over Jalan Tun Razak next to Perpustakaan Negara Malaysia (National Library of Malaysia).}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Kuala_Lumpur_Malaysia_Skyline-03.jpg",
+  "bytes": 70634
+ },
+ "g-kinderdijk": {
+  "level": 0,
+  "country": "Netherlands",
+  "file": "File:The windmills of Kinderdijk.JPG",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Tarod",
+  "description": "The windmills of Kinderdijk are one of the best known Dutch tourist sites. They have been a UNESCO World Heritage Site since 1997.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:The_windmills_of_Kinderdijk.JPG",
+  "bytes": 82278
+ },
+ "g-watarun": {
+  "level": 0,
+  "country": "Thailand",
+  "file": "File:Templo Wat Arun, Bangkok, Tailandia, 2013-08-22, DD 30.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Diego Delso",
+  "description": "Entrance doorway to ordination hall with guardians in the Temple, , .}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Templo_Wat_Arun,_Bangkok,_Tailandia,_2013-08-22,_DD_30.jpg",
+  "bytes": 118175
+ },
+ "g-perito": {
+  "level": 0,
+  "country": "Argentina",
+  "file": "File:Glaciar Perito Moreno14 - Argentina.JPG",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Diego Delso",
+  "description": "Perito Moreno Glacier, Argentina}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Glaciar_Perito_Moreno14_-_Argentina.JPG",
+  "bytes": 87593
+ },
+ "g-milford": {
+  "level": 0,
+  "country": "New Zealand",
+  "file": "File:Milford Sound in Fiordland National Park 08.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Krzysztof Golik",
+  "description": "Milford Sound in Fiordland National Park, South Island of New Zealand}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Milford_Sound_in_Fiordland_National_Park_08.jpg",
+  "bytes": 78914
+ },
+ "g-charles": {
+  "level": 0,
+  "country": "Czech Republic",
+  "file": "File:Vltava river in Prague.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Dmitry A. Mottl",
+  "description": "Panoramic view of the Vltava River flowing through Prague, Czech Republic. The photograph shows several bridges and prominent buildings in the city centre, including Charles Bridge, Mánes Bridge, Legion Bridge, Jirásek Bridge, the National Theatre, and several historic buildings along the banks of t",
+  "source": "https://commons.wikimedia.org/wiki/File:Vltava_river_in_Prague.jpg",
+  "bytes": 121332
+ },
+ "g-gyeongbok": {
+  "level": 0,
+  "country": "South Korea",
+  "file": "File:Gyeonghoeru (Royal Banquet Hall) at Gyeongbokgung Palace, Seoul.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Frank Schulenburg",
+  "description": "Royal Banquet Hall Gyeonghoeru (경회루) at Gyeongbokgung Palace (경복궁), Seoul}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Gyeonghoeru_(Royal_Banquet_Hall)_at_Gyeongbokgung_Palace,_Seoul.jpg",
+  "bytes": 75673
+ },
+ "g-borobudur": {
+  "level": 0,
+  "country": "Indonesia",
+  "file": "File:Borobudur, Java, Indonesia, 20220817 1013 8739.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Jakub Hałun",
+  "description": "View of Borobudur Temple, Java, Indonesia}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Borobudur,_Java,_Indonesia,_20220817_1013_8739.jpg",
+  "bytes": 91620
+ },
+ "m-santorini": {
+  "level": 1,
+  "country": "Greece",
+  "file": "File:1000 Three domes of Oia in Santorini Photo by Giles Laurent.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Giles Laurent",
+  "description": "Three domes of Oia in Santorini}}",
+  "source": "https://commons.wikimedia.org/wiki/File:1000_Three_domes_of_Oia_in_Santorini_Photo_by_Giles_Laurent.jpg",
+  "bytes": 88542
+ },
+ "m-iceland": {
+  "level": 1,
+  "country": "Iceland",
+  "file": "File:Skógafoss July 2014.JPG",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Martin Falbisoner",
+  "description": "Skógafoss, Iceland, July 2014}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Sk%C3%B3gafoss_July_2014.JPG",
+  "bytes": 49891
+ },
+ "m-geiranger": {
+  "level": 1,
+  "country": "Norway",
+  "file": "File:Geirangerfjord from Ørnesvingen, 2013 June.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Ximonic (Simo Räsänen)",
+  "description": "A view to Geirangerfjord from Ørnesvingen, Stranda, Møre og Romsdal, Norway in 2013 June.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Geirangerfjord_from_%C3%98rnesvingen,_2013_June.jpg",
+  "bytes": 98851
+ },
+ "m-matterhorn": {
+  "level": 1,
+  "country": "Switzerland",
+  "file": "File:CH.VS.Zermatt 2021-10-17 Matterhorn 8726.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Roy Egloff",
+  "description": "Hiking near the Matterhorn in Zermatt, Valais, Switzerland}}",
+  "source": "https://commons.wikimedia.org/wiki/File:CH.VS.Zermatt_2021-10-17_Matterhorn_8726.jpg",
+  "bytes": 115013
  }
 }
