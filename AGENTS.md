@@ -33,6 +33,7 @@ Prefer `npm run smoke` over manual screenshots. Take screenshots only when a hum
 | `dist/leaderboard.js`, `dist/leaderboard-config.js` | Optional Supabase leaderboard (🏆, name sheet, offline queue, same name = same player). Config holds the live project URL and its public `sb_publishable_` key (sent only as `apikey`, never as Bearer); never commit a secret/service_role key. Empty config hides it. Tests stub the config and never call the live project. Schema: `supabase/schema.sql`, setup: `docs/SUPABASE_SETUP.md`. |
 | `dist/style.css` | All styles; respects `prefers-reduced-motion`. |
 | `dist/valid-words.js`, `WORD-LIST-LICENSE.txt` | Word list for Letterlight and Ladder validation. |
+| `dist/favicon.svg`, `dist/favicon-32.png`, `dist/apple-touch-icon.png` | Site icons, copied from the logo masters in `brand/`. |
 | `verify*.cjs` | Node vm checks (see the README table). `tests/smoke.mjs` is the browser smoke test. |
 | `tools/` | Offline content tools. `history/*.bundle` holds the original Sites commits (archival). |
 
