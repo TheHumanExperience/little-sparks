@@ -185,3 +185,7 @@ The existing Sites hosting configuration is retained in `.openai/hosting.json`.
 This GitHub copy is not automatically synchronized with future Sites changes.
 
 Photo source links and credits are preserved in `dist/photos.js`. Third-party assets retain their applicable rights and attribution requirements.
+
+## Copyright
+
+© 2026 Devansh Sanghvi. All rights reserved. This code is public so it can be viewed, but it isn't open source: see [LICENSE](LICENSE) for what that covers and for the third-party material it excludes.

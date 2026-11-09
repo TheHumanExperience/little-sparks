@@ -1,0 +1,18 @@
+Copyright (c) 2026 Devansh Sanghvi. All rights reserved.
+
+This repository's source code, puzzles, written content, and the Little Sparks
+logo are the property of the copyright holder. No licence is granted to copy,
+modify, publish, distribute, sell, or create derivative works from them without
+prior written permission.
+
+The rights GitHub's Terms of Service give other users to view and fork a public
+repository on GitHub still apply. They do not grant any permission beyond that.
+
+Third-party material is not covered by this notice and stays under its own terms:
+
+- The word list in dist/valid-words.js is under the MIT License. See
+  dist/WORD-LIST-LICENSE.txt.
+- Each photograph in dist/photos/ is under the public-domain status or Creative
+  Commons licence recorded with its credit and source in dist/photos.js.
+- The DM Sans and Libre Caslon Display fonts are loaded from Google Fonts under
+  their own licences.
