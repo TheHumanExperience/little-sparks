@@ -272,7 +272,7 @@ Soft, unglossy, and pressable, like card stock.
 
 ### Navigation
 
-The header holds the lowercase ✳ little sparks wordmark on the left and a row of pills on the right. A 4px flow bar sits on its bottom edge. Pills tighten and the "Today" label drops away on the narrowest phones. The wordmark shrinks to 16px at 400px wide and below, and at 380px and below only the ✳ remains, in a 44px tap area with the full name kept for screen readers.
+The header holds the lowercase ✳ little sparks wordmark on the left and a row of pills on the right. A 4px flow bar sits on its bottom edge. Pills tighten and the "Today" label drops away on the narrowest phones. The day sheet opens with one primary button, "Next puzzle to play", which names the card it opens; on a solved card the centre foot link reads "Next to play ↓". Day rows count what is solved, never what is left. The wordmark shrinks to 16px at 400px wide and below, and at 380px and below only the ✳ remains, in a 44px tap area with the full name kept for screen readers.
 
 ### Choice Tiles
 

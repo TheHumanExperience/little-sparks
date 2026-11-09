@@ -20,6 +20,7 @@ Tap the Little Sparks logo at any time to go back to the first card of today.
   - If the puzzle isn't solved yet, it clears at once and an Undo button stays for 5 seconds.
   - If the puzzle is solved, you're asked to confirm first. Your solve stays counted, so the solve count, streak, flow, stickers and milestones don't change.
   - Solving it again shows a small "Solved again" celebration and awards nothing, and hints you use while replaying don't drain the flow bar.
+- **Next puzzle to play.** Tap the today count in the header to open the day sheet. Its top button, "Next puzzle to play", names the next card that isn't solved yet, after the card you're on (older days next, then back round to today), and takes you there. Tapping a day opens its first card still to play. On a solved card, "Next spark ↓" becomes "Next to play ↓" and skips the solved cards in between. Revealed answers count as still to play. Day rows show only what's solved, never what's "left", so the archive never reads as a backlog. `feedNextUnsolved` in `dist/feed.js` finds the card; `verify-feed.cjs` and the smoke test check it.
 
 With reduced motion turned on there's no confetti and no shimmer, and the logo jumps straight to the top instead of scrolling.
 

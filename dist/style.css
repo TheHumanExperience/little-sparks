@@ -380,3 +380,8 @@ body.golden .feedbar .brand span { color: #c8901f; }
 .placeopts .ruled { opacity: .45; text-decoration: line-through; }
 .placeopts .right { background: #52775a; border-color: #52775a; color: #fff; }
 @media (max-width: 520px) { .placeframe img { height: 240px; } }
+
+/* Day sheet: jump to the next unsolved puzzle */
+.nextunsolved .btn { width: 100%; min-height: 52px; display: flex; flex-direction: column; align-items: center; gap: 2px; margin: 4px 0 10px; }
+.nextunsolved .btn small { font-size: 12px; font-weight: 400; opacity: .85; }
+.nextunsolved .allsolved { text-align: center; color: #355a40; font-weight: 600; }

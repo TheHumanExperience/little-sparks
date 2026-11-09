@@ -108,6 +108,17 @@ for (const [engine, launch, ctxOpts] of engines) {
   await solvePocket();
   check(await page.locator(".spark.live .donebadge:not([hidden])").count() === 1, `${engine} Pocket Sudoku solves by touch`);
   check(/·\s*1\/\d+/.test(await page.locator("#todayPill").innerText()), `${engine} header counts the solve`);
+  // A solved card's Next skips solved cards; the day sheet jumps to the next unsolved one.
+  check((await page.locator(".spark.live .nextspark").innerText()).includes("Next to play"), `${engine} solved card offers Next to play`);
+  const order = await page.evaluate(() => { const o = feedOrder(); all[progressKey(today())].games[o[2]] = { done: true }; persist(); return o; });
+  await page.locator(".spark.live .nextspark").tap();
+  await page.waitForSelector(`.spark.live[data-idx="${order[3]}"]`, { timeout: 5000 }).catch(() => {});
+  check(await page.evaluate((i) => +document.querySelector(".spark.live")?.dataset.idx === i, order[3]), `${engine} Next unsolved skips a solved card`);
+  await page.locator("#todayPill").tap();
+  check((await page.locator("#nextUnsolved .btn").innerText()).includes("Next puzzle to play"), `${engine} day sheet offers the next puzzle to play`);
+  await page.locator("#nextUnsolved .btn").tap();
+  await page.waitForSelector(`.spark.live[data-idx="${order[4]}"]`, { timeout: 5000 }).catch(() => {});
+  check(await page.evaluate((i) => +document.querySelector(".spark.live")?.dataset.idx === i && !document.querySelector("#daysSheet").open, order[4]), `${engine} day sheet jumps to the next unsolved card`);
   // The brand returns to today's first card.
   await page.locator(".brand").tap();
   await page.waitForTimeout(1000);

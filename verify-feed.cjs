@@ -41,6 +41,24 @@ for (const from of ["2026-01-01", "2026-03-29", "2026-10-25", "2026-12-31"]) {
 if (window.FEED_MODE) fail("feed.js must stay inert without #feed");
 const d = "2026-05-05"; all[progressKey(d)] = { games: { 0: { done: true }, 3: { done: true }, 9: { done: true }, 16: { done: true } } };
 if (feedCount(d) !== 4) fail("feedCount should count all 19 cards");
+// Next unsolved: skips solved cards, ignores revealed answers, moves on to older days, wraps to today.
+{ const from = "2026-06-10", order = feedOrder(), y = feedDate(1, from), keep = JSON.stringify(all);
+  for (const k of Object.keys(all)) delete all[k];
+  let n = feedNextUnsolved(undefined, undefined, from);
+  if (n.d !== from || n.i !== order[0] || n.offset !== 0) fail("next unsolved should start at today's first card");
+  all[progressKey(from)] = { games: { [order[1]]: { done: true }, [order[2]]: { credit: true }, [order[3]]: { done: true, revealed: 1 } } };
+  n = feedNextUnsolved(from, order[0], from);
+  if (n.i !== order[3]) fail("next unsolved should skip solved and credit cards but not revealed ones: " + n.i);
+  all[progressKey(from)].games = Object.fromEntries(order.map((i) => [i, { done: true }]));
+  n = feedNextUnsolved(from, order[5], from);
+  if (n.d !== y || n.i !== order[0] || n.offset !== 1) fail("next unsolved should move on to yesterday");
+  all[progressKey(y)] = { games: Object.fromEntries(order.slice(0, 4).map((i) => [i, { done: true }])) };
+  delete all[progressKey(from)].games[order[2]];
+  n = feedNextUnsolved(feedDate(FEED_DAYS - 1, from), order.at(-1), from);
+  if (n.d !== from || n.i !== order[2]) fail("next unsolved should wrap round to today");
+  for (let k = 0; k < FEED_DAYS; k++) all[progressKey(feedDate(k, from))] = { games: Object.fromEntries(order.map((i) => [i, { done: true }])) };
+  if (feedNextUnsolved(from, order[0], from) !== null) fail("next unsolved should be null when everything is solved");
+  for (const k of Object.keys(all)) delete all[k]; Object.assign(all, JSON.parse(keep)); }
 all[progressKey(d)].games[7] = { done: true };
 if (feedCount(d) !== 4) fail("old Starlines saves must not count or break");
 if (Object.entries(all[progressKey(d)].games).filter(([i, g]) => +i < 5 && g.done).length !== 2) fail("legacy 5-game count changed");
