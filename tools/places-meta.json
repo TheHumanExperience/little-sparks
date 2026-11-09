@@ -428,5 +428,93 @@
   "description": "Hawa Mahal (The Palace of Winds) in Jaipur}}",
   "source": "https://commons.wikimedia.org/wiki/File:20191218_Pa%C5%82ac_Wiatr%C3%B3w_w_Jaipurze_1129_9124.jpg",
   "bytes": 115421
+ },
+ "m-boudha": {
+  "level": 1,
+  "country": "Nepal",
+  "file": "File:Boudhanath Stupa view from Kapan Height-IMG 9815.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Bijay Chaurasia",
+  "description": "Boudhanath Stupa view from Kapan Height}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Boudhanath_Stupa_view_from_Kapan_Height-IMG_9815.jpg",
+  "bytes": 63496
+ },
+ "m-cappadocia": {
+  "level": 1,
+  "country": "Turkey",
+  "file": "File:Hot air balloon in Cappadocia 02.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Bernard Gagnon",
+  "description": "Hot air balloon in Cappadocia, Turkey}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Hot_air_balloon_in_Cappadocia_02.jpg",
+  "bytes": 108148
+ },
+ "m-uyuni": {
+  "level": 1,
+  "country": "Bolivia",
+  "file": "File:Salar de Uyuni, Bolivia, 2016-02-04, DD 16-18 HDR.JPG",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Diego Delso",
+  "description": "Reflections in the Uyuni salt flat during sunrise, Daniel Campos Province, Potosí Department, southwestern Bolivia, not far from the crest of the Andes. This salt flat is, with a surface of , the world's largest, and during the rain saison (December-February) offers spectacular reflexions.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Salar_de_Uyuni,_Bolivia,_2016-02-04,_DD_16-18_HDR.JPG",
+  "bytes": 31568
+ },
+ "m-dubrovnik": {
+  "level": 1,
+  "country": "Croatia",
+  "file": "File:Dubrovnik Old Town 1.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "kallerna",
+  "description": "Morning view of the Old Town of Dubrovnik and its city walls, an UNESCO Heritage Site since 1979.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Dubrovnik_Old_Town_1.jpg",
+  "bytes": 103095
+ },
+ "m-lisbon": {
+  "level": 1,
+  "country": "Portugal",
+  "file": "File:Lisbon in a day - Tram 28 Alfama (39271341600).jpg",
+  "licence": "CC BY 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+  "artist": "Michael Meraner",
+  "description": "Photos from my trip to Lisbon in March 2018.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Lisbon_in_a_day_-_Tram_28_Alfama_(39271341600).jpg",
+  "bytes": 119191
+ },
+ "m-moher": {
+  "level": 1,
+  "country": "Ireland",
+  "file": "File:Ireland Cliffs of Moher BW 2025-09-11 14-27-51.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Berthold Werner",
+  "description": "Ireland, Cliffs of Moher, O'Brien's Tower}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Ireland_Cliffs_of_Moher_BW_2025-09-11_14-27-51.jpg",
+  "bytes": 62625
+ },
+ "m-stonehenge": {
+  "level": 1,
+  "country": "United Kingdom",
+  "file": "File:Stonehenge from the north.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Sumit Surai",
+  "description": "Stonehenge",
+  "source": "https://commons.wikimedia.org/wiki/File:Stonehenge_from_the_north.jpg",
+  "bytes": 69460
+ },
+ "m-hallstatt": {
+  "level": 1,
+  "country": "Austria",
+  "file": "File:Panoramic view of Hallstatt village and shoreline from lake.jpg",
+  "licence": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "artist": "David Kernan",
+  "description": "A panoramic view of Hallstatt, Austria, looking across Hallstätter See. This wide-angle shot encompasses a significant stretch of the village waterfront, illustrating how the settlement is built into the steep base of the Dachstein Alps. It features the Evangelical Church, the boat docks, and the su",
+  "source": "https://commons.wikimedia.org/wiki/File:Panoramic_view_of_Hallstatt_village_and_shoreline_from_lake.jpg",
+  "bytes": 66189
  }
 }
