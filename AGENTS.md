@@ -63,7 +63,7 @@ Prefer `npm run smoke` over manual screenshots. Take screenshots only when a hum
 - Rewards live in `little-sparks-rewards-v1`: `{muted, flow, stickers, reveals:{date, used:[[],[],[]]}}`.
 - Never rename keys or change the meaning of saved fields. Migrate by reading old shapes, for example:
   - Story Shuffle `order`.
-  - The legacy Killer save without `hard`.
+  - The legacy Killer save without `hard`, and Tricky Killer saves with `hard: 1` (first Tricky generator; new games save `hard: 2`).
   - The legacy Mirror Garden save (mirrors placed or solved) without `v2`.
   - The legacy Aha card at index 3 (`ahaLegacy`).
   - Time Lens `photoIds`; its old `answers[].points` are ignored (Time Lens has no score).
