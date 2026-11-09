@@ -982,19 +982,27 @@ function savedDuel(d, s) {
   Object.assign(s, { duelIds: m.photos.map((p) => p.image), duelDecade: m.decade, duelOptions: m.options });
   return m;
 }
+// Judges a decade pick for the middle photo: "right", or which way to look ("earlier"/"later").
+function duelTry(s, m, y) {
+  s.wrongDecades ||= [];
+  if (y === m.decade) { s.guess = y; return "right"; }
+  if (!s.wrongDecades.includes(y)) s.wrongDecades.push(y);
+  return y > m.decade ? "earlier" : "later";
+}
 function timeDuel(i) {
   const s = state(i), m = savedDuel(day, s);
   s.picks ||= [];
   s.misses ??= 0;
-  $("#rules").textContent = "Three real archive photographs. Tap them from oldest to newest. Then guess the decade of the middle one — you get one try.";
+  s.wrongDecades ||= [];
+  $("#rules").textContent = "Three real archive photographs. Tap them from oldest to newest. Then find the decade of the middle one. A miss tells you whether to go earlier or later.";
   function draw() {
     const ordered = s.ordered || s.done, mid = m.photos[m.middle];
     $("#board").innerHTML = `<div class="duel">${m.photos.map((p, k) => {
       const at = s.picks.indexOf(k), rank = m.order.indexOf(k);
       return `<button class="duelphoto ${at >= 0 ? "picked" : ""} ${ordered && k === m.middle ? "middle" : ""}" data-duel="${k}" ${ordered ? "disabled" : ""}><img src="${p.image}" alt="${hideYears(p.alt)}" loading="lazy"><span class="duelbadge">${ordered ? rank + 1 : at >= 0 ? at + 1 : ""}</span>${s.done ? `<span class="duelyear">${p.year}</span>` : ""}</button>`;
     }).join("")}</div>` +
-      (ordered && !s.done ? `<p class="instruction">Now: which decade is the middle photo (<b>2</b>) from?</p><div class="decades">${m.options.map((y) => `<button class="btn secondary" data-decade="${y}">${y}s</button>`).join("")}</div>` : "") +
-      (s.done ? `<div class="reveal"><p>${s.revealed ? `The middle photo is from the ${m.decade}s.` : s.guess === m.decade ? "Right decade! ★★★" : `It was the ${m.decade}s.${s.misses ? "" : " Your order was perfect though!"}`}</p>${m.order.map((k) => `<p class="small"><b>${m.photos[k].year} · ${m.photos[k].title}</b> — ${m.photos[k].story}${m.photos[k].why ? ` <i>Why it mattered: ${m.photos[k].why}</i>` : ""}<br><a href="${m.photos[k].source}" target="_blank" rel="noopener">${m.photos[k].credit}</a></p>`).join("")}</div>` : "") +
+      (ordered && !s.done ? `<p class="instruction">Now: which decade is the middle photo (<b>2</b>) from?</p><div class="decades">${m.options.map((y) => `<button class="btn secondary ${s.wrongDecades.includes(y) ? "ruled" : ""}" data-decade="${y}" ${s.wrongDecades.includes(y) ? "disabled" : ""}>${y}s</button>`).join("")}</div>` : "") +
+      (s.done ? `<div class="reveal"><p>${s.revealed ? `The middle photo is from the ${m.decade}s.` : s.guess === m.decade ? `The ${m.decade}s! ${["★★★", "★★", "★"][Math.min(2, s.wrongDecades.length)]}` : `It was the ${m.decade}s.`}</p>${m.order.map((k) => `<p class="small"><b>${m.photos[k].year} · ${m.photos[k].title}</b> — ${m.photos[k].story}${m.photos[k].why ? ` <i>Why it mattered: ${m.photos[k].why}</i>` : ""}<br><a href="${m.photos[k].source}" target="_blank" rel="noopener">${m.photos[k].credit}</a></p>`).join("")}</div>` : "") +
       (!ordered ? `<p class="small">${s.picks.length ? `${s.picks.length} of 3 chosen` : "Tap the oldest first"}${s.misses ? ` · ${s.misses} reshuffle${s.misses === 1 ? "" : "s"}` : ""}</p>` : "");
     $("#board").querySelectorAll("[data-duel]").forEach((b) => (b.onclick = () => {
       if (ordered) return;
@@ -1008,10 +1016,13 @@ function timeDuel(i) {
       persist();
       draw();
     }));
+    // Only the right decade solves it. A miss is ruled out and points earlier or later.
     $("#board").querySelectorAll("[data-decade]").forEach((b) => (b.onclick = () => {
-      s.guess = +b.dataset.decade;
+      if (s.done) return;
+      const y = +b.dataset.decade, got = duelTry(s, m, y);
       persist();
-      sparkSolved(s.guess === m.decade ? `Yes — the ${m.decade}s! A sharp eye.` : `So close — it was the ${m.decade}s.`);
+      if (got === "right") sparkSolved(s.wrongDecades.length ? `Yes — the ${m.decade}s! You got there.` : `Yes — the ${m.decade}s, first try! A sharp eye.`);
+      else msg(`Not the ${y}s. Look ${got}.`);
       draw();
     }));
   }

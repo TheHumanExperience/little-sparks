@@ -220,6 +220,7 @@ dialog.sheet h2 { font-size: 26px; margin: 0; }
 .duelbadge:empty { display: none; }
 .duelyear { position: absolute; bottom: 0; left: 0; right: 0; background: #000a; color: white; font-weight: 700; font-size: 13px; padding: 3px; }
 .decades { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.decades .ruled { opacity: .45; text-decoration: line-through; }
 .neighbourgrid.solved .neighbour { background: #eaf2e2; }
 @media (max-width: 380px) {
   .sparktitle { font-size: 26px; }
@@ -364,3 +365,18 @@ body.golden .feedbar .brand span { color: #c8901f; }
 .pills { flex: none; }
 @media (max-width: 400px) { body.feedmode .feedbar .brand { font-size: 16px; } body.feedmode .feedbar .brand span { font-size: 22px; margin-right: 4px; } }
 @media (max-width: 380px) { body.feedmode .feedbar .brand { display: inline-flex; align-items: center; min-width: 44px; min-height: 44px; font-size: 0; letter-spacing: 0; } body.feedmode .feedbar .brand span { font-size: 26px; margin-right: 0; } }
+
+/* Time Lens tries and found photos */
+.lenstries { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 14px 0 0; }
+.lenstries li { font-size: 13px; padding: 5px 10px; border-radius: 999px; background: #eceee3; color: #4d5c50; }
+.lenstries li.hit { background: #52775a; color: #fff; }
+.reveal.found { background: #e3ecd6; box-shadow: inset 0 0 0 2px #9dbb8a; }
+.recap.found strong { color: #385f48; }
+
+/* Where in the World */
+.placeframe img { height: 300px; object-fit: cover; }
+.placeopts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 14px 0 4px; }
+.placeopts .choice { margin: 0; min-height: 48px; text-align: center; font-size: 15px; }
+.placeopts .ruled { opacity: .45; text-decoration: line-through; }
+.placeopts .right { background: #52775a; border-color: #52775a; color: #fff; }
+@media (max-width: 520px) { .placeframe img { height: 240px; } }

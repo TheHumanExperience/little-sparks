@@ -95,6 +95,14 @@ difficulty = 1;
   // A save pinned to a photo since deleted from the bank still loads, with its same-year stand-in.
   const gone = Object.keys(REMOVED_PHOTOS)[0], pin = { duelIds: [gone, ...fresh.duelIds.slice(1)], duelDecade: fresh.duelDecade, duelOptions: fresh.duelOptions };
   if (savedDuel(d, pin).photos.some((p) => !p || p.image === gone)) fail("removed photo save must fall back"); }
+// Only the right decade solves a Duel; a miss points the right way and is remembered.
+for (const lvl of [0, 1, 2]) { difficulty = lvl;
+  for (const d of days.slice(0, 60)) { const m = duelModel(d), s = {};
+    if (!m.options.includes(m.decade) || new Set(m.options).size !== m.options.length) fail("duel decade options");
+    if (Math.floor(m.photos[m.middle].year / 10) * 10 !== m.decade) fail("duel decade is not the middle photo's");
+    for (const y of m.options) if (y !== m.decade && duelTry(s, m, y) !== (y > m.decade ? "earlier" : "later")) fail("duel miss direction");
+    if (s.guess !== undefined || s.wrongDecades.length !== m.options.length - 1) fail("duel miss must not solve");
+    if (duelTry(s, m, m.decade) !== "right" || s.guess !== m.decade) fail("duel right decade"); } }
 // Tricky Killer saves started before the harder generator keep their original puzzle.
 difficulty = 2;
 { const d = "2026-05-04", old = { values: legacyKillerModel(d, 2).givens.slice() }, fresh = {};

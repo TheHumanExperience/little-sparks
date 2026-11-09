@@ -1,0 +1,80 @@
+{
+ "_skip": {},
+ "g-eiffel": {
+  "level": 0,
+  "country": "France",
+  "file": "File:Paris - The Eiffel Tower in spring - 2307.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Jorge Royan",
+  "description": "The Eiffel Tower in spring, Paris, France.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Paris_-_The_Eiffel_Tower_in_spring_-_2307.jpg",
+  "bytes": 197445
+ },
+ "g-taj": {
+  "level": 0,
+  "country": "India",
+  "file": "File:Taj Mahal (Edited).jpeg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Yann; edited by Jim Carter",
+  "description": "Taj Mahal, Agra. FP on the English Wikipedia.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Taj_Mahal_(Edited).jpeg",
+  "bytes": 71691
+ },
+ "g-liberty": {
+  "level": 0,
+  "country": "United States",
+  "file": "File:Statue of Liberty and a sightseeing boat, Liberty Island, New York.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Christian David",
+  "description": "The Statue of Liberty (Bartholdi, 1886) on Liberty Island; a sightseeing boat passes in the foreground with the New Jersey skyline behind.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Statue_of_Liberty_and_a_sightseeing_boat,_Liberty_Island,_New_York.jpg",
+  "bytes": 76191
+ },
+ "g-colosseum": {
+  "level": 0,
+  "country": "Italy",
+  "file": "File:Colosseum of Rome and Roman forum.jpg",
+  "licence": "CC0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "artist": "Wilfredo Rafael Rodriguez Hernandez",
+  "description": "",
+  "source": "https://commons.wikimedia.org/wiki/File:Colosseum_of_Rome_and_Roman_forum.jpg",
+  "bytes": 93111
+ },
+ "g-greatwall": {
+  "level": 0,
+  "country": "China",
+  "file": "File:Great Wall of China July 2006.JPG",
+  "licence": "CC0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "artist": "Velatrix",
+  "description": "The Great Wall of China at Mutianyu, near Beijing, in July 2006.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Great_Wall_of_China_July_2006.JPG",
+  "bytes": 121787
+ },
+ "g-opera": {
+  "level": 0,
+  "country": "Australia",
+  "file": "File:Sydney Opera House - Dec 2008.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Diliff",
+  "description": "A exposure blended photo of the Sydney Opera House, as viewed from the Sydney Harbour Bridge. Taken by myself with a Canon 5D and 100mm f/2.8 macro lens.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Sydney_Opera_House_-_Dec_2008.jpg",
+  "bytes": 62410
+ },
+ "g-redeemer": {
+  "level": 0,
+  "country": "Brazil",
+  "file": "File:Redentor Over Clouds 1.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Donatas Dabravolskas",
+  "description": "Statue Christ the Redeemer over the clouds}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Redentor_Over_Clouds_1.jpg",
+  "bytes": 48600
+ }
+}
