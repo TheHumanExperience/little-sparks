@@ -87,5 +87,159 @@
   "description": "Machu Picchu, Peru}}",
   "source": "https://commons.wikimedia.org/wiki/File:Machu_Picchu,_Per%C3%BA,_2015-07-30,_DD_61-64_PAN.jpg",
   "bytes": 48151
+ },
+ "g-giza": {
+  "level": 0,
+  "country": "Egypt",
+  "file": "File:All Gizah Pyramids.jpg",
+  "licence": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+  "artist": "Ricardo Liberato",
+  "description": "All Giza Pyramids in one shot.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:All_Gizah_Pyramids.jpg",
+  "bytes": 68583
+ },
+ "g-bigben": {
+  "level": 0,
+  "country": "United Kingdom",
+  "file": "File:Palace of Westminster, London - Feb 2007.jpg",
+  "licence": "CC BY-SA 2.5",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5/",
+  "artist": "Diliff",
+  "description": "The Palace of Westminster at night as seen from the opposite side of the River Thames. Victoria Tower and the House of Lords is on the left. The Clock Tower of Big Ben and the House of Commons is on the right. The spire left of centre is the 300ft ventilation chimney above the central lobby. The twi",
+  "source": "https://commons.wikimedia.org/wiki/File:Palace_of_Westminster,_London_-_Feb_2007.jpg",
+  "bytes": 39655
+ },
+ "g-petra": {
+  "level": 0,
+  "country": "Jordan",
+  "file": "File:Restauration du Khasne Petra.jpg",
+  "licence": "Public domain",
+  "licenseUrl": "https://en.wikipedia.org/wiki/Public_domain",
+  "artist": "* Hittorff, Jacques Ignace, 1792-1867 (Artist)",
+  "description": "1830 lithograph of the architectural drawing \"Restauration du Khasné [al-Khazneh = \"Treasury\"] (Petra).\" in the New York Public Library Digital Collections.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Restauration_du_Khasne_Petra.jpg",
+  "bytes": 46695
+ },
+ "g-angkor": {
+  "level": 0,
+  "country": "Cambodia",
+  "file": "File:Angkor Wat in Cambodia.jpg",
+  "licence": "CC0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "artist": "Martaapue",
+  "description": "Sunrise in Angkor Wat, Cambodia.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Angkor_Wat_in_Cambodia.jpg",
+  "bytes": 50351
+ },
+ "g-fuji": {
+  "level": 0,
+  "country": "Japan",
+  "file": "File:Chureito Pagoda and Mount Fuji 2023-03-07.jpg",
+  "licence": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "artist": "Stjepko Krehula",
+  "description": "Chureito Pagoda and Mount Fuji}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Chureito_Pagoda_and_Mount_Fuji_2023-03-07.jpg",
+  "bytes": 84876
+ },
+ "g-sagrada": {
+  "level": 0,
+  "country": "Spain",
+  "file": "File:Sagrada Familia, Barcelona (P1170692).jpg",
+  "licence": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+  "artist": "Matti Blume",
+  "description": "",
+  "source": "https://commons.wikimedia.org/wiki/File:Sagrada_Familia,_Barcelona_(P1170692).jpg",
+  "bytes": 155519
+ },
+ "g-neuschwanstein": {
+  "level": 0,
+  "country": "Germany",
+  "file": "File:Neuschwanstein Castle 2024.jpg",
+  "licence": "CC0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "artist": "Wilfredo Rafael Rodriguez Hernandez",
+  "description": "",
+  "source": "https://commons.wikimedia.org/wiki/File:Neuschwanstein_Castle_2024.jpg",
+  "bytes": 88167
+ },
+ "g-basil": {
+  "level": 0,
+  "country": "Russia",
+  "file": "File:Вид на Исторический музей в сторону Красной площади.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Олег Токарев",
+  "description": "View of the State Historical Museum in front of the Red Square. Moscow, Russia.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:%D0%92%D0%B8%D0%B4_%D0%BD%D0%B0_%D0%98%D1%81%D1%82%D0%BE%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9_%D0%BC%D1%83%D0%B7%D0%B5%D0%B9_%D0%B2_%D1%81%D1%82%D0%BE%D1%80%D0%BE%D0%BD%D1%83_%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%B9_%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D0%B8.jpg",
+  "bytes": 105853
+ },
+ "g-chichen": {
+  "level": 0,
+  "country": "Mexico",
+  "file": "File:Chichen Itza 2.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Daniel Schwen",
+  "description": "El Castillo (pyramidd of Kukulcán) in Chichén Itzá}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Chichen_Itza_2.jpg",
+  "bytes": 44533
+ },
+ "g-burj": {
+  "level": 0,
+  "country": "United Arab Emirates",
+  "file": "File:Burj Khalifa from the sea, Dubai.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Jpbowen",
+  "description": "View of the Burj Khalifa from a ferry at sea, Dubai, UAE.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Burj_Khalifa_from_the_sea,_Dubai.jpg",
+  "bytes": 46243
+ },
+ "g-acropolis": {
+  "level": 0,
+  "country": "Greece",
+  "file": "File:Attica 06-13 Athens 50 View from Philopappos - Acropolis Hill.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "",
+  "description": "View from Philopappos Hill in Athens (Attica, Greece) — Acropolis of Athens}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Attica_06-13_Athens_50_View_from_Philopappos_-_Acropolis_Hill.jpg",
+  "bytes": 98641
+ },
+ "g-hagia": {
+  "level": 0,
+  "country": "Turkey",
+  "file": "File:Hagia Sophia Mars 2013.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Arild Vågen",
+  "description": "Hagia Sophia}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Hagia_Sophia_Mars_2013.jpg",
+  "bytes": 92375
+ },
+ "g-marina": {
+  "level": 0,
+  "country": "Singapore",
+  "file": "File:ArtScience Museum, Marina Bay Sands, Singapore.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Basile Morin",
+  "description": "ArtScience Museum, Marina Bay Sands, in the late afternoon, in front of the skyline of the Central Business District, Singapore. Architect : Moshe Safdie.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:ArtScience_Museum,_Marina_Bay_Sands,_Singapore.jpg",
+  "bytes": 74427
+ },
+ "g-cntower": {
+  "level": 0,
+  "country": "Canada",
+  "file": "File:Toronto skyline as viewed from Ireland Park.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Maksim Sokolov (maxergon.com)",
+  "description": "Toronto skyline as viewed from Ireland Park}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Toronto_skyline_as_viewed_from_Ireland_Park.jpg",
+  "bytes": 85557
  }
 }
