@@ -552,8 +552,9 @@ function sixCount(grid, cages = null, limit = 2, found = null) {
 }
 // Human-style solve: repeatedly fill singles. A candidate must avoid its row, column, box and
 // cage digits, and leave a cage sum the remaining cells can still reach with distinct digits.
-// Naked singles only, or with `hidden` also hidden singles. Returns how many cells stay empty.
-function sixSingles(givens, cages = null, hidden = false) {
+// Naked singles only, or with `hidden` also hidden singles. Returns how many cells stay empty
+// (or, with `list`, which cells).
+function sixSingles(givens, cages = null, hidden = false, list = false) {
   const g = givens.slice(), cageOf = [];
   if (cages) cages.forEach((c, k) => c.cells.forEach((i) => (cageOf[i] = k)));
   const reach = (left, need, used) => {
@@ -589,7 +590,7 @@ function sixSingles(givens, cages = null, hidden = false) {
       if (spots.length === 1) { g[spots[0]] = v; progress = true; }
     }
   }
-  return g.filter((v) => !v).length;
+  return list ? [...Array(36).keys()].filter((i) => !g[i]) : g.filter((v) => !v).length;
 }
 function sudokuSixModel(d) {
   const r = rng(puzzleSeed(d) + "sudoku-six"), sol = sixSolution(r), givens = sol.slice(), want = [20, 15, 11][difficulty];
@@ -652,10 +653,14 @@ function legacyKillerModel(d, lvl = difficulty) {
   return { sol, givens, cages, cageId };
 }
 // Tricky: big cages (3–4 cells, never a single), very few givens, unique, and naked
-// singles alone must stall. Seeded attempts run in order, so the pick is deterministic:
-// the first attempt with ≤2 givens wins, otherwise the one with the fewest givens.
-const KILLER_HARD = { sizes: [3, 3, 3, 4], maxGivens: 2, cap: 6, attempts: 30 };
-function hardKillerModel(d) {
+// singles alone must stall. Seeded attempts run in order, so the pick is deterministic.
+// v1 (games started before 2026-11-09): the first attempt with ≤2 givens wins, otherwise the
+// one with the fewest givens; most of these needed guessing or deep cage logic.
+// v2: after uniqueness, add givens from the cells hidden singles can't reach until hidden
+// singles (with cage sums) finish the grid, so it is always solvable by steady logic. The first
+// attempt with ≤ maxGivens2 wins, otherwise the one with the fewest givens.
+const KILLER_HARD = { sizes: [3, 3, 3, 4], maxGivens: 2, maxGivens2: 4, cap: 6, cap2: 8, attempts: 30 };
+function hardKillerModel(d, v = 2) {
   let best = null;
   for (let attempt = 0; attempt < KILLER_HARD.attempts; attempt++) {
     const r = rng(puzzleSeed(d) + "killer-hard-" + attempt), sol = sixSolution(r);
@@ -696,17 +701,27 @@ function hardKillerModel(d) {
       givens[i] = sol[i];
     }
     if (!unique) continue;
+    if (v >= 2) {
+      // Give a digit from the cells hidden singles leave empty until they finish the grid.
+      for (let left; (left = sixSingles(givens, live, true, true)).length && n < KILLER_HARD.cap2; n++) {
+        const i = left[Math.floor(r() * left.length)];
+        givens[i] = sol[i];
+      }
+      if (sixSingles(givens, live, true)) continue;
+    }
     const m = { sol, givens, cages: live, cageId: id };
     const stall = sixSingles(givens, live) > 0, score = n + (stall ? 0 : 100);
-    if (stall && n <= KILLER_HARD.maxGivens) return m;
+    if (stall && n <= (v >= 2 ? KILLER_HARD.maxGivens2 : KILLER_HARD.maxGivens)) return m;
     if (!best || score < best.score) best = { score, m };
   }
   return best ? best.m : legacyKillerModel(d, 2);
 }
-// A Killer Six game keeps the generator it was started with.
+// A Killer Six game keeps the generator it was started with: no `hard` = legacy,
+// hard 1 = the first Tricky generator, hard 2 = the current one.
 function savedKiller(d, s) {
   if (difficulty === 2 && s.values && !s.hard) return legacyKillerModel(d, 2);
-  if (difficulty === 2) s.hard = 1;
+  if (difficulty === 2 && s.values && s.hard === 1) return hardKillerModel(d, 1);
+  if (difficulty === 2) s.hard = 2;
   return killerSixModel(d);
 }
 function sixGame(i, m, intro) {
@@ -967,19 +982,27 @@ function savedDuel(d, s) {
   Object.assign(s, { duelIds: m.photos.map((p) => p.image), duelDecade: m.decade, duelOptions: m.options });
   return m;
 }
+// Judges a decade pick for the middle photo: "right", or which way to look ("earlier"/"later").
+function duelTry(s, m, y) {
+  s.wrongDecades ||= [];
+  if (y === m.decade) { s.guess = y; return "right"; }
+  if (!s.wrongDecades.includes(y)) s.wrongDecades.push(y);
+  return y > m.decade ? "earlier" : "later";
+}
 function timeDuel(i) {
   const s = state(i), m = savedDuel(day, s);
   s.picks ||= [];
   s.misses ??= 0;
-  $("#rules").textContent = "Three real archive photographs. Tap them from oldest to newest. Then guess the decade of the middle one — you get one try.";
+  s.wrongDecades ||= [];
+  $("#rules").textContent = "Three real archive photographs. Tap them from oldest to newest. Then find the decade of the middle one. A miss tells you whether to go earlier or later.";
   function draw() {
     const ordered = s.ordered || s.done, mid = m.photos[m.middle];
     $("#board").innerHTML = `<div class="duel">${m.photos.map((p, k) => {
       const at = s.picks.indexOf(k), rank = m.order.indexOf(k);
       return `<button class="duelphoto ${at >= 0 ? "picked" : ""} ${ordered && k === m.middle ? "middle" : ""}" data-duel="${k}" ${ordered ? "disabled" : ""}><img src="${p.image}" alt="${hideYears(p.alt)}" loading="lazy"><span class="duelbadge">${ordered ? rank + 1 : at >= 0 ? at + 1 : ""}</span>${s.done ? `<span class="duelyear">${p.year}</span>` : ""}</button>`;
     }).join("")}</div>` +
-      (ordered && !s.done ? `<p class="instruction">Now: which decade is the middle photo (<b>2</b>) from?</p><div class="decades">${m.options.map((y) => `<button class="btn secondary" data-decade="${y}">${y}s</button>`).join("")}</div>` : "") +
-      (s.done ? `<div class="reveal"><p>${s.revealed ? `The middle photo is from the ${m.decade}s.` : s.guess === m.decade ? "Right decade! ★★★" : `It was the ${m.decade}s.${s.misses ? "" : " Your order was perfect though!"}`}</p>${m.order.map((k) => `<p class="small"><b>${m.photos[k].year} · ${m.photos[k].title}</b> — ${m.photos[k].story}${m.photos[k].why ? ` <i>Why it mattered: ${m.photos[k].why}</i>` : ""}<br><a href="${m.photos[k].source}" target="_blank" rel="noopener">${m.photos[k].credit}</a></p>`).join("")}</div>` : "") +
+      (ordered && !s.done ? `<p class="instruction">Now: which decade is the middle photo (<b>2</b>) from?</p><div class="decades">${m.options.map((y) => `<button class="btn secondary ${s.wrongDecades.includes(y) ? "ruled" : ""}" data-decade="${y}" ${s.wrongDecades.includes(y) ? "disabled" : ""}>${y}s</button>`).join("")}</div>` : "") +
+      (s.done ? `<div class="reveal"><p>${s.revealed ? `The middle photo is from the ${m.decade}s.` : s.guess === m.decade ? `The ${m.decade}s! ${["★★★", "★★", "★"][Math.min(2, s.wrongDecades.length)]}` : `It was the ${m.decade}s.`}</p>${m.order.map((k) => `<p class="small"><b>${m.photos[k].year} · ${m.photos[k].title}</b> — ${m.photos[k].story}${m.photos[k].why ? ` <i>Why it mattered: ${m.photos[k].why}</i>` : ""}<br><a href="${m.photos[k].source}" target="_blank" rel="noopener">${m.photos[k].credit}</a></p>`).join("")}</div>` : "") +
       (!ordered ? `<p class="small">${s.picks.length ? `${s.picks.length} of 3 chosen` : "Tap the oldest first"}${s.misses ? ` · ${s.misses} reshuffle${s.misses === 1 ? "" : "s"}` : ""}</p>` : "");
     $("#board").querySelectorAll("[data-duel]").forEach((b) => (b.onclick = () => {
       if (ordered) return;
@@ -993,10 +1016,13 @@ function timeDuel(i) {
       persist();
       draw();
     }));
+    // Only the right decade solves it. A miss is ruled out and points earlier or later.
     $("#board").querySelectorAll("[data-decade]").forEach((b) => (b.onclick = () => {
-      s.guess = +b.dataset.decade;
+      if (s.done) return;
+      const y = +b.dataset.decade, got = duelTry(s, m, y);
       persist();
-      sparkSolved(s.guess === m.decade ? `Yes — the ${m.decade}s! A sharp eye.` : `So close — it was the ${m.decade}s.`);
+      if (got === "right") sparkSolved(s.wrongDecades.length ? `Yes — the ${m.decade}s! You got there.` : `Yes — the ${m.decade}s, first try! A sharp eye.`);
+      else msg(`Not the ${y}s. Look ${got}.`);
       draw();
     }));
   }

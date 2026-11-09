@@ -8,7 +8,7 @@
    Neighbours → Little Neighbours / Neighbours Goal / Neighbours Goal.
    The five Aha cards (3, 17–20) sit together as one block. */
 const FEED_FAMILIES = { sudoku: [1, 11, 21], killer: [12, 12, 12], bloom: [4, 14, 14], neighbours: [6, 16, 16] };
-const FEED_PLAN = [0, "sudoku", "killer", 8, 3, 17, 18, 19, 20, 2, 9, "bloom", 5, 10, 22, 13, 23, "neighbours", 15];
+const FEED_PLAN = [0, "sudoku", "killer", 8, 3, 17, 18, 19, 20, 2, 9, "bloom", 5, 10, 22, 13, 23, "neighbours", 15]; // 24 (Where in the World) joins once its photos are in
 const feedOrder = (lv = difficulty) => FEED_PLAN.map((x) => (typeof x === "string" ? FEED_FAMILIES[x][lv] : x));
 const feedSibling = (i, lv = difficulty) => Object.values(FEED_FAMILIES).find((f) => f.includes(i))?.[lv] ?? i;
 const FEED_DAYS = 31;
@@ -110,6 +110,7 @@ function revealState(d, i, s = {}) {
   if (i === 16) return set({ board: goalModel(d).good.slice(), history: [] });
   if (i === 22) return set({ bulbs: lanternModel(d).solution.slice(), dots: [] });
   if (i === 23) return set({ beds: bedsModel(d).rects.map((b) => b.slice()) });
+  if (i === 24) { const m = savedPlace(d, s); return set({ pick: m.place.country }); }
   return set({});
 }
 const burstSize = (streak) => Math.min(28 + 8 * (Math.max(1, streak) - 1), 76);
@@ -182,7 +183,10 @@ if (document.getElementById?.("feed")) {
       msg("This puzzle couldn't load. Try another level or day.");
     }
     liveWasDone = !!state(i).done;
-    if (state(i).revealed && state(i).done) {
+    if (state(i).missed && state(i).done) {
+      card.classList.add("is-revealed");
+      msg("Not this time, so this one doesn't count today. The answers are yours to keep.");
+    } else if (state(i).revealed && state(i).done) {
       card.classList.add("is-revealed");
       const why = AHA_SLOTS.includes(i) && !ahaLegacy(day, i) ? " " + ahaModel(day, AHA_SLOTS.indexOf(i)).why : "";
       msg("Answer revealed — it doesn't count as solved. Tap ↺ to try it yourself." + why);
@@ -508,7 +512,7 @@ if (document.getElementById?.("feed")) {
     if (live) {
       const done = !!state(+live.dataset.idx).done;
       refreshCard(live);
-      if (done && !liveWasDone) { liveWasDone = true; refreshHeader(); const st = state(+live.dataset.idx); if (st.credit || st.revealed) celebrateReplay(live, !st.credit); else { celebrate(live); if (typeof lbSolved === "function") lbSolved(live.dataset.day, difficulty, +live.dataset.idx); } }
+      if (done && !liveWasDone) { liveWasDone = true; refreshHeader(); const st = state(+live.dataset.idx); if (st.missed && !st.credit) { $("#announce").textContent = "Not this time. This one doesn't count today."; } else if (st.credit || st.revealed) celebrateReplay(live, !st.credit); else { celebrate(live); if (typeof lbSolved === "function") lbSolved(live.dataset.day, difficulty, +live.dataset.idx); } }
     }
     refreshHeader();
   };

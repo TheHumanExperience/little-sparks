@@ -48,12 +48,14 @@ const checks = {
     killerGivens[difficulty] += m.givens.filter(Boolean).length;
     // Gentle stays friendly: plenty of givens, and naked singles alone finish it.
     if (difficulty === 0 && (m.givens.filter(Boolean).length < 12 || sixSingles(m.givens, m.cages))) fail("gentle killer too hard");
-    // Tricky must be genuinely harder: big cages, at most three givens, and naked singles alone stall.
+    // Tricky must be genuinely harder: big cages, at most five givens, and naked singles alone stall,
+    // yet hidden singles (with cage sums) always finish it, so it never needs guessing.
     if (difficulty === 2) {
       const givens = m.givens.filter(Boolean).length, singles = m.cages.filter((c) => c.cells.length === 1).length;
       if (singles) fail("tricky killer has single-cell cages");
-      if (givens > 3) fail("tricky killer gives " + givens + " digits");
+      if (givens > 5) fail("tricky killer gives " + givens + " digits");
       if (!sixSingles(m.givens, m.cages)) fail("tricky killer falls to naked singles");
+      if (sixSingles(m.givens, m.cages, true)) fail("tricky killer needs more than hidden singles");
       killerStats.givens += givens; killerStats.cages += m.cages.length; killerStats.hidden += sixSingles(m.givens, m.cages, true) ? 0 : 1; killerStats.n++;
     } },
   21: (m) => { checks[11](m); const n = m.givens.filter(Boolean).length;
@@ -93,11 +95,23 @@ difficulty = 1;
   // A save pinned to a photo since deleted from the bank still loads, with its same-year stand-in.
   const gone = Object.keys(REMOVED_PHOTOS)[0], pin = { duelIds: [gone, ...fresh.duelIds.slice(1)], duelDecade: fresh.duelDecade, duelOptions: fresh.duelOptions };
   if (savedDuel(d, pin).photos.some((p) => !p || p.image === gone)) fail("removed photo save must fall back"); }
+// Only the right decade solves a Duel; a miss points the right way and is remembered.
+for (const lvl of [0, 1, 2]) { difficulty = lvl;
+  for (const d of days.slice(0, 60)) { const m = duelModel(d), s = {};
+    if (!m.options.includes(m.decade) || new Set(m.options).size !== m.options.length) fail("duel decade options");
+    if (Math.floor(m.photos[m.middle].year / 10) * 10 !== m.decade) fail("duel decade is not the middle photo's");
+    for (const y of m.options) if (y !== m.decade && duelTry(s, m, y) !== (y > m.decade ? "earlier" : "later")) fail("duel miss direction");
+    if (s.guess !== undefined || s.wrongDecades.length !== m.options.length - 1) fail("duel miss must not solve");
+    if (duelTry(s, m, m.decade) !== "right" || s.guess !== m.decade) fail("duel right decade"); } }
 // Tricky Killer saves started before the harder generator keep their original puzzle.
 difficulty = 2;
 { const d = "2026-05-04", old = { values: legacyKillerModel(d, 2).givens.slice() }, fresh = {};
   if (JSON.stringify(savedKiller(d, old)) !== JSON.stringify(legacyKillerModel(d, 2))) fail("legacy killer changed");
-  if (JSON.stringify(savedKiller(d, fresh)) !== JSON.stringify(killerSixModel(d)) || !fresh.hard) fail("fresh killer should use the hard model"); }
+  if (JSON.stringify(savedKiller(d, fresh)) !== JSON.stringify(killerSixModel(d)) || fresh.hard !== 2) fail("fresh killer should use the hard model");
+  // Games started on the first Tricky generator (hard: 1) keep their puzzle.
+  const v1 = { values: hardKillerModel(d, 1).givens.slice(), hard: 1 };
+  if (JSON.stringify(savedKiller(d, v1)) !== JSON.stringify(hardKillerModel(d, 1)) || v1.hard !== 1) fail("hard v1 killer save changed");
+  if (sixCount(hardKillerModel(d, 1).givens, hardKillerModel(d, 1).cages) !== 1) fail("hard v1 killer not unique"); }
 // Gardens started on the first generator keep their puzzle; new ones use the harder one.
 { const d = "2026-05-04", old = { mirrors: { 7: "/" } }, done = { done: true, mirrors: {} }, fresh = {};
   if (JSON.stringify(savedMirror(d, old)) !== JSON.stringify(legacyMirrorModel(d, 2)) || old.v2) fail("legacy mirror save changed");
