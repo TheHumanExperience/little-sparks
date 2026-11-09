@@ -29,7 +29,7 @@ It was made by one person for one person. A puzzle app can copy the feed, the ga
 - Played on a phone, with iOS Safari as the main target. Each card is full-screen and played in place in the feed.
 - Day-based: a new set each calendar day, with a 31-day archive that always regenerates the same puzzles.
 - Three levels, chosen by the player: Gentle, Medium, Tricky. Each level shows one game per family, so the levels feel different.
-- Served as a static site from a GitHub Pages subpath. Progress stays in the browser. The leaderboard is optional and hidden when unconfigured.
+- Served as a static site from GitHub Pages at https://little-sparks.in. Progress stays in the browser. The leaderboard is optional and hidden when unconfigured.
 - Sound and haptics are optional; chimes can be muted and only start after a first tap.
 
 ## Capabilities and Constraints
@@ -47,7 +47,7 @@ It was made by one person for one person. A puzzle app can copy the feed, the ga
 
 ## Brand Commitments
 
-- **Name:** Little Sparks, with the ✳ spark as its mark.
+- **Name:** Little Sparks, with a wax seal pressed with a spark and a small heart as its logo (`brand/`), and the ✳ spark as its in-app mark.
 - **The love note is the emotional heart of the product and stays prominent.** It reads exactly: "Created with love from Devansh".
 - **Voice:** warm and calm, with no pressure. Never exam or test language; no "CAT", "Quant", "LRDI", "MCQ", or "TITA" labels. Reasoning cards are presented as logical reasoning puzzles.
 - **No ads, ever.**

@@ -1,8 +1,8 @@
 # Little Sparks — agent guide
 
-**Intent.** A cosy daily puzzle gift for Nidhi. The love note reads exactly "Created with love from Devansh". Keep the tone warm and calm: no exam or test language, no pressure, no ads. It is mobile-first (iOS Safari is the main target) and is a static, zero-build app in `dist/`. It is served from the GitHub Pages subpath, so use relative URLs only, with no CDNs or frameworks.
+**Intent.** A cosy daily puzzle gift for Nidhi. The love note reads exactly "Created with love from Devansh". Keep the tone warm and calm: no exam or test language, no pressure, no ads. It is mobile-first (iOS Safari is the main target) and is a static, zero-build app in `dist/`. It is served from GitHub Pages at https://little-sparks.in. Use relative URLs only, so it keeps working locally and from any path, with no CDNs or frameworks. Saved progress is tied to the site's address, so changing the domain strands it.
 
-Read this file first. Open README.md (player-facing rules) or CONTENT.md (content rules) only when you need them.
+Read this file first. Open README.md (player-facing rules and hosting), CONTENT.md (content rules), PRODUCT.md (who it is for and what to protect) or DESIGN.md (visual system) only when you need them.
 
 ## Commands
 ```sh
@@ -18,7 +18,7 @@ Prefer `npm run smoke` over manual screenshots. Take screenshots only when a hum
 ## File map
 | File | Role |
 |---|---|
-| `dist/index.html` | Shell: header (brand, today pill, sound, level), `#feed`, level and day sheets. Script order matters. Every local CSS/JS is referenced as `file?v=__BUILD__` (CI stamps the commit SHA; checked by verify-assets). |
+| `dist/index.html` | Shell: header (brand, today pill, sound, level), `#feed`, level and day sheets. Script order matters. Every local CSS, JS and icon is referenced as `file?v=__BUILD__` (CI stamps the commit SHA; checked by verify-assets). |
 | `dist/app.js` | Minified core: `LEVELS`, `difficulty`, storage (`all`, `persist`, `state`), `rng`/`shuffle`/`puzzleSeed`, games 0–4 (`games` array). |
 | `dist/daily-content.js` | Day-indexed content windows (`calendarIndex`, `freshContent`, `wordAnswer`). |
 | `dist/photos.js` | `PHOTO_BANK` (credits, licences, clues). `retired: true` entries stay for old saves. |
@@ -36,6 +36,8 @@ Prefer `npm run smoke` over manual screenshots. Take screenshots only when a hum
 | `dist/favicon.svg`, `dist/favicon-32.png`, `dist/apple-touch-icon.png` | Site icons, copied from the logo masters in `brand/`. |
 | `verify*.cjs` | Node vm checks (see the README table). `tests/smoke.mjs` is the browser smoke test. |
 | `tools/` | Offline content tools. `history/*.bundle` holds the original Sites commits (archival). |
+| `PRODUCT.md`, `DESIGN.md`, `.impeccable/design.json` | Product brief, visual system, and the design tokens' generated sidecar. |
+| `brand/` | Logo masters and exports. Not deployed. |
 
 ## Game registry (state index → game)
 0 Letterlight · 1 Pocket Sudoku · 2 Dot & Match · 3 Aha (legacy single card / track slot 0) · 4 Bloom Trail · 5 Time Lens · 6 Little Neighbours · 7 *retired (Starlines; ignore old saves)* · 8 Story Shuffle · 9 Colour Alchemy · 10 Mirror Garden · 11 Sudoku Six · 12 Killer Six · 13 Letterlight Ladder · 14 Bloom Trail 5×5 · 15 Time Lens Duel · 16 Neighbours Goal · 17–20 Aha track slots 1–4 · 21 Sudoku Six · Hard · 22 Lantern Lanes · 23 Garden Beds.

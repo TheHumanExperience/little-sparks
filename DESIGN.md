@@ -237,7 +237,7 @@ Depth is a sheet resting on a desk. Every card gets one barely-there shadow to l
 
 ## Shapes
 
-The form language is soft rounded rectangles, tightening as pieces get smaller: large sheets at 22px, fields at 14px, inner panels at 12px, buttons at 8px, and puzzle tiles at 6px. Pills are fully round and hold navigation, status, and quiet actions. Bottom sheets round only their top corners. The ✳ spark is the recurring mark, and hand-drawn-feeling glyphs such as ♡ carry the sentiment.
+The form language is soft rounded rectangles, tightening as pieces get smaller: large sheets at 22px, fields at 14px, inner panels at 12px, buttons at 8px, and puzzle tiles at 6px. Pills are fully round and hold navigation, status, and quiet actions. Bottom sheets round only their top corners. The ✳ spark is the recurring mark inside the app, and hand-drawn-feeling glyphs such as ♡ carry the sentiment. The logo is a slightly uneven Wax Seal disc pressed with an eight-ray spark and a small heart; below 48px it drops the ring and heart so it stays clear. Its masters are in `brand/`, and the browser-tab and home-screen icons in `dist/` are copied from them.
 
 ## Components
 

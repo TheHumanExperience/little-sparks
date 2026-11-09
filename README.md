@@ -1,6 +1,6 @@
 # Little Sparks
 
-A daily puzzle app laid out as a vertical, snap-scrolling feed, like Reels. Each full-screen card holds a game you can play right there. Today's 19 sparks come first (14 games plus a block of five Aha reasoning cards), then a short "you made it" note. After that the feed keeps going into yesterday, the day before, and so on back 30 days. Each earlier day is loaded as you reach it. Every solve sets off a short celebration: a sparkle burst, a card glow, a "Solved n/21" count-up, and a vibration on phones that support it. With reduced motion turned on, you get a calm glow instead.
+A daily puzzle app laid out as a vertical, snap-scrolling feed, like Reels. Each full-screen card holds a game you can play right there. Today's 19 sparks come first (14 games plus a block of five Aha reasoning cards), then a short "you made it" note. After that the feed keeps going into yesterday, the day before, and so on back 30 days. Each earlier day is loaded as you reach it. Every solve sets off a short celebration: a sparkle burst, a card glow, a "Solved n/19" count-up, and a vibration on phones that support it. With reduced motion turned on, you get a calm glow instead.
 
 Tap the Little Sparks logo at any time to go back to the first card of today.
 
@@ -53,7 +53,7 @@ Each level has 19 cards. The families are set in `FEED_FAMILIES` in `dist/feed.j
 
 Every card still gets harder from Gentle to Tricky, and progress is saved in the browser.
 
-**The Aha track** replaces the old single Aha Moment card. Each day has five logical-reasoning cards, placed together as one block (cards 4–8) so the reasoning flow isn't broken up. They are drawn from nineteen categories, mixing number puzzles and logic puzzles:
+**The Aha track** replaces the old single Aha Moment card. Each day has five logical-reasoning cards, placed together as one block (cards 5–9) so the reasoning flow isn't broken up. They are drawn from nineteen categories, mixing number puzzles and logic puzzles:
 
 - Percentages and profit
 - Arrangements
@@ -103,7 +103,11 @@ Mobile browsers are the main target, and the feed was tested at 320, 360, 375 an
 | `dist/sparks.js` | The nine feed games |
 | `dist/lanterns.js` | Lantern Lanes (state 22): generator, solver and renderer |
 | `dist/beds.js` | Garden Beds (state 23): generator, solver and renderer |
+| `dist/aha.js` | The Aha track: 19 logical-reasoning categories with brute-force solvers |
 | `dist/feed.js` | Feed, celebrations and rewards, clear & retry, day and level sheets, and midnight rollover |
+| `dist/leaderboard.js`, `dist/leaderboard-config.js` | The optional Supabase leaderboard |
+| `dist/favicon.svg`, `dist/favicon-32.png`, `dist/apple-touch-icon.png` | Browser-tab and iPhone home-screen icons |
+| `brand/` | Logo masters and exports (not deployed) |
 
 ## Run locally
 
@@ -125,17 +129,22 @@ for f in verify*.cjs; do node "$f"; done
 
 Or run `npm run verify`. For a headless browser smoke test of every card at all three levels in WebKit and Chromium, run `npm install && npm run smoke` (it also tests the leaderboard against a mocked Supabase). Add `-- --shots` to save screenshots to `tests/shots/`; by default it saves them only on failure.
 
-Contributors and coding agents should start with [AGENTS.md](AGENTS.md) and check [REVIEW.md](REVIEW.md) before handing off.
+Contributors and coding agents should start with [AGENTS.md](AGENTS.md) and check [REVIEW.md](REVIEW.md) before handing off. Who the app is for and what it must protect are in [PRODUCT.md](PRODUCT.md), and its visual system is in [DESIGN.md](DESIGN.md).
 
 | Script | Checks |
 | --- | --- |
+| `verify.cjs` | The original daily sets over 366 days: unique Sudoku, valid full garden paths, solvable dominoes and correct logic choices. |
+| `verify-extras.cjs` | Little Neighbours and Time Lens over 365 days: solvable targets, the full photo round and resume with no points, daily-five isolation, and sandbox moves preserving inventory. |
+| `verify-levels.cjs` | Re-runs `verify.cjs` and `verify-extras.cjs` at every level, then checks separate level progress, legacy progress, difficulty persistence, clues, anchors and word attempts. |
+| `verify-window.cjs` | The 61-day content windows at all levels, active and retired photos, history-shaping and Indian photo days, unique words and questions, save continuity, and the 30-day archive. |
+| `verify-words.cjs` | Letterlight guess handling and keyboard feedback, plus the answer list: all valid guesses, none rare or plural, no repeat within 365 days per level, and started puzzles keeping their word. |
 | `verify-sparks.cjs` | The nine feed games plus Sudoku Six · Hard, every level, a full year of dates. Each puzzle must be deterministic, solvable by its own checker, unique where promised, and varied. For Story Shuffle it also checks that every accepted order is a valid permutation, that the canonical order is listed first, that the starting shuffle is never already solved, that a move inserts and shifts (4 → 2 gives 1, 4, 2, 3, 5, 6), and that repeated hints always finish the story. For Mirror Garden it checks every garden has exactly one solution, that solver effort rises Gentle < Medium < Tricky and is at least double the old generator, and that old saves keep their garden. For Killer Six on Tricky it checks there are no single-cell cages, at most 3 givens, and that naked singles alone stall; it prints the average givens, cages and how many fall to hidden singles. |
 | `verify-lanterns.cjs` | Lantern Lanes at every level over 366 days: deterministic, varied, solved by its stored answer and by nothing else (solver-checked), Gentle's budget is the true minimum, numbers and counter per level, solver effort rising Gentle < Medium < Tricky, the clash and number rules, the tutorial and reveal. |
 | `verify-beds.cjs` | Garden Beds at every level over 366 days: deterministic, varied, packet sizes per level, solved by its stored beds and by nothing else (solver-checked), Gentle never needs a guess, solver effort and decoy beds rising Gentle < Medium < Tricky, the bed verdicts, the How to play example, and reveal. |
 | `verify-aha.cjs` | Every Aha category at all three levels over 366 days. Each question must be deterministic, have exactly one answer (confirmed by brute force), have unique options that include the answer, and rarely repeat its wording within 61 days. Also checks no exam labels, the old slot-3 saves, that days played before the 19-category ring keep their original rotation, the skill counts, and that clear & retry keeps credit. |
 | `verify-feed.cjs` | Feed order, the 31-day window, and that `feed.js` does nothing on a page without the feed. |
 | `verify-leaderboard.cjs` | Points 1/3/5, one claim per date × level × game, India-time day, Monday-week and month boundaries, the offline queue (round trip, pruning), name cleaning and escaping, same name = same player, the committed config being empty or a public publishable/anon key only, and that schema.sql keeps the same rules and lock-down. |
-| `verify-assets.cjs` | Every local CSS/JS in `index.html` uses `?v=__BUILD__` and exists; the Pages workflow stamps the commit SHA in before upload, so returning visitors never get stale files. |
+| `verify-assets.cjs` | Every local CSS, JS and icon reference in `index.html` uses `?v=__BUILD__` and exists; the Pages workflow stamps the commit SHA in before upload, so returning visitors never get stale files. |
 | `verify-rewards.cjs` | Which cards are shiny never changes, and about 5% of cards are shiny across 366 days. Also checks the flow-meter rules, burst and milestone sizes, the rising chime, that clear & retry only affects that one puzzle on that day and level, and the reveal limits (unlimited/5/3 per day, free re-reveal, refresh on a new day, revealed cards never count, every game's revealed state is complete). |
 
 `dist/ladders.js` is generated. After editing the word list in `tools/build-ladders.cjs`, rebuild it:
@@ -165,8 +174,12 @@ git push origin sites-history
 
 ## Hosting and credits
 
-The site is hosted on GitHub Pages at https://thehumanexperience.github.io/little-sparks/.
-Every push to `main` runs the validation scripts and deploys `dist/` via `.github/workflows/pages.yml`.
+The site is live at https://little-sparks.in and hosted on GitHub Pages. Every push to `main` runs the validation scripts and deploys `dist/` via `.github/workflows/pages.yml`.
+
+- **Domain:** DNS is managed at GoDaddy: four `A` and four `AAAA` records on `@` point to GitHub Pages, and `www` is a CNAME to `thehumanexperience.github.io`. A `_github-pages-challenge-TheHumanExperience` TXT record keeps the domain verified, so leave it in place.
+- **Custom domain setting:** it lives in the repository's Settings → Pages. Deploys go through GitHub Actions, so there is no `CNAME` file.
+- **Old address:** https://thehumanexperience.github.io/little-sparks/ redirects to the domain.
+- **Saved progress:** browsers keep it per site address, so anything saved on the old address did not move to the domain. Changing the address again would strand progress the same way.
 
 The existing Sites hosting configuration is retained in `.openai/hosting.json`.
 This GitHub copy is not automatically synchronized with future Sites changes.

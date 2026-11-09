@@ -24,5 +24,5 @@ Run `npm run verify` and `npm run smoke` first. Then check:
   - The note reads "Created with love from Devansh".
 - **Photos:** only free licences (public domain or CC). Each has `credit`, `source` and `licenseUrl`, and hints never show the year.
 - **Leaderboard:** `dist/leaderboard-config.js` holds only the project URL and the public publishable/anon key. Never commit a service_role or secret key, and escape every name before using innerHTML. Anon may only execute the SECURITY DEFINER RPCs, with no table rights. Player ids are never returned in lists.
-- **Static app:** no build step, no script CDNs or frameworks, relative URLs only (GitHub Pages subpath).
-- **Docs:** README, CONTENT and AGENTS are updated when rules, files or storage change.
+- **Static app:** no build step, no script CDNs or frameworks, relative URLs only, so the site works locally and from any path.
+- **Docs:** README, CONTENT and AGENTS are updated when rules, files or storage change, and PRODUCT or DESIGN when the audience or visual system changes.
