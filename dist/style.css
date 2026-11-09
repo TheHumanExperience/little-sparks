@@ -360,3 +360,7 @@ body.golden .feedbar .brand span { color: #c8901f; }
 .aboutbody { margin-top: 12px; font-size: 16px; line-height: 1.6; }
 .aboutbody p { margin: 0 0 14px; }
 .aboutbody .lovenote { margin: 24px 0 4px; line-height: 1.25; text-align: center; }
+/* Narrow phones: the header stays on screen whatever the pills say. Below 381px only the ✳ shows; the link keeps its aria-label. */
+.pills { flex: none; }
+@media (max-width: 400px) { body.feedmode .feedbar .brand { font-size: 16px; } body.feedmode .feedbar .brand span { font-size: 22px; margin-right: 4px; } }
+@media (max-width: 380px) { body.feedmode .feedbar .brand { display: inline-flex; align-items: center; min-width: 44px; min-height: 44px; font-size: 0; letter-spacing: 0; } body.feedmode .feedbar .brand span { font-size: 26px; margin-right: 0; } }
