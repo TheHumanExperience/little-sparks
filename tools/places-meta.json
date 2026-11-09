@@ -384,5 +384,49 @@
   "description": "Hiking near the Matterhorn in Zermatt, Valais, Switzerland}}",
   "source": "https://commons.wikimedia.org/wiki/File:CH.VS.Zermatt_2021-10-17_Matterhorn_8726.jpg",
   "bytes": 115013
+ },
+ "m-chefchaouen": {
+  "level": 1,
+  "country": "Morocco",
+  "file": "File:2018 01 (Blue) - Chaouen.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Fbrandao.1963",
+  "description": "Street and typical houses in Chefchaouen, the blue city of Morocco.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:2018_01_(Blue)_-_Chaouen.jpg",
+  "bytes": 93967
+ },
+ "m-halong": {
+  "level": 1,
+  "country": "Vietnam",
+  "file": "File:View of sea from Titov Island, Ha Long Bay, Vietnam, 20240128 1337 3732.jpg",
+  "licence": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "artist": "Jakub Hałun",
+  "description": "View of sea and tourist boats from Titov Island, Ha Long Bay, Vietnam}}",
+  "source": "https://commons.wikimedia.org/wiki/File:View_of_sea_from_Titov_Island,_Ha_Long_Bay,_Vietnam,_20240128_1337_3732.jpg",
+  "bytes": 72986
+ },
+ "m-inari": {
+  "level": 1,
+  "country": "Japan",
+  "file": "File:Torii path with lantern at Fushimi Inari Taisha Shrine, Kyoto, Japan.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Basile Morin",
+  "description": "Torii path with a hanging lantern at Fushimi Inari Taisha Shrine Senbontorii, Kyoto, Japan.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Torii_path_with_lantern_at_Fushimi_Inari_Taisha_Shrine,_Kyoto,_Japan.jpg",
+  "bytes": 106121
+ },
+ "m-hawamahal": {
+  "level": 1,
+  "country": "India",
+  "file": "File:20191218 Pałac Wiatrów w Jaipurze 1129 9124.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Jakub Hałun",
+  "description": "Hawa Mahal (The Palace of Winds) in Jaipur}}",
+  "source": "https://commons.wikimedia.org/wiki/File:20191218_Pa%C5%82ac_Wiatr%C3%B3w_w_Jaipurze_1129_9124.jpg",
+  "bytes": 115421
  }
 }
