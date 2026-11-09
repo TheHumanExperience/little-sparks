@@ -516,5 +516,82 @@
   "description": "A panoramic view of Hallstatt, Austria, looking across Hallstätter See. This wide-angle shot encompasses a significant stretch of the village waterfront, illustrating how the settlement is built into the steep base of the Dachstein Alps. It features the Evangelical Church, the boat docks, and the su",
   "source": "https://commons.wikimedia.org/wiki/File:Panoramic_view_of_Hallstatt_village_and_shoreline_from_lake.jpg",
   "bytes": 66189
+ },
+ "m-budapest": {
+  "level": 1,
+  "country": "Hungary",
+  "file": "File:Széchenyi Chain Bridge in Budapest at night.jpg",
+  "licence": "CC0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "artist": "Wilfredor",
+  "description": "{{Multilingual description|en=Night view of The Széchenyi Chain Bridge from Buda Castle in Budapest, Hungary|es=Vista nocturna del puente de las cadenas Széchenyi desde el Castillo de Buda, en Budapest|fa=پل زنجیر، پلی بر روی رود دانوب در شهر بوداپست، مجارستان است",
+  "source": "https://commons.wikimedia.org/wiki/File:Sz%C3%A9chenyi_Chain_Bridge_in_Budapest_at_night.jpg",
+  "bytes": 81741
+ },
+ "m-bagan": {
+  "level": 1,
+  "country": "Myanmar",
+  "file": "File:20160801 Bagan temples 6701.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Jakub Hałun",
+  "description": "Temples on Bagan Plain in Myanmar}}",
+  "source": "https://commons.wikimedia.org/wiki/File:20160801_Bagan_temples_6701.jpg",
+  "bytes": 79308
+ },
+ "m-sigiriya": {
+  "level": 1,
+  "country": "Sri Lanka",
+  "file": "File:Sigiriya Rock Sri lanka.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Asitha dev",
+  "description": "These phtos taken from Sigiriya Sri Lanka}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Sigiriya_Rock_Sri_lanka.jpg",
+  "bytes": 183557
+ },
+ "m-chocolate": {
+  "level": 1,
+  "country": "Philippines",
+  "file": "File:The Chocolate Hills in Bohol.jpg",
+  "licence": "CC0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "artist": "rogel tura",
+  "description": "Chocolate Hills are conical karst hills in Bohol, is a famous tourist attraction. There are about 1,776 hills spread over an area of more than 50 square kilometers, covered in green grass that turns brown during the dry season.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:The_Chocolate_Hills_in_Bohol.jpg",
+  "bytes": 63621
+ },
+ "m-monument": {
+  "level": 1,
+  "country": "United States",
+  "file": "File:West Mitten Butte - Monument Valley Luca Galuzzi 2007.jpg",
+  "licence": "CC BY-SA 2.5",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5/",
+  "artist": "Luca Galuzzi (Lucag)",
+  "description": "West Mitten Butte, Monument Valley Navajo Tribal Park. Monument Valley is located on the southern border of Utah with northern Arizona, USA. (view ~due East)--:en:West and East Mitten Buttes are in Arizona, apart; Merrick Butte is off-photo, just right (south); the Utah border is left, the cliffs ar",
+  "source": "https://commons.wikimedia.org/wiki/File:West_Mitten_Butte_-_Monument_Valley_Luca_Galuzzi_2007.jpg",
+  "bytes": 93756
+ },
+ "m-moraine": {
+  "level": 1,
+  "country": "Canada",
+  "file": "File:Richardson's red squirrel (Tamiasciurus hudsonicus richardsoni) Moraine Lake.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Charles J Sharp",
+  "description": "Richardson's red squirrel (Tamiasciurus hudsonicus richardsoni), Moraine Lake, AB, Canada}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Richardson%27s_red_squirrel_(Tamiasciurus_hudsonicus_richardsoni)_Moraine_Lake.jpg",
+  "bytes": 63386
+ },
+ "m-havana": {
+  "level": 1,
+  "country": "Cuba",
+  "file": "File:National-Capitol-and-classic-cars-in-Havana-Cuba-225-031-061A.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Fraganda",
+  "description": "El Capitolio, the National Capitol of Cuba, is a neoclassical public building on the Paseo del Prado in central Havana. Brightly coloured classic American cars line the street in front of the Gran Teatro de La Habana. Photographed in March 2025 in Havana, Cuba.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:National-Capitol-and-classic-cars-in-Havana-Cuba-225-031-061A.jpg",
+  "bytes": 106116
  }
 }
