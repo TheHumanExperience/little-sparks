@@ -1,0 +1,560 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-09T10:59:25.725Z",
+  "title": "Design System: Little Sparks",
+  "extensions": {
+    "colorMeta": {
+      "fountain-ink": {
+        "role": "primary",
+        "displayName": "Fountain Ink",
+        "canonical": "#243f32",
+        "tonalRamp": [
+          "#030e08",
+          "#122d20",
+          "#314c3e",
+          "#516e5f",
+          "#749182",
+          "#98b6a6",
+          "#c5d6cc",
+          "#eaf0ed"
+        ]
+      },
+      "letter-paper": {
+        "role": "neutral",
+        "displayName": "Letter Paper",
+        "canonical": "#f8f6ef",
+        "tonalRamp": [
+          "#0c0b09",
+          "#282621",
+          "#47453f",
+          "#686660",
+          "#8b8983",
+          "#b0aea7",
+          "#d2d1cd",
+          "#efeeed"
+        ]
+      },
+      "fresh-sheet": {
+        "role": "neutral",
+        "displayName": "Fresh Sheet",
+        "canonical": "#fffdf8",
+        "tonalRamp": [
+          "#0c0b09",
+          "#282623",
+          "#464541",
+          "#686662",
+          "#8b8984",
+          "#b0aea9",
+          "#d2d1ce",
+          "#efeeed"
+        ]
+      },
+      "wax-seal": {
+        "role": "secondary",
+        "displayName": "Wax Seal",
+        "canonical": "#a45a2b",
+        "tonalRamp": [
+          "#1a0400",
+          "#411900",
+          "#6e3100",
+          "#98501f",
+          "#c07345",
+          "#e89869",
+          "#f4c6ac",
+          "#fcebe1"
+        ]
+      },
+      "pressed-fern": {
+        "role": "primary",
+        "displayName": "Pressed Fern",
+        "canonical": "#385f48",
+        "tonalRamp": [
+          "#000f06",
+          "#052f1b",
+          "#284e38",
+          "#497059",
+          "#6c947b",
+          "#90ba9f",
+          "#c0d8c9",
+          "#e8f1eb"
+        ]
+      },
+      "deep-fern": {
+        "role": "primary",
+        "displayName": "Deep Fern",
+        "canonical": "#355a40",
+        "tonalRamp": [
+          "#010f05",
+          "#082f17",
+          "#2a4e35",
+          "#4b7055",
+          "#6d9478",
+          "#91ba9c",
+          "#c1d8c7",
+          "#e9f1eb"
+        ]
+      },
+      "solved-sage": {
+        "role": "primary",
+        "displayName": "Solved Sage",
+        "canonical": "#52775a",
+        "tonalRamp": [
+          "#010f04",
+          "#0a2f16",
+          "#2b4e33",
+          "#4c7054",
+          "#6e9476",
+          "#92ba9a",
+          "#c2d8c6",
+          "#e9f1ea"
+        ]
+      },
+      "candle-gold": {
+        "role": "tertiary",
+        "displayName": "Candle Gold",
+        "canonical": "#e9c46a",
+        "tonalRamp": [
+          "#120a00",
+          "#322400",
+          "#574201",
+          "#7f6104",
+          "#a78423",
+          "#cda94e",
+          "#e3cfa0",
+          "#f5eedd"
+        ]
+      },
+      "warm-amber": {
+        "role": "tertiary",
+        "displayName": "Warm Amber",
+        "canonical": "#e9a23b",
+        "tonalRamp": [
+          "#150800",
+          "#382100",
+          "#603c00",
+          "#8c5a00",
+          "#ba7a05",
+          "#e49e35",
+          "#f2c997",
+          "#fbecda"
+        ]
+      },
+      "gold-wash": {
+        "role": "tertiary",
+        "displayName": "Gold Wash",
+        "canonical": "#f6e3b5",
+        "tonalRamp": [
+          "#110a00",
+          "#322400",
+          "#534318",
+          "#75643a",
+          "#99875c",
+          "#beac80",
+          "#dbd0b7",
+          "#f2eee5"
+        ]
+      },
+      "lamplight": {
+        "role": "tertiary",
+        "displayName": "Lamplight",
+        "canonical": "#fbefc4",
+        "tonalRamp": [
+          "#100b00",
+          "#302600",
+          "#4f441e",
+          "#71663f",
+          "#948961",
+          "#b9ae85",
+          "#d8d1ba",
+          "#f1eee6"
+        ]
+      },
+      "sage-tint": {
+        "role": "neutral",
+        "displayName": "Sage Tint",
+        "canonical": "#e3ecda",
+        "tonalRamp": [
+          "#090c06",
+          "#23291b",
+          "#414839",
+          "#61695a",
+          "#848c7c",
+          "#a9b1a0",
+          "#ced3c9",
+          "#edefeb"
+        ]
+      },
+      "linen": {
+        "role": "neutral",
+        "displayName": "Linen",
+        "canonical": "#f0f2e8",
+        "tonalRamp": [
+          "#0b0c08",
+          "#262720",
+          "#44463e",
+          "#65675f",
+          "#888a81",
+          "#adafa6",
+          "#d0d2cc",
+          "#eeefed"
+        ]
+      },
+      "soft-stone": {
+        "role": "neutral",
+        "displayName": "Soft Stone",
+        "canonical": "#e6e9de",
+        "tonalRamp": [
+          "#0b0c08",
+          "#25281f",
+          "#44463d",
+          "#65675e",
+          "#888b81",
+          "#adafa5",
+          "#d0d2cc",
+          "#eeefec"
+        ]
+      },
+      "pencil-line": {
+        "role": "neutral",
+        "displayName": "Pencil Line",
+        "canonical": "#d3dccb",
+        "tonalRamp": [
+          "#090c06",
+          "#22291c",
+          "#41483a",
+          "#61695a",
+          "#848c7d",
+          "#a9b1a1",
+          "#ced3c9",
+          "#edefec"
+        ]
+      },
+      "faded-ink": {
+        "role": "neutral",
+        "displayName": "Faded Ink",
+        "canonical": "#607063",
+        "tonalRamp": [
+          "#060d08",
+          "#1c2a1f",
+          "#3a493d",
+          "#5b6b5e",
+          "#7e8e81",
+          "#a2b3a5",
+          "#cad4cc",
+          "#ecefec"
+        ]
+      },
+      "margin-note": {
+        "role": "neutral",
+        "displayName": "Margin Note",
+        "canonical": "#6b7a67",
+        "tonalRamp": [
+          "#070d06",
+          "#1e2b1a",
+          "#3c4a38",
+          "#5c6b58",
+          "#7f8e7b",
+          "#a3b39f",
+          "#cbd4c8",
+          "#ecf0eb"
+        ]
+      },
+      "garden-soil": {
+        "role": "neutral",
+        "displayName": "Garden Soil",
+        "canonical": "#f4ecd9",
+        "tonalRamp": [
+          "#0e0b04",
+          "#2c2617",
+          "#4b4435",
+          "#6c6555",
+          "#908977",
+          "#b5ad9b",
+          "#d5d1c6",
+          "#f0eeea"
+        ]
+      },
+      "bed-timber": {
+        "role": "neutral",
+        "displayName": "Bed Timber",
+        "canonical": "#7c5a2f",
+        "tonalRamp": [
+          "#150800",
+          "#382000",
+          "#5e3d10",
+          "#815f34",
+          "#a68256",
+          "#cca67a",
+          "#e3cdb4",
+          "#f5ede4"
+        ]
+      },
+      "slate-wall": {
+        "role": "neutral",
+        "displayName": "Slate Wall",
+        "canonical": "#3f4a45",
+        "tonalRamp": [
+          "#070d0a",
+          "#1f2925",
+          "#3d4843",
+          "#5e6964",
+          "#808c87",
+          "#a5b1ac",
+          "#ccd3cf",
+          "#ecefee"
+        ]
+      },
+      "gentle-no": {
+        "role": "neutral",
+        "displayName": "Gentle No",
+        "canonical": "#b5483d",
+        "tonalRamp": [
+          "#210000",
+          "#500001",
+          "#81140f",
+          "#a93d33",
+          "#d26255",
+          "#fc8779",
+          "#febfb6",
+          "#ffe9e5"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Note-card and day-intro headlines."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "The puzzle title on every card."
+      },
+      "love-note": {
+        "displayName": "Love Note",
+        "purpose": "The love note, set in the display face."
+      },
+      "sheet-title": {
+        "displayName": "Sheet Title",
+        "purpose": "Headings on bottom sheets."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Puzzle text and clues."
+      },
+      "body-small": {
+        "displayName": "Body Small",
+        "purpose": "How-to copy and helper notes."
+      },
+      "control": {
+        "displayName": "Control",
+        "purpose": "Pills and quiet card-foot controls."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "The uppercase card eyebrow."
+      }
+    },
+    "shadows": [
+      {
+        "name": "sheet-at-rest",
+        "value": "0 6px 24px #24403210",
+        "purpose": "The spark card."
+      },
+      {
+        "name": "lifted-piece",
+        "value": "0 6px 18px rgba(40, 60, 40, .18)",
+        "purpose": "A story card while it is being dragged."
+      },
+      {
+        "name": "floating-chip",
+        "value": "0 6px 18px #24403240",
+        "purpose": "The solved chip."
+      },
+      {
+        "name": "milestone",
+        "value": "0 20px 60px #24403240",
+        "purpose": "Milestone cards, the only deep shadow."
+      },
+      {
+        "name": "solve-glow",
+        "value": "0 0 0 6px #f2c94c88, 0 0 40px 12px #f2c94c55",
+        "purpose": "The peak of the 1.4s celebration, settling back to the resting shadow."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-settle",
+        "value": "cubic-bezier(0.2, 0.7, 0.3, 1)",
+        "purpose": "The sparkle burst drifting outward."
+      },
+      {
+        "name": "ease-pop",
+        "value": "cubic-bezier(0.2, 1.4, 0.4, 1)",
+        "purpose": "Milestone cards arriving with a small overshoot."
+      },
+      {
+        "name": "duration-glow",
+        "value": "1.4s",
+        "purpose": "The card glow after a solve."
+      },
+      {
+        "name": "duration-state",
+        "value": "0.25s",
+        "purpose": "Puzzle cell fill changes."
+      },
+      {
+        "name": "duration-holo",
+        "value": "4s",
+        "purpose": "The shiny card border loop."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "narrowest",
+        "value": "340px"
+      },
+      {
+        "name": "phone-sm",
+        "value": "360px"
+      },
+      {
+        "name": "phone-se",
+        "value": "380px"
+      },
+      {
+        "name": "phone",
+        "value": "430px"
+      },
+      {
+        "name": "phone-lg",
+        "value": "520px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The main action on a puzzle, such as Check my answer.",
+      "html": "<button class=\"ds-btn\">Check my answer</button>",
+      "css": ".ds-btn { background: var(--green, #385f48); color: #fff; border: 0; border-radius: 8px; padding: 12px 18px; font: 400 16px \"DM Sans\", Arial, sans-serif; cursor: pointer; } .ds-btn:hover { background: #355a40; } .ds-btn:focus-visible { outline: 3px solid #a45a2b; outline-offset: 4px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "A companion action, such as asking for a hint.",
+      "html": "<button class=\"ds-btn-sec\">A gentle hint</button>",
+      "css": ".ds-btn-sec { background: #e6e9de; color: var(--ink, #243f32); border: 0; border-radius: 8px; padding: 12px 18px; font: 400 16px \"DM Sans\", Arial, sans-serif; cursor: pointer; } .ds-btn-sec:focus-visible { outline: 3px solid #a45a2b; outline-offset: 4px; }"
+    },
+    {
+      "name": "Header Pill",
+      "kind": "chip",
+      "refersTo": "pill",
+      "description": "Status and navigation in the header.",
+      "html": "<button class=\"ds-pill\"><b>3/19</b></button>",
+      "css": ".ds-pill { border: 1px solid #d3d9c8; background: #fffdf7; color: var(--ink, #243f32); border-radius: 999px; padding: 7px 12px; font: 600 13px \"DM Sans\", Arial, sans-serif; cursor: pointer; } .ds-pill b { font-variant-numeric: tabular-nums; } .ds-pill:hover { background: #f6e3b5; } .ds-pill:focus-visible { outline: 3px solid #a45a2b; outline-offset: 4px; }"
+    },
+    {
+      "name": "Choice Tile",
+      "kind": "custom",
+      "refersTo": "choice",
+      "description": "One answer in a logical reasoning card.",
+      "html": "<button class=\"ds-choice\">Tejas</button>",
+      "css": ".ds-choice { display: block; width: 100%; min-height: 44px; border: 1px solid #ccd5c6; border-radius: 9px; padding: 15px; background: #fffdf8; color: var(--ink, #243f32); font: 400 15px \"DM Sans\", Arial, sans-serif; cursor: pointer; } .ds-choice:hover { background: #e3ecda; } .ds-choice:focus-visible { outline: 3px solid #a45a2b; outline-offset: 4px; }"
+    },
+    {
+      "name": "Name Field",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "Text entry on sheets, sized to avoid iOS zoom.",
+      "html": "<input class=\"ds-field\" placeholder=\"Your name\" />",
+      "css": ".ds-field { width: 100%; min-height: 48px; padding: 10px 14px; border: 1px solid #cdd6c4; border-radius: 14px; background: #fff; color: var(--ink, #243f32); font: 400 16px \"DM Sans\", Arial, sans-serif; } .ds-field:focus-visible { outline: 3px solid #a45a2b; outline-offset: 4px; }"
+    },
+    {
+      "name": "Header",
+      "kind": "nav",
+      "description": "Wordmark on the left with status pills on the right, and the flow bar along the bottom edge.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-brand\" href=\"#\"><span>✳</span> little sparks</a><i class=\"ds-flow\"></i></nav>",
+      "css": ".ds-nav { position: relative; display: flex; align-items: center; height: 56px; padding: 0 14px; background: #f8f6ef; } .ds-brand { color: #243f32; text-decoration: none; font: 600 19px \"DM Sans\", Arial, sans-serif; letter-spacing: -0.5px; } .ds-brand:hover { color: #355a40; } .ds-brand:focus-visible { outline: 3px solid #a45a2b; outline-offset: 4px; } .ds-brand span { font-size: 26px; } .ds-flow { position: absolute; left: 0; bottom: 0; height: 4px; width: 60%; background: linear-gradient(90deg, #f2c94c, #e9a23b); border-radius: 0 3px 3px 0; }"
+    },
+    {
+      "name": "Spark Card",
+      "kind": "card",
+      "refersTo": "spark-card",
+      "description": "The single lifted sheet that holds each puzzle.",
+      "html": "<article class=\"ds-card\"><p class=\"ds-eye\">05 / 19 · Logical reasoning</p><h3 class=\"ds-title\">Truth &amp; Lies</h3></article>",
+      "css": ".ds-card { max-width: 360px; background: #fffdf8; border: 1px solid #e0e4d6; border-radius: 22px; padding: 16px 18px 14px; box-shadow: 0 6px 24px #24403210; color: #243f32; transition: box-shadow .4s, border-color .4s; } .ds-card:hover { border-color: #e9c46a; } .ds-eye { margin: 0; color: #6b7a67; font: 700 11px \"DM Sans\", Arial, sans-serif; letter-spacing: 1.2px; text-transform: uppercase; } .ds-title { margin: 6px 0 4px; font: 400 30px \"Libre Caslon Display\", Georgia, serif; }"
+    },
+    {
+      "name": "Love Note",
+      "kind": "custom",
+      "description": "The emotional close of the day, on the note card.",
+      "html": "<p class=\"ds-love\"><span aria-hidden=\"true\">♡</span> Created with love from Devansh</p>",
+      "css": ".ds-love { margin: 22px 0 12px; text-align: center; color: #243f32; font: 400 24px \"Libre Caslon Display\", Georgia, serif; } .ds-love span { display: block; color: #b07d5b; font-size: 26px; margin-bottom: 6px; }"
+    },
+    {
+      "name": "Solved Chip",
+      "kind": "custom",
+      "refersTo": "solved-chip",
+      "description": "The count-up shown after a solve.",
+      "html": "<span class=\"ds-chip\">Solved <b>4/19</b></span>",
+      "css": ".ds-chip { display: inline-block; background: #355a40; color: #fff; font: 700 14px \"DM Sans\", Arial, sans-serif; padding: 8px 14px; border-radius: 999px; box-shadow: 0 6px 18px #24403240; } .ds-chip b { font-variant-numeric: tabular-nums; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Handwritten Note",
+    "overview": "Each day of Little Sparks is a small letter left for someone. The page is cream, the ink is a deep green, and the serif headings take their time. Nothing on a resting screen is trying to win attention, because the person reading it is already loved and already here.\n\nThe system is quiet, then delighted. At rest it is still and papery. Color, motion, and glow arrive only in response to something real: a solved puzzle, a lit square, a flow bar that has filled. A celebration feels earned because the sheet it lands on was calm a moment before.\n\nEvery touchable part is soft and tactile, like rounded paper tiles and good stationery. The screen is one sheet at a time, sized for a thumb on a phone, with its density set by the puzzle it holds.",
+    "keyCharacteristics": [
+      "Cream paper and deep green ink, with no pure black and no cold greys.",
+      "A high-contrast Caslon display face over a friendly geometric sans.",
+      "One full-screen sheet per puzzle, with a single faint shadow.",
+      "Gold belongs to reward; rust belongs to small human accents.",
+      "Each puzzle world keeps its own small palette inside the shared sheet."
+    ],
+    "rules": [
+      {
+        "name": "The Earned Gold Rule",
+        "body": "Gold and amber appear only as a response to play: a solve, a lit square, a filled flow bar. A resting screen never wears gold for decoration.",
+        "section": "colors"
+      },
+      {
+        "name": "The Warm Neutral Rule",
+        "body": "Every neutral leans cream or sage. Pure black and cool greys do not belong on the paper.",
+        "section": "colors"
+      },
+      {
+        "name": "The Serif Speaks Softly Rule",
+        "body": "The display face is for titles and sentiment, always at weight 400. Instructions and controls belong to DM Sans.",
+        "section": "typography"
+      },
+      {
+        "name": "The Steady Numbers Rule",
+        "body": "Counts and answer values use tabular numerals, so a changing score never shifts.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Sheet Rule",
+        "body": "A resting screen has one lifted surface: the card. Elements inside it stay flat, separated by borders and tone.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep resting screens cream, green, and still, so that the first burst of gold means something.",
+      "Do set the love note in the display face and keep it prominent on the note card, reading exactly \"Created with love from Devansh\".",
+      "Do use Fountain Ink instead of black, and warm neutrals instead of grey.",
+      "Do keep touchable controls at least 44px tall and text inputs at 16px or larger.",
+      "Do give every animation a calm, still fallback under reduced motion.",
+      "Do pair every Gentle No red with a shape, icon, or motion cue."
+    ],
+    "donts": [
+      "Don't use gold, amber, or multicolor gradients on a resting element.",
+      "Don't add a second lifted surface to a resting screen.",
+      "Don't put instructions or controls in the display face.",
+      "Don't introduce a new typeface, script CDN, or framework to reach a visual effect.",
+      "Don't use a red error treatment outside puzzle feedback.",
+      "Don't let design imply pressure: no countdowns, urgent colors, or nagging empty-streak treatments."
+    ]
+  }
+}
