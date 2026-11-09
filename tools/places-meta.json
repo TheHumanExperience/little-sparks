@@ -76,5 +76,16 @@
   "description": "Statue Christ the Redeemer over the clouds}}",
   "source": "https://commons.wikimedia.org/wiki/File:Redentor_Over_Clouds_1.jpg",
   "bytes": 48600
+ },
+ "g-machu": {
+  "level": 0,
+  "country": "Peru",
+  "file": "File:Machu Picchu, Perú, 2015-07-30, DD 61-64 PAN.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Diego Delso",
+  "description": "Machu Picchu, Peru}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Machu_Picchu,_Per%C3%BA,_2015-07-30,_DD_61-64_PAN.jpg",
+  "bytes": 48151
  }
 }
