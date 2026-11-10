@@ -28,7 +28,8 @@
    "File:Richardson's red squirrel (Tamiasciurus hudsonicus richardsoni) Moraine Lake.jpg"
   ],
   "m-mara": [
-   "File:Lions Family Portrait Masai Mara.jpg"
+   "File:Lions Family Portrait Masai Mara.jpg",
+   "File:Maasai village (44121579832).jpg"
   ],
   "t-addis": [
    "File:Lemon Boy.jpg"
@@ -985,17 +986,6 @@
   "source": "https://commons.wikimedia.org/wiki/File:Lake_Moraine-Banff_National_Park.jpg",
   "bytes": 97944
  },
- "m-mara": {
-  "level": 1,
-  "country": "Kenya",
-  "file": "File:Maasai village (44121579832).jpg",
-  "licence": "CC BY 2.0",
-  "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
-  "artist": "Kandukuru Nagarjun from Bangalore, India",
-  "description": "Around the Maasai Mara. Nerok County, Kenya, June 2018",
-  "source": "https://commons.wikimedia.org/wiki/File:Maasai_village_(44121579832).jpg",
-  "bytes": 112115
- },
  "t-addis": {
   "level": 2,
   "country": "Ethiopia",
@@ -1017,5 +1007,38 @@
   "description": "Cathedral, Plaza de Armas, Cusco, Peru}}",
   "source": "https://commons.wikimedia.org/wiki/File:Catedral,_Plaza_de_Armas,_Cusco,_Per%C3%BA,_2015-07-31,_DD_73.JPG",
   "bytes": 83296
+ },
+ "t-istanbul": {
+  "level": 2,
+  "country": "Turkey",
+  "file": "File:İstiklal Caddesi İstanbul.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Umit Yurduseven",
+  "description": "The iconic red streetcar running at the Istiklal Avenue}}",
+  "source": "https://commons.wikimedia.org/wiki/File:%C4%B0stiklal_Caddesi_%C4%B0stanbul.jpg",
+  "bytes": 74892
+ },
+ "t-krakow": {
+  "level": 2,
+  "country": "Poland",
+  "file": "File:Kraków Cloth Hall, Café Noworolski, 3 Main Market square, Old Town, Kraków, Poland.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Igor123121",
+  "description": "Kraków Cloth Hall, Café Noworolski, 3 Main Market square, Old Town, Krakow, Poland}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Krak%C3%B3w_Cloth_Hall,_Caf%C3%A9_Noworolski,_3_Main_Market_square,_Old_Town,_Krak%C3%B3w,_Poland.jpg",
+  "bytes": 86799
+ },
+ "t-moscow": {
+  "level": 2,
+  "country": "Russia",
+  "file": "File:Nikolskaya wooden church.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Hamerani",
+  "description": "Russia. Suzdal. Nikolskaya wooden church (the church of St. Nicholas from the village of Glotovo), built in 1776.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Nikolskaya_wooden_church.jpg",
+  "bytes": 101290
  }
 }

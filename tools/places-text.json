@@ -454,5 +454,83 @@
   "alt": "A city of skyscrapers at night with a glowing orange-and-white lattice tower in the middle.",
   "clue": "A red-and-white lattice tower, inspired by one in Paris, glowing in one of the world's biggest cities.",
   "story": "Tokyo Tower in Japan opened in 1958. At 333 metres it is a little taller than the Eiffel Tower, which inspired it."
+ },
+ "g-machu": {
+  "title": "A city in the clouds",
+  "alt": "Stone ruins and green terraces on a mountain ridge, with a steep green peak rising behind.",
+  "clue": "A 15th-century stone citadel on a high Andean ridge, made famous around the world in 1911.",
+  "story": "Machu Picchu was built for the Inca emperor Pachacuti around 1450. The peak behind it is Huayna Picchu."
+ },
+ "g-petra": {
+  "title": "Camels at the Treasury",
+  "alt": "Camels with colourful saddles in front of a grand temple-like facade carved into rose-red rock.",
+  "clue": "A 'rose-red city' carved straight into desert cliffs by Nabataean traders over 2,000 years ago.",
+  "story": "Al-Khazneh, the Treasury, is the most famous building in Petra, Jordan. It is not built but carved directly into the sandstone cliff."
+ },
+ "g-sagrada": {
+  "title": "Towers among the cranes",
+  "alt": "Looking up at intricate stone spires of a huge church surrounded by construction cranes.",
+  "clue": "A basilica started in 1882 that is still being built, designed by an architect who loved curves and nature.",
+  "story": "The Sagrada Família in Barcelona was Antoni Gaudí's life's work. Building has continued for more than 140 years."
+ },
+ "g-moai": {
+  "title": "A row of stone heads",
+  "alt": "A long row of giant stone statues with large heads standing on a platform beyond tall grass.",
+  "clue": "Nearly a thousand giant stone figures on a remote Pacific island, far from any other land.",
+  "story": "These are the fifteen moai of Ahu Tongariki on Easter Island (Rapa Nui), which belongs to Chile. They were re-erected in the 1990s after a tsunami had scattered them."
+ },
+ "g-table": {
+  "title": "A flat-topped mountain",
+  "alt": "A city at dawn below a long, flat-topped mountain.",
+  "clue": "A mountain with a top as flat as a table, above a harbour city near the southern tip of a continent.",
+  "story": "Table Mountain rises above Cape Town in South Africa. When cloud spills over its flat top, locals say the 'tablecloth' is on."
+ },
+ "m-boudha": {
+  "title": "Eyes on the stupa",
+  "alt": "A white dome topped by a golden tower painted with watchful eyes, strung with colourful prayer flags.",
+  "clue": "A great white dome with painted eyes, in a valley below the highest mountains on Earth.",
+  "story": "Boudhanath in Kathmandu, Nepal, is one of the largest stupas in the world. The eyes on its tower are the all-seeing eyes of the Buddha."
+ },
+ "m-sigiriya": {
+  "title": "A rock fortress",
+  "alt": "A huge flat-topped rock rising above green forest under a cloudy sky.",
+  "clue": "A king's palace was built on top of this huge rock in the 5th century, reached through the paws of a stone lion.",
+  "story": "Sigiriya, or Lion Rock, in Sri Lanka rises about 180 metres. Only the giant lion paws remain of the gateway to the top."
+ },
+ "m-moraine": {
+  "title": "A turquoise lake",
+  "alt": "A bright turquoise lake below a row of jagged snowy peaks and dark pine forest.",
+  "clue": "A glacier-fed lake coloured by fine 'rock flour', in a national park in the northern Rocky Mountains.",
+  "story": "Moraine Lake lies in Banff National Park in Canada. Its colour comes from glacial rock flour that reflects blue-green light."
+ },
+ "t-addis": {
+  "title": "A blue and white minibus",
+  "alt": "A blue-and-white minibus taxi on a busy street.",
+  "clue": "Blue-and-white minibuses carry most people around this highland capital, the seat of the African Union.",
+  "story": "Addis Ababa in Ethiopia sits about 2,400 metres high. Its blue-and-white minibuses are the city's everyday transport."
+ },
+ "t-istanbul": {
+  "title": "A red tram from above",
+  "alt": "Looking down on a busy pedestrian street with a small red vintage tram passing through.",
+  "clue": "A red nostalgic tram on a busy avenue, in a city that sits on two continents.",
+  "story": "Istiklal Avenue in Istanbul, Turkey, carries a restored red tram. The city spreads across both Europe and Asia."
+ },
+ "t-krakow": {
+  "title": "Arcades on the square",
+  "alt": "A long Renaissance hall with arched arcades and café umbrellas on a large market square.",
+  "clue": "A Renaissance cloth hall on one of the largest medieval market squares in Europe.",
+  "story": "The Cloth Hall stands on the Main Market Square in Kraków, Poland. Traders have sold cloth and goods here since the 1300s."
+ },
+ "t-moscow": {
+  "title": "A wooden church in the snow",
+  "alt": "A small dark wooden church with a steep pointed roof among frosty birch trees and snow.",
+  "clue": "Log churches built without nails, birch trees and deep winter snow, in a historic town north-east of a great capital.",
+  "story": "This wooden Church of St Nicholas stands in Suzdal, Russia. It was moved there from a village in 1960 as part of a museum of wooden architecture."
+ },
+ "t-cusco": {
+  "title": "A cathedral on the square",
+  "alt": "A large stone cathedral with twin bell towers above steps where people sit in the sun.",
+  "clue": "A colonial cathedral built on Inca foundations, in a mountain city that was once an empire's capital.",
+  "story": "Cusco Cathedral in Peru was built from 1560 to 1654, partly with stones taken from Inca buildings. Cusco was the capital of the Inca Empire."
  }
 }
