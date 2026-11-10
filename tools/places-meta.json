@@ -769,5 +769,27 @@
   "description": "Simits on a street stand for food sales}}",
   "source": "https://commons.wikimedia.org/wiki/File:Simits_on_a_street_stand_in_Istanbul.jpg",
   "bytes": 158102
+ },
+ "t-cairo": {
+  "level": 2,
+  "country": "Egypt",
+  "file": "File:Cairo - Khan al-Khalili spice market 1994.jpg",
+  "licence": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+  "artist": "Jon Gudorf Photography",
+  "description": "Cairo - Khan al-Khalili spice market 1994}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Cairo_-_Khan_al-Khalili_spice_market_1994.jpg",
+  "bytes": 154740
+ },
+ "t-krakow": {
+  "level": 2,
+  "country": "Poland",
+  "file": "File:Anti-Ukrainian protest Kraków. Main Market square, Old Town, Kraków, Poland.jpg",
+  "licence": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "artist": "Igor123121",
+  "description": "Anti-Ukrainian protest Krakow, Main Market square, Old Town, Kraków, Poland}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Anti-Ukrainian_protest_Krak%C3%B3w._Main_Market_square,_Old_Town,_Krak%C3%B3w,_Poland.jpg",
+  "bytes": 132511
  }
 }
