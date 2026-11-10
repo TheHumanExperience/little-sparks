@@ -11,7 +11,6 @@ const document = { querySelector(s) { if (!nodes.has(s)) nodes.set(s, element())
 const context = { document, localStorage: { getItem: () => null, setItem: () => {} }, window: {}, setInterval: () => {}, fs };
 vm.createContext(context);
 for (const f of ["valid-words.js", "app.js", "daily-content.js", "photos.js", "extras.js", "stories.js", "ladders.js", "sparks.js", "places.js", "globe.js"]) vm.runInContext(fs.readFileSync("dist/" + f, "utf8"), context);
-if (!vm.runInContext("PLACES.length", context)) { console.log("SKIP: Where in the World has no photos yet (not in the feed)."); process.exit(0); }
 const out = vm.runInContext(`
 const fail = (m) => { throw Error(m); };
 const FREE = /^(public domain|pd\\b|pd-|cc0|cc by(-sa)? \\d\\.\\d|cc by(-sa)?$|cc-by(-sa)?-\\d\\.\\d)/i;

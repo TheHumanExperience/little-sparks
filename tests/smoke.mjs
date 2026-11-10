@@ -108,6 +108,17 @@ for (const [engine, launch, ctxOpts] of engines) {
   await solvePocket();
   check(await page.locator(".spark.live .donebadge:not([hidden])").count() === 1, `${engine} Pocket Sudoku solves by touch`);
   check(/·\s*1\/\d+/.test(await page.locator("#todayPill").innerText()), `${engine} header counts the solve`);
+  // A solved card's Next skips solved cards; the day sheet jumps to the next unsolved one.
+  check((await page.locator(".spark.live .nextspark").innerText()).includes("Next to play"), `${engine} solved card offers Next to play`);
+  const order = await page.evaluate(() => { const o = feedOrder(); all[progressKey(today())].games[o[2]] = { done: true }; persist(); return o; });
+  await page.locator(".spark.live .nextspark").tap();
+  await page.waitForSelector(`.spark.live[data-idx="${order[3]}"]`, { timeout: 5000 }).catch(() => {});
+  check(await page.evaluate((i) => +document.querySelector(".spark.live")?.dataset.idx === i, order[3]), `${engine} Next unsolved skips a solved card`);
+  await page.locator("#todayPill").tap();
+  check((await page.locator("#nextUnsolved .btn").innerText()).includes("Next puzzle to play"), `${engine} day sheet offers the next puzzle to play`);
+  await page.locator("#nextUnsolved .btn").tap();
+  await page.waitForSelector(`.spark.live[data-idx="${order[4]}"]`, { timeout: 5000 }).catch(() => {});
+  check(await page.evaluate((i) => +document.querySelector(".spark.live")?.dataset.idx === i && !document.querySelector("#daysSheet").open, order[4]), `${engine} day sheet jumps to the next unsolved card`);
   // The brand returns to today's first card.
   await page.locator(".brand").tap();
   await page.waitForTimeout(1000);
@@ -180,6 +191,25 @@ for (const [engine, launch, ctxOpts] of engines) {
   }
   await page.waitForTimeout(300);
   check(await page.evaluate(() => state(23).done && !state(23).revealed), `${engine} Garden Beds solves itself by drag` + (await page.evaluate(() => state(23).done ? "" : " " + JSON.stringify(state(23).beds) + " want " + JSON.stringify(bedsModel(day).rects))));
+  // Where in the World (Medium, iPhone SE): four tappable countries, continent hint, a miss fades, the answer solves and counts.
+  await page.setViewportSize({ width: 375, height: 667 }); await fresh(1); await goTo(24);
+  const wf = await page.evaluate(() => { const card = document.querySelector(".spark.live").getBoundingClientRect(), opts = [...document.querySelectorAll(".spark.live .placeopt")];
+    return { n: opts.length, minH: Math.min(...opts.map((o) => o.getBoundingClientRect().height)), inside: opts.every((o) => { const r = o.getBoundingClientRect(); return r.left >= card.left && r.right <= card.right; }), overflow: document.documentElement.scrollWidth > innerWidth }; });
+  check(wf.n === 4 && wf.minH >= 44 && wf.inside && !wf.overflow, `${engine} Where in the World shows four 44px countries inside the card ` + JSON.stringify(wf));
+  await page.locator(".spark.live .stage button", { hasText: "A gentle hint" }).tap();
+  check(/It's in /.test(await page.locator(".spark.live #feedback").innerText()), `${engine} first place hint names the continent`);
+  const wp = await page.evaluate(() => { const m = savedPlace(day, state(24)); return { right: m.place.country, wrong: m.options.filter((c) => c !== m.place.country) }; });
+  await page.locator(`.spark.live [data-place="${wp.wrong[0]}"]`).tap();
+  check(await page.evaluate((c) => { const b = document.querySelector(`.spark.live [data-place="${c}"]`); return b.classList.contains("ruled") && b.disabled && !state(24).done; }, wp.wrong[0]), `${engine} a wrong country fades and doesn't solve`);
+  await page.locator(`.spark.live [data-place="${wp.right}"]`).tap(); await page.waitForTimeout(300);
+  check(await page.evaluate(() => state(24).done && !state(24).revealed && feedDone(day, 24)), `${engine} the right country solves Where in the World`);
+  check(/(^|[\s·])1\/20\b/.test(await page.locator("#todayPill").innerText()), `${engine} the place solve is counted`);
+  // Tricky: two misses end the round as missed, which never counts.
+  await fresh(2); await goTo(24);
+  const wt = await page.evaluate(() => { const m = savedPlace(day, state(24)); return m.options.filter((c) => c !== m.place.country); });
+  for (const c of wt.slice(0, 2)) { await page.locator(`.spark.live [data-place="${c}"]`).tap(); await page.waitForTimeout(150); }
+  check(await page.evaluate(() => state(24).done && state(24).missed && state(24).revealed && !feedDone(day, 24)), `${engine} two misses on Tricky end the round without counting`);
+  check(/(^|[\s·])0\/20\b/.test(await page.locator("#todayPill").innerText()), `${engine} a missed place round isn't counted`);
   // Matchsticks (Medium, iPhone SE): no options, a typed equation that fits, rejects a wrong one and accepts any spacing/signs.
   await page.setViewportSize({ width: 375, height: 667 }); await fresh(1);
   const ms = await page.evaluate(() => { const cat = AHA_CATS.findIndex((c) => c.id === "matchsticks"), d = today(), m = { cat, ...AHA_GEN[cat](rng(puzzleSeed(d) + "|smoke"), 1) };

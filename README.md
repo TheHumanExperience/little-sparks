@@ -6,7 +6,7 @@ Tap the Little Sparks logo at any time to go back to the first card of today.
 
 ### Small rewards while playing
 
-- **Escalating celebrations.** Solves less than 15 minutes apart build a streak. Each streak step adds more confetti to the burst. You also get bigger celebrations at the 5th and 10th solve of a day and when all 19 are solved.
+- **Escalating celebrations.** Solves less than 15 minutes apart build a streak. Each streak step adds more confetti to the burst. You also get bigger celebrations at the 5th and 10th solve of a day and when all 20 are solved.
 - **Chimes.** Each solve plays a soft chime made with the Web Audio API. Its pitch climbs a pentatonic scale as your streak grows, up to a streak of 10. The 🔔 button in the header mutes it, and that setting is saved. Sound only starts after your first tap or key press, which iOS requires.
 - **Flow bar.** The thin bar under the header fills by 1 for each puzzle you solve without a hint, up to 5. The first hint you use on a puzzle drains 2, never below 0, and that puzzle can no longer add flow. When the bar is full, cards turn golden for the rest of the day and stay golden even if you use hints. The bar resets at midnight.
 - **Shiny cards.** About 1 card in 20 has a holographic look. Which cards are shiny depends only on the date and the game, so reloading the page doesn't change them. Solving a shiny card gives you a sticker, shown in a toast and counted on the note card.
@@ -20,6 +20,7 @@ Tap the Little Sparks logo at any time to go back to the first card of today.
   - If the puzzle isn't solved yet, it clears at once and an Undo button stays for 5 seconds.
   - If the puzzle is solved, you're asked to confirm first. Your solve stays counted, so the solve count, streak, flow, stickers and milestones don't change.
   - Solving it again shows a small "Solved again" celebration and awards nothing, and hints you use while replaying don't drain the flow bar.
+- **Next puzzle to play.** Tap the today count in the header to open the day sheet. Its top button, "Next puzzle to play", names the next card that isn't solved yet, after the card you're on (older days next, then back round to today), and takes you there. Tapping a day opens its first card still to play. On a solved card, "Next spark ↓" becomes "Next to play ↓" and skips the solved cards in between. Revealed answers count as still to play. Day rows show only what's solved, never what's "left", so the archive never reads as a backlog. `feedNextUnsolved` in `dist/feed.js` finds the card; `verify-feed.cjs` and the smoke test check it.
 
 With reduced motion turned on there's no confetti and no shimmer, and the logo jumps straight to the top instead of scrolling.
 
@@ -46,7 +47,7 @@ The games, in feed order. Each level shows one game from each family, so Gentle,
 | 19 | Time Lens Duel | Time Lens Duel | Time Lens Duel |
 | 20 | Where in the World (famous landmarks) | Where in the World (recognisable places) | Where in the World (everyday scenes) |
 
-Each level has 20 cards. The families are set in `FEED_FAMILIES` in `dist/feed.js`. Starlines has been retired; old Starlines saves are simply ignored.
+Each level has 20 cards. Where in the World joined on 10 November 2026, so earlier days keep their 19 cards and any day already finished stays finished (`FEED_SINCE` in `dist/feed.js`). The families are set in `FEED_FAMILIES` in `dist/feed.js`. Starlines has been retired; old Starlines saves are simply ignored.
 
 **Lantern Lanes** is Light Up (Akari). Tap a square for a 💡; it lights its row and column until a wall stops it. Light every square, never let two bulbs see each other, and give each numbered wall exactly that many bulbs on its 4 sides (diagonals don't count). Tapping cycles bulb → dot ("no bulb here") → empty, and a long press drops a dot. How to play opens with that number rule in one line and a 3-step mini tutorial with tiny example boards. Numbers turn green when exact and red when over, lit squares glow, and clashing bulbs flash red. Gentle (5×5) has no numbers and exactly the fewest bulbs that can do it; Medium (6×6) adds some numbers and keeps the bulbs-left counter; Tricky (7×7) has fewer numbers and no counter. Every puzzle has exactly one answer.
 

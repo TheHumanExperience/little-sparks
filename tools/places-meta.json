@@ -1,5 +1,67 @@
 {
- "_skip": {},
+ "_skip": {
+  "g-machu": [
+   "File:Machu Picchu, Perú, 2015-07-30, DD 61-64 PAN.jpg"
+  ],
+  "g-petra": [
+   "File:Restauration du Khasne Petra.jpg"
+  ],
+  "g-sagrada": [
+   "File:Sagrada Familia, Barcelona (P1170692).jpg"
+  ],
+  "g-moai": [
+   "File:Ahu Tongariki quince moais.jpg"
+  ],
+  "g-table": [
+   "File:Table Mountain, Cape Town (P1050264).jpg"
+  ],
+  "m-boudha": [
+   "File:Boudhanath Stupa view from Kapan Height-IMG 9815.jpg"
+  ],
+  "m-hallstatt": [
+   "File:Panoramic view of Hallstatt village and shoreline from lake.jpg"
+  ],
+  "m-sigiriya": [
+   "File:Sigiriya Rock Sri lanka.jpg"
+  ],
+  "m-moraine": [
+   "File:Richardson's red squirrel (Tamiasciurus hudsonicus richardsoni) Moraine Lake.jpg"
+  ],
+  "m-mara": [
+   "File:Lions Family Portrait Masai Mara.jpg",
+   "File:Maasai village (44121579832).jpg"
+  ],
+  "t-addis": [
+   "File:Lemon Boy.jpg"
+  ],
+  "t-istanbul": [
+   "File:Simits on a street stand in Istanbul.jpg"
+  ],
+  "t-krakow": [
+   "File:Anti-Ukrainian protest Kraków. Main Market square, Old Town, Kraków, Poland.jpg"
+  ],
+  "t-sweden": [
+   "File:6 juni (18).JPG"
+  ],
+  "t-moscow": [
+   "File:2005 year - Abandoned village in the Tver region. Village houses in Russia.jpg"
+  ],
+  "t-ireland": [
+   "File:Pub and village street, Southerndown - geograph.org.uk - 1019476.jpg"
+  ],
+  "t-valparaiso": [
+   "File:2019-03-19 SOCIBER VALPARAISO III floating drydock.jpg"
+  ],
+  "t-cusco": [
+   "File:Vista de Cusco, Perú, 2015-07-31, DD 11-17 PAN.JPG"
+  ],
+  "t-greekvillage": [
+   "File:Moni Naxos Greece 2018080818540NP6172.jpg"
+  ],
+  "t-wales": [
+   "File:Recreated Celtic Village, Museum of Welsh Life. - geograph.org.uk - 138611.jpg"
+  ]
+ },
  "g-eiffel": {
   "level": 0,
   "country": "France",
@@ -77,15 +139,961 @@
   "source": "https://commons.wikimedia.org/wiki/File:Redentor_Over_Clouds_1.jpg",
   "bytes": 48600
  },
- "g-machu": {
+ "g-giza": {
   "level": 0,
-  "country": "Peru",
-  "file": "File:Machu Picchu, Perú, 2015-07-30, DD 61-64 PAN.jpg",
+  "country": "Egypt",
+  "file": "File:All Gizah Pyramids.jpg",
+  "licence": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+  "artist": "Ricardo Liberato",
+  "description": "All Giza Pyramids in one shot.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:All_Gizah_Pyramids.jpg",
+  "bytes": 68583
+ },
+ "g-bigben": {
+  "level": 0,
+  "country": "United Kingdom",
+  "file": "File:Palace of Westminster, London - Feb 2007.jpg",
+  "licence": "CC BY-SA 2.5",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5/",
+  "artist": "Diliff",
+  "description": "The Palace of Westminster at night as seen from the opposite side of the River Thames. Victoria Tower and the House of Lords is on the left. The Clock Tower of Big Ben and the House of Commons is on the right. The spire left of centre is the 300ft ventilation chimney above the central lobby. The twi",
+  "source": "https://commons.wikimedia.org/wiki/File:Palace_of_Westminster,_London_-_Feb_2007.jpg",
+  "bytes": 39655
+ },
+ "g-angkor": {
+  "level": 0,
+  "country": "Cambodia",
+  "file": "File:Angkor Wat in Cambodia.jpg",
+  "licence": "CC0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "artist": "Martaapue",
+  "description": "Sunrise in Angkor Wat, Cambodia.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Angkor_Wat_in_Cambodia.jpg",
+  "bytes": 50351
+ },
+ "g-fuji": {
+  "level": 0,
+  "country": "Japan",
+  "file": "File:Chureito Pagoda and Mount Fuji 2023-03-07.jpg",
+  "licence": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "artist": "Stjepko Krehula",
+  "description": "Chureito Pagoda and Mount Fuji}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Chureito_Pagoda_and_Mount_Fuji_2023-03-07.jpg",
+  "bytes": 84876
+ },
+ "g-neuschwanstein": {
+  "level": 0,
+  "country": "Germany",
+  "file": "File:Neuschwanstein Castle 2024.jpg",
+  "licence": "CC0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "artist": "Wilfredo Rafael Rodriguez Hernandez",
+  "description": "",
+  "source": "https://commons.wikimedia.org/wiki/File:Neuschwanstein_Castle_2024.jpg",
+  "bytes": 88167
+ },
+ "g-basil": {
+  "level": 0,
+  "country": "Russia",
+  "file": "File:Вид на Исторический музей в сторону Красной площади.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Олег Токарев",
+  "description": "View of the State Historical Museum in front of the Red Square. Moscow, Russia.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:%D0%92%D0%B8%D0%B4_%D0%BD%D0%B0_%D0%98%D1%81%D1%82%D0%BE%D1%80%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9_%D0%BC%D1%83%D0%B7%D0%B5%D0%B9_%D0%B2_%D1%81%D1%82%D0%BE%D1%80%D0%BE%D0%BD%D1%83_%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%B9_%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D0%B8.jpg",
+  "bytes": 105853
+ },
+ "g-chichen": {
+  "level": 0,
+  "country": "Mexico",
+  "file": "File:Chichen Itza 2.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Daniel Schwen",
+  "description": "El Castillo (pyramidd of Kukulcán) in Chichén Itzá}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Chichen_Itza_2.jpg",
+  "bytes": 44533
+ },
+ "g-burj": {
+  "level": 0,
+  "country": "United Arab Emirates",
+  "file": "File:Burj Khalifa from the sea, Dubai.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Jpbowen",
+  "description": "View of the Burj Khalifa from a ferry at sea, Dubai, UAE.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Burj_Khalifa_from_the_sea,_Dubai.jpg",
+  "bytes": 46243
+ },
+ "g-acropolis": {
+  "level": 0,
+  "country": "Greece",
+  "file": "File:Attica 06-13 Athens 50 View from Philopappos - Acropolis Hill.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "",
+  "description": "View from Philopappos Hill in Athens (Attica, Greece) — Acropolis of Athens}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Attica_06-13_Athens_50_View_from_Philopappos_-_Acropolis_Hill.jpg",
+  "bytes": 98641
+ },
+ "g-hagia": {
+  "level": 0,
+  "country": "Turkey",
+  "file": "File:Hagia Sophia Mars 2013.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Arild Vågen",
+  "description": "Hagia Sophia}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Hagia_Sophia_Mars_2013.jpg",
+  "bytes": 92375
+ },
+ "g-marina": {
+  "level": 0,
+  "country": "Singapore",
+  "file": "File:ArtScience Museum, Marina Bay Sands, Singapore.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Basile Morin",
+  "description": "ArtScience Museum, Marina Bay Sands, in the late afternoon, in front of the skyline of the Central Business District, Singapore. Architect : Moshe Safdie.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:ArtScience_Museum,_Marina_Bay_Sands,_Singapore.jpg",
+  "bytes": 74427
+ },
+ "g-cntower": {
+  "level": 0,
+  "country": "Canada",
+  "file": "File:Toronto skyline as viewed from Ireland Park.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Maksim Sokolov (maxergon.com)",
+  "description": "Toronto skyline as viewed from Ireland Park}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Toronto_skyline_as_viewed_from_Ireland_Park.jpg",
+  "bytes": 85557
+ },
+ "g-petronas": {
+  "level": 0,
+  "country": "Malaysia",
+  "file": "File:Kuala Lumpur Malaysia Skyline-03.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "CEphoto, Uwe Aranas",
+  "description": "Kuala Lumpur, Malaysia: Skyline of KL, seen from the pedestrian flyover over Jalan Tun Razak next to Perpustakaan Negara Malaysia (National Library of Malaysia).}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Kuala_Lumpur_Malaysia_Skyline-03.jpg",
+  "bytes": 70634
+ },
+ "g-kinderdijk": {
+  "level": 0,
+  "country": "Netherlands",
+  "file": "File:The windmills of Kinderdijk.JPG",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Tarod",
+  "description": "The windmills of Kinderdijk are one of the best known Dutch tourist sites. They have been a UNESCO World Heritage Site since 1997.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:The_windmills_of_Kinderdijk.JPG",
+  "bytes": 82278
+ },
+ "g-watarun": {
+  "level": 0,
+  "country": "Thailand",
+  "file": "File:Templo Wat Arun, Bangkok, Tailandia, 2013-08-22, DD 30.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Diego Delso",
+  "description": "Entrance doorway to ordination hall with guardians in the Temple, , .}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Templo_Wat_Arun,_Bangkok,_Tailandia,_2013-08-22,_DD_30.jpg",
+  "bytes": 118175
+ },
+ "g-perito": {
+  "level": 0,
+  "country": "Argentina",
+  "file": "File:Glaciar Perito Moreno14 - Argentina.JPG",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Diego Delso",
+  "description": "Perito Moreno Glacier, Argentina}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Glaciar_Perito_Moreno14_-_Argentina.JPG",
+  "bytes": 87593
+ },
+ "g-milford": {
+  "level": 0,
+  "country": "New Zealand",
+  "file": "File:Milford Sound in Fiordland National Park 08.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Krzysztof Golik",
+  "description": "Milford Sound in Fiordland National Park, South Island of New Zealand}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Milford_Sound_in_Fiordland_National_Park_08.jpg",
+  "bytes": 78914
+ },
+ "g-charles": {
+  "level": 0,
+  "country": "Czech Republic",
+  "file": "File:Vltava river in Prague.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Dmitry A. Mottl",
+  "description": "Panoramic view of the Vltava River flowing through Prague, Czech Republic. The photograph shows several bridges and prominent buildings in the city centre, including Charles Bridge, Mánes Bridge, Legion Bridge, Jirásek Bridge, the National Theatre, and several historic buildings along the banks of t",
+  "source": "https://commons.wikimedia.org/wiki/File:Vltava_river_in_Prague.jpg",
+  "bytes": 121332
+ },
+ "g-gyeongbok": {
+  "level": 0,
+  "country": "South Korea",
+  "file": "File:Gyeonghoeru (Royal Banquet Hall) at Gyeongbokgung Palace, Seoul.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Frank Schulenburg",
+  "description": "Royal Banquet Hall Gyeonghoeru (경회루) at Gyeongbokgung Palace (경복궁), Seoul}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Gyeonghoeru_(Royal_Banquet_Hall)_at_Gyeongbokgung_Palace,_Seoul.jpg",
+  "bytes": 75673
+ },
+ "g-borobudur": {
+  "level": 0,
+  "country": "Indonesia",
+  "file": "File:Borobudur, Java, Indonesia, 20220817 1013 8739.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Jakub Hałun",
+  "description": "View of Borobudur Temple, Java, Indonesia}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Borobudur,_Java,_Indonesia,_20220817_1013_8739.jpg",
+  "bytes": 91620
+ },
+ "m-santorini": {
+  "level": 1,
+  "country": "Greece",
+  "file": "File:1000 Three domes of Oia in Santorini Photo by Giles Laurent.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Giles Laurent",
+  "description": "Three domes of Oia in Santorini}}",
+  "source": "https://commons.wikimedia.org/wiki/File:1000_Three_domes_of_Oia_in_Santorini_Photo_by_Giles_Laurent.jpg",
+  "bytes": 88542
+ },
+ "m-iceland": {
+  "level": 1,
+  "country": "Iceland",
+  "file": "File:Skógafoss July 2014.JPG",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Martin Falbisoner",
+  "description": "Skógafoss, Iceland, July 2014}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Sk%C3%B3gafoss_July_2014.JPG",
+  "bytes": 49891
+ },
+ "m-geiranger": {
+  "level": 1,
+  "country": "Norway",
+  "file": "File:Geirangerfjord from Ørnesvingen, 2013 June.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Ximonic (Simo Räsänen)",
+  "description": "A view to Geirangerfjord from Ørnesvingen, Stranda, Møre og Romsdal, Norway in 2013 June.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Geirangerfjord_from_%C3%98rnesvingen,_2013_June.jpg",
+  "bytes": 98851
+ },
+ "m-matterhorn": {
+  "level": 1,
+  "country": "Switzerland",
+  "file": "File:CH.VS.Zermatt 2021-10-17 Matterhorn 8726.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Roy Egloff",
+  "description": "Hiking near the Matterhorn in Zermatt, Valais, Switzerland}}",
+  "source": "https://commons.wikimedia.org/wiki/File:CH.VS.Zermatt_2021-10-17_Matterhorn_8726.jpg",
+  "bytes": 115013
+ },
+ "m-chefchaouen": {
+  "level": 1,
+  "country": "Morocco",
+  "file": "File:2018 01 (Blue) - Chaouen.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Fbrandao.1963",
+  "description": "Street and typical houses in Chefchaouen, the blue city of Morocco.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:2018_01_(Blue)_-_Chaouen.jpg",
+  "bytes": 93967
+ },
+ "m-halong": {
+  "level": 1,
+  "country": "Vietnam",
+  "file": "File:View of sea from Titov Island, Ha Long Bay, Vietnam, 20240128 1337 3732.jpg",
+  "licence": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "artist": "Jakub Hałun",
+  "description": "View of sea and tourist boats from Titov Island, Ha Long Bay, Vietnam}}",
+  "source": "https://commons.wikimedia.org/wiki/File:View_of_sea_from_Titov_Island,_Ha_Long_Bay,_Vietnam,_20240128_1337_3732.jpg",
+  "bytes": 72986
+ },
+ "m-inari": {
+  "level": 1,
+  "country": "Japan",
+  "file": "File:Torii path with lantern at Fushimi Inari Taisha Shrine, Kyoto, Japan.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Basile Morin",
+  "description": "Torii path with a hanging lantern at Fushimi Inari Taisha Shrine Senbontorii, Kyoto, Japan.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Torii_path_with_lantern_at_Fushimi_Inari_Taisha_Shrine,_Kyoto,_Japan.jpg",
+  "bytes": 106121
+ },
+ "m-hawamahal": {
+  "level": 1,
+  "country": "India",
+  "file": "File:20191218 Pałac Wiatrów w Jaipurze 1129 9124.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Jakub Hałun",
+  "description": "Hawa Mahal (The Palace of Winds) in Jaipur}}",
+  "source": "https://commons.wikimedia.org/wiki/File:20191218_Pa%C5%82ac_Wiatr%C3%B3w_w_Jaipurze_1129_9124.jpg",
+  "bytes": 115421
+ },
+ "m-cappadocia": {
+  "level": 1,
+  "country": "Turkey",
+  "file": "File:Hot air balloon in Cappadocia 02.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Bernard Gagnon",
+  "description": "Hot air balloon in Cappadocia, Turkey}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Hot_air_balloon_in_Cappadocia_02.jpg",
+  "bytes": 108148
+ },
+ "m-uyuni": {
+  "level": 1,
+  "country": "Bolivia",
+  "file": "File:Salar de Uyuni, Bolivia, 2016-02-04, DD 16-18 HDR.JPG",
   "licence": "CC BY-SA 4.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
   "artist": "Diego Delso",
-  "description": "Machu Picchu, Peru}}",
-  "source": "https://commons.wikimedia.org/wiki/File:Machu_Picchu,_Per%C3%BA,_2015-07-30,_DD_61-64_PAN.jpg",
-  "bytes": 48151
+  "description": "Reflections in the Uyuni salt flat during sunrise, Daniel Campos Province, Potosí Department, southwestern Bolivia, not far from the crest of the Andes. This salt flat is, with a surface of , the world's largest, and during the rain saison (December-February) offers spectacular reflexions.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Salar_de_Uyuni,_Bolivia,_2016-02-04,_DD_16-18_HDR.JPG",
+  "bytes": 31568
+ },
+ "m-dubrovnik": {
+  "level": 1,
+  "country": "Croatia",
+  "file": "File:Dubrovnik Old Town 1.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "kallerna",
+  "description": "Morning view of the Old Town of Dubrovnik and its city walls, an UNESCO Heritage Site since 1979.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Dubrovnik_Old_Town_1.jpg",
+  "bytes": 103095
+ },
+ "m-lisbon": {
+  "level": 1,
+  "country": "Portugal",
+  "file": "File:Lisbon in a day - Tram 28 Alfama (39271341600).jpg",
+  "licence": "CC BY 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+  "artist": "Michael Meraner",
+  "description": "Photos from my trip to Lisbon in March 2018.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Lisbon_in_a_day_-_Tram_28_Alfama_(39271341600).jpg",
+  "bytes": 119191
+ },
+ "m-moher": {
+  "level": 1,
+  "country": "Ireland",
+  "file": "File:Ireland Cliffs of Moher BW 2025-09-11 14-27-51.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Berthold Werner",
+  "description": "Ireland, Cliffs of Moher, O'Brien's Tower}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Ireland_Cliffs_of_Moher_BW_2025-09-11_14-27-51.jpg",
+  "bytes": 62625
+ },
+ "m-stonehenge": {
+  "level": 1,
+  "country": "United Kingdom",
+  "file": "File:Stonehenge from the north.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Sumit Surai",
+  "description": "Stonehenge",
+  "source": "https://commons.wikimedia.org/wiki/File:Stonehenge_from_the_north.jpg",
+  "bytes": 69460
+ },
+ "m-budapest": {
+  "level": 1,
+  "country": "Hungary",
+  "file": "File:Széchenyi Chain Bridge in Budapest at night.jpg",
+  "licence": "CC0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "artist": "Wilfredor",
+  "description": "{{Multilingual description|en=Night view of The Széchenyi Chain Bridge from Buda Castle in Budapest, Hungary|es=Vista nocturna del puente de las cadenas Széchenyi desde el Castillo de Buda, en Budapest|fa=پل زنجیر، پلی بر روی رود دانوب در شهر بوداپست، مجارستان است",
+  "source": "https://commons.wikimedia.org/wiki/File:Sz%C3%A9chenyi_Chain_Bridge_in_Budapest_at_night.jpg",
+  "bytes": 81741
+ },
+ "m-bagan": {
+  "level": 1,
+  "country": "Myanmar",
+  "file": "File:20160801 Bagan temples 6701.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Jakub Hałun",
+  "description": "Temples on Bagan Plain in Myanmar}}",
+  "source": "https://commons.wikimedia.org/wiki/File:20160801_Bagan_temples_6701.jpg",
+  "bytes": 79308
+ },
+ "m-chocolate": {
+  "level": 1,
+  "country": "Philippines",
+  "file": "File:The Chocolate Hills in Bohol.jpg",
+  "licence": "CC0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "artist": "rogel tura",
+  "description": "Chocolate Hills are conical karst hills in Bohol, is a famous tourist attraction. There are about 1,776 hills spread over an area of more than 50 square kilometers, covered in green grass that turns brown during the dry season.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:The_Chocolate_Hills_in_Bohol.jpg",
+  "bytes": 63621
+ },
+ "m-monument": {
+  "level": 1,
+  "country": "United States",
+  "file": "File:West Mitten Butte - Monument Valley Luca Galuzzi 2007.jpg",
+  "licence": "CC BY-SA 2.5",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.5/",
+  "artist": "Luca Galuzzi (Lucag)",
+  "description": "West Mitten Butte, Monument Valley Navajo Tribal Park. Monument Valley is located on the southern border of Utah with northern Arizona, USA. (view ~due East)--:en:West and East Mitten Buttes are in Arizona, apart; Merrick Butte is off-photo, just right (south); the Utah border is left, the cliffs ar",
+  "source": "https://commons.wikimedia.org/wiki/File:West_Mitten_Butte_-_Monument_Valley_Luca_Galuzzi_2007.jpg",
+  "bytes": 93756
+ },
+ "m-havana": {
+  "level": 1,
+  "country": "Cuba",
+  "file": "File:National-Capitol-and-classic-cars-in-Havana-Cuba-225-031-061A.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Fraganda",
+  "description": "El Capitolio, the National Capitol of Cuba, is a neoclassical public building on the Paseo del Prado in central Havana. Brightly coloured classic American cars line the street in front of the Gran Teatro de La Habana. Photographed in March 2025 in Havana, Cuba.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:National-Capitol-and-classic-cars-in-Havana-Cuba-225-031-061A.jpg",
+  "bytes": 106116
+ },
+ "m-cartagena": {
+  "level": 1,
+  "country": "Colombia",
+  "file": "File:Colombia, Cartagena, Plaza de la Aduana.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Dr. Thomas Liptak",
+  "description": "",
+  "source": "https://commons.wikimedia.org/wiki/File:Colombia,_Cartagena,_Plaza_de_la_Aduana.jpg",
+  "bytes": 102131
+ },
+ "m-sossusvlei": {
+  "level": 1,
+  "country": "Namibia",
+  "file": "File:Dead Vlei, Sossusvlei, Namibia, 2018-08-06, DD 086.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Diego Delso",
+  "description": "Dead camel thorn (Vachellia erioloba), Deadvlei, Namib-Naukluft Park, Namibia.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Dead_Vlei,_Sossusvlei,_Namibia,_2018-08-06,_DD_086.jpg",
+  "bytes": 42756
+ },
+ "m-baobab": {
+  "level": 1,
+  "country": "Madagascar",
+  "file": "File:Walking the Avenue of the Baobabs.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Gavinevans",
+  "description": "Local people on the Avenue of the Baobabs, Morondava, Madagascar}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Walking_the_Avenue_of_the_Baobabs.jpg",
+  "bytes": 82535
+ },
+ "m-isfahan": {
+  "level": 1,
+  "country": "Iran",
+  "file": "File:Naghshe Jahan Square Isfahan modified.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": ":en:User:Arad",
+  "description": "Naghsh-i Jahan Square, Isfahan, Iran (Edited version)}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Naghshe_Jahan_Square_Isfahan_modified.jpg",
+  "bytes": 94698
+ },
+ "m-registan": {
+  "level": 1,
+  "country": "Uzbekistan",
+  "file": "File:Registan 01.jpg",
+  "licence": "CC0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "artist": "Bernard Gagnon",
+  "description": "Registan in Samarkand, Uzbekistan}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Registan_01.jpg",
+  "bytes": 54661
+ },
+ "m-venice": {
+  "level": 1,
+  "country": "Italy",
+  "file": "File:Canal Grande Chiesa della Salute e Dogana dal ponte dell Accademia.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Moroder/Template:Credits",
+  "description": "{{Multilingual description",
+  "source": "https://commons.wikimedia.org/wiki/File:Canal_Grande_Chiesa_della_Salute_e_Dogana_dal_ponte_dell_Accademia.jpg",
+  "bytes": 78956
+ },
+ "m-zhangjiajie": {
+  "level": 1,
+  "country": "China",
+  "file": "File:Zhangjiajie at dawn 1.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Dcpeets",
+  "description": "Dawn breaking on a few of the thousands of rock pillars at Zhangjiajie}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Zhangjiajie_at_dawn_1.jpg",
+  "bytes": 66749
+ },
+ "t-bangkok": {
+  "level": 2,
+  "country": "Thailand",
+  "file": "File:Pratu Nam Pier, Bangkok, Thailand (6906983490).jpg",
+  "licence": "CC BY 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+  "artist": "David McKelvey from Brisbane, Australia",
+  "description": "Pratunam is a shopping district in Bangkok. It is a major market area with thousands of fashion stores that sell wholesale with cheap prices guaranteed, especially if you buy in bulk. Pratunam is used in a broad sense here, and it also includes the areas of Victory Monument, Ratchathewi and Makkasan",
+  "source": "https://commons.wikimedia.org/wiki/File:Pratu_Nam_Pier,_Bangkok,_Thailand_(6906983490).jpg",
+  "bytes": 98927
+ },
+ "t-tbilisi": {
+  "level": 2,
+  "country": "Georgia",
+  "file": "File:2014 Tbilisi, Domy na Starym Mieście (04).jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Marcin Konsek",
+  "description": "Houses in the Old Town. Tbilisi, Georgia.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:2014_Tbilisi,_Domy_na_Starym_Mie%C5%9Bcie_(04).jpg",
+  "bytes": 112787
+ },
+ "t-colombo": {
+  "level": 2,
+  "country": "Sri Lanka",
+  "file": "File:Sri Lanka, Puttalam street scene (5).jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Vincent van Zeijst",
+  "description": "View into Mannar Road, Puttalam, Sri Lanka (on Bing/maps called Eluwakkulama Road).}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Sri_Lanka,_Puttalam_street_scene_(5).jpg",
+  "bytes": 121718
+ },
+ "t-dhaka": {
+  "level": 2,
+  "country": "Bangladesh",
+  "file": "File:Rickshaw Parking at Dhaka (9601873282).jpg",
+  "licence": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+  "artist": "Nasir Khan Saikat @ flickr from Dhaka, Bangladesh",
+  "description": "A rickshaw parking area at Dhaka, Bangladesh}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Rickshaw_Parking_at_Dhaka_(9601873282).jpg",
+  "bytes": 112907
+ },
+ "t-pakistan": {
+  "level": 2,
+  "country": "Pakistan",
+  "file": "File:Truck Art.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Mehtab Alam",
+  "description": "This beautifully decorated truck is travelling towards Sost dry port driving on the mighty Karakoram Highway (KKH). As the truck travels, it moves through Beautiful mountains and scenic beauty that is present in mountains.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Truck_Art.jpg",
+  "bytes": 115201
+ },
+ "t-jeepney": {
+  "level": 2,
+  "country": "Philippines",
+  "file": "File:Jeepney in Metro Manila 2025 01.jpg",
+  "licence": "CC0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "artist": "Aliceinthealice",
+  "description": "Jeepney in Metro Manila, May 2025}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Jeepney_in_Metro_Manila_2025_01.jpg",
+  "bytes": 159652
+ },
+ "t-mongolia": {
+  "level": 2,
+  "country": "Mongolia",
+  "file": "File:Mongolian Ger.jpg",
+  "licence": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+  "artist": "Mark Fischer",
+  "description": "A ger, sometimes called a yurt, sits on the Steppes near Mandalgovi, Mongolia.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Mongolian_Ger.jpg",
+  "bytes": 87351
+ },
+ "t-cairo": {
+  "level": 2,
+  "country": "Egypt",
+  "file": "File:Cairo - Khan al-Khalili spice market 1994.jpg",
+  "licence": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+  "artist": "Jon Gudorf Photography",
+  "description": "Cairo - Khan al-Khalili spice market 1994}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Cairo_-_Khan_al-Khalili_spice_market_1994.jpg",
+  "bytes": 154740
+ },
+ "t-porto": {
+  "level": 2,
+  "country": "Portugal",
+  "file": "File:Cais da Ribeira, Oporto, Portugal, 2012-05-09, DD 14.JPG",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Diego Delso|permission=",
+  "description": "Cais da Ribeira, Porto, Portugal}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Cais_da_Ribeira,_Oporto,_Portugal,_2012-05-09,_DD_14.JPG",
+  "bytes": 55903
+ },
+ "t-quebec": {
+  "level": 2,
+  "country": "Canada",
+  "file": "File:Park in Quebec City with a monument.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Wilfredo Rafael Rodriguez Hernandez",
+  "description": "A park in Quebec City with a monument. Photographed on Rue Dalhousie, Quebec City.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Park_in_Quebec_City_with_a_monument.jpg",
+  "bytes": 71695
+ },
+ "t-nairobi": {
+  "level": 2,
+  "country": "Kenya",
+  "file": "File:KiXX matatu at a busy Nairobi intersection.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Lebu Ayiga",
+  "description": "A highly decorated matatu named \"KiXX\" driving through a busy city intersection in Nairobi, Kenya. The side of the bus has vibrant comic-style graphics and \"STREET LEGAL\" text. The rear of the bus features a painted portrait of a man, an American flag design, and the text \"JUST LICK IT\". Billboards ",
+  "source": "https://commons.wikimedia.org/wiki/File:KiXX_matatu_at_a_busy_Nairobi_intersection.jpg",
+  "bytes": 88099
+ },
+ "t-accra": {
+  "level": 2,
+  "country": "Ghana",
+  "file": "File:Makola Market, Accra, Ghana.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Nii Adama Armah",
+  "description": "Makola Market, Accra, Ghana}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Makola_Market,_Accra,_Ghana.jpg",
+  "bytes": 120841
+ },
+ "t-kolkata": {
+  "level": 2,
+  "country": "India",
+  "file": "File:Taxi of Kolkata.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Bernard Gagnon",
+  "description": "A taxi of Kolkata, India}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Taxi_of_Kolkata.jpg",
+  "bytes": 120592
+ },
+ "t-bali": {
+  "level": 2,
+  "country": "Indonesia",
+  "file": "File:Rice terraces, Bali.jpg",
+  "licence": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "artist": "Vyacheslav Argenberg",
+  "description": "Rice terraces in Bali. Rice fields. Traditional rice farming in Bali. This is probably one of the most photographed in-land places in Bali. Tegallalang, Ubud. Bali, Indonesia.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Rice_terraces,_Bali.jpg",
+  "bytes": 149345
+ },
+ "t-yerevan": {
+  "level": 2,
+  "country": "Armenia",
+  "file": "File:Ópera, Ereván, Armenia, 2016-10-03, DD 13.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Diego Delso",
+  "description": "Opera Theatre, Yerevan, Armenia. The building, designed by the Armenian architect Alexander Tamanian, was officially opened in 1933 and consists of two concert halls: the Aram Khatchaturian concert hall with 1,400 seats and the Alexander Spendiaryan Opera and Ballet National Theatre with 1,200 seats",
+  "source": "https://commons.wikimedia.org/wiki/File:%C3%93pera,_Erev%C3%A1n,_Armenia,_2016-10-03,_DD_13.jpg",
+  "bytes": 43035
+ },
+ "t-marrakech": {
+  "level": 2,
+  "country": "Morocco",
+  "file": "File:Oriental hanging lanterns. Souk Haddadine, Marrakech Medina (سوق الحدادين مراكش).jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Petar Milošević",
+  "description": "Oriental hanging lanterns. Souk Haddadine, Marrakech Medina, Morocco}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Oriental_hanging_lanterns._Souk_Haddadine,_Marrakech_Medina_(%D8%B3%D9%88%D9%82_%D8%A7%D9%84%D8%AD%D8%AF%D8%A7%D8%AF%D9%8A%D9%86_%D9%85%D8%B1%D8%A7%D9%83%D8%B4).jpg",
+  "bytes": 165571
+ },
+ "t-laos": {
+  "level": 2,
+  "country": "Laos",
+  "file": "File:Praying bhikkhus inside Wat Sensoukharam in Luang Prabang Laos.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Basile Morin",
+  "description": "Praying bhikkhus sitting in front of a gold statue of the seated Buddha, inside Wat Sensoukharam, Buddhist temple, in Luang Prabang, Laos.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Praying_bhikkhus_inside_Wat_Sensoukharam_in_Luang_Prabang_Laos.jpg",
+  "bytes": 152572
+ },
+ "m-uluru": {
+  "level": 1,
+  "country": "Australia",
+  "file": "File:Uluṟu (Ayers Rock), Sunset.jpg",
+  "licence": "CC0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "artist": "Weyf",
+  "description": "Uluru (Ayers Rock), Sunset}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Ulu%E1%B9%9Fu_(Ayers_Rock),_Sunset.jpg",
+  "bytes": 76972
+ },
+ "t-hanoi": {
+  "level": 2,
+  "country": "Vietnam",
+  "file": "File:Hanoi street scene- motorbikes (22522817795).jpg",
+  "licence": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+  "artist": "Nicolas Lannuzel from Singapore, Singapore",
+  "description": "Hanoi street scene: motorbikes",
+  "source": "https://commons.wikimedia.org/wiki/File:Hanoi_street_scene-_motorbikes_(22522817795).jpg",
+  "bytes": 111650
+ },
+ "t-seoul": {
+  "level": 2,
+  "country": "South Korea",
+  "file": "File:Celebrating The Invention Of Hangul 1 (125014281).jpeg",
+  "licence": "CC BY 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+  "artist": "",
+  "description": "500px provided description: Dancing to celebrate the invention of Hangul, Korean Original Character [#Ballet ,#Seoul ,#Hangul ,#A7m2]",
+  "source": "https://commons.wikimedia.org/wiki/File:Celebrating_The_Invention_Of_Hangul_1_(125014281).jpeg",
+  "bytes": 85749
+ },
+ "t-lapaz": {
+  "level": 2,
+  "country": "Bolivia",
+  "file": "File:La Paz, Bolivia en la mañana.jpg",
+  "licence": "CC0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "artist": "Henryisknow",
+  "description": "City of La Paz in Bolivia.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:La_Paz,_Bolivia_en_la_ma%C3%B1ana.jpg",
+  "bytes": 46248
+ },
+ "t-oaxaca": {
+  "level": 2,
+  "country": "Mexico",
+  "file": "File:Mexico.Oax.Oaxaca.streets.01.jpg",
+  "licence": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+  "artist": "",
+  "description": "",
+  "source": "https://commons.wikimedia.org/wiki/File:Mexico.Oax.Oaxaca.streets.01.jpg",
+  "bytes": 80561
+ },
+ "t-japanstreet": {
+  "level": 2,
+  "country": "Japan",
+  "file": "File:Tokyo Tower, Minato City.jpg",
+  "licence": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "artist": "David Kernan",
+  "description": "A high-angle night photograph of Tokyo, Japan. The Tokyo Tower is prominently illuminated in its traditional orange \"Landmark Light.\" To the left, several modern skyscrapers are visible, including the Azabudai Hills Mori JP Tower and the Roppongi Hills Mori Tower. The foreground and background are f",
+  "source": "https://commons.wikimedia.org/wiki/File:Tokyo_Tower,_Minato_City.jpg",
+  "bytes": 84233
+ },
+ "g-machu": {
+  "level": 0,
+  "country": "Peru",
+  "file": "File:Machu Picchu, Perú, 2015-07-30, DD 47.JPG",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Diego Delso",
+  "description": "View of the ancient houses of Machu Picchu houses, Urubamba Province, Cusco Region, today Peru. The 15th-century Inca citadel, abandoned one century later, is situated in the Sacred Valley on a mountain ridge above sea level.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Machu_Picchu,_Per%C3%BA,_2015-07-30,_DD_47.JPG",
+  "bytes": 101884
+ },
+ "g-petra": {
+  "level": 0,
+  "country": "Jordan",
+  "file": "File:Petra city 22.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Tareq Mnadili",
+  "description": "Petra is a famous archaeological site in Jordan's southwestern desert. Dating to around 300 B.C., it was the capital of the Nabatean Kingdom. Accessed via a narrow canyon called Al Siq, it contains tombs and temples carved into pink sandstone cliffs, earning its nickname, the \"Rose City.\" Perhaps it",
+  "source": "https://commons.wikimedia.org/wiki/File:Petra_city_22.jpg",
+  "bytes": 140998
+ },
+ "g-sagrada": {
+  "level": 0,
+  "country": "Spain",
+  "file": "File:View of Basilica and Expiatory Church of the Holy Family (Basílica i Temple Expiatori de la Sagrada Família) ( UNESCO World Heritage Site). Barcelona, Catalonia, Spain.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Mstyslav Chernov",
+  "description": "View of Basilica and Expiatory Church of the Holy Family (BasГ­lica i Temple Expiatori de la Sagrada FamГ­lia) ( UNESCO World Heritage Site). Barcelona, Catalonia, Spain",
+  "source": "https://commons.wikimedia.org/wiki/File:View_of_Basilica_and_Expiatory_Church_of_the_Holy_Family_(Bas%C3%ADlica_i_Temple_Expiatori_de_la_Sagrada_Fam%C3%ADlia)_(_UNESCO_World_Heritage_Site)._Barcelona,_Catalonia,_Spain.jpg",
+  "bytes": 101811
+ },
+ "g-table": {
+  "level": 0,
+  "country": "South Africa",
+  "file": "File:Cape Town City Bowl and Table Mountain at dawn.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Daniel Case",
+  "description": "The area of and seen from the roof of the Strand South hotel}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Cape_Town_City_Bowl_and_Table_Mountain_at_dawn.jpg",
+  "bytes": 81360
+ },
+ "g-moai": {
+  "level": 0,
+  "country": "Chile",
+  "file": "File:Row (2051934571).jpg",
+  "licence": "CC BY 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+  "artist": "Phil Whitehouse from London, United Kingdom",
+  "description": "After visiting the North of Chile, we flew down to Santiago and then across to Easter Island (or Rapa Nui as the locals call it. Or Isla de Pascua as Spanish speakers call it), some 3700km off the coast of South America. The famous Moai statues are dotted around the island in various states of compl",
+  "source": "https://commons.wikimedia.org/wiki/File:Row_(2051934571).jpg",
+  "bytes": 132850
+ },
+ "m-boudha": {
+  "level": 1,
+  "country": "Nepal",
+  "file": "File:Boudhanath stupa, Kathmandu 01.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Bernard Gagnon",
+  "description": "Boudhanath stupa, Kathmandu, Nepal}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Boudhanath_stupa,_Kathmandu_01.jpg",
+  "bytes": 64945
+ },
+ "m-sigiriya": {
+  "level": 1,
+  "country": "Sri Lanka",
+  "file": "File:Sigiriya Fortress, Sri Lanka.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Madhawa Dunuwila",
+  "description": "Sigiriya or Sinhagiri (Lion Rock is an ancient rock fortress located in the northern Matale District near the town of Dambulla in the Central Province, Sri Lanka. The name refers to a site of historical and archaeological significance that is dominated by a massive column of rock nearly 200 metres (",
+  "source": "https://commons.wikimedia.org/wiki/File:Sigiriya_Fortress,_Sri_Lanka.jpg",
+  "bytes": 105490
+ },
+ "m-moraine": {
+  "level": 1,
+  "country": "Canada",
+  "file": "File:Lake Moraine-Banff National Park.jpg",
+  "licence": "CC BY 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+  "artist": "Florian Fuchs",
+  "description": "Lake Moraine-Banff National Park}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Lake_Moraine-Banff_National_Park.jpg",
+  "bytes": 97944
+ },
+ "t-addis": {
+  "level": 2,
+  "country": "Ethiopia",
+  "file": "File:Minibus taxi in Addis Ababa.jpg",
+  "licence": "CC BY 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+  "artist": "Radosław Botev, copyright holder: Fundacja Kontroli Społecznej \"Nomos\"",
+  "description": "A street in Addis Ababa, Ethiopia - minibus and the Lion of Judah Monument by Maurice Calka}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Minibus_taxi_in_Addis_Ababa.jpg",
+  "bytes": 59193
+ },
+ "t-cusco": {
+  "level": 2,
+  "country": "Peru",
+  "file": "File:Catedral, Plaza de Armas, Cusco, Perú, 2015-07-31, DD 73.JPG",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Diego Delso",
+  "description": "Cathedral, Plaza de Armas, Cusco, Peru}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Catedral,_Plaza_de_Armas,_Cusco,_Per%C3%BA,_2015-07-31,_DD_73.JPG",
+  "bytes": 83296
+ },
+ "t-istanbul": {
+  "level": 2,
+  "country": "Turkey",
+  "file": "File:İstiklal Caddesi İstanbul.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Umit Yurduseven",
+  "description": "The iconic red streetcar running at the Istiklal Avenue}}",
+  "source": "https://commons.wikimedia.org/wiki/File:%C4%B0stiklal_Caddesi_%C4%B0stanbul.jpg",
+  "bytes": 74892
+ },
+ "t-krakow": {
+  "level": 2,
+  "country": "Poland",
+  "file": "File:Kraków Cloth Hall, Café Noworolski, 3 Main Market square, Old Town, Kraków, Poland.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Igor123121",
+  "description": "Kraków Cloth Hall, Café Noworolski, 3 Main Market square, Old Town, Krakow, Poland}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Krak%C3%B3w_Cloth_Hall,_Caf%C3%A9_Noworolski,_3_Main_Market_square,_Old_Town,_Krak%C3%B3w,_Poland.jpg",
+  "bytes": 86799
+ },
+ "t-moscow": {
+  "level": 2,
+  "country": "Russia",
+  "file": "File:Nikolskaya wooden church.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Hamerani",
+  "description": "Russia. Suzdal. Nikolskaya wooden church (the church of St. Nicholas from the village of Glotovo), built in 1776.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Nikolskaya_wooden_church.jpg",
+  "bytes": 101290
+ },
+ "m-hallstatt": {
+  "level": 1,
+  "country": "Austria",
+  "file": "File:Hallstatt - Zentrum .JPG",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "C.Stadler/Bwag",
+  "description": "Northeast view of Hallstatt, Upper Austria.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Hallstatt_-_Zentrum_.JPG",
+  "bytes": 131111
+ },
+ "t-valparaiso": {
+  "level": 2,
+  "country": "Chile",
+  "file": "File:Casa en calle Miramar, Cerro Alegre, Valparaíso 20201102 93.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Carlos Figueroa Rojas",
+  "description": "",
+  "source": "https://commons.wikimedia.org/wiki/File:Casa_en_calle_Miramar,_Cerro_Alegre,_Valpara%C3%ADso_20201102_93.jpg",
+  "bytes": 118997
+ },
+ "t-greekvillage": {
+  "level": 2,
+  "country": "Greece",
+  "file": "File:Sklavi-Sitia-Crete.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Petro Stelte",
+  "description": "View of the village Sklavi. Sitia, Crete, Greece.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Sklavi-Sitia-Crete.jpg",
+  "bytes": 103040
+ },
+ "t-sweden": {
+  "level": 2,
+  "country": "Sweden",
+  "file": "File:Hallsta Paper Mill January 2012g.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "ArildV",
+  "description": "Rödvillorna (red houses) built for workers at Hallsta Paper Mill 1914-15.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Hallsta_Paper_Mill_January_2012g.jpg",
+  "bytes": 166609
+ },
+ "t-ireland": {
+  "level": 2,
+  "country": "Ireland",
+  "file": "File:2019-07-20-Dingle Lighthouse-0673.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Superbass",
+  "description": "Dingle Lighthouse, at the entrance of Dingle Bay}}",
+  "source": "https://commons.wikimedia.org/wiki/File:2019-07-20-Dingle_Lighthouse-0673.jpg",
+  "bytes": 90473
  }
 }

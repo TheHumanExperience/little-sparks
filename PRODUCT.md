@@ -16,9 +16,9 @@ Her job is to open a small, kind daily moment, play as many puzzles as she feels
 
 ## Product Purpose
 
-Little Sparks is a cosy daily puzzle gift. Each day brings 19 playable cards ("sparks") in a vertical, snap-scrolling feed, followed by a short note, and the feed continues back through the previous 30 days.
+Little Sparks is a cosy daily puzzle gift. Each day brings 20 playable cards ("sparks") in a vertical, snap-scrolling feed, followed by a short note, and the feed continues back through the previous 30 days.
 
-**Success is a small daily ritual:** she opens it most days, plays a few cards, and leaves feeling warm. Finishing all 19 is optional and must never feel like the expected outcome.
+**Success is a small daily ritual:** she opens it most days, plays a few cards, and leaves feeling warm. Finishing all 20 is optional and must never feel like the expected outcome.
 
 ## Positioning
 
@@ -34,7 +34,7 @@ It was made by one person for one person. A puzzle app can copy the feed, the ga
 
 ## Capabilities and Constraints
 
-**Capabilities:** word, number, logic, and photo-dating puzzles; the five-card Aha logical-reasoning block; per-card Clear & retry and Reveal answer; escalating solve celebrations, chimes, the flow bar, shiny cards and stickers; a look-back day picker; an optional Day/Week/Month leaderboard.
+**Capabilities:** word, number, logic, and photo-dating and photo-geography puzzles; the five-card Aha logical-reasoning block; per-card Clear & retry and Reveal answer; escalating solve celebrations, chimes, the flow bar, shiny cards and stickers; a look-back day picker; an optional Day/Week/Month leaderboard.
 
 **Terminology:** a *spark* or *card* is one puzzle; the *feed* is the scroll of cards; levels are *Gentle / Medium / Tricky*; *flow* is the no-hints meter; *shiny* cards award *stickers*; *Reveal answer* gives the solution without credit.
 
