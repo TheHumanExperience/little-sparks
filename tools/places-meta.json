@@ -918,5 +918,104 @@
   "description": "Petra is a famous archaeological site in Jordan's southwestern desert. Dating to around 300 B.C., it was the capital of the Nabatean Kingdom. Accessed via a narrow canyon called Al Siq, it contains tombs and temples carved into pink sandstone cliffs, earning its nickname, the \"Rose City.\" Perhaps it",
   "source": "https://commons.wikimedia.org/wiki/File:Petra_city_22.jpg",
   "bytes": 140998
+ },
+ "g-sagrada": {
+  "level": 0,
+  "country": "Spain",
+  "file": "File:View of Basilica and Expiatory Church of the Holy Family (Basílica i Temple Expiatori de la Sagrada Família) ( UNESCO World Heritage Site). Barcelona, Catalonia, Spain.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Mstyslav Chernov",
+  "description": "View of Basilica and Expiatory Church of the Holy Family (BasГ­lica i Temple Expiatori de la Sagrada FamГ­lia) ( UNESCO World Heritage Site). Barcelona, Catalonia, Spain",
+  "source": "https://commons.wikimedia.org/wiki/File:View_of_Basilica_and_Expiatory_Church_of_the_Holy_Family_(Bas%C3%ADlica_i_Temple_Expiatori_de_la_Sagrada_Fam%C3%ADlia)_(_UNESCO_World_Heritage_Site)._Barcelona,_Catalonia,_Spain.jpg",
+  "bytes": 101811
+ },
+ "g-table": {
+  "level": 0,
+  "country": "South Africa",
+  "file": "File:Cape Town City Bowl and Table Mountain at dawn.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Daniel Case",
+  "description": "The area of and seen from the roof of the Strand South hotel}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Cape_Town_City_Bowl_and_Table_Mountain_at_dawn.jpg",
+  "bytes": 81360
+ },
+ "g-moai": {
+  "level": 0,
+  "country": "Chile",
+  "file": "File:Row (2051934571).jpg",
+  "licence": "CC BY 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+  "artist": "Phil Whitehouse from London, United Kingdom",
+  "description": "After visiting the North of Chile, we flew down to Santiago and then across to Easter Island (or Rapa Nui as the locals call it. Or Isla de Pascua as Spanish speakers call it), some 3700km off the coast of South America. The famous Moai statues are dotted around the island in various states of compl",
+  "source": "https://commons.wikimedia.org/wiki/File:Row_(2051934571).jpg",
+  "bytes": 132850
+ },
+ "m-boudha": {
+  "level": 1,
+  "country": "Nepal",
+  "file": "File:Boudhanath stupa, Kathmandu 01.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Bernard Gagnon",
+  "description": "Boudhanath stupa, Kathmandu, Nepal}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Boudhanath_stupa,_Kathmandu_01.jpg",
+  "bytes": 64945
+ },
+ "m-sigiriya": {
+  "level": 1,
+  "country": "Sri Lanka",
+  "file": "File:Sigiriya Fortress, Sri Lanka.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Madhawa Dunuwila",
+  "description": "Sigiriya or Sinhagiri (Lion Rock is an ancient rock fortress located in the northern Matale District near the town of Dambulla in the Central Province, Sri Lanka. The name refers to a site of historical and archaeological significance that is dominated by a massive column of rock nearly 200 metres (",
+  "source": "https://commons.wikimedia.org/wiki/File:Sigiriya_Fortress,_Sri_Lanka.jpg",
+  "bytes": 105490
+ },
+ "m-moraine": {
+  "level": 1,
+  "country": "Canada",
+  "file": "File:Lake Moraine-Banff National Park.jpg",
+  "licence": "CC BY 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+  "artist": "Florian Fuchs",
+  "description": "Lake Moraine-Banff National Park}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Lake_Moraine-Banff_National_Park.jpg",
+  "bytes": 97944
+ },
+ "m-mara": {
+  "level": 1,
+  "country": "Kenya",
+  "file": "File:Maasai village (44121579832).jpg",
+  "licence": "CC BY 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+  "artist": "Kandukuru Nagarjun from Bangalore, India",
+  "description": "Around the Maasai Mara. Nerok County, Kenya, June 2018",
+  "source": "https://commons.wikimedia.org/wiki/File:Maasai_village_(44121579832).jpg",
+  "bytes": 112115
+ },
+ "t-addis": {
+  "level": 2,
+  "country": "Ethiopia",
+  "file": "File:Minibus taxi in Addis Ababa.jpg",
+  "licence": "CC BY 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+  "artist": "Radosław Botev, copyright holder: Fundacja Kontroli Społecznej \"Nomos\"",
+  "description": "A street in Addis Ababa, Ethiopia - minibus and the Lion of Judah Monument by Maurice Calka}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Minibus_taxi_in_Addis_Ababa.jpg",
+  "bytes": 59193
+ },
+ "t-cusco": {
+  "level": 2,
+  "country": "Peru",
+  "file": "File:Catedral, Plaza de Armas, Cusco, Perú, 2015-07-31, DD 73.JPG",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Diego Delso",
+  "description": "Cathedral, Plaza de Armas, Cusco, Peru}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Catedral,_Plaza_de_Armas,_Cusco,_Per%C3%BA,_2015-07-31,_DD_73.JPG",
+  "bytes": 83296
  }
 }
