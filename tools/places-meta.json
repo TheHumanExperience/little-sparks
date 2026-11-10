@@ -896,5 +896,27 @@
   "description": "A high-angle night photograph of Tokyo, Japan. The Tokyo Tower is prominently illuminated in its traditional orange \"Landmark Light.\" To the left, several modern skyscrapers are visible, including the Azabudai Hills Mori JP Tower and the Roppongi Hills Mori Tower. The foreground and background are f",
   "source": "https://commons.wikimedia.org/wiki/File:Tokyo_Tower,_Minato_City.jpg",
   "bytes": 84233
+ },
+ "g-machu": {
+  "level": 0,
+  "country": "Peru",
+  "file": "File:Machu Picchu, Perú, 2015-07-30, DD 47.JPG",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Diego Delso",
+  "description": "View of the ancient houses of Machu Picchu houses, Urubamba Province, Cusco Region, today Peru. The 15th-century Inca citadel, abandoned one century later, is situated in the Sacred Valley on a mountain ridge above sea level.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Machu_Picchu,_Per%C3%BA,_2015-07-30,_DD_47.JPG",
+  "bytes": 101884
+ },
+ "g-petra": {
+  "level": 0,
+  "country": "Jordan",
+  "file": "File:Petra city 22.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Tareq Mnadili",
+  "description": "Petra is a famous archaeological site in Jordan's southwestern desert. Dating to around 300 B.C., it was the capital of the Nabatean Kingdom. Accessed via a narrow canyon called Al Siq, it contains tombs and temples carved into pink sandstone cliffs, earning its nickname, the \"Rose City.\" Perhaps it",
+  "source": "https://commons.wikimedia.org/wiki/File:Petra_city_22.jpg",
+  "bytes": 140998
  }
 }
