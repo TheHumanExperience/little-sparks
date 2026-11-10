@@ -923,5 +923,27 @@
   "description": "Praying bhikkhus sitting in front of a gold statue of the seated Buddha, inside Wat Sensoukharam, Buddhist temple, in Luang Prabang, Laos.}}",
   "source": "https://commons.wikimedia.org/wiki/File:Praying_bhikkhus_inside_Wat_Sensoukharam_in_Luang_Prabang_Laos.jpg",
   "bytes": 152572
+ },
+ "g-table": {
+  "level": 0,
+  "country": "",
+  "file": "File:Table Mountain, Cape Town (P1050264).jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Matti Blume",
+  "description": "Cape dassie on Table Mountain, Cape Town}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Table_Mountain,_Cape_Town_(P1050264).jpg",
+  "bytes": 115137
+ },
+ "m-uluru": {
+  "level": 0,
+  "country": "",
+  "file": "File:Uluṟu (Ayers Rock), Sunset.jpg",
+  "licence": "CC0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "artist": "Weyf",
+  "description": "Uluru (Ayers Rock), Sunset}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Ulu%E1%B9%9Fu_(Ayers_Rock),_Sunset.jpg",
+  "bytes": 76972
  }
 }
