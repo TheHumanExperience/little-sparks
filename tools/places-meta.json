@@ -945,5 +945,82 @@
   "description": "Uluru (Ayers Rock), Sunset}}",
   "source": "https://commons.wikimedia.org/wiki/File:Ulu%E1%B9%9Fu_(Ayers_Rock),_Sunset.jpg",
   "bytes": 76972
+ },
+ "m-mara": {
+  "level": 0,
+  "country": "",
+  "file": "File:Lions Family Portrait Masai Mara.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Benh LIEU SONG",
+  "description": "Portrait of three lions (one female and two males) of a pride, all resting at morning time. Taken in Maasai Mara, southwest Kenya.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Lions_Family_Portrait_Masai_Mara.jpg",
+  "bytes": 102900
+ },
+ "t-hanoi": {
+  "level": 0,
+  "country": "",
+  "file": "File:Hanoi street scene- motorbikes (22522817795).jpg",
+  "licence": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+  "artist": "Nicolas Lannuzel from Singapore, Singapore",
+  "description": "Hanoi street scene: motorbikes",
+  "source": "https://commons.wikimedia.org/wiki/File:Hanoi_street_scene-_motorbikes_(22522817795).jpg",
+  "bytes": 111650
+ },
+ "t-seoul": {
+  "level": 0,
+  "country": "",
+  "file": "File:Celebrating The Invention Of Hangul 1 (125014281).jpeg",
+  "licence": "CC BY 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+  "artist": "",
+  "description": "500px provided description: Dancing to celebrate the invention of Hangul, Korean Original Character [#Ballet ,#Seoul ,#Hangul ,#A7m2]",
+  "source": "https://commons.wikimedia.org/wiki/File:Celebrating_The_Invention_Of_Hangul_1_(125014281).jpeg",
+  "bytes": 85749
+ },
+ "t-valparaiso": {
+  "level": 0,
+  "country": "",
+  "file": "File:2019-03-19 SOCIBER VALPARAISO III floating drydock.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Gordon Leggett",
+  "description": "SOCIBER floating drydock, VALPARAISO III with tugboat, PEQUEN - IMO 9253650 in the cradle being worked on, at Valparaiso, Chile on March 19, 2019",
+  "source": "https://commons.wikimedia.org/wiki/File:2019-03-19_SOCIBER_VALPARAISO_III_floating_drydock.jpg",
+  "bytes": 112443
+ },
+ "t-lapaz": {
+  "level": 0,
+  "country": "",
+  "file": "File:La Paz, Bolivia en la mañana.jpg",
+  "licence": "CC0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "artist": "Henryisknow",
+  "description": "City of La Paz in Bolivia.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:La_Paz,_Bolivia_en_la_ma%C3%B1ana.jpg",
+  "bytes": 46248
+ },
+ "t-cusco": {
+  "level": 0,
+  "country": "",
+  "file": "File:Vista de Cusco, Perú, 2015-07-31, DD 11-17 PAN.JPG",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Diego Delso",
+  "description": "Panoramic view (span of approx. 150°) of the city of Cusco, Peru. The city, located near the Sacred Valley of the Andes mountain range, is the capital of the Cusco Province, has a population of 428,450 inhabitants and its elevation is around . The site was the historic capital of the Inca Empire fro",
+  "source": "https://commons.wikimedia.org/wiki/File:Vista_de_Cusco,_Per%C3%BA,_2015-07-31,_DD_11-17_PAN.JPG",
+  "bytes": 29792
+ },
+ "t-oaxaca": {
+  "level": 0,
+  "country": "",
+  "file": "File:Mexico.Oax.Oaxaca.streets.01.jpg",
+  "licence": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+  "artist": "",
+  "description": "",
+  "source": "https://commons.wikimedia.org/wiki/File:Mexico.Oax.Oaxaca.streets.01.jpg",
+  "bytes": 80561
  }
 }
