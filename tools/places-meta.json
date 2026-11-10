@@ -1040,5 +1040,60 @@
   "description": "Russia. Suzdal. Nikolskaya wooden church (the church of St. Nicholas from the village of Glotovo), built in 1776.}}",
   "source": "https://commons.wikimedia.org/wiki/File:Nikolskaya_wooden_church.jpg",
   "bytes": 101290
+ },
+ "m-hallstatt": {
+  "level": 1,
+  "country": "Austria",
+  "file": "File:Hallstatt - Zentrum .JPG",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "C.Stadler/Bwag",
+  "description": "Northeast view of Hallstatt, Upper Austria.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Hallstatt_-_Zentrum_.JPG",
+  "bytes": 131111
+ },
+ "t-valparaiso": {
+  "level": 2,
+  "country": "Chile",
+  "file": "File:Casa en calle Miramar, Cerro Alegre, Valparaíso 20201102 93.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Carlos Figueroa Rojas",
+  "description": "",
+  "source": "https://commons.wikimedia.org/wiki/File:Casa_en_calle_Miramar,_Cerro_Alegre,_Valpara%C3%ADso_20201102_93.jpg",
+  "bytes": 118997
+ },
+ "t-greekvillage": {
+  "level": 2,
+  "country": "Greece",
+  "file": "File:Sklavi-Sitia-Crete.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Petro Stelte",
+  "description": "View of the village Sklavi. Sitia, Crete, Greece.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Sklavi-Sitia-Crete.jpg",
+  "bytes": 103040
+ },
+ "t-sweden": {
+  "level": 2,
+  "country": "Sweden",
+  "file": "File:Hallsta Paper Mill January 2012g.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "ArildV",
+  "description": "Rödvillorna (red houses) built for workers at Hallsta Paper Mill 1914-15.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Hallsta_Paper_Mill_January_2012g.jpg",
+  "bytes": 166609
+ },
+ "t-ireland": {
+  "level": 2,
+  "country": "Ireland",
+  "file": "File:2019-07-20-Dingle Lighthouse-0673.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Superbass",
+  "description": "Dingle Lighthouse, at the entrance of Dingle Bay}}",
+  "source": "https://commons.wikimedia.org/wiki/File:2019-07-20-Dingle_Lighthouse-0673.jpg",
+  "bytes": 90473
  }
 }

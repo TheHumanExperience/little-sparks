@@ -532,5 +532,35 @@
   "alt": "A large stone cathedral with twin bell towers above steps where people sit in the sun.",
   "clue": "A colonial cathedral built on Inca foundations, in a mountain city that was once an empire's capital.",
   "story": "Cusco Cathedral in Peru was built from 1560 to 1654, partly with stones taken from Inca buildings. Cusco was the capital of the Inca Empire."
+ },
+ "m-hallstatt": {
+  "title": "A village on the lake",
+  "alt": "Painted wooden houses and a white church spire along a still lake, below steep wooded mountains.",
+  "clue": "An Alpine lakeside village that has mined salt for 7,000 years, so pretty it has been copied in China.",
+  "story": "Hallstatt in Austria gave its name to an Iron Age culture. A full-size copy of the village was built in Guangdong, China, in 2012."
+ },
+ "t-valparaiso": {
+  "title": "A house on the hill",
+  "alt": "A pale blue wooden house with a red roof and dormer windows on a hillside street with old lamp posts.",
+  "clue": "Painted wooden houses on steep hills above a Pacific port, linked to the harbour by old funicular lifts.",
+  "story": "This house is on Cerro Alegre in Valparaíso, Chile. Many hillside houses were built by European merchants in the 1800s, and old funiculars still climb the slopes."
+ },
+ "t-greekvillage": {
+  "title": "White houses on the hillside",
+  "alt": "A small village of white and stone houses on a terraced hillside with olive trees.",
+  "clue": "White cube houses among olive terraces, on a long mountainous island in the Mediterranean.",
+  "story": "This is the village of Sklavi near Sitia on Crete, Greece. Crete has some of the oldest olive trees in the world."
+ },
+ "t-sweden": {
+  "title": "Red houses in the frost",
+  "alt": "Red wooden houses with white trim among frosted birch trees in winter.",
+  "clue": "Wooden houses painted a deep red made from copper-mine waste, among birches in a northern kingdom.",
+  "story": "These red houses were built for paper-mill workers at Hallstavik, Sweden, in 1914–15. The paint, Falu red, comes from the copper mine at Falun."
+ },
+ "t-ireland": {
+  "title": "A lighthouse on the bay",
+  "alt": "A small white lighthouse on a green clifftop at the mouth of a bay, with patchwork fields behind.",
+  "clue": "A small lighthouse on a peninsula of green fields at the far western edge of Europe, where Gaelic is still spoken.",
+  "story": "Dingle Lighthouse marks the entrance to Dingle Bay in County Kerry, Ireland. The Dingle peninsula is part of the Gaeltacht, where Irish is an everyday language."
  }
 }

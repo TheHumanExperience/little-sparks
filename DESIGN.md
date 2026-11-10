@@ -205,7 +205,7 @@ A warm, botanical stationery palette: greens and creams at rest, candlelight gol
 - **Body** (400, 16px; 14–15px with 1.5 line height for puzzle prose): Puzzle text and clues.
 - **Body Small** (400, 13px, 1.55 line height): How-to copy and helper notes.
 - **Control** (600, 13px): Pills and quiet card-foot controls. Solved counts use tabular numerals.
-- **Label** (700, 11px, 1.2px tracking, uppercase): The card eyebrow, for example "05 / 19 · Light".
+- **Label** (700, 11px, 1.2px tracking, uppercase): The card eyebrow, for example "05 / 20 · Light".
 
 ### Named Rules
 

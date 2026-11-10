@@ -11,7 +11,7 @@ vm.createContext(context);
 for (const f of ["valid-words.js", "app.js", "daily-content.js", "photos.js", "extras.js", "stories.js", "ladders.js", "sparks.js", "lanterns.js", "beds.js", "places.js", "globe.js", "aha.js", "feed.js"]) vm.runInContext(fs.readFileSync("dist/" + f, "utf8"), context);
 const result = vm.runInContext(`
 const fail = (m) => { throw Error(m); };
-const expect = [[0, 1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 13, 15, 17, 18, 19, 20, 22, 23], [0, 2, 3, 5, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 23], [0, 2, 3, 5, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]];
+const expect = [[0, 1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 13, 15, 17, 18, 19, 20, 22, 23, 24], [0, 2, 3, 5, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 23, 24], [0, 2, 3, 5, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]];
 for (const lv of [0, 1, 2]) {
   const order = feedOrder(lv), sorted = [...order].sort((a, b) => a - b).join(",");
   if (sorted !== expect[lv].join(",")) fail("level " + lv + " feed must hold " + expect[lv] + " exactly once: " + sorted);
@@ -27,11 +27,11 @@ for (const lv of [0, 1, 2]) {
 const names = (lv) => feedOrder(lv).filter((i) => !AHA_SLOTS.includes(i)).map((i) => feedGame(i).name).join("|");
 if (!names(0).includes("Pocket Sudoku") || !names(1).includes("Sudoku Six") || !names(2).includes("Sudoku Six · Hard")) fail("sudoku family per level");
 for (const lv of [0, 1, 2]) { const o = feedOrder(lv), k = o.indexOf(12); if (k < 1 || o[k - 1] !== FEED_FAMILIES.sudoku[lv]) fail("Killer Six must follow the sudoku card at level " + lv); }
-if (feedOrder(0).length !== 19) fail("19 cards per level");
+if (feedOrder(0).length !== 20) fail("20 cards per level");
 for (const lv of [0, 1, 2]) { const o = feedOrder(lv); if (o[o.indexOf(10) + 1] !== 22) fail("Lantern Lanes follows Mirror Garden at level " + lv); if (o[o.indexOf(13) + 1] !== 23) fail("Garden Beds follows Letterlight Ladder at level " + lv); }
 if (!names(0).includes("Bloom Trail|") && !names(0).includes("|Bloom Trail")) fail("Gentle needs Bloom Trail");
 if (!names(1).includes("Bloom Trail 5×5") || !names(2).includes("Bloom Trail 5×5") || !names(0).includes("Little Neighbours") || !names(2).includes("Neighbours Goal")) fail("bloom/neighbours family per level");
-for (const i of [8, 9, 10, 11, 12, 13, 14, 15, 16, 21, 22, 23]) if (typeof SPARKS[i].render !== "function") fail("no renderer for spark " + i);
+for (const i of [8, 9, 10, 11, 12, 13, 14, 15, 16, 21, 22, 23, 24]) if (typeof SPARKS[i].render !== "function") fail("no renderer for spark " + i);
 for (const from of ["2026-01-01", "2026-03-29", "2026-10-25", "2026-12-31"]) {
   const ds = Array.from({ length: FEED_DAYS }, (_, o) => feedDate(o, from));
   if (ds[0] !== from) fail("offset 0 must be the start day");
@@ -40,7 +40,7 @@ for (const from of ["2026-01-01", "2026-03-29", "2026-10-25", "2026-12-31"]) {
 }
 if (window.FEED_MODE) fail("feed.js must stay inert without #feed");
 const d = "2026-05-05"; all[progressKey(d)] = { games: { 0: { done: true }, 3: { done: true }, 9: { done: true }, 16: { done: true } } };
-if (feedCount(d) !== 4) fail("feedCount should count all 19 cards");
+if (feedCount(d) !== 4) fail("feedCount should count all 20 cards");
 // Next unsolved: skips solved cards, ignores revealed answers, moves on to older days, wraps to today.
 { const from = "2026-06-10", order = feedOrder(), y = feedDate(1, from), keep = JSON.stringify(all);
   for (const k of Object.keys(all)) delete all[k];
