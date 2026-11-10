@@ -44,7 +44,7 @@ Prefer `npm run smoke` over manual screenshots. Take screenshots only when a hum
 ## Game registry (state index → game)
 0 Letterlight · 1 Pocket Sudoku · 2 Dot & Match · 3 Aha (legacy single card / track slot 0) · 4 Bloom Trail · 5 Time Lens · 6 Little Neighbours · 7 *retired (Starlines; ignore old saves)* · 8 Story Shuffle · 9 Colour Alchemy · 10 Mirror Garden · 11 Sudoku Six · 12 Killer Six · 13 Letterlight Ladder · 14 Bloom Trail 5×5 · 15 Time Lens Duel · 16 Neighbours Goal · 17–20 Aha track slots 1–4 · 21 Sudoku Six · Hard · 22 Lantern Lanes · 23 Garden Beds · 24 Where in the World.
 
-- **Feed order** comes from `FEED_PLAN` in feed.js. It has 20 cards per level (Lantern Lanes, 22, sits right after Mirror Garden; Garden Beds, 23, right after Letterlight Ladder; Where in the World, 24, is last), and the five Aha cards sit together as one block.
+- **Feed order** comes from `FEED_PLAN` in feed.js. It has 20 cards per level (Lantern Lanes, 22, sits right after Mirror Garden; Garden Beds, 23, right after Letterlight Ladder; Where in the World, 24, is last). `FEED_SINCE` keeps a newly added game off days before it launched (24 from 2026-11-10), so earlier days keep their card count; pass the day to `feedOrder(lv, d)` wherever a day is known, and the five Aha cards sit together as one block.
 - **Families:** one game per level (`FEED_FAMILIES`), as [Gentle, Medium, Tricky]:
   - sudoku: [1, 11, 21]
   - killer: [12, 12, 12] (Killer Six on every level, graded by `killerSixModel`; placed right after sudoku)

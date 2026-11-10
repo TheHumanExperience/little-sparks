@@ -59,6 +59,17 @@ if (feedCount(d) !== 4) fail("feedCount should count all 20 cards");
   for (let k = 0; k < FEED_DAYS; k++) all[progressKey(feedDate(k, from))] = { games: Object.fromEntries(order.map((i) => [i, { done: true }])) };
   if (feedNextUnsolved(from, order[0], from) !== null) fail("next unsolved should be null when everything is solved");
   for (const k of Object.keys(all)) delete all[k]; Object.assign(all, JSON.parse(keep)); }
+// Where in the World joins on 2026-11-10: earlier days keep their 19 cards and their full-day count.
+for (const lv of [0, 1, 2]) {
+  if (feedOrder(lv, "2026-11-09").length !== 19 || feedOrder(lv, "2026-11-09").includes(24)) fail("days before 2026-11-10 keep 19 cards at level " + lv);
+  if (feedOrder(lv, "2026-11-10").length !== 20 || feedOrder(lv, "2026-11-10").at(-1) !== 24) fail("Where in the World joins on 2026-11-10 at level " + lv);
+}
+{ const old = "2026-11-08", keep = JSON.stringify(all);
+  all[progressKey(old)] = { games: Object.fromEntries(feedOrder(difficulty, old).map((i) => [i, { done: true }])) };
+  if (feedCount(old) !== 19 || milestoneFor(19, old) !== "all" || milestoneFor(19, "2026-11-10") === "all") fail("a finished earlier day still counts as all solved");
+  const n = feedNextUnsolved(old, feedOrder(difficulty, old)[0], "2026-11-12");
+  if (n && n.d === old) fail("next to play must not send you to a card an earlier day never had");
+  for (const k of Object.keys(all)) delete all[k]; Object.assign(all, JSON.parse(keep)); }
 all[progressKey(d)].games[7] = { done: true };
 if (feedCount(d) !== 4) fail("old Starlines saves must not count or break");
 if (Object.entries(all[progressKey(d)].games).filter(([i, g]) => +i < 5 && g.done).length !== 2) fail("legacy 5-game count changed");

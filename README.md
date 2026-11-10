@@ -47,7 +47,7 @@ The games, in feed order. Each level shows one game from each family, so Gentle,
 | 19 | Time Lens Duel | Time Lens Duel | Time Lens Duel |
 | 20 | Where in the World (famous landmarks) | Where in the World (recognisable places) | Where in the World (everyday scenes) |
 
-Each level has 20 cards. The families are set in `FEED_FAMILIES` in `dist/feed.js`. Starlines has been retired; old Starlines saves are simply ignored.
+Each level has 20 cards. Where in the World joined on 10 November 2026, so earlier days keep their 19 cards and any day already finished stays finished (`FEED_SINCE` in `dist/feed.js`). The families are set in `FEED_FAMILIES` in `dist/feed.js`. Starlines has been retired; old Starlines saves are simply ignored.
 
 **Lantern Lanes** is Light Up (Akari). Tap a square for a 💡; it lights its row and column until a wall stops it. Light every square, never let two bulbs see each other, and give each numbered wall exactly that many bulbs on its 4 sides (diagonals don't count). Tapping cycles bulb → dot ("no bulb here") → empty, and a long press drops a dot. How to play opens with that number rule in one line and a 3-step mini tutorial with tiny example boards. Numbers turn green when exact and red when over, lit squares glow, and clashing bulbs flash red. Gentle (5×5) has no numbers and exactly the fewest bulbs that can do it; Medium (6×6) adds some numbers and keeps the bulbs-left counter; Tricky (7×7) has fewer numbers and no counter. Every puzzle has exactly one answer.
 

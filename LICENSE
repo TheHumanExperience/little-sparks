@@ -14,5 +14,8 @@ Third-party material is not covered by this notice and stays under its own terms
   dist/WORD-LIST-LICENSE.txt.
 - Each photograph in dist/photos/ is under the public-domain status or Creative
   Commons licence recorded with its credit and source in dist/photos.js.
+- Each photograph in dist/places/ comes from Wikimedia Commons and is under the
+  public-domain status or Creative Commons licence recorded with its credit,
+  licence and source in dist/places.js (and tools/places-meta.json).
 - The DM Sans and Libre Caslon Display fonts are loaded from Google Fonts under
   their own licences.
