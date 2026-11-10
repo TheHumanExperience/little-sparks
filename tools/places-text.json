@@ -358,5 +358,71 @@
   "alt": "A round white felt tent standing alone on wide, dry grassland under a big sky.",
   "clue": "A land of nomads, where families still live in round felt tents that can be packed up in an hour.",
   "story": "The ger is the traditional home in Mongolia; this one stands on the steppe near Mandalgovi. Its door traditionally faces south, and many families still live in one."
+ },
+ "m-uluru": {
+  "title": "A red rock at sunset",
+  "alt": "A huge, glowing red sandstone rock rising from golden grassland under dark storm clouds.",
+  "clue": "A single giant sandstone rock in the middle of a vast red desert, sacred to its Aboriginal custodians.",
+  "story": "Uluṟu rises 348 metres above the plains of central Australia. It is sacred to the Aṉangu people, and climbing it has been banned since 2019."
+ },
+ "t-cairo": {
+  "title": "Sacks in the spice market",
+  "alt": "Open sacks of spices and dried goods with handwritten price cards in a flowing right-to-left script.",
+  "clue": "Read the price cards: a right-to-left script, in an old market in a big city on a great northern river.",
+  "story": "This is the spice market in Khan el-Khalili, Cairo, a bazaar trading since the 1300s. The labels are written in Arabic."
+ },
+ "t-porto": {
+  "title": "Houses along the river",
+  "alt": "Colourful houses stacked up a steep riverbank, with boats on a wide river.",
+  "clue": "Colourful houses tumble down to a river that gave its name to a sweet wine.",
+  "story": "The Ribeira quarter of Porto lines the Douro river. Port wine was shipped downriver from the vineyards in flat-bottomed boats called rabelos."
+ },
+ "t-quebec": {
+  "title": "A castle-like hotel above the old town",
+  "alt": "A green-roofed, castle-like hotel above old stone houses, with snow in a park in front.",
+  "clue": "A walled old town where the street signs are in French, on a cliff above a great river.",
+  "story": "Quebec City is the only walled city north of Mexico in the Americas. The castle-like building is the Château Frontenac hotel, opened in 1893."
+ },
+ "t-nairobi": {
+  "title": "A painted minibus",
+  "alt": "A minibus covered in bright graffiti-style art at a busy city junction.",
+  "clue": "Brightly painted shared minibuses, often with music blaring, are how this East African capital gets around.",
+  "story": "Matatus are the shared minibuses of Nairobi in Kenya. Owners compete to have the boldest art, lights and music."
+ },
+ "t-accra": {
+  "title": "A busy market",
+  "alt": "A crowded market with stalls of tomatoes, shoes, baskets and colourful goods under umbrellas.",
+  "clue": "A great open-air market in a West African capital on the Gulf of Guinea.",
+  "story": "Makola Market in Accra, Ghana, is one of the biggest markets in West Africa. Most of its traders are women, known as market queens."
+ },
+ "t-kolkata": {
+  "title": "A yellow taxi",
+  "alt": "A round-shouldered yellow taxi on a city street, with another behind and a sun umbrella stall.",
+  "clue": "Rounded yellow taxis from a car first built in 1958, in a big city on a branch of a holy river.",
+  "story": "The yellow Hindustan Ambassador taxis of Kolkata are a symbol of the city. The Ambassador was made in West Bengal for over 50 years."
+ },
+ "t-bali": {
+  "title": "Terraces of rice",
+  "alt": "Steep green rice terraces among coconut palms.",
+  "clue": "Rice terraces watered by a 1,000-year-old shared system run by temples, on an island of Hindu temples.",
+  "story": "These terraces are in Bali, Indonesia. Their water is shared through subak, a co-operative system recognised by UNESCO."
+ },
+ "t-yerevan": {
+  "title": "A round theatre",
+  "alt": "A round stone theatre building with arched windows on a wide square under a clear blue sky.",
+  "clue": "A capital built of pink and grey volcanic stone, in sight of a mountain from the story of Noah's ark.",
+  "story": "The Opera Theatre in Yerevan, Armenia, was designed by Alexander Tamanian and opened in 1933."
+ },
+ "t-marrakech": {
+  "title": "Lanterns in the souk",
+  "alt": "Dozens of pierced metal lanterns hanging and glowing in a shop.",
+  "clue": "Pierced brass lanterns in the metalworkers' lane of a red-walled old city.",
+  "story": "Souk Haddadine in Marrakech is the blacksmiths' and metalworkers' market. The city's walls and houses are built from red earth."
+ },
+ "t-laos": {
+  "title": "Monks at prayer",
+  "alt": "Monks in saffron robes kneeling before a golden seated Buddha in a red and gold temple.",
+  "clue": "Saffron-robed monks in a temple of red and gold, in a quiet royal town where two rivers meet.",
+  "story": "This is Wat Sensoukharam in Luang Prabang, Laos. Every dawn, monks walk the streets to receive offerings of sticky rice."
  }
 }

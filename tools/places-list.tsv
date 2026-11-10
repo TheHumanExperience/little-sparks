@@ -20,7 +20,7 @@ g-acropolis	0	Greece	Parthenon Acropolis Athens
 g-hagia	0	Turkey	Hagia Sophia Istanbul exterior
 g-marina	0	Singapore	Marina Bay Sands Singapore skyline
 g-cntower	0	Canada	CN Tower Toronto skyline
-g-table	0	South Africa	Table Mountain Cape Town
+g-table	0	South Africa	Table Mountain Cape Town city view
 g-moai	0	Chile	Ahu Tongariki moai row
 g-petronas	0	Malaysia	Petronas Towers Kuala Lumpur
 g-kinderdijk	0	Netherlands	Kinderdijk windmills
@@ -79,18 +79,18 @@ t-oaxaca	2	Mexico	Oaxaca street colourful
 t-istanbul	2	Turkey	Istanbul Istiklal Avenue tram
 t-cairo	2	Egypt	Cairo street Khan el-Khalili
 t-greekvillage	2	Greece	Greek village taverna street
-t-krakow	2	Poland	Kraków Main Square
+t-krakow	2	Poland	Kraków Cloth Hall Main Market Square
 t-porto	2	Portugal	Porto Ribeira houses
-t-sweden	2	Sweden	Swedish red wooden house countryside
+t-sweden	2	Sweden	Swedish red cottage falu red countryside
 t-quebec	2	Canada	Quebec City Petit Champlain street
 t-wales	2	United Kingdom	Wales bilingual road sign village
-t-ireland	2	Ireland	Irish village pub street
+t-ireland	2	Ireland	Dingle town colourful shops Ireland
 t-nairobi	2	Kenya	Nairobi matatu street
 t-accra	2	Ghana	Accra Makola market
 t-japanstreet	2	Japan	Japanese residential street vending machine
 t-kolkata	2	India	Kolkata yellow taxi street
 t-bali	2	Indonesia	Bali rice terraces Tegallalang
 t-yerevan	2	Armenia	Yerevan street Armenian
-t-moscow	2	Russia	Russian village wooden houses
+t-moscow	2	Russia	Suzdal wooden church village Russia
 t-marrakech	2	Morocco	Marrakech souk
 t-laos	2	Laos	Luang Prabang monks street
