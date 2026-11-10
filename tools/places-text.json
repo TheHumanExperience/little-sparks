@@ -424,5 +424,35 @@
   "alt": "Monks in saffron robes kneeling before a golden seated Buddha in a red and gold temple.",
   "clue": "Saffron-robed monks in a temple of red and gold, in a quiet royal town where two rivers meet.",
   "story": "This is Wat Sensoukharam in Luang Prabang, Laos. Every dawn, monks walk the streets to receive offerings of sticky rice."
+ },
+ "t-hanoi": {
+  "title": "Motorbikes at the lights",
+  "alt": "A crowd of riders on scooters waiting at a city junction, under a shop sign with lots of accent marks.",
+  "clue": "Read the shop sign: a Latin alphabet with many stacked accent marks, in a capital where motorbikes outnumber cars.",
+  "story": "This is Hanoi, Vietnam. Vietnamese is written in Latin letters with extra marks that show its six tones."
+ },
+ "t-seoul": {
+  "title": "A festival for an alphabet",
+  "alt": "Dancers on an outdoor stage beside a large seated bronze statue of a king, with a mountain behind.",
+  "clue": "A seated king who invented an alphabet in 1443, in a capital ringed by mountains.",
+  "story": "This stage was set up beside the statue of King Sejong in Seoul, South Korea, to celebrate Hangul, the alphabet he created. Hangul Day is a national holiday on 9 October."
+ },
+ "t-lapaz": {
+  "title": "A city below the peaks",
+  "alt": "Office blocks in a city filling a deep valley, with a snowy mountain beyond.",
+  "clue": "A city so high in the Andes that its everyday public transport is a network of cable cars.",
+  "story": "La Paz in Bolivia sits about 3,600 metres above sea level. Its Mi Teleférico cable cars are the world's largest urban cable car network."
+ },
+ "t-oaxaca": {
+  "title": "A colourful street",
+  "alt": "A street of brightly painted houses leading to a twin-towered stone church.",
+  "clue": "Bright painted houses and a baroque church in a southern city known for chocolate and seven kinds of mole sauce.",
+  "story": "This street is in Oaxaca, Mexico. The city is famous for its mole sauces, its markets and its Day of the Dead celebrations."
+ },
+ "t-japanstreet": {
+  "title": "A tower in the night city",
+  "alt": "A city of skyscrapers at night with a glowing orange-and-white lattice tower in the middle.",
+  "clue": "A red-and-white lattice tower, inspired by one in Paris, glowing in one of the world's biggest cities.",
+  "story": "Tokyo Tower in Japan opened in 1958. At 333 metres it is a little taller than the Eiffel Tower, which inspired it."
  }
 }

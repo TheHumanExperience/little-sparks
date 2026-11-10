@@ -1,5 +1,66 @@
 {
- "_skip": {},
+ "_skip": {
+  "g-machu": [
+   "File:Machu Picchu, Perú, 2015-07-30, DD 61-64 PAN.jpg"
+  ],
+  "g-petra": [
+   "File:Restauration du Khasne Petra.jpg"
+  ],
+  "g-sagrada": [
+   "File:Sagrada Familia, Barcelona (P1170692).jpg"
+  ],
+  "g-moai": [
+   "File:Ahu Tongariki quince moais.jpg"
+  ],
+  "g-table": [
+   "File:Table Mountain, Cape Town (P1050264).jpg"
+  ],
+  "m-boudha": [
+   "File:Boudhanath Stupa view from Kapan Height-IMG 9815.jpg"
+  ],
+  "m-hallstatt": [
+   "File:Panoramic view of Hallstatt village and shoreline from lake.jpg"
+  ],
+  "m-sigiriya": [
+   "File:Sigiriya Rock Sri lanka.jpg"
+  ],
+  "m-moraine": [
+   "File:Richardson's red squirrel (Tamiasciurus hudsonicus richardsoni) Moraine Lake.jpg"
+  ],
+  "m-mara": [
+   "File:Lions Family Portrait Masai Mara.jpg"
+  ],
+  "t-addis": [
+   "File:Lemon Boy.jpg"
+  ],
+  "t-istanbul": [
+   "File:Simits on a street stand in Istanbul.jpg"
+  ],
+  "t-krakow": [
+   "File:Anti-Ukrainian protest Kraków. Main Market square, Old Town, Kraków, Poland.jpg"
+  ],
+  "t-sweden": [
+   "File:6 juni (18).JPG"
+  ],
+  "t-moscow": [
+   "File:2005 year - Abandoned village in the Tver region. Village houses in Russia.jpg"
+  ],
+  "t-ireland": [
+   "File:Pub and village street, Southerndown - geograph.org.uk - 1019476.jpg"
+  ],
+  "t-valparaiso": [
+   "File:2019-03-19 SOCIBER VALPARAISO III floating drydock.jpg"
+  ],
+  "t-cusco": [
+   "File:Vista de Cusco, Perú, 2015-07-31, DD 11-17 PAN.JPG"
+  ],
+  "t-greekvillage": [
+   "File:Moni Naxos Greece 2018080818540NP6172.jpg"
+  ],
+  "t-wales": [
+   "File:Recreated Celtic Village, Museum of Welsh Life. - geograph.org.uk - 138611.jpg"
+  ]
+ },
  "g-eiffel": {
   "level": 0,
   "country": "France",
@@ -77,17 +138,6 @@
   "source": "https://commons.wikimedia.org/wiki/File:Redentor_Over_Clouds_1.jpg",
   "bytes": 48600
  },
- "g-machu": {
-  "level": 0,
-  "country": "Peru",
-  "file": "File:Machu Picchu, Perú, 2015-07-30, DD 61-64 PAN.jpg",
-  "licence": "CC BY-SA 4.0",
-  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "artist": "Diego Delso",
-  "description": "Machu Picchu, Peru}}",
-  "source": "https://commons.wikimedia.org/wiki/File:Machu_Picchu,_Per%C3%BA,_2015-07-30,_DD_61-64_PAN.jpg",
-  "bytes": 48151
- },
  "g-giza": {
   "level": 0,
   "country": "Egypt",
@@ -110,17 +160,6 @@
   "source": "https://commons.wikimedia.org/wiki/File:Palace_of_Westminster,_London_-_Feb_2007.jpg",
   "bytes": 39655
  },
- "g-petra": {
-  "level": 0,
-  "country": "Jordan",
-  "file": "File:Restauration du Khasne Petra.jpg",
-  "licence": "Public domain",
-  "licenseUrl": "https://en.wikipedia.org/wiki/Public_domain",
-  "artist": "* Hittorff, Jacques Ignace, 1792-1867 (Artist)",
-  "description": "1830 lithograph of the architectural drawing \"Restauration du Khasné [al-Khazneh = \"Treasury\"] (Petra).\" in the New York Public Library Digital Collections.}}",
-  "source": "https://commons.wikimedia.org/wiki/File:Restauration_du_Khasne_Petra.jpg",
-  "bytes": 46695
- },
  "g-angkor": {
   "level": 0,
   "country": "Cambodia",
@@ -142,17 +181,6 @@
   "description": "Chureito Pagoda and Mount Fuji}}",
   "source": "https://commons.wikimedia.org/wiki/File:Chureito_Pagoda_and_Mount_Fuji_2023-03-07.jpg",
   "bytes": 84876
- },
- "g-sagrada": {
-  "level": 0,
-  "country": "Spain",
-  "file": "File:Sagrada Familia, Barcelona (P1170692).jpg",
-  "licence": "CC BY-SA 2.0",
-  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-  "artist": "Matti Blume",
-  "description": "",
-  "source": "https://commons.wikimedia.org/wiki/File:Sagrada_Familia,_Barcelona_(P1170692).jpg",
-  "bytes": 155519
  },
  "g-neuschwanstein": {
   "level": 0,
@@ -241,17 +269,6 @@
   "description": "Toronto skyline as viewed from Ireland Park}}",
   "source": "https://commons.wikimedia.org/wiki/File:Toronto_skyline_as_viewed_from_Ireland_Park.jpg",
   "bytes": 85557
- },
- "g-moai": {
-  "level": 0,
-  "country": "Chile",
-  "file": "File:Ahu Tongariki quince moais.jpg",
-  "licence": "CC BY-SA 4.0",
-  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "artist": "Rocío Mantis",
-  "description": "Ahu Tongariki is the largest ahu on Easter Island. Its moai were toppled during the island's civil wars and in the twentieth century the ahu was swept inland by a tsunami.}}",
-  "source": "https://commons.wikimedia.org/wiki/File:Ahu_Tongariki_quince_moais.jpg",
-  "bytes": 95994
  },
  "g-petronas": {
   "level": 0,
@@ -429,17 +446,6 @@
   "source": "https://commons.wikimedia.org/wiki/File:20191218_Pa%C5%82ac_Wiatr%C3%B3w_w_Jaipurze_1129_9124.jpg",
   "bytes": 115421
  },
- "m-boudha": {
-  "level": 1,
-  "country": "Nepal",
-  "file": "File:Boudhanath Stupa view from Kapan Height-IMG 9815.jpg",
-  "licence": "CC BY-SA 4.0",
-  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "artist": "Bijay Chaurasia",
-  "description": "Boudhanath Stupa view from Kapan Height}}",
-  "source": "https://commons.wikimedia.org/wiki/File:Boudhanath_Stupa_view_from_Kapan_Height-IMG_9815.jpg",
-  "bytes": 63496
- },
  "m-cappadocia": {
   "level": 1,
   "country": "Turkey",
@@ -506,17 +512,6 @@
   "source": "https://commons.wikimedia.org/wiki/File:Stonehenge_from_the_north.jpg",
   "bytes": 69460
  },
- "m-hallstatt": {
-  "level": 1,
-  "country": "Austria",
-  "file": "File:Panoramic view of Hallstatt village and shoreline from lake.jpg",
-  "licence": "CC BY 4.0",
-  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-  "artist": "David Kernan",
-  "description": "A panoramic view of Hallstatt, Austria, looking across Hallstätter See. This wide-angle shot encompasses a significant stretch of the village waterfront, illustrating how the settlement is built into the steep base of the Dachstein Alps. It features the Evangelical Church, the boat docks, and the su",
-  "source": "https://commons.wikimedia.org/wiki/File:Panoramic_view_of_Hallstatt_village_and_shoreline_from_lake.jpg",
-  "bytes": 66189
- },
  "m-budapest": {
   "level": 1,
   "country": "Hungary",
@@ -539,17 +534,6 @@
   "source": "https://commons.wikimedia.org/wiki/File:20160801_Bagan_temples_6701.jpg",
   "bytes": 79308
  },
- "m-sigiriya": {
-  "level": 1,
-  "country": "Sri Lanka",
-  "file": "File:Sigiriya Rock Sri lanka.jpg",
-  "licence": "CC BY-SA 4.0",
-  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "artist": "Asitha dev",
-  "description": "These phtos taken from Sigiriya Sri Lanka}}",
-  "source": "https://commons.wikimedia.org/wiki/File:Sigiriya_Rock_Sri_lanka.jpg",
-  "bytes": 183557
- },
  "m-chocolate": {
   "level": 1,
   "country": "Philippines",
@@ -571,17 +555,6 @@
   "description": "West Mitten Butte, Monument Valley Navajo Tribal Park. Monument Valley is located on the southern border of Utah with northern Arizona, USA. (view ~due East)--:en:West and East Mitten Buttes are in Arizona, apart; Merrick Butte is off-photo, just right (south); the Utah border is left, the cliffs ar",
   "source": "https://commons.wikimedia.org/wiki/File:West_Mitten_Butte_-_Monument_Valley_Luca_Galuzzi_2007.jpg",
   "bytes": 93756
- },
- "m-moraine": {
-  "level": 1,
-  "country": "Canada",
-  "file": "File:Richardson's red squirrel (Tamiasciurus hudsonicus richardsoni) Moraine Lake.jpg",
-  "licence": "CC BY-SA 4.0",
-  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "artist": "Charles J Sharp",
-  "description": "Richardson's red squirrel (Tamiasciurus hudsonicus richardsoni), Moraine Lake, AB, Canada}}",
-  "source": "https://commons.wikimedia.org/wiki/File:Richardson%27s_red_squirrel_(Tamiasciurus_hudsonicus_richardsoni)_Moraine_Lake.jpg",
-  "bytes": 63386
  },
  "m-havana": {
   "level": 1,
@@ -693,17 +666,6 @@
   "source": "https://commons.wikimedia.org/wiki/File:2014_Tbilisi,_Domy_na_Starym_Mie%C5%9Bcie_(04).jpg",
   "bytes": 112787
  },
- "t-addis": {
-  "level": 2,
-  "country": "Ethiopia",
-  "file": "File:Lemon Boy.jpg",
-  "licence": "CC BY-SA 4.0",
-  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "artist": "Natnael Tadele",
-  "description": "Young boy selling Lemon in outskirts of Addis Ababa}}",
-  "source": "https://commons.wikimedia.org/wiki/File:Lemon_Boy.jpg",
-  "bytes": 53466
- },
  "t-colombo": {
   "level": 2,
   "country": "Sri Lanka",
@@ -759,17 +721,6 @@
   "source": "https://commons.wikimedia.org/wiki/File:Mongolian_Ger.jpg",
   "bytes": 87351
  },
- "t-istanbul": {
-  "level": 2,
-  "country": "Turkey",
-  "file": "File:Simits on a street stand in Istanbul.jpg",
-  "licence": "CC BY-SA 4.0",
-  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "artist": "Miomir Magdevski",
-  "description": "Simits on a street stand for food sales}}",
-  "source": "https://commons.wikimedia.org/wiki/File:Simits_on_a_street_stand_in_Istanbul.jpg",
-  "bytes": 158102
- },
  "t-cairo": {
   "level": 2,
   "country": "Egypt",
@@ -780,17 +731,6 @@
   "description": "Cairo - Khan al-Khalili spice market 1994}}",
   "source": "https://commons.wikimedia.org/wiki/File:Cairo_-_Khan_al-Khalili_spice_market_1994.jpg",
   "bytes": 154740
- },
- "t-krakow": {
-  "level": 2,
-  "country": "Poland",
-  "file": "File:Anti-Ukrainian protest Kraków. Main Market square, Old Town, Kraków, Poland.jpg",
-  "licence": "CC BY 4.0",
-  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-  "artist": "Igor123121",
-  "description": "Anti-Ukrainian protest Krakow, Main Market square, Old Town, Kraków, Poland}}",
-  "source": "https://commons.wikimedia.org/wiki/File:Anti-Ukrainian_protest_Krak%C3%B3w._Main_Market_square,_Old_Town,_Krak%C3%B3w,_Poland.jpg",
-  "bytes": 132511
  },
  "t-porto": {
   "level": 2,
@@ -803,17 +743,6 @@
   "source": "https://commons.wikimedia.org/wiki/File:Cais_da_Ribeira,_Oporto,_Portugal,_2012-05-09,_DD_14.JPG",
   "bytes": 55903
  },
- "t-sweden": {
-  "level": 2,
-  "country": "Sweden",
-  "file": "File:6 juni (18).JPG",
-  "licence": "CC BY-SA 3.0",
-  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
-  "artist": "Einarspetz",
-  "description": "House at Klockarborg, Lilla Garn, Vallentuna, Sweden. Former home of the Söderberg family}}",
-  "source": "https://commons.wikimedia.org/wiki/File:6_juni_(18).JPG",
-  "bytes": 117979
- },
  "t-quebec": {
   "level": 2,
   "country": "Canada",
@@ -824,17 +753,6 @@
   "description": "A park in Quebec City with a monument. Photographed on Rue Dalhousie, Quebec City.}}",
   "source": "https://commons.wikimedia.org/wiki/File:Park_in_Quebec_City_with_a_monument.jpg",
   "bytes": 71695
- },
- "t-ireland": {
-  "level": 2,
-  "country": "Ireland",
-  "file": "File:Pub and village street, Southerndown - geograph.org.uk - 1019476.jpg",
-  "licence": "CC BY-SA 2.0",
-  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-  "artist": "Andrew Hill",
-  "description": "Pub and village street, Southerndown The pub is called the Three Golden Cups.}}",
-  "source": "https://commons.wikimedia.org/wiki/File:Pub_and_village_street,_Southerndown_-_geograph.org.uk_-_1019476.jpg",
-  "bytes": 69551
  },
  "t-nairobi": {
   "level": 2,
@@ -891,17 +809,6 @@
   "source": "https://commons.wikimedia.org/wiki/File:%C3%93pera,_Erev%C3%A1n,_Armenia,_2016-10-03,_DD_13.jpg",
   "bytes": 43035
  },
- "t-moscow": {
-  "level": 2,
-  "country": "Russia",
-  "file": "File:2005 year - Abandoned village in the Tver region. Village houses in Russia.jpg",
-  "licence": "CC BY-SA 4.0",
-  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "artist": "Dmitry Makeev",
-  "description": "Abandoned village in the Tver region, 2005 year, Toropetsky District. Village houses in Russia}}",
-  "source": "https://commons.wikimedia.org/wiki/File:2005_year_-_Abandoned_village_in_the_Tver_region._Village_houses_in_Russia.jpg",
-  "bytes": 115523
- },
  "t-marrakech": {
   "level": 2,
   "country": "Morocco",
@@ -924,20 +831,9 @@
   "source": "https://commons.wikimedia.org/wiki/File:Praying_bhikkhus_inside_Wat_Sensoukharam_in_Luang_Prabang_Laos.jpg",
   "bytes": 152572
  },
- "g-table": {
-  "level": 0,
-  "country": "",
-  "file": "File:Table Mountain, Cape Town (P1050264).jpg",
-  "licence": "CC BY-SA 4.0",
-  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "artist": "Matti Blume",
-  "description": "Cape dassie on Table Mountain, Cape Town}}",
-  "source": "https://commons.wikimedia.org/wiki/File:Table_Mountain,_Cape_Town_(P1050264).jpg",
-  "bytes": 115137
- },
  "m-uluru": {
-  "level": 0,
-  "country": "",
+  "level": 1,
+  "country": "Australia",
   "file": "File:Uluṟu (Ayers Rock), Sunset.jpg",
   "licence": "CC0",
   "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
@@ -946,20 +842,9 @@
   "source": "https://commons.wikimedia.org/wiki/File:Ulu%E1%B9%9Fu_(Ayers_Rock),_Sunset.jpg",
   "bytes": 76972
  },
- "m-mara": {
-  "level": 0,
-  "country": "",
-  "file": "File:Lions Family Portrait Masai Mara.jpg",
-  "licence": "CC BY-SA 3.0",
-  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
-  "artist": "Benh LIEU SONG",
-  "description": "Portrait of three lions (one female and two males) of a pride, all resting at morning time. Taken in Maasai Mara, southwest Kenya.}}",
-  "source": "https://commons.wikimedia.org/wiki/File:Lions_Family_Portrait_Masai_Mara.jpg",
-  "bytes": 102900
- },
  "t-hanoi": {
-  "level": 0,
-  "country": "",
+  "level": 2,
+  "country": "Vietnam",
   "file": "File:Hanoi street scene- motorbikes (22522817795).jpg",
   "licence": "CC BY-SA 2.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
@@ -969,8 +854,8 @@
   "bytes": 111650
  },
  "t-seoul": {
-  "level": 0,
-  "country": "",
+  "level": 2,
+  "country": "South Korea",
   "file": "File:Celebrating The Invention Of Hangul 1 (125014281).jpeg",
   "licence": "CC BY 3.0",
   "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
@@ -979,20 +864,9 @@
   "source": "https://commons.wikimedia.org/wiki/File:Celebrating_The_Invention_Of_Hangul_1_(125014281).jpeg",
   "bytes": 85749
  },
- "t-valparaiso": {
-  "level": 0,
-  "country": "",
-  "file": "File:2019-03-19 SOCIBER VALPARAISO III floating drydock.jpg",
-  "licence": "CC BY-SA 4.0",
-  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "artist": "Gordon Leggett",
-  "description": "SOCIBER floating drydock, VALPARAISO III with tugboat, PEQUEN - IMO 9253650 in the cradle being worked on, at Valparaiso, Chile on March 19, 2019",
-  "source": "https://commons.wikimedia.org/wiki/File:2019-03-19_SOCIBER_VALPARAISO_III_floating_drydock.jpg",
-  "bytes": 112443
- },
  "t-lapaz": {
-  "level": 0,
-  "country": "",
+  "level": 2,
+  "country": "Bolivia",
   "file": "File:La Paz, Bolivia en la mañana.jpg",
   "licence": "CC0",
   "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
@@ -1001,20 +875,9 @@
   "source": "https://commons.wikimedia.org/wiki/File:La_Paz,_Bolivia_en_la_ma%C3%B1ana.jpg",
   "bytes": 46248
  },
- "t-cusco": {
-  "level": 0,
-  "country": "",
-  "file": "File:Vista de Cusco, Perú, 2015-07-31, DD 11-17 PAN.JPG",
-  "licence": "CC BY-SA 4.0",
-  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "artist": "Diego Delso",
-  "description": "Panoramic view (span of approx. 150°) of the city of Cusco, Peru. The city, located near the Sacred Valley of the Andes mountain range, is the capital of the Cusco Province, has a population of 428,450 inhabitants and its elevation is around . The site was the historic capital of the Inca Empire fro",
-  "source": "https://commons.wikimedia.org/wiki/File:Vista_de_Cusco,_Per%C3%BA,_2015-07-31,_DD_11-17_PAN.JPG",
-  "bytes": 29792
- },
  "t-oaxaca": {
-  "level": 0,
-  "country": "",
+  "level": 2,
+  "country": "Mexico",
   "file": "File:Mexico.Oax.Oaxaca.streets.01.jpg",
   "licence": "CC BY-SA 2.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
@@ -1023,31 +886,9 @@
   "source": "https://commons.wikimedia.org/wiki/File:Mexico.Oax.Oaxaca.streets.01.jpg",
   "bytes": 80561
  },
- "t-greekvillage": {
-  "level": 0,
-  "country": "",
-  "file": "File:Moni Naxos Greece 2018080818540NP6172.jpg",
-  "licence": "CC BY-SA 4.0",
-  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-  "artist": "Stepanps",
-  "description": "View of Mt. Zas from the taverna opposite to village Moni of Naxos, Cyclades, Greece. At the right and middle of the picture, on the steep hill is hardly distinguished the chapel of St. John that is opposite of the village Filoti.}}",
-  "source": "https://commons.wikimedia.org/wiki/File:Moni_Naxos_Greece_2018080818540NP6172.jpg",
-  "bytes": 59423
- },
- "t-wales": {
-  "level": 0,
-  "country": "",
-  "file": "File:Recreated Celtic Village, Museum of Welsh Life. - geograph.org.uk - 138611.jpg",
-  "licence": "CC BY-SA 2.0",
-  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-  "artist": "Colin Smith",
-  "description": "Recreated Celtic Village, Museum of Welsh Life. The open fire within the circular hut gives the thatched roof a \"steaming\" effect. Three round wattle-and-daub huts are surrounded by a ditch and wooden palisade.}}",
-  "source": "https://commons.wikimedia.org/wiki/File:Recreated_Celtic_Village,_Museum_of_Welsh_Life._-_geograph.org.uk_-_138611.jpg",
-  "bytes": 102446
- },
  "t-japanstreet": {
-  "level": 0,
-  "country": "",
+  "level": 2,
+  "country": "Japan",
   "file": "File:Tokyo Tower, Minato City.jpg",
   "licence": "CC BY 4.0",
   "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
