@@ -1022,5 +1022,16 @@
   "description": "",
   "source": "https://commons.wikimedia.org/wiki/File:Mexico.Oax.Oaxaca.streets.01.jpg",
   "bytes": 80561
+ },
+ "t-greekvillage": {
+  "level": 0,
+  "country": "",
+  "file": "File:Moni Naxos Greece 2018080818540NP6172.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Stepanps",
+  "description": "View of Mt. Zas from the taverna opposite to village Moni of Naxos, Cyclades, Greece. At the right and middle of the picture, on the steep hill is hardly distinguished the chapel of St. John that is opposite of the village Filoti.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Moni_Naxos_Greece_2018080818540NP6172.jpg",
+  "bytes": 59423
  }
 }
