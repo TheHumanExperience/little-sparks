@@ -1033,5 +1033,27 @@
   "description": "View of Mt. Zas from the taverna opposite to village Moni of Naxos, Cyclades, Greece. At the right and middle of the picture, on the steep hill is hardly distinguished the chapel of St. John that is opposite of the village Filoti.}}",
   "source": "https://commons.wikimedia.org/wiki/File:Moni_Naxos_Greece_2018080818540NP6172.jpg",
   "bytes": 59423
+ },
+ "t-wales": {
+  "level": 0,
+  "country": "",
+  "file": "File:Recreated Celtic Village, Museum of Welsh Life. - geograph.org.uk - 138611.jpg",
+  "licence": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+  "artist": "Colin Smith",
+  "description": "Recreated Celtic Village, Museum of Welsh Life. The open fire within the circular hut gives the thatched roof a \"steaming\" effect. Three round wattle-and-daub huts are surrounded by a ditch and wooden palisade.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Recreated_Celtic_Village,_Museum_of_Welsh_Life._-_geograph.org.uk_-_138611.jpg",
+  "bytes": 102446
+ },
+ "t-japanstreet": {
+  "level": 0,
+  "country": "",
+  "file": "File:Tokyo Tower, Minato City.jpg",
+  "licence": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "artist": "David Kernan",
+  "description": "A high-angle night photograph of Tokyo, Japan. The Tokyo Tower is prominently illuminated in its traditional orange \"Landmark Light.\" To the left, several modern skyscrapers are visible, including the Azabudai Hills Mori JP Tower and the Roppongi Hills Mori Tower. The foreground and background are f",
+  "source": "https://commons.wikimedia.org/wiki/File:Tokyo_Tower,_Minato_City.jpg",
+  "bytes": 84233
  }
 }
