@@ -802,5 +802,126 @@
   "description": "Cais da Ribeira, Porto, Portugal}}",
   "source": "https://commons.wikimedia.org/wiki/File:Cais_da_Ribeira,_Oporto,_Portugal,_2012-05-09,_DD_14.JPG",
   "bytes": 55903
+ },
+ "t-sweden": {
+  "level": 2,
+  "country": "Sweden",
+  "file": "File:6 juni (18).JPG",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Einarspetz",
+  "description": "House at Klockarborg, Lilla Garn, Vallentuna, Sweden. Former home of the Söderberg family}}",
+  "source": "https://commons.wikimedia.org/wiki/File:6_juni_(18).JPG",
+  "bytes": 117979
+ },
+ "t-quebec": {
+  "level": 2,
+  "country": "Canada",
+  "file": "File:Park in Quebec City with a monument.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Wilfredo Rafael Rodriguez Hernandez",
+  "description": "A park in Quebec City with a monument. Photographed on Rue Dalhousie, Quebec City.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Park_in_Quebec_City_with_a_monument.jpg",
+  "bytes": 71695
+ },
+ "t-ireland": {
+  "level": 2,
+  "country": "Ireland",
+  "file": "File:Pub and village street, Southerndown - geograph.org.uk - 1019476.jpg",
+  "licence": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+  "artist": "Andrew Hill",
+  "description": "Pub and village street, Southerndown The pub is called the Three Golden Cups.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Pub_and_village_street,_Southerndown_-_geograph.org.uk_-_1019476.jpg",
+  "bytes": 69551
+ },
+ "t-nairobi": {
+  "level": 2,
+  "country": "Kenya",
+  "file": "File:KiXX matatu at a busy Nairobi intersection.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Lebu Ayiga",
+  "description": "A highly decorated matatu named \"KiXX\" driving through a busy city intersection in Nairobi, Kenya. The side of the bus has vibrant comic-style graphics and \"STREET LEGAL\" text. The rear of the bus features a painted portrait of a man, an American flag design, and the text \"JUST LICK IT\". Billboards ",
+  "source": "https://commons.wikimedia.org/wiki/File:KiXX_matatu_at_a_busy_Nairobi_intersection.jpg",
+  "bytes": 88099
+ },
+ "t-accra": {
+  "level": 2,
+  "country": "Ghana",
+  "file": "File:Makola Market, Accra, Ghana.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Nii Adama Armah",
+  "description": "Makola Market, Accra, Ghana}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Makola_Market,_Accra,_Ghana.jpg",
+  "bytes": 120841
+ },
+ "t-kolkata": {
+  "level": 2,
+  "country": "India",
+  "file": "File:Taxi of Kolkata.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Bernard Gagnon",
+  "description": "A taxi of Kolkata, India}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Taxi_of_Kolkata.jpg",
+  "bytes": 120592
+ },
+ "t-bali": {
+  "level": 2,
+  "country": "Indonesia",
+  "file": "File:Rice terraces, Bali.jpg",
+  "licence": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "artist": "Vyacheslav Argenberg",
+  "description": "Rice terraces in Bali. Rice fields. Traditional rice farming in Bali. This is probably one of the most photographed in-land places in Bali. Tegallalang, Ubud. Bali, Indonesia.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Rice_terraces,_Bali.jpg",
+  "bytes": 149345
+ },
+ "t-yerevan": {
+  "level": 2,
+  "country": "Armenia",
+  "file": "File:Ópera, Ereván, Armenia, 2016-10-03, DD 13.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Diego Delso",
+  "description": "Opera Theatre, Yerevan, Armenia. The building, designed by the Armenian architect Alexander Tamanian, was officially opened in 1933 and consists of two concert halls: the Aram Khatchaturian concert hall with 1,400 seats and the Alexander Spendiaryan Opera and Ballet National Theatre with 1,200 seats",
+  "source": "https://commons.wikimedia.org/wiki/File:%C3%93pera,_Erev%C3%A1n,_Armenia,_2016-10-03,_DD_13.jpg",
+  "bytes": 43035
+ },
+ "t-moscow": {
+  "level": 2,
+  "country": "Russia",
+  "file": "File:2005 year - Abandoned village in the Tver region. Village houses in Russia.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Dmitry Makeev",
+  "description": "Abandoned village in the Tver region, 2005 year, Toropetsky District. Village houses in Russia}}",
+  "source": "https://commons.wikimedia.org/wiki/File:2005_year_-_Abandoned_village_in_the_Tver_region._Village_houses_in_Russia.jpg",
+  "bytes": 115523
+ },
+ "t-marrakech": {
+  "level": 2,
+  "country": "Morocco",
+  "file": "File:Oriental hanging lanterns. Souk Haddadine, Marrakech Medina (سوق الحدادين مراكش).jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Petar Milošević",
+  "description": "Oriental hanging lanterns. Souk Haddadine, Marrakech Medina, Morocco}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Oriental_hanging_lanterns._Souk_Haddadine,_Marrakech_Medina_(%D8%B3%D9%88%D9%82_%D8%A7%D9%84%D8%AD%D8%AF%D8%A7%D8%AF%D9%8A%D9%86_%D9%85%D8%B1%D8%A7%D9%83%D8%B4).jpg",
+  "bytes": 165571
+ },
+ "t-laos": {
+  "level": 2,
+  "country": "Laos",
+  "file": "File:Praying bhikkhus inside Wat Sensoukharam in Luang Prabang Laos.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Basile Morin",
+  "description": "Praying bhikkhus sitting in front of a gold statue of the seated Buddha, inside Wat Sensoukharam, Buddhist temple, in Luang Prabang, Laos.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Praying_bhikkhus_inside_Wat_Sensoukharam_in_Luang_Prabang_Laos.jpg",
+  "bytes": 152572
  }
 }
