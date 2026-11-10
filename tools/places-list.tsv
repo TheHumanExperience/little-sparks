@@ -5,13 +5,13 @@ g-colosseum	0	Italy	Colosseum Rome exterior
 g-greatwall	0	China	Great Wall of China Mutianyu
 g-opera	0	Australia	Sydney Opera House harbour
 g-redeemer	0	Brazil	Christ the Redeemer Corcovado Rio
-g-machu	0	Peru	Machu Picchu panorama
+g-machu	0	Peru	Machu Picchu Huayna Picchu citadel view
 g-giza	0	Egypt	Pyramids of Giza
 g-bigben	0	United Kingdom	Palace of Westminster Big Ben Thames
-g-petra	0	Jordan	Petra Treasury Al Khazneh
+g-petra	0	Jordan	Al Khazneh Treasury Petra sandstone facade
 g-angkor	0	Cambodia	Angkor Wat sunrise
 g-fuji	0	Japan	Chureito Pagoda Mount Fuji
-g-sagrada	0	Spain	Sagrada Familia Barcelona
+g-sagrada	0	Spain	Sagrada Familia basilica towers exterior
 g-neuschwanstein	0	Germany	Neuschwanstein Castle
 g-basil	0	Russia	Saint Basil's Cathedral Red Square
 g-chichen	0	Mexico	Chichen Itza El Castillo
@@ -21,7 +21,7 @@ g-hagia	0	Turkey	Hagia Sophia Istanbul exterior
 g-marina	0	Singapore	Marina Bay Sands Singapore skyline
 g-cntower	0	Canada	CN Tower Toronto skyline
 g-table	0	South Africa	Table Mountain Cape Town
-g-moai	0	Chile	Moai Ahu Tongariki Easter Island
+g-moai	0	Chile	Ahu Tongariki moai row
 g-petronas	0	Malaysia	Petronas Towers Kuala Lumpur
 g-kinderdijk	0	Netherlands	Kinderdijk windmills
 g-watarun	0	Thailand	Wat Arun Bangkok
@@ -38,21 +38,21 @@ m-chefchaouen	1	Morocco	Chefchaouen blue street
 m-halong	1	Vietnam	Ha Long Bay boats
 m-inari	1	Japan	Fushimi Inari torii gates
 m-hawamahal	1	India	Hawa Mahal Jaipur
-m-boudha	1	Nepal	Boudhanath stupa Kathmandu
+m-boudha	1	Nepal	Boudhanath Stupa
 m-cappadocia	1	Turkey	Cappadocia hot air balloons
 m-uyuni	1	Bolivia	Salar de Uyuni
 m-dubrovnik	1	Croatia	Dubrovnik old town walls
 m-lisbon	1	Portugal	Lisbon tram 28 Alfama
 m-moher	1	Ireland	Cliffs of Moher
 m-stonehenge	1	United Kingdom	Stonehenge
-m-hallstatt	1	Austria	Hallstatt lake village
+m-hallstatt	1	Austria	Hallstatt village church lake houses
 m-budapest	1	Hungary	Hungarian Parliament Building Danube
 m-bagan	1	Myanmar	Bagan temples plain
-m-sigiriya	1	Sri Lanka	Sigiriya rock
+m-sigiriya	1	Sri Lanka	Sigiriya Lion Rock fortress
 m-chocolate	1	Philippines	Chocolate Hills Bohol
 m-uluru	1	Australia	Uluru
 m-monument	1	United States	Monument Valley buttes
-m-moraine	1	Canada	Moraine Lake
+m-moraine	1	Canada	Moraine Lake Valley of the Ten Peaks
 m-havana	1	Cuba	Havana classic car street
 m-cartagena	1	Colombia	Cartagena Colombia colonial street balconies
 m-mara	1	Kenya	Maasai Mara giraffe savanna
@@ -65,7 +65,7 @@ m-zhangjiajie	1	China	Zhangjiajie pillars
 t-bangkok	2	Thailand	Bangkok street market Thai signs
 t-hanoi	2	Vietnam	Hanoi Old Quarter street motorbikes
 t-tbilisi	2	Georgia	Tbilisi old town street
-t-addis	2	Ethiopia	Addis Ababa street
+t-addis	2	Ethiopia	Addis Ababa street minibus
 t-seoul	2	South Korea	Seoul street signs Hangul alley
 t-colombo	2	Sri Lanka	Sri Lanka street tuk tuk town
 t-dhaka	2	Bangladesh	Dhaka cycle rickshaws street
@@ -76,7 +76,7 @@ t-valparaiso	2	Chile	Valparaíso colourful houses hills
 t-lapaz	2	Bolivia	La Paz Bolivia street market women
 t-cusco	2	Peru	Cusco street Quechua women llama
 t-oaxaca	2	Mexico	Oaxaca street colourful
-t-istanbul	2	Turkey	Istanbul street simit
+t-istanbul	2	Turkey	Istanbul Istiklal Avenue tram
 t-cairo	2	Egypt	Cairo street Khan el-Khalili
 t-greekvillage	2	Greece	Greek village taverna street
 t-krakow	2	Poland	Kraków Main Square

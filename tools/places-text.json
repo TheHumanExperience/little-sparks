@@ -1,0 +1,362 @@
+{
+ "g-eiffel": {
+  "title": "A wrought-iron tower in spring",
+  "alt": "A tall lattice iron tower framed by blossoming trees under a blue sky.",
+  "clue": "An iron lattice tower built for a world's fair in 1889 and once meant to be temporary.",
+  "story": "The Eiffel Tower in Paris was built by Gustave Eiffel's company for the 1889 World's Fair. Critics called it an eyesore; it became the most visited paid monument in the world."
+ },
+ "g-taj": {
+  "title": "A marble mausoleum",
+  "alt": "A white marble domed tomb with four slender minarets, reflected in a long garden pool.",
+  "clue": "A white marble tomb built by an emperor in memory of his wife, beside the Yamuna river.",
+  "story": "The Taj Mahal in Agra was built by Mughal emperor Shah Jahan for Mumtaz Mahal, finished around 1653. Its marble changes colour from pink at dawn to gold at sunset."
+ },
+ "g-liberty": {
+  "title": "A copper lady with a torch",
+  "alt": "A green statue holding a torch high on an island, with a city skyline and a tour boat behind.",
+  "clue": "A gift from France in 1886, turned green as its copper skin weathered.",
+  "story": "The Statue of Liberty stands in New York Harbor. Its copper turned green over about 30 years, and it welcomed millions of immigrants arriving by ship."
+ },
+ "g-colosseum": {
+  "title": "An ancient arena",
+  "alt": "A huge oval stone amphitheatre with arched tiers, beside ruined columns and tall cypress trees.",
+  "clue": "Gladiators once fought here in front of up to 50,000 spectators, almost 2,000 years ago.",
+  "story": "The Colosseum in Rome opened in 80 AD. It could hold around 50,000 people, and engineers could even flood the arena for mock sea battles."
+ },
+ "g-greatwall": {
+  "title": "A wall across the mountains",
+  "alt": "A stone wall with watchtowers winding along green mountain ridges.",
+  "clue": "Built and rebuilt over many dynasties to guard a northern frontier.",
+  "story": "The Great Wall of China stretches thousands of kilometres. This is the Mutianyu section near Beijing, rebuilt during the Ming dynasty in the 1500s."
+ },
+ "g-opera": {
+  "title": "Sails on the harbour",
+  "alt": "A white building with roofs shaped like sails, lit up at night beside dark water and a city skyline.",
+  "clue": "Its roof shells were designed by a Danish architect after a competition in 1957.",
+  "story": "The Sydney Opera House, designed by Jørn Utzon, opened in 1973. More than a million roof tiles cover its famous shells."
+ },
+ "g-redeemer": {
+  "title": "A statue above the clouds",
+  "alt": "A statue with outstretched arms on a mountain peak, standing above a sea of clouds at sunrise.",
+  "clue": "Arms wide open on a granite peak, looking over a city famous for its carnival.",
+  "story": "Christ the Redeemer on Corcovado mountain above Rio de Janeiro was completed in 1931. It stands 30 metres tall and is often struck by lightning."
+ },
+ "g-giza": {
+  "title": "Pyramids in the desert",
+  "alt": "Three great stone pyramids rising from golden sand under a clear sky.",
+  "clue": "The largest was the tallest human-made structure on Earth for nearly 4,000 years.",
+  "story": "The Pyramids of Giza were built around 4,500 years ago as tombs for pharaohs. The Great Pyramid is the only one of the Seven Wonders of the Ancient World still standing."
+ },
+ "g-bigben": {
+  "title": "A clock tower at dusk",
+  "alt": "A gothic palace and a tall clock tower glowing gold beside a river at dusk.",
+  "clue": "The great bell inside the clock tower has a nickname that everyone uses for the whole tower.",
+  "story": "The Palace of Westminster in London is home to Parliament. Big Ben is really the name of the great bell inside the Elizabeth Tower."
+ },
+ "g-angkor": {
+  "title": "Temple towers at sunrise",
+  "alt": "Silhouettes of temple towers and palm trees at sunrise, reflected in a still pond.",
+  "clue": "The largest religious monument in the world, first built as a Hindu temple in the 1100s.",
+  "story": "Angkor Wat was built by the Khmer king Suryavarman II in the 1100s. Its towers appear on the country's national flag."
+ },
+ "g-fuji": {
+  "title": "A pagoda and a snowy volcano",
+  "alt": "A red five-storey pagoda in front of a snow-capped volcano above a city.",
+  "clue": "A perfectly shaped snow-topped volcano, a favourite subject of woodblock prints.",
+  "story": "Mount Fuji, seen from the Chureito Pagoda, is the country's tallest mountain at 3,776 metres. It last erupted in 1707."
+ },
+ "g-neuschwanstein": {
+  "title": "A fairy-tale castle",
+  "alt": "A white castle with slender turrets perched on a forested hillside.",
+  "clue": "A romantic king's castle in the Bavarian Alps, said to have inspired a famous fairy-tale castle at a theme park.",
+  "story": "Neuschwanstein Castle was built for King Ludwig II from 1869. He lived there for only a few months, and it opened to visitors soon after his death."
+ },
+ "g-basil": {
+  "title": "Red walls and onion domes",
+  "alt": "Red brick towers topped with stars, colourful onion domes and a large square in a big city.",
+  "clue": "Red brick walls, ruby stars and a famous square whose name means 'beautiful'.",
+  "story": "Red Square in Moscow sits beside the Kremlin. St Basil's Cathedral, with its swirling onion domes, was finished in 1561."
+ },
+ "g-chichen": {
+  "title": "A stepped pyramid",
+  "alt": "A stepped stone pyramid with a temple on top, on a wide lawn under white clouds.",
+  "clue": "At the equinoxes, shadows make a serpent appear to slide down its staircase.",
+  "story": "El Castillo at Chichén Itzá was built by the Maya. Its four staircases have 91 steps each, which with the top platform add up to 365, one for every day of the year."
+ },
+ "g-burj": {
+  "title": "The tallest tower",
+  "alt": "A needle-thin skyscraper soaring above a hazy skyline across the water.",
+  "clue": "The tallest building in the world rises from a desert city on the Persian Gulf.",
+  "story": "The Burj Khalifa in Dubai is 828 metres tall and opened in 2010. On a clear day its tip can be seen from 95 kilometres away."
+ },
+ "g-acropolis": {
+  "title": "A temple on the hill",
+  "alt": "Ancient marble temple ruins on a rocky hilltop above green trees.",
+  "clue": "A temple to the city's patron goddess, on a rock above the birthplace of democracy.",
+  "story": "The Parthenon on the Acropolis of Athens was built in the 400s BC for the goddess Athena."
+ },
+ "g-hagia": {
+  "title": "Domes and minarets",
+  "alt": "A great domed building in pink and grey stone, with four tall minarets.",
+  "clue": "Built as a cathedral, later a mosque, its huge dome seemed to float to those who first saw it.",
+  "story": "Hagia Sophia in Istanbul was completed in 537. For nearly a thousand years it had the largest dome in the world."
+ },
+ "g-marina": {
+  "title": "A lotus by the bay",
+  "alt": "A white lotus-shaped museum in front of glass towers along a waterfront.",
+  "clue": "A city-state on an island, where a lotus-shaped museum sits beside a famous hotel with a 'ship' on its roof.",
+  "story": "The ArtScience Museum at Marina Bay in Singapore opened in 2011. Its roof collects rainwater that runs down through its centre."
+ },
+ "g-cntower": {
+  "title": "A needle by the lake",
+  "alt": "A tall concrete tower with a pod near the top, beside a lake, skyscrapers and a white boat.",
+  "clue": "A tall communications tower on the shore of one of the Great Lakes.",
+  "story": "The CN Tower in Toronto, finished in 1976, was the world's tallest free-standing structure for 32 years. Visitors can walk around the outside edge, harnessed, 356 metres up."
+ },
+ "g-petronas": {
+  "title": "Twin silver towers",
+  "alt": "Two identical silver skyscrapers joined by a sky bridge, among other towers and green trees.",
+  "clue": "Twin towers whose floor plan is based on an eight-pointed star from Islamic art.",
+  "story": "The Petronas Towers in Kuala Lumpur were the world's tallest buildings from 1998 to 2004. A double-deck sky bridge links them on the 41st and 42nd floors."
+ },
+ "g-kinderdijk": {
+  "title": "Windmills on the water",
+  "alt": "Old brick windmills along a reedy canal with water lilies.",
+  "clue": "Nineteen windmills that pumped water out of land lying below sea level.",
+  "story": "The windmills of Kinderdijk were built around 1740 to drain the polders. They are a UNESCO World Heritage Site."
+ },
+ "g-watarun": {
+  "title": "Guardians at the temple door",
+  "alt": "A temple hall with tiered orange roofs and a white spire, among sculpted trees and a tall guardian statue.",
+  "clue": "A riverside 'Temple of Dawn' in a kingdom that was never colonised.",
+  "story": "This hall is part of Wat Arun, the Temple of Dawn, on the Chao Phraya river in Bangkok. Its great spire is decorated with pieces of colourful Chinese porcelain."
+ },
+ "g-perito": {
+  "title": "A wall of blue ice",
+  "alt": "A towering wall of blue-white ice meeting a lake, with snowy mountains behind.",
+  "clue": "A glacier that has stayed roughly the same size for a century, in a windswept region at the bottom of a continent.",
+  "story": "The Perito Moreno Glacier in Patagonia is about 30 km long. Huge chunks of ice regularly break off its face with a roar."
+ },
+ "g-milford": {
+  "title": "A peak above the fiord",
+  "alt": "A sharp mountain peak rising from a fiord between steep green cliffs.",
+  "clue": "A fiord in the far south-west of two large islands, where the film trilogy about a ring was shot nearby.",
+  "story": "Milford Sound in Fiordland was carved by glaciers. Mitre Peak rises 1,692 metres straight out of the water."
+ },
+ "g-charles": {
+  "title": "A river of bridges",
+  "alt": "Stone bridges crossing a river through a city of red roofs, spires and autumn trees.",
+  "clue": "A medieval stone bridge lined with statues crosses this river in the 'city of a hundred spires'.",
+  "story": "The Vltava flows through Prague under a string of bridges. The oldest, Charles Bridge, was begun in 1357 and is lined with thirty statues."
+ },
+ "g-gyeongbok": {
+  "title": "A pavilion on a pond",
+  "alt": "A wooden pavilion with a curved tiled roof standing on stone pillars over a still pond.",
+  "clue": "A royal palace pavilion where kings held banquets, in a capital surrounded by mountains.",
+  "story": "Gyeongbokgung in Seoul was the main royal palace of the Joseon dynasty from 1395. The Gyeonghoeru pavilion stands on 48 stone pillars."
+ },
+ "g-borobudur": {
+  "title": "A temple mountain",
+  "alt": "A vast stepped stone temple with a bell-shaped stupa on top, on a green lawn.",
+  "clue": "The largest Buddhist temple in the world, hidden under volcanic ash and jungle for centuries.",
+  "story": "Borobudur in Central Java was built in the 800s. Its walls carry more than 2,600 carved relief panels."
+ },
+ "m-santorini": {
+  "title": "Blue domes by the sea",
+  "alt": "White-washed churches with bright blue domes on a cliff above a deep blue sea.",
+  "clue": "White houses and blue domes on the rim of a flooded volcanic crater in the Aegean.",
+  "story": "Oia on Santorini sits on the edge of a caldera formed by a huge eruption about 3,600 years ago."
+ },
+ "m-iceland": {
+  "title": "A waterfall in the mist",
+  "alt": "A wide waterfall pouring off a green cliff into mist.",
+  "clue": "A land of glaciers and volcanoes where waterfalls drop off the old sea cliffs.",
+  "story": "Skógafoss in Iceland falls 60 metres. On sunny days its spray almost always makes a rainbow."
+ },
+ "m-geiranger": {
+  "title": "A winding fjord",
+  "alt": "A deep blue fjord curving between steep green mountains.",
+  "clue": "A long, narrow fjord on a rugged northern coast, with waterfalls known as the Seven Sisters.",
+  "story": "The Geirangerfjord in Norway is a UNESCO World Heritage Site. Abandoned farms still cling to its cliffs."
+ },
+ "m-matterhorn": {
+  "title": "A pyramid of rock",
+  "alt": "A sharp, snow-streaked pyramid-shaped peak above autumn larch forests and a hiking path.",
+  "clue": "A famous pyramid peak on the border between two Alpine countries; a chocolate bar borrowed its shape.",
+  "story": "The Matterhorn above Zermatt is 4,478 metres high. It was first climbed in 1865."
+ },
+ "m-chefchaouen": {
+  "title": "The blue lanes",
+  "alt": "A narrow lane and steps where every wall and door is painted shades of blue.",
+  "clue": "A mountain town in North Africa where almost everything is painted blue.",
+  "story": "Chefchaouen in the Rif mountains of Morocco has painted its old town blue for generations; theories range from keeping it cool to keeping mosquitoes away."
+ },
+ "m-halong": {
+  "title": "Islands in the bay",
+  "alt": "Tall limestone islands rising from calm green water, with white cruise boats.",
+  "clue": "Thousands of limestone islands rise from a bay whose name means 'where the dragon descends'.",
+  "story": "Ha Long Bay in Vietnam has around 1,600 limestone islands and islets. Many have caves you can sail into."
+ },
+ "m-inari": {
+  "title": "A tunnel of gates",
+  "alt": "A path through a tunnel of bright orange wooden gates painted with black writing.",
+  "clue": "Thousands of orange gates, each donated by a person or business, lead up a sacred mountain.",
+  "story": "Fushimi Inari Taisha in Kyoto has around 10,000 torii gates. The writing on each one names who gave it."
+ },
+ "m-hawamahal": {
+  "title": "A palace of windows",
+  "alt": "A pink sandstone palace front with hundreds of small latticed windows above a busy street.",
+  "clue": "A 'Palace of Winds' in a pink-painted city, built so royal women could watch street life unseen.",
+  "story": "Hawa Mahal in Jaipur was built in 1799. Its 953 small windows let breezes through to keep it cool."
+ },
+ "m-cappadocia": {
+  "title": "Balloons over fairy chimneys",
+  "alt": "A striped hot-air balloon floating over a valley of cone-shaped rock towers.",
+  "clue": "Soft volcanic rock carved by wind into 'fairy chimneys', with homes and churches cut inside them.",
+  "story": "Cappadocia in central Turkey has whole underground cities carved into the rock. Hundreds of balloons rise over it at dawn."
+ },
+ "m-uyuni": {
+  "title": "Walking on the sky",
+  "alt": "People standing on a vast, mirror-like flat of water reflecting the sunset sky.",
+  "clue": "The world's largest salt flat, high in the Andes, becomes a giant mirror after rain.",
+  "story": "Salar de Uyuni in Bolivia covers over 10,000 square kilometres. It is so flat that satellites use it to calibrate their instruments."
+ },
+ "m-dubrovnik": {
+  "title": "A walled city by the sea",
+  "alt": "A walled old town with orange roofs and a small harbour on a blue sea.",
+  "clue": "A walled 'Pearl of the Adriatic' that starred as a fantasy capital on television.",
+  "story": "Dubrovnik's city walls run almost 2 km around the old town and date mostly from the 1300s to 1500s."
+ },
+ "m-lisbon": {
+  "title": "A tram up the hill",
+  "alt": "A red and cream tram climbing a narrow street between tiled buildings with balconies.",
+  "clue": "Old yellow and red trams rattle up the steep hills of a seaside capital on the western edge of Europe.",
+  "story": "Lisbon's trams have climbed its hills since the 1870s. Tram 28 winds through the old Alfama district."
+ },
+ "m-moher": {
+  "title": "Cliffs above the ocean",
+  "alt": "Green clifftops falling to a dark ocean, with a small stone tower at the edge.",
+  "clue": "Sheer cliffs on a green Atlantic island famous for its music and rain.",
+  "story": "The Cliffs of Moher in County Clare rise up to 214 metres. O'Brien's Tower was built in 1835 as a viewing point."
+ },
+ "m-stonehenge": {
+  "title": "A ring of stones",
+  "alt": "A circle of huge standing stones with lintels across the top, on a green plain under clouds.",
+  "clue": "A prehistoric stone circle aligned with the midsummer sunrise.",
+  "story": "Stonehenge on Salisbury Plain in England was built in stages from about 5,000 years ago. Some stones came from Wales, 225 km away."
+ },
+ "m-budapest": {
+  "title": "A bridge of lights",
+  "alt": "A chain bridge lit up at night over a wide river, with a domed parliament glowing beyond.",
+  "clue": "Three old towns on either side of a great river joined to become one capital in 1873.",
+  "story": "The Széchenyi Chain Bridge in Budapest opened in 1849 as the first permanent bridge across the Danube there."
+ },
+ "m-bagan": {
+  "title": "A plain of temples",
+  "alt": "Old brick temples with pointed spires rising from green bushes under a grey sky.",
+  "clue": "More than 2,000 brick temples and pagodas scattered across a river plain.",
+  "story": "Bagan in Myanmar was a royal capital from the 800s to the 1200s, when over 10,000 temples were built there."
+ },
+ "m-chocolate": {
+  "title": "Hills like sweets",
+  "alt": "Hundreds of round grassy hills scattered across a green landscape.",
+  "clue": "More than a thousand dome-shaped hills that turn brown in the dry season, on an island in a 7,000-island nation.",
+  "story": "The Chocolate Hills on Bohol are named for their brown colour in the dry season, when they look like chocolate drops."
+ },
+ "m-monument": {
+  "title": "Red rock giants",
+  "alt": "Tall red sandstone buttes rising from a flat red desert under a cloudy sky.",
+  "clue": "Red sandstone towers on Navajo land, seen in countless cowboy films.",
+  "story": "Monument Valley on the Arizona–Utah border is inside the Navajo Nation. Its buttes rise up to 300 metres above the valley floor."
+ },
+ "m-havana": {
+  "title": "Classic cars on the boulevard",
+  "alt": "Brightly coloured 1950s cars parked in front of a white domed building and an ornate palace.",
+  "clue": "An island capital where colourful American cars from the 1950s still drive the streets.",
+  "story": "Havana's El Capitolio was finished in 1929. The classic cars are kept running with home-made parts."
+ },
+ "m-cartagena": {
+  "title": "Balconies on the square",
+  "alt": "Colourful colonial buildings with wooden balconies and street lamps around a square.",
+  "clue": "A walled Caribbean port city with flower-filled wooden balconies.",
+  "story": "Cartagena's walled old town in Colombia was built to protect Spanish treasure ships from pirates."
+ },
+ "m-sossusvlei": {
+  "title": "A dead tree before red dunes",
+  "alt": "A dead, twisted tree on a white clay pan in front of a huge orange sand dune.",
+  "clue": "Some of the tallest sand dunes on Earth, in one of the oldest deserts.",
+  "story": "Deadvlei in the Namib Desert holds trees that died about 900 years ago. The air is so dry that they have never rotted."
+ },
+ "m-baobab": {
+  "title": "An avenue of giants",
+  "alt": "A dirt road lined with enormous bottle-shaped trees, with people walking at dusk.",
+  "clue": "Huge bottle-shaped trees on a big island off the south-east coast of a continent.",
+  "story": "The Avenue of the Baobabs in Madagascar has trees up to 800 years old. Most of the world's baobab species grow only on this island."
+ },
+ "m-isfahan": {
+  "title": "A great square",
+  "alt": "A vast square with gardens and fountains, framed by turquoise domes and arcades, seen through an arch.",
+  "clue": "A royal square so grand that a proverb called the city 'half the world'.",
+  "story": "Naqsh-e Jahan Square in Isfahan was built in the early 1600s by Shah Abbas I. Polo was once played on it."
+ },
+ "m-registan": {
+  "title": "Three blue-tiled schools",
+  "alt": "A square framed by three tiled buildings with huge arched gateways and turquoise domes.",
+  "clue": "Three tiled madrasas around a square on the old Silk Road.",
+  "story": "The Registan in Samarkand is ringed by three madrasas built between 1417 and 1660."
+ },
+ "m-venice": {
+  "title": "A gondola on the canal",
+  "alt": "A gondola gliding along a wide canal lined with old palaces and a domed church.",
+  "clue": "A city of canals instead of roads, built on wooden piles in a lagoon.",
+  "story": "Venice's Grand Canal is lined with palaces built over 600 years. The domed church is Santa Maria della Salute."
+ },
+ "m-zhangjiajie": {
+  "title": "Stone pillars in the mist",
+  "alt": "Tall sandstone pillars covered in trees, rising out of the mist.",
+  "clue": "Thousands of sandstone pillars said to have inspired the floating mountains in a blockbuster film.",
+  "story": "The pillars of Zhangjiajie in Hunan province rise up to 200 metres. It became the country's first national forest park in 1982."
+ },
+ "t-bangkok": {
+  "title": "A sign to the pier",
+  "alt": "A green street sign in a looping script with an arrow, above a busy street.",
+  "clue": "Read the sign: rounded letters with little loops, and a pier on a river that carries the city's boats.",
+  "story": "The sign points to Pratu Nam Pier on a canal in Bangkok. Thai script has 44 consonants and no spaces between words."
+ },
+ "t-tbilisi": {
+  "title": "Carved wooden balconies",
+  "alt": "An old house with carved wooden balconies among cypress trees and a lamp post.",
+  "clue": "Carved wooden balconies like these hang over the old streets of a capital in the Caucasus.",
+  "story": "Old Tbilisi is famous for its carved wooden balconies. Georgian is written in its own alphabet, used for no other national language."
+ },
+ "t-colombo": {
+  "title": "A west-coast town street",
+  "alt": "A busy street with three-wheeled taxis, motorbikes, shop signs and a domed building.",
+  "clue": "Three-wheeler taxis and shop signs in a rounded script; this island sits just off a big subcontinent's southern tip.",
+  "story": "This is Mannar Road in Puttalam, on Sri Lanka's west coast. The rounded letters on the signs are Sinhala, and tuk-tuks are the everyday taxi."
+ },
+ "t-dhaka": {
+  "title": "Rickshaws at rest",
+  "alt": "A row of cycle rickshaws with colourful hoods parked on a street under trees.",
+  "clue": "Colourfully decorated cycle rickshaws are everywhere in this river-delta capital, once called the 'rickshaw capital of the world'.",
+  "story": "Dhaka in Bangladesh has hundreds of thousands of cycle rickshaws. Painting their hoods is a folk art of its own."
+ },
+ "t-pakistan": {
+  "title": "A painted truck in the mountains",
+  "alt": "A brightly painted and decorated truck on a mountain highway between rocky peaks.",
+  "clue": "Trucks decorated with flowers, mirrors and chains drive a high mountain highway towards China.",
+  "story": "Truck art is a famous folk art in Pakistan. This road, the Karakoram Highway, is one of the highest paved roads in the world."
+ },
+ "t-jeepney": {
+  "title": "A long chrome jeep",
+  "alt": "A long chrome jeep-like bus at a junction under tangled power lines and tall buildings.",
+  "clue": "Long chrome jeeps, first rebuilt from army surplus after 1945, are the everyday bus in this island nation's capital.",
+  "story": "Jeepneys in Manila were first made from American army jeeps left after the Second World War. They are known as the 'kings of the road'."
+ },
+ "t-mongolia": {
+  "title": "A felt tent on the steppe",
+  "alt": "A round white felt tent standing alone on wide, dry grassland under a big sky.",
+  "clue": "A land of nomads, where families still live in round felt tents that can be packed up in an hour.",
+  "story": "The ger is the traditional home in Mongolia; this one stands on the steppe near Mandalgovi. Its door traditionally faces south, and many families still live in one."
+ }
+}
