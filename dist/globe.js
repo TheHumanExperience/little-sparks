@@ -10,7 +10,7 @@ const WORLD_REGIONS = {
   Europe: {
     "Western Europe": ["France", "Germany", "Netherlands", "Belgium", "Switzerland", "Austria", "Luxembourg"],
     "Northern Europe": ["United Kingdom", "Ireland", "Iceland", "Norway", "Sweden", "Finland", "Denmark", "Estonia"],
-    "Southern Europe": ["Italy", "Spain", "Portugal", "Greece", "Croatia", "Malta", "Slovenia", "Montenegro", "Albania"],
+    "Southern Europe": ["Italy", "Vatican City", "Spain", "Portugal", "Greece", "Croatia", "Malta", "Slovenia", "Montenegro", "Albania"],
     "Eastern Europe": ["Poland", "Czech Republic", "Hungary", "Romania", "Bulgaria", "Slovakia", "Russia", "Ukraine"],
   },
   Asia: {
