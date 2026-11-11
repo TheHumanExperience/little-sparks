@@ -138,15 +138,17 @@ Requires Node.js:
 for f in verify*.cjs; do node "$f"; done
 ```
 
+Every check loads the app through `tests/load-app.cjs`, which runs every script in `dist/index.html` in page order against a small fake DOM, with the leaderboard switched off. So the checks always test the same program the player loads. Use `loadApp({ level, storage, dom, globals })` in a new check instead of building a vm context by hand.
+
 Or run `npm run verify`. For a headless browser smoke test of every card at all three levels in WebKit and Chromium, run `npm install && npm run smoke` (it also tests the leaderboard against a mocked Supabase). Add `-- --shots` to save screenshots to `tests/shots/`; by default it saves them only on failure.
 
 Contributors and coding agents should start with [AGENTS.md](AGENTS.md) and check [REVIEW.md](REVIEW.md) before handing off. Who the app is for and what it must protect are in [PRODUCT.md](PRODUCT.md), and its visual system is in [DESIGN.md](DESIGN.md).
 
 | Script | Checks |
 | --- | --- |
-| `verify.cjs` | The original daily sets over 366 days: unique Sudoku, valid full garden paths, solvable dominoes and correct logic choices. |
-| `verify-extras.cjs` | Little Neighbours and Time Lens over 365 days: solvable targets, the full photo round and resume, misses that nudge earlier or later, a repeated year using no try, 1 of 3 found ending as missed and 2 of 3 completing the card with no points, daily-five isolation, and sandbox moves preserving inventory. |
-| `verify-levels.cjs` | Re-runs `verify.cjs` and `verify-extras.cjs` at every level, then checks separate level progress, legacy progress, difficulty persistence, clues, anchors and word attempts. |
+| `verify.cjs` | The original daily sets over 366 days at every level: unique Sudoku, valid full garden paths, solvable dominoes and correct logic choices. |
+| `verify-extras.cjs` | Little Neighbours and Time Lens over 365 days at every level, with an Indian and a history-shaping photo in every round: solvable targets, the full photo round and resume, misses that nudge earlier or later, a repeated year using no try, 1 of 3 found ending as missed and 2 of 3 completing the card with no points, daily-five isolation, and sandbox moves preserving inventory. |
+| `verify-levels.cjs` | Separate level progress, legacy progress, difficulty persistence, clues, anchors and word attempts. |
 | `verify-window.cjs` | The 61-day content windows at all levels, active and retired photos, history-shaping and Indian photo days, unique words and questions, save continuity, and the 30-day archive. |
 | `verify-words.cjs` | Letterlight guess handling and keyboard feedback, plus the answer list: all valid guesses, none rare or plural, no repeat within 365 days per level, and started puzzles keeping their word. |
 | `verify-sparks.cjs` | The nine feed games plus Sudoku Six · Hard, every level, a full year of dates. Each puzzle must be deterministic, solvable by its own checker, unique where promised, and varied. For Story Shuffle it also checks that every accepted order is a valid permutation, that the canonical order is listed first, that the starting shuffle is never already solved, that a move inserts and shifts (4 → 2 gives 1, 4, 2, 3, 5, 6), and that repeated hints always finish the story. For Mirror Garden it checks every garden has exactly one solution, that solver effort rises Gentle < Medium < Tricky and is at least double the old generator, and that old saves keep their garden. For Killer Six on Tricky it checks there are no single-cell cages, at most 5 givens, that naked singles alone stall and that hidden singles always finish it, and that games started on the first Tricky generator keep their puzzle; it prints the average givens, cages and how many fall to hidden singles. |

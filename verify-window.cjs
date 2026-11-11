@@ -1,7 +1,5 @@
 const fs=require('fs'),vm=require('vm'),assert=require('assert'),path=require('path');
-const nodes=new Map();const el=()=>({innerHTML:'',textContent:'',value:'',children:[],open:false,append(b){this.children.push(b)},querySelectorAll(){return[]},setAttribute(){},showModal(){this.open=true},close(){this.open=false}});
-const ctx={document:{querySelector(k){if(!nodes.has(k))nodes.set(k,el());return nodes.get(k)},querySelectorAll(){return[]},createElement:el},window:{},localStorage:{getItem(){return null},setItem(){}},setInterval(){}};vm.createContext(ctx);
-for(const f of ['app.js','daily-content.js','photos.js','extras.js'])vm.runInContext(fs.readFileSync('dist/'+f,'utf8'),ctx);
+const {context:ctx,nodes}=require('./tests/load-app.cjs').loadApp();
 vm.runInContext(`
 if(ACTIVE_PHOTOS.length!==183)throw Error('Expected 183 active photos');
 if(new Set(PHOTO_BANK.map(p=>p.image)).size!==PHOTO_BANK.length)throw Error('Duplicate image IDs');

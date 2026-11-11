@@ -45,7 +45,7 @@ Like the original games, the nine feed games are built from the date and the dif
 - Shiny cards are picked with `rng(`${date}|shiny|${game}`)() < 0.05`, so the same cards are shiny every time you load a day. Changing that formula changes which past cards are shiny.
 - The feed counts 20 cards for each day and level from 2026-11-10 (19 on earlier days, which predate Where in the World): 15 games (Lantern Lanes, Garden Beds and Where in the World on every level, and one per family: Pocket Sudoku / Sudoku Six / Sudoku Six · Hard, Killer Six on all three, Bloom Trail / 5×5 / 5×5, Little Neighbours / Neighbours Goal / Neighbours Goal) plus five Aha track cards in one block, generated in `dist/aha.js`. The original five games keep their own progress records, so older saves still work.
 
-Run `node verify-window.cjs`, `node verify-levels.cjs` and `node verify-sparks.cjs` before changing the generators or the content banks.
+Run `node verify-window.cjs`, `node verify.cjs`, `node verify-extras.cjs` and `node verify-sparks.cjs` before changing the generators or the content banks.
 
 ## Photographs
 

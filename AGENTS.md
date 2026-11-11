@@ -35,7 +35,7 @@ Prefer `npm run smoke` over manual screenshots. Take screenshots only when a hum
 | `dist/style.css` | All styles; respects `prefers-reduced-motion`. |
 | `dist/valid-words.js`, `WORD-LIST-LICENSE.txt` | Word list for Letterlight and Ladder validation. |
 | `dist/favicon.svg`, `dist/favicon-32.png`, `dist/apple-touch-icon.png` | Site icons, copied from the logo masters in `brand/`. |
-| `verify*.cjs` | Node vm checks (see the README table). `tests/smoke.mjs` is the browser smoke test. |
+| `verify*.cjs` | Node vm checks (see the README table). Each loads the app with `loadApp()` from `tests/load-app.cjs`, which runs every script in `index.html` in page order; never hand-build a vm context or script list. `tests/smoke.mjs` is the browser smoke test. |
 | `tools/` | Offline content tools. `history/*.bundle` holds the original Sites commits (archival). |
 | `PRODUCT.md`, `DESIGN.md`, `.impeccable/design.json` | Product brief, visual system, and the design tokens' generated sidecar. |
 | `brand/` | Logo masters and exports. Not deployed. |

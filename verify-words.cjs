@@ -1,9 +1,6 @@
 const fs=require('fs'),vm=require('vm'),assert=require('assert');
-const nodes=new Map();let form,input={value:''};
-function el(){return {innerHTML:'',textContent:'',children:[],append(b){this.children.push(b)},querySelectorAll(){return[]},querySelector(){return input},setAttribute(){},showModal(){},close(){}}}
-const ctx={document:{querySelector(s){if(!nodes.has(s))nodes.set(s,el());return nodes.get(s)},querySelectorAll(){return[]},createElement(t){const e=el();if(t==='form')form=e;return e}},localStorage:{getItem(){return null},setItem(){}},window:{},setInterval(){}};
-vm.createContext(ctx);
-for(const f of ['valid-words.js','app.js','daily-content.js'])vm.runInContext(fs.readFileSync('dist/'+f,'utf8'),ctx);
+const {loadApp}=require('./tests/load-app.cjs');let form,input={value:''};const dom={defaults:{querySelector(){return input}},onCreate(t,e){if(t==='form')form=e}};
+const {context:ctx,nodes,storage}=loadApp({dom});
 function submit(v){input.value=v;form.onsubmit({preventDefault(){}})}
 vm.runInContext('setup();openGame(0)',ctx);
 submit('ZZZZZ');assert.equal(vm.runInContext('state(0).guesses.length',ctx),0);assert.match(nodes.get('#feedback').textContent,/no guess used/);
@@ -24,7 +21,7 @@ console.log('Passed: duplicate letters retain their strongest keyboard feedback.
 
 // Letterlight answer list (v3): size, no duplicates, valid guesses, no rare words, plurals or rhyme traps,
 // no repeat within 365 days on a level, levels well apart, and started puzzles keep their word.
-const ctx2={document:ctx.document,localStorage:ctx.localStorage,window:{},setInterval(){}};vm.createContext(ctx2);for(const f of ['valid-words.js','app.js','daily-content.js'])vm.runInContext(fs.readFileSync('dist/'+f,'utf8'),ctx2);
+const {context:ctx2}=loadApp({storage,dom});
 vm.runInContext(`
 const fail=(m)=>{throw Error(m)};
 const RARE=new Set('NYMPH QUALM FJORD GLYPH KNOLL TRYST VAPID WRUNG ABYSS EPOCH SPRIG PLUME THYME TWIRL LILAC POUCH LIGHT NIGHT STARS FIGHT MIGHT SIGHT RIGHT TIGHT SOUND FOUND MOUND POUND HOUND WOUND ROUND'.split(' '));

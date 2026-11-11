@@ -3,14 +3,7 @@
 // repeats; every day × level is deterministic, offers four distinct countries with the answer exactly
 // once, graded by level; tries, misses and pinned saves behave.
 const fs = require("fs"), vm = require("vm");
-function element() {
-  return { textContent: "", innerHTML: "", value: "", dataset: {}, children: [], querySelectorAll: () => [], classList: { add() {}, remove() {}, toggle() {} }, append(b) { this.children.push(b); } };
-}
-const nodes = new Map();
-const document = { querySelector(s) { if (!nodes.has(s)) nodes.set(s, element()); return nodes.get(s); }, querySelectorAll: () => [], createElement: () => element(), addEventListener() {} };
-const context = { document, localStorage: { getItem: () => null, setItem: () => {} }, window: {}, setInterval: () => {}, fs };
-vm.createContext(context);
-for (const f of ["valid-words.js", "app.js", "daily-content.js", "photos.js", "extras.js", "stories.js", "ladders.js", "sparks.js", "places.js", "globe.js"]) vm.runInContext(fs.readFileSync("dist/" + f, "utf8"), context);
+const { context } = require("./tests/load-app.cjs").loadApp({ globals: { fs } });
 const out = vm.runInContext(`
 const fail = (m) => { throw Error(m); };
 const FREE = /^(public domain|pd\\b|pd-|cc0|cc by(-sa)? \\d\\.\\d|cc by(-sa)?$|cc-by(-sa)?-\\d\\.\\d)/i;

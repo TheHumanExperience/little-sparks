@@ -1,14 +1,7 @@
 // Checks the feed games (state 8–16 and 21): every level, every day of a year is
 // deterministic, solvable by its own checker, unique where promised, and varied.
 const fs = require("fs"), vm = require("vm");
-const nodes = new Map();
-function element() {
-  return { textContent: "", innerHTML: "", value: "", open: false, children: [], dataset: {}, querySelectorAll: () => [], classList: { add() {}, remove() {}, toggle() {} }, append(b) { this.children.push(b); }, showModal() { this.open = true; }, close() { this.open = false; } };
-}
-const document = { querySelector(s) { if (!nodes.has(s)) nodes.set(s, element()); return nodes.get(s); }, querySelectorAll: () => [], createElement: () => element(), addEventListener() {} };
-const context = { document, localStorage: { getItem: () => null, setItem: () => {} }, window: {}, setInterval: () => {} };
-vm.createContext(context);
-for (const f of ["valid-words.js", "app.js", "daily-content.js", "photos.js", "extras.js", "stories.js", "ladders.js", "sparks.js"]) vm.runInContext(fs.readFileSync("dist/" + f, "utf8"), context);
+const { context } = require("./tests/load-app.cjs").loadApp();
 const t0 = Date.now();
 const summary = vm.runInContext(`
 const fail = (m) => { throw Error(m); };

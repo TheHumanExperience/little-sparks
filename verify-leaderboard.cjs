@@ -2,11 +2,9 @@ const fs = require("fs"), vm = require("vm");
 const fail = (m) => { throw Error(m); };
 let fetched = 0;
 const cfgSrc = fs.readFileSync("dist/leaderboard-config.js", "utf8");
-const ctx = { console, crypto: require("crypto").webcrypto, fetch: () => { fetched++; return Promise.reject(Error("offline")); }, document: { querySelector: () => null }, localStorage: { getItem: () => null, setItem() {} } };
-vm.createContext(ctx);
-// Tests run against an empty config so nothing ever reaches the live project.
-vm.runInContext(cfgSrc.replace(/(SUPABASE_URL|SUPABASE_ANON_KEY) = "[^"]*"/g, '$1 = ""'), ctx);
-vm.runInContext(fs.readFileSync("dist/leaderboard.js", "utf8"), ctx);
+// The whole page loads, with the leaderboard switched off (empty config) and fetch counted, so
+// nothing ever reaches the live project.
+const { context: ctx } = require("./tests/load-app.cjs").loadApp({ globals: { crypto: require("crypto").webcrypto, fetch: () => { fetched++; return Promise.reject(Error("offline")); } } });
 const run = (code) => vm.runInContext(code, ctx);
 
 // Points mapping: Gentle 1, Medium 3, Tricky 5; anything else 0.
