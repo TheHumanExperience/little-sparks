@@ -1,5 +1,5 @@
 // Checks the feed wiring: every game appears exactly once, every card has metadata,
-// the archive window is 31 distinct days, and feed.js stays inert without a #feed element.
+// the daily warm-up opener rotates, the archive window is 31 distinct days, and feed.js stays inert without a #feed element.
 const fs = require("fs"), vm = require("vm");
 const nodes = new Map();
 function element() {
@@ -38,11 +38,35 @@ for (const from of ["2026-01-01", "2026-03-29", "2026-10-25", "2026-12-31"]) {
   if (new Set(ds).size !== FEED_DAYS) fail("feed days repeat around " + from);
   for (let k = 1; k < ds.length; k++) if (!(ds[k] < ds[k - 1])) fail("feed days not descending around " + from);
 }
+// Daily opener: a warm-up leads (the Aha block moves whole), Letterlight takes its old place, nothing else moves.
+if (FEED_PLAN[0] !== 0) fail("FEED_PLAN must start with Letterlight (the opener takes its place)");
+for (const x of FEED_OPENERS) if (x !== "aha" && !FEED_PLAN.includes(x)) fail("opener " + x + " must be in FEED_PLAN or be aha");
+for (const lv of [0, 1, 2]) {
+  const seen = new Set();
+  for (let k = 0; k < 400; k++) {
+    const d = feedDate(k, "2026-12-31"), o = feedOrder(lv, d), pick = feedOpener(d, lv), base = feedOrder(lv).filter((i) => !(FEED_SINCE[i] && d < FEED_SINCE[i]));
+    const lead = pick === "aha" ? base.filter((i) => AHA_SLOTS.includes(i)) : [typeof pick === "string" ? FEED_FAMILIES[pick][lv] : pick];
+    if (o.join() !== feedOrder(lv, d).join()) fail("opener not deterministic on " + d);
+    if (o.slice(0, lead.length).join() !== lead.join()) fail("opener " + pick + " must lead on " + d + " level " + lv);
+    if (o[0] === 0) fail("Letterlight must not open on " + d);
+    if ([...o].sort((a, b) => a - b).join() !== [...base].sort((a, b) => a - b).join()) fail("dated order lost a card on " + d);
+    const ahaPos = AHA_SLOTS.map((i) => o.indexOf(i)).sort((a, b) => a - b);
+    if (ahaPos.some((p, j) => j && p - ahaPos[j - 1] !== 1)) fail("Aha block split on " + d);
+    if (o[o.indexOf(12) - 1] !== FEED_FAMILIES.sudoku[lv]) fail("Killer Six must follow sudoku on " + d);
+    const others = (a) => a.filter((i) => i !== 0 && !lead.includes(i)).join();
+    if (others(o) !== others(base)) fail("only the opener and Letterlight may move on " + d);
+    const after = base.slice(base.indexOf(lead.at(-1)) + 1).find((i) => i !== 0);
+    if (after !== undefined && o[o.indexOf(0) + 1] !== after) fail("Letterlight must take the opener's old place on " + d);
+    if (k && pick === feedOpener(feedDate(k - 1, "2026-12-31"), lv)) fail("same opener two days running at level " + lv);
+    if (k < FEED_OPENERS.length) seen.add(pick);
+  }
+  if (seen.size !== FEED_OPENERS.length) fail("every opener must come round within " + FEED_OPENERS.length + " days");
+}
 if (window.FEED_MODE) fail("feed.js must stay inert without #feed");
 const d = "2026-05-05"; all[progressKey(d)] = { games: { 0: { done: true }, 3: { done: true }, 9: { done: true }, 16: { done: true } } };
 if (feedCount(d) !== 4) fail("feedCount should count all 20 cards");
 // Next unsolved: skips solved cards, ignores revealed answers, moves on to older days, wraps to today.
-{ const from = "2026-06-10", order = feedOrder(), y = feedDate(1, from), keep = JSON.stringify(all);
+{ const from = "2026-06-10", order = feedOrder(difficulty, from), y = feedDate(1, from), yOrder = feedOrder(difficulty, y), keep = JSON.stringify(all);
   for (const k of Object.keys(all)) delete all[k];
   let n = feedNextUnsolved(undefined, undefined, from);
   if (n.d !== from || n.i !== order[0] || n.offset !== 0) fail("next unsolved should start at today's first card");
@@ -51,12 +75,12 @@ if (feedCount(d) !== 4) fail("feedCount should count all 20 cards");
   if (n.i !== order[3]) fail("next unsolved should skip solved and credit cards but not revealed ones: " + n.i);
   all[progressKey(from)].games = Object.fromEntries(order.map((i) => [i, { done: true }]));
   n = feedNextUnsolved(from, order[5], from);
-  if (n.d !== y || n.i !== order[0] || n.offset !== 1) fail("next unsolved should move on to yesterday");
-  all[progressKey(y)] = { games: Object.fromEntries(order.slice(0, 4).map((i) => [i, { done: true }])) };
+  if (n.d !== y || n.i !== yOrder[0] || n.offset !== 1) fail("next unsolved should move on to yesterday");
+  all[progressKey(y)] = { games: Object.fromEntries(yOrder.slice(0, 4).map((i) => [i, { done: true }])) };
   delete all[progressKey(from)].games[order[2]];
-  n = feedNextUnsolved(feedDate(FEED_DAYS - 1, from), order.at(-1), from);
+  n = feedNextUnsolved(feedDate(FEED_DAYS - 1, from), feedOrder(difficulty, feedDate(FEED_DAYS - 1, from)).at(-1), from);
   if (n.d !== from || n.i !== order[2]) fail("next unsolved should wrap round to today");
-  for (let k = 0; k < FEED_DAYS; k++) all[progressKey(feedDate(k, from))] = { games: Object.fromEntries(order.map((i) => [i, { done: true }])) };
+  for (let k = 0; k < FEED_DAYS; k++) all[progressKey(feedDate(k, from))] = { games: Object.fromEntries(feedOrder(difficulty, feedDate(k, from)).map((i) => [i, { done: true }])) };
   if (feedNextUnsolved(from, order[0], from) !== null) fail("next unsolved should be null when everything is solved");
   for (const k of Object.keys(all)) delete all[k]; Object.assign(all, JSON.parse(keep)); }
 // Where in the World joins on 2026-11-10: earlier days keep their 19 cards and their full-day count.

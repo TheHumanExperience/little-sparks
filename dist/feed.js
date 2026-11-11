@@ -10,9 +10,19 @@
 const FEED_FAMILIES = { sudoku: [1, 11, 21], killer: [12, 12, 12], bloom: [4, 14, 14], neighbours: [6, 16, 16] };
 const FEED_PLAN = [0, "sudoku", "killer", 8, 3, 17, 18, 19, 20, 2, 9, "bloom", 5, 10, 22, 13, 23, "neighbours", 15, 24];
 /* Games that joined after launch appear only from their first day, so earlier days keep the cards (and
-   the full-day count) they had. Without a date, the order is today's. */
+   the full-day count) they had. Without a date, the order is today's base order. */
 const FEED_SINCE = { 24: "2026-11-10" };
-const feedOrder = (lv = difficulty, d) => FEED_PLAN.map((x) => (typeof x === "string" ? FEED_FAMILIES[x][lv] : x)).filter((i) => !(d && FEED_SINCE[i] && d < FEED_SINCE[i]));
+// The day opens with a rotating warm-up: Mirror Garden, the Bloom Trail of the level, Garden Beds or the
+// whole Aha block. It moves to the front and Letterlight takes its old place; every other card keeps its order.
+const FEED_OPENERS = [10, "bloom", 23, "aha"];
+const feedOpener = (d, lv = difficulty) => FEED_OPENERS[mod(calendarIndex(d) + lv, FEED_OPENERS.length)];
+const feedOrder = (lv = difficulty, d) => {
+  const o = FEED_PLAN.map((x) => (typeof x === "string" ? FEED_FAMILIES[x][lv] : x)).filter((i) => !(d && FEED_SINCE[i] && d < FEED_SINCE[i]));
+  if (!d) return o;
+  const pick = feedOpener(d, lv), lead = pick === "aha" ? o.filter((i) => AHA_SLOTS.includes(i)) : [typeof pick === "string" ? FEED_FAMILIES[pick][lv] : pick];
+  const rest = o.flatMap((i) => (i === lead[0] ? [0] : i === 0 || lead.includes(i) ? [] : [i]));
+  return [...lead, ...rest];
+};
 const feedSibling = (i, lv = difficulty) => Object.values(FEED_FAMILIES).find((f) => f.includes(i))?.[lv] ?? i;
 const FEED_DAYS = 31;
 // Tells leaderboard.js this feed reports first solves through lbSolved (see the setup override).
