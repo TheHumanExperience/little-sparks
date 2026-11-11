@@ -139,6 +139,19 @@ if (!eq(storyMove([1, 2, 3, 4, 5, 6], 2, 2), [1, 2, 3, 4, 5, 6])) throw Error("s
 const base = [1, 2, 3, 4, 5, 6]; storyMove(base, 0, 5); if (!eq(base, [1, 2, 3, 4, 5, 6])) throw Error("story move mutates input");
 `, context);
 vm.runInContext(`if (typeof starModel !== "undefined" || SPARKS[7]) throw Error("Starlines should be retired");
+// Story cycle: the first 22 stories never move, and dates before STORY_V2_FROM keep the original cycle.
+const ORIGINAL_STORIES = "Monsoon tea|The lost kite|Sourdough|A letter home|The seedling|Train journey|The puzzle box|Birthday cake|Lost puppy|The first snow|Market morning|Rangoli|Paper boat|The library book|Garden swing|Bicycle lesson|The stargazer|Painting a wall|Fishing trip|Moving in|Sea turtle|Music lesson";
+if (STORIES.slice(0, STORY_V1_COUNT).map((s) => s.title).join("|") !== ORIGINAL_STORIES) throw Error("the original 22 stories must stay first and in order");
+if (new Set(STORIES.map((s) => s.title)).size !== STORIES.length) throw Error("duplicate story title");
+if (STORIES.length < STORY_V2_COUNT) throw Error("the v2 cycle needs " + STORY_V2_COUNT + " stories");
+const dayAt = (from, k) => { const t = new Date(from + "T12:00:00Z"); t.setUTCDate(t.getUTCDate() + k); return t.toISOString().slice(0, 10); };
+for (let k = -400; k < 0; k++) { const d = dayAt(STORY_V2_FROM, k); for (const lv of [0, 1, 2]) if (storyIndex(d, lv) !== cycleIndex(STORY_V1_COUNT, "stories-v1-" + lv, d, lv * 7)) throw Error("pre-cutover story changed on " + d); }
+for (const lv of [0, 1, 2]) {
+  const seq = Array.from({ length: 3 * STORY_V2_COUNT }, (_, k) => storyIndex(dayAt(STORY_V2_FROM, k), lv));
+  if (seq.slice(0, STORY_V2_COUNT - STORY_V1_COUNT).some((i) => i < STORY_V1_COUNT)) throw Error("newer stories must come first at level " + lv);
+  for (let k = 0; k + STORY_V2_COUNT <= seq.length; k++) if (new Set(seq.slice(k, k + STORY_V2_COUNT)).size !== STORY_V2_COUNT) throw Error("a story repeats within " + STORY_V2_COUNT + " days at level " + lv);
+}
+for (let k = 0; k < 400; k++) { const d = dayAt(STORY_V2_FROM, k); if (new Set([0, 1, 2].map((lv) => storyIndex(d, lv))).size !== 3) throw Error("two levels share a story on " + d); }
 for (const st of STORIES) {
   if (!st.accepted || st.accepted[0].join("") !== "012345") throw Error("story needs accepted orders starting with the canonical one: " + st.title);
   for (const o of st.accepted) if (o.length !== 6 || [...o].sort().join("") !== "012345") throw Error("bad accepted order in " + st.title);

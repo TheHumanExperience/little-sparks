@@ -17,7 +17,7 @@
 
 Like the original games, the nine feed games are built from the date and the difficulty level, so past days look the same every time you open them.
 
-- **Story Shuffle** draws from the 22 stories in `dist/stories.js`.
+- **Story Shuffle** draws from the 61 stories in `dist/stories.js`. Dates before 2026-11-13 (`STORY_V2_FROM`) keep the original 22-story cycle. From that date, each level shows the 39 newer stories first and then the original 22, so no story repeats within 61 days and two levels never share a story on the same day. Keep the first 61 stories in place and in order. Both cycles have fixed sizes (`STORY_V1_COUNT`, `STORY_V2_COUNT`). To add stories, append them and start a new dated cycle from a future date, so days already shown never change.
   - There are no clue lines. The order has to come from the story text itself, so each beat needs natural time and cause cues ("That evening…", "Once it's baked…").
   - Each story has an `accepted` list of orders. The canonical order comes first. Add other orders only when two middle beats really could happen either way round (for example Paper boat, Garden swing and Moving in).
   - Any accepted order solves the puzzle.

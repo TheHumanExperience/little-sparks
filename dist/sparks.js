@@ -72,9 +72,19 @@ function swipeTrail(grid, attr, getPath) {
 /* ───────────── 8 · Story Shuffle ───────────── */
 // No clue lines: the beats' own time and cause cues carry the order. A story is solved by
 // any order in its `accepted` list. Tricky hides the card titles, leaving only the text.
+// Dates before STORY_V2_FROM keep the original 22-story cycle, so archive days and started saves never change.
+// From then on, each level shows every newer story first and then the original 22, so no story repeats
+// within STORY_V2_COUNT days. Both counts are frozen: adding stories needs a new dated cycle (v3). Levels are offset so they rarely share a story on the same day.
+const STORY_V2_FROM = "2026-11-13", STORY_V1_COUNT = 22, STORY_V2_COUNT = 61;
+function storyIndex(d, lvl) {
+  if (d < STORY_V2_FROM) return cycleIndex(STORY_V1_COUNT, "stories-v1-" + lvl, d, lvl * 7);
+  const fresh = STORY_V2_COUNT - STORY_V1_COUNT, t = mod(calendarIndex(d) - calendarIndex(STORY_V2_FROM), STORY_V2_COUNT);
+  const pick = (len, key, k) => { if (!SHUFFLE_CACHE.has(key)) SHUFFLE_CACHE.set(key, shuffle([...Array(len).keys()], rng(key))); return SHUFFLE_CACHE.get(key)[mod(k, len)]; };
+  return t < fresh ? STORY_V1_COUNT + pick(fresh, "stories-v2-new", t + lvl * 13) : pick(STORY_V1_COUNT, "stories-v2-old", t - fresh + lvl * 7);
+}
 function storyModel(d) {
   const lvl = difficulty,
-    story = STORIES[cycleIndex(STORIES.length, "stories-v1-" + lvl, d, lvl * 7)],
+    story = STORIES[storyIndex(d, lvl)],
     r = rng(puzzleSeed(d) + "story"),
     accepted = story.accepted.map((o) => o.join(""));
   let order;
