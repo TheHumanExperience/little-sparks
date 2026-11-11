@@ -562,5 +562,185 @@
   "alt": "A small white lighthouse on a green clifftop at the mouth of a bay, with patchwork fields behind.",
   "clue": "A small lighthouse on a peninsula of green fields at the far western edge of Europe, where Gaelic is still spoken.",
   "story": "Dingle Lighthouse marks the entrance to Dingle Bay in County Kerry, Ireland. The Dingle peninsula is part of the Gaeltacht, where Irish is an everyday language."
+ },
+ "g-vatican": {
+  "title": "A dome above a great square",
+  "alt": "A grand basilica with a columned front and a huge dome under a deep blue sky, with colonnades on either side.",
+  "clue": "A great dome partly designed by Michelangelo, at the heart of the world's smallest country.",
+  "story": "St Peter's Basilica stands in Vatican City, an independent country smaller than half a square kilometre, inside Rome. Its dome, finished in 1590, is one of the tallest in the world."
+ },
+ "g-goldengate": {
+  "title": "An orange bridge in the mist",
+  "alt": "A red-orange suspension bridge over a strait, seen from a rocky beach with misty water and boulders.",
+  "clue": "A suspension bridge painted \"International Orange\", spanning a foggy strait where a bay meets the Pacific.",
+  "story": "The Golden Gate Bridge in San Francisco opened in 1937. Its orange colour was chosen to stand out in the fog, and painters touch it up all year round."
+ },
+ "g-kilimanjaro": {
+  "title": "Snow above the savanna",
+  "alt": "A snow-capped mountain floating above a band of cloud, with flat-topped acacia trees on a dry plain below.",
+  "clue": "The roof of a continent: a lone snow-capped volcano rising almost 6,000 metres above the savanna.",
+  "story": "Mount Kilimanjaro in Tanzania is the highest mountain in Africa, 5,895 metres high. This photo was taken from Amboseli National Park, just over the border in Kenya, which has some of the best views of the peak."
+ },
+ "g-victoria": {
+  "title": "Smoke that thunders",
+  "alt": "A wide waterfall pouring into a deep gorge, with spray rising and a bright rainbow over the cliffs.",
+  "clue": "Locals call it \"the smoke that thunders\": a curtain of water almost two kilometres wide.",
+  "story": "Victoria Falls lies on the Zambezi river between Zimbabwe and Zambia; this view is from the Zimbabwe side. Its spray can be seen from 50 km away, and on full-moon nights it can even make a moonbow."
+ },
+ "g-montstmichel": {
+  "title": "An island abbey and its sheep",
+  "alt": "A rocky island crowned by an abbey with a tall spire, beyond green meadows where sheep are grazing.",
+  "clue": "An abbey-topped island that becomes part of the mainland when the tide goes out, with sheep on the salt meadows.",
+  "story": "Mont-Saint-Michel stands in a bay on the coast of Normandy, France. Its tides are among the strongest in Europe, and lamb raised on the salt meadows is a local speciality."
+ },
+ "g-alhambra": {
+  "title": "A red fortress at sunset",
+  "alt": "Reddish fortress walls and towers on a wooded hill, glowing in evening light with mountains behind.",
+  "clue": "A red fortress-palace of Moorish sultans, glowing at sunset above a city near snowy mountains.",
+  "story": "The Alhambra in Granada, Spain, was built mainly by the Nasrid sultans in the 1200s and 1300s. Its name comes from the Arabic for \"the red one\", after the colour of its walls."
+ },
+ "g-forbidden": {
+  "title": "Golden roofs of a palace city",
+  "alt": "Rows of palace halls with golden-yellow tiled roofs and red walls, stretching towards a modern city skyline.",
+  "clue": "Nearly a thousand golden-roofed buildings where emperors lived for five centuries.",
+  "story": "The Forbidden City in Beijing was the home of China's emperors from 1420 to 1912. Yellow roof tiles were kept for the emperor alone; today it is the Palace Museum."
+ },
+ "g-pisa": {
+  "title": "A tower that leans",
+  "alt": "A white marble cathedral on a green lawn, with a leaning bell tower behind it and the sun bursting beside it.",
+  "clue": "A marble bell tower that began to tilt before it was even finished.",
+  "story": "The Leaning Tower of Pisa in Italy is the bell tower of the cathedral beside it. Building started in 1173, and the soft ground made it lean; engineers have since made it safe without straightening it."
+ },
+ "m-london": {
+  "title": "A red bus and a red phone box",
+  "alt": "An old red double-decker bus parked beside a red telephone box on a wet city street lined with stone buildings.",
+  "clue": "A red double-decker and a red telephone box: two icons of one capital's streets.",
+  "story": "This Routemaster bus is in London, United Kingdom. Routemasters served the city from 1956 to 2005 and a few still run on heritage routes; the red K6 phone box was designed by Giles Gilbert Scott in 1935."
+ },
+ "m-brussels": {
+  "title": "Golden guildhouses at night",
+  "alt": "Ornate stone guildhouses with gilded statues and gables, lit up at night around a cobbled square.",
+  "clue": "Gilded guildhouses around a square that is covered in a carpet of flowers every other summer.",
+  "story": "The Grand-Place in Brussels, Belgium, is lined with guildhouses rebuilt after 1695. Every two years a Flower Carpet of about half a million begonias fills the square."
+ },
+ "m-bled": {
+  "title": "An island church on a lake",
+  "alt": "A small island with a white church tower on a blue-green lake, with forested hills, a clifftop castle and cloudy mountains behind.",
+  "clue": "A tiny island church with a wishing bell, reached by wooden rowing boats across an Alpine lake.",
+  "story": "Lake Bled in Slovenia has the country's only natural island. Visitors climb 99 steps to the church and ring its wishing bell; the castle on the cliff is more than a thousand years old."
+ },
+ "m-tigersnest": {
+  "title": "A monastery on a cliff",
+  "alt": "White monastery buildings with golden roofs clinging to a sheer rock face above a forested valley.",
+  "clue": "A monastery clinging to a cliff high above a valley, where a guru is said to have flown in on a tigress.",
+  "story": "Paro Taktsang, the Tiger's Nest, in Bhutan sits about 900 metres above the Paro valley. Legend says Guru Rinpoche flew here on the back of a tigress to meditate in a cave."
+ },
+ "m-maldives": {
+  "title": "A jetty to the lagoon",
+  "alt": "A wooden jetty running across white sand into a turquoise lagoon towards villas on stilts, under palm fronds.",
+  "clue": "Villas on stilts over a lagoon in a nation of about 1,200 coral islands, most barely a metre above the sea.",
+  "story": "This is Thudufushi island in the Maldives. The country is the flattest in the world: its highest natural point is only about 2.4 metres above sea level."
+ },
+ "m-djenne": {
+  "title": "A mud-brick mosque on market day",
+  "alt": "A huge mosque built of earth with spiky towers and wooden beams, above a busy market of colourful stalls.",
+  "clue": "The largest mud-brick building in the world, re-plastered by the whole town at a festival each year.",
+  "story": "The Great Mosque of Djenné in Mali was rebuilt in its present form in 1907. Each year the townspeople join in the Crépissage, a festival to spread fresh mud over its walls."
+ },
+ "m-tikal": {
+  "title": "A temple in the rainforest",
+  "alt": "A tall stepped stone pyramid with a temple on top, surrounded by rainforest trees and a green lawn.",
+  "clue": "A temple-pyramid of an ancient civilisation rising from the rainforest, home to toucans and howler monkeys.",
+  "story": "This is Temple II at Tikal in Guatemala, one of the greatest Maya cities, home to tens of thousands of people some 1,300 years ago. Today spider monkeys and toucans live among the ruins."
+ },
+ "m-galapagos": {
+  "title": "A giant tortoise in the grass",
+  "alt": "A huge tortoise with a domed shell walking through bright green grass under small trees.",
+  "clue": "Island tortoises like this one helped inspire a famous theory about how species change.",
+  "story": "Giant tortoises live on the Galápagos Islands of Ecuador and can weigh over 250 kg and live more than 100 years. Charles Darwin noticed the shells differed from island to island."
+ },
+ "m-angel": {
+  "title": "A waterfall from the clouds",
+  "alt": "A ribbon of water dropping from a high cliff into mist, with cloud drifting across the rock face.",
+  "clue": "The world's tallest uninterrupted waterfall, dropping almost a kilometre from a flat-topped mountain.",
+  "story": "Angel Falls in Venezuela plunges 979 metres from the top of Auyán-tepui. It is named after Jimmie Angel, a pilot who flew over it in 1933."
+ },
+ "m-landwasser": {
+  "title": "A train on a stone viaduct",
+  "alt": "A red train crossing a curved stone viaduct high above a gorge, heading into a tunnel, with a snowy peak behind.",
+  "clue": "A red mountain train curves off a tall stone viaduct straight into a tunnel in the cliff.",
+  "story": "The Landwasser Viaduct in Switzerland carries the Rhaetian Railway 65 metres above the river. It opened in 1902 and is part of a UNESCO World Heritage railway."
+ },
+ "m-apostles": {
+  "title": "Stone stacks in the surf",
+  "alt": "Golden limestone stacks standing in a foaming sea beside tall coastal cliffs under a cloudy sky.",
+  "clue": "Limestone stacks standing in the surf beside one of the world's great coastal drives.",
+  "story": "The Twelve Apostles stand off the Great Ocean Road in Victoria, Australia. There were never twelve; waves wear them down, and only a few still stand."
+ },
+ "m-taipei": {
+  "title": "A bamboo-shaped tower",
+  "alt": "A tall green-glass skyscraper made of stacked sections rising above a city, seen from a wooded hill at sunset.",
+  "clue": "A skyscraper shaped like stacked bamboo, with a giant steel ball inside to steady it in typhoons.",
+  "story": "Taipei 101 in Taiwan was the world's tallest building from 2004 to 2010. A 660-tonne steel ball hanging near the top sways to calm the tower in wind and earthquakes."
+ },
+ "t-malta": {
+  "title": "Painted boats in the harbour",
+  "alt": "Brightly painted wooden fishing boats in blue, yellow and green floating in a harbour in front of a town of pale stone houses.",
+  "clue": "Brightly painted fishing boats, each with a watchful eye on its bow, in a small island nation's harbour.",
+  "story": "These are luzzu boats in Marsaxlokk, a fishing village in Malta. The eye painted on each bow is said to go back to the Phoenicians and to watch over the fishermen."
+ },
+ "t-tallinn": {
+  "title": "A town hall with a spire",
+  "alt": "A Gothic stone town hall with a slender spire on a cobbled square, with colourful old houses and café umbrellas.",
+  "clue": "A Gothic town hall with a slender spire on a cobbled medieval square near the Baltic Sea.",
+  "story": "Tallinn Town Hall in Estonia is the oldest surviving town hall in Northern Europe. The weathervane on its spire, Old Thomas, is a symbol of the city."
+ },
+ "t-lagos": {
+  "title": "A yellow minibus",
+  "alt": "A yellow minibus with black stripes driving past a footbridge and brick buildings on a busy road.",
+  "clue": "Yellow minibuses with black stripes carry millions of people around a huge West African city.",
+  "story": "Danfo minibuses are the yellow-and-black buses of Lagos, Nigeria. Their conductors call out the destinations as they go, and the city has some of Africa's busiest roads."
+ },
+ "t-colonia": {
+  "title": "A cobbled lane to the river",
+  "alt": "A cobbled lane between old pastel houses and flowering trees, sloping down to a wide brown river.",
+  "clue": "A cobbled colonial lane sloping down to a river so wide it looks like the sea.",
+  "story": "This lane is in Colonia del Sacramento, Uruguay, founded by the Portuguese in 1680. Across the wide Río de la Plata lies Buenos Aires."
+ },
+ "t-jiufen": {
+  "title": "Stairs between teahouses",
+  "alt": "A steep stepped lane between small shops with red lanterns and signs in Chinese characters.",
+  "clue": "Steep lanes of teahouses in an old gold-mining town, with shop signs in traditional characters.",
+  "story": "Jiufen in Taiwan grew rich in a gold rush in the 1890s. Its lantern-lit lanes and teahouses look out over the sea, and Taiwan writes Chinese in traditional characters."
+ },
+ "t-bokaap": {
+  "title": "A pink house",
+  "alt": "A bright pink house front with painted aloe plants, wooden-framed windows and a balcony with magenta balusters.",
+  "clue": "A candy-pink house in a hillside quarter famous for painting its homes in bright colours.",
+  "story": "This house is on Wale Street in the Bo-Kaap, Cape Town, South Africa. The quarter's houses are painted bright colours, and it is famous for its Cape Malay food."
+ },
+ "t-rothenburg": {
+  "title": "A half-timbered corner",
+  "alt": "A cobbled street fork with a half-timbered yellow house, pastel houses and a stone gate tower, with walkers.",
+  "clue": "Half-timbered houses and a gate tower in a walled medieval town on a \"Romantic Road\".",
+  "story": "The Plönlein, \"little square\", is in Rothenburg ob der Tauber, Germany. The town's medieval walls still run all the way round, and you can walk along them."
+ },
+ "t-zanzibar": {
+  "title": "Verandas by a garden",
+  "alt": "Old white houses with dark red trim and wooden verandas beside a small garden with a flowering bush and big trees.",
+  "clue": "Shady old merchant houses with deep verandas on a spice island in the Indian Ocean.",
+  "story": "This square is in Stone Town, the old heart of Zanzibar City in Tanzania. Zanzibar was famous for its cloves, and Swahili, Arab, Indian and European styles mix in its buildings."
+ },
+ "t-okavango": {
+  "title": "Poling through the delta",
+  "alt": "A person standing in a narrow wooden canoe and pushing it along with a pole across calm blue water and reeds.",
+  "clue": "Poling a dugout canoe through a delta whose river flows into a desert and never reaches the sea.",
+  "story": "The Okavango Delta in Botswana is fed by a river that runs into the Kalahari and spreads out instead of reaching the sea. Guides pole visitors through it in canoes called mokoro."
+ },
+ "t-nizwa": {
+  "title": "Battlements and a minaret",
+  "alt": "Rounded sandy battlements of a fort in the foreground, with a minaret and a town below and hazy mountains behind.",
+  "clue": "Fort battlements and a mosque minaret in a mountain oasis town known for its dates and silver.",
+  "story": "Nizwa Fort in Oman was built in the 1600s around a huge round tower, with views over the palm groves. The town holds a lively Friday market and is known for its dates."
  }
 }
