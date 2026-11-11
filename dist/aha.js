@@ -515,10 +515,10 @@ function genRatio(r, lv) {
 
 const DI_SETS = [
   { rows: ["North", "South", "East", "West", "Central"], what: "Regional sales of a tea brand (₹ crore)" },
-  { rows: ["Aster", "Banyan", "Cedar", "Deodar", "Elm"], what: "Students placed by five colleges" },
+  { rows: ["Aster", "Banyan", "Cedar", "Deodar", "Elm"], what: "Students placed by college" },
   { rows: ["Mumbai", "Delhi", "Pune", "Chennai", "Kolkata"], what: "Electric scooters sold (hundreds)" },
   { rows: ["Phones", "Laptops", "Tablets", "Watches", "Speakers"], what: "Units shipped by a store (thousands)" },
-  { rows: ["Alpha", "Beta", "Gamma", "Delta", "Omega"], what: "Revenue of five start-ups (₹ lakh)" },
+  { rows: ["Alpha", "Beta", "Gamma", "Delta", "Omega"], what: "Start-up revenue (₹ lakh)" },
 ];
 function genDi(r, lv) {
   const set = ahaPick(r, DI_SETS), y0 = ahaInt(r, 2016, 2021), n = lv === 0 ? 3 : 4, cols = lv === 0 ? 2 : 3, names = shuffle(set.rows, r).slice(0, n);
@@ -868,7 +868,7 @@ function genCube(r, lv) {
     if (!a && r() < 0.8) continue;
     const size = `${a0}×${b0}×${c0}`, near = [0, 1, 2, 3].filter((x) => x !== k).map((x) => cubeCounts({ ...data, ask: "exact", k: x })).concat(a0 * b0 * c0 - a);
     const what = ask === "both" ? "show both colours" : ask === "atleast" ? `have at least one face ${verb}` : k === 0 ? `have no ${coat} at all` : `have exactly ${k} face${k > 1 ? "s" : ""} ${verb}`;
-    return { data, kind: "number", a, near, intro: `${A} makes a ${size} ${obj} for the school fair. It is ${two ? `${verb} red on the top and bottom and blue on the four sides` : `${verb} ${face[0]}`}, then cut into ${a0 * b0 * c0} equal little cubes.`, ask: `How many little cubes ${what}?`, hint: two ? "A little cube shows both colours only if it touches the top or bottom AND a side, which means it sits on a top or bottom edge." : why0, why: cube && ask === "exact" && p.every(Boolean) ? `${why0} On a ${size} cube that's ${["(n−2)³", "6 × (n−2)²", "12 × (n−2)", "the 8 corners"][k].replace(/n/g, n)}${k < 3 ? ` = ${a}` : ""}.` : `${why0} Counting the ${size} ${obj} piece by piece gives ${a}.` };
+    return { data, kind: "number", a, near, intro: `${A} makes a ${size} ${obj} for the school fair. It is ${two ? `${verb} red on the top and bottom and blue on the four sides` : `${verb} ${face[0]}`}, then cut into ${a0 * b0 * c0} equal little cubes.`, ask: `How many little cubes ${what}?`, hint: two ? "A little cube shows both colours only if it touches the top or bottom AND a side, which means it sits on a top or bottom edge." : why0, why: cube && ask === "exact" && p.every(Boolean) ? `${why0} On a ${size} cube that's ${k < 3 ? ["(n−2)³", "6 × (n−2)²", "12 × (n−2)"][k].replace(/n/g, n) : "the 8 corners"}${k < 3 ? ` = ${a}` : ""}.` : `${why0} Counting the ${size} ${obj} piece by piece gives ${a}.` };
   }
 }
 

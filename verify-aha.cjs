@@ -29,7 +29,7 @@ for (let lv = 0; lv < 3; lv++) {
     for (const d of dates) {
       const seed = puzzleSeed(d) + "|verify|" + c, q = AHA_GEN[c](rng(seed), lv), again = AHA_GEN[c](rng(seed), lv);
       if (JSON.stringify(q) !== JSON.stringify(again)) fail("not deterministic: " + AHA_CATS[c].id + " " + d + " L" + lv);
-      for (const k of ["intro", "ask", "hint", "why"]) if (!q[k] || /undefined|NaN|Infinity/.test(q[k])) fail("bad " + k + " in " + AHA_CATS[c].id + " " + d + ": " + q[k]);
+      for (const k of ["intro", "ask", "hint", "why"]) if (!q[k] || /undefined|NaN|Infinity|[a-z][0-9]+[a-z]/.test(q[k])) fail("bad " + k + " in " + AHA_CATS[c].id + " " + d + ": " + q[k]);
       if ((q.clues || []).some((x) => /undefined|NaN/.test(x))) fail("bad clue in " + AHA_CATS[c].id + " " + d);
       const sol = ahaSolve(c, q.data);
       if (sol.length !== 1) fail("expected exactly one answer, got " + JSON.stringify(sol) + " for " + AHA_CATS[c].id + " " + d + " L" + lv + " " + JSON.stringify(q.data));
