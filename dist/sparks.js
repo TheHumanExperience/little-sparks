@@ -634,7 +634,7 @@ function hardSixModel(d) {
 }
 function killerSixModel(d) {
   const lvl = difficulty;
-  return lvl === 2 ? hardKillerModel(d) : legacyKillerModel(d, lvl);
+  return lvl === 2 ? softKillerModel(d) : legacyKillerModel(d, lvl);
 }
 // Gentle and Medium (and Tricky games started before the harder generator) use this one.
 // Gentle/Medium Killer. Gentle starts from 12 givens (same seed, cages and give order as before, so
@@ -727,12 +727,26 @@ function hardKillerModel(d, v = 2) {
   return best ? best.m : legacyKillerModel(d, 2);
 }
 // A Killer Six game keeps the generator it was started with: no `hard` = legacy,
-// hard 1 = the first Tricky generator, hard 2 = the current one.
+// hard 1 = the first Tricky generator, hard 2 = hardKillerModel v2, hard 3 = softKillerModel.
 function savedKiller(d, s) {
   if (difficulty === 2 && s.values && !s.hard) return legacyKillerModel(d, 2);
   if (difficulty === 2 && s.values && s.hard === 1) return hardKillerModel(d, 1);
-  if (difficulty === 2) s.hard = 2;
+  if (difficulty === 2 && s.values && s.hard === 2) return hardKillerModel(d, 2);
+  if (difficulty === 2) s.hard = 3;
   return killerSixModel(d);
+}
+// v3, a little kinder: the v2 grid plus up to KILLER_SOFT_EXTRA more givens, each the open cell
+// (first in seeded order on ties) that lets naked singles fill the most other cells. Stops early
+// once naked singles alone finish the grid.
+const KILLER_SOFT_EXTRA = 1;
+function softKillerModel(d) {
+  const m = hardKillerModel(d, 2), givens = m.givens.slice(), order = shuffle([...Array(36).keys()], rng(puzzleSeed(d) + "killer-soft"));
+  for (let k = 0; k < KILLER_SOFT_EXTRA && sixSingles(givens, m.cages); k++) {
+    let best = -1, bestLeft = Infinity;
+    for (const i of order) if (!givens[i]) { const g = givens.slice(); g[i] = m.sol[i]; const left = sixSingles(g, m.cages); if (left < bestLeft) { best = i; bestLeft = left; } }
+    givens[best] = m.sol[best];
+  }
+  return { ...m, givens };
 }
 function sixGame(i, m, intro) {
   const s = state(i);

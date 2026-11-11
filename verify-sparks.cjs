@@ -48,15 +48,14 @@ const checks = {
     killerGivens[difficulty] += m.givens.filter(Boolean).length;
     // Gentle stays friendly: plenty of givens, and naked singles alone finish it.
     if (difficulty === 0 && (m.givens.filter(Boolean).length < 12 || sixSingles(m.givens, m.cages))) fail("gentle killer too hard");
-    // Tricky must be genuinely harder: big cages, at most five givens, and naked singles alone stall,
-    // yet hidden singles (with cage sums) always finish it, so it never needs guessing.
+    // Tricky keeps big cages and at most six givens (v2's grid plus one), and hidden singles
+    // (with cage sums) always finish it, so it never needs guessing.
     if (difficulty === 2) {
       const givens = m.givens.filter(Boolean).length, singles = m.cages.filter((c) => c.cells.length === 1).length;
       if (singles) fail("tricky killer has single-cell cages");
-      if (givens > 5) fail("tricky killer gives " + givens + " digits");
-      if (!sixSingles(m.givens, m.cages)) fail("tricky killer falls to naked singles");
+      if (givens > 6) fail("tricky killer gives " + givens + " digits");
       if (sixSingles(m.givens, m.cages, true)) fail("tricky killer needs more than hidden singles");
-      killerStats.givens += givens; killerStats.cages += m.cages.length; killerStats.hidden += sixSingles(m.givens, m.cages, true) ? 0 : 1; killerStats.n++;
+      killerStats.givens += givens; killerStats.cages += m.cages.length; killerStats.hidden += sixSingles(m.givens, m.cages) ? 0 : 1; killerStats.n++;
     } },
   21: (m) => { checks[11](m); const n = m.givens.filter(Boolean).length;
     if (n > 11) fail("hard sudoku gives " + n + " digits");
@@ -107,7 +106,12 @@ for (const lvl of [0, 1, 2]) { difficulty = lvl;
 difficulty = 2;
 { const d = "2026-05-04", old = { values: legacyKillerModel(d, 2).givens.slice() }, fresh = {};
   if (JSON.stringify(savedKiller(d, old)) !== JSON.stringify(legacyKillerModel(d, 2))) fail("legacy killer changed");
-  if (JSON.stringify(savedKiller(d, fresh)) !== JSON.stringify(killerSixModel(d)) || fresh.hard !== 2) fail("fresh killer should use the hard model");
+  if (JSON.stringify(savedKiller(d, fresh)) !== JSON.stringify(killerSixModel(d)) || fresh.hard !== 3) fail("fresh killer should use the softer v3 model");
+  // Games started on v2 (hard: 2) keep their puzzle; v3 is v2's grid plus at most one given.
+  const v2 = { values: hardKillerModel(d, 2).givens.slice(), hard: 2 };
+  if (JSON.stringify(savedKiller(d, v2)) !== JSON.stringify(hardKillerModel(d, 2)) || v2.hard !== 2) fail("hard v2 killer save changed");
+  for (const day of days.slice(0, 60)) { const h = hardKillerModel(day, 2), s = softKillerModel(day), extra = s.givens.filter(Boolean).length - h.givens.filter(Boolean).length;
+    if (JSON.stringify(s.cages) !== JSON.stringify(h.cages) || h.givens.some((v, i) => v && s.givens[i] !== v) || extra < 0 || extra > KILLER_SOFT_EXTRA) fail("v3 killer must be v2 plus at most " + KILLER_SOFT_EXTRA + " given on " + day); }
   // Games started on the first Tricky generator (hard: 1) keep their puzzle.
   const v1 = { values: hardKillerModel(d, 1).givens.slice(), hard: 1 };
   if (JSON.stringify(savedKiller(d, v1)) !== JSON.stringify(hardKillerModel(d, 1)) || v1.hard !== 1) fail("hard v1 killer save changed");
@@ -126,7 +130,7 @@ out.push("mirrorSolverNodes{before:" + mirrorStats.map((x) => (x.oldNodes / days
 if (!(killerGivens[0] > killerGivens[1] && killerGivens[1] > killerGivens[2])) fail("killer givens must fall Gentle > Medium > Tricky: " + killerGivens);
 out.push("killerAvgGivens{" + killerGivens.map((g) => (g / days.length).toFixed(2)).join("/") + "}");
 out.push("sudokuHard{avgGivens:" + (hardSix.givens / hardSix.n).toFixed(2) + ",maxGivens:" + hardSix.max + ",hiddenSinglesSolve:" + hardSix.hidden + "/" + hardSix.n + ",nakedSinglesSolve:0}");
-out.push("killerTricky{avgGivens:" + (killerStats.givens / killerStats.n).toFixed(2) + ",avgCages:" + (killerStats.cages / killerStats.n).toFixed(1) + ",hiddenSinglesSolve:" + killerStats.hidden + "/" + killerStats.n + ",nakedSinglesSolve:0}");
+out.push("killerTricky{avgGivens:" + (killerStats.givens / killerStats.n).toFixed(2) + ",avgCages:" + (killerStats.cages / killerStats.n).toFixed(1) + ",hiddenSinglesSolve:" + killerStats.n + "/" + killerStats.n + ",nakedSinglesSolve:" + killerStats.hidden + "/" + killerStats.n + "}");
 // Smoke-render each game into the fake DOM and play a scripted solve.
 difficulty = 1; day = "2026-05-04"; data = { games: {} };
 for (const i of Object.keys(models)) { openSpark(+i); if (!$("#rules").textContent || !$("#board").innerHTML) fail("render " + i); }
