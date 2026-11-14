@@ -138,6 +138,8 @@ function lbInit() {
     const r = lbAward(st, d, lv, g, istDate());
     if (!r.item) return 0;
     st = r.st;
+    // First solve and no name yet: ask once the celebration has settled, unless a sheet is open.
+    if (!st.name && !st.asked) setTimeout(() => { if (!st.name && !st.asked && !document.querySelector("dialog[open]")) askName(); }, 2800);
     save();
     pill.classList.remove("bump");
     void pill.offsetWidth;
@@ -147,7 +149,7 @@ function lbInit() {
     return r.item.p;
   };
 
-  /* Name: asked once on the first visit, editable from the leaderboard sheet. */
+  /* Name: asked once, a moment after her first real solve (never on load), editable from the leaderboard sheet. */
   const nameSheet = $("#nameSheet"), nameInput = $("#lbName"), nameForm = $("#lbNameForm");
   function askName() {
     nameInput.value = st.name;
@@ -213,7 +215,6 @@ function lbInit() {
   setInterval(() => st.queue.length && flush(), 60000);
   catchUp();
   flush();
-  if (!st.name && !st.asked) setTimeout(askName, 600);
 }
 // Runs once every script (including feed.js) has loaded.
 if (typeof document !== "undefined" && document.readyState === "loading") document.addEventListener("DOMContentLoaded", lbInit);

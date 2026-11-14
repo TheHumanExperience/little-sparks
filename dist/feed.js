@@ -159,7 +159,25 @@ if (document.getElementById?.("feed")) {
   };
   const coverHtml = (g, done) => `<div class="cover"><div class="coverart" aria-hidden="true">${g.art}</div><p>${g.blurb}</p><span class="coverhint">${done ? "✓ Solved — scroll here to see it again" : "Settle here to play"}</span></div>`;
   const introHtml = (d, offset) => `<section class="spark dayintro" data-day="${d}" data-intro="1"><div class="sparkinner"><span class="eyebrow">${offset === 1 ? "Yesterday" : offset + " days ago"}</span><h2>${new Date(d + "T12:00:00").toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" })}</h2><p class="introcount"><b>${feedCount(d)}</b> of ${feedOrder(difficulty, d).length} sparks solved</p><div class="introdots">${feedOrder(difficulty, d).map((i) => `<i class="${feedDone(d, i) ? "done" : ""}"></i>`).join("")}</div><p class="small">Every puzzle from that day, waiting just below. ↓</p></div></section>`;
-  const noteHtml = () => `<section class="spark notecard" data-note="1"><div class="sparkinner"><div class="coverart" aria-hidden="true">✳ ✴ ✦</div><span class="eyebrow">You made it through today</span><h2 class="notehero">A little play.<br>A lovely little pause.</h2><p class="todaycount"><b class="todaycountnum">${feedCount(feedToday)}</b> of ${feedOrder(difficulty, feedToday).length} sparks today</p><p class="rewardline"><span class="stickercount">${rewards.stickers.length}</span> shiny stickers · flow <span class="flowcount">${flowNow().value}</span>/${FLOW_MAX}</p><p class="lovenote"><span aria-hidden="true">♡</span> Created with love from Devansh</p><button class="linkish aboutlink" type="button" data-about="1">Why this exists</button><p class="small">Keep scrolling for yesterday’s sparks ↓</p></div></section>`;
+  // Counts on the note show only what was done: nothing at zero, never "of 20".
+  const noteBits = () => {
+    const n = feedCount(feedToday), s = rewards.stickers.length, f = flowNow().value;
+    return {
+      eyebrow: n ? "You made it through today" : "Today’s note",
+      count: n ? `<b class="todaycountnum">${n}</b> spark${n === 1 ? "" : "s"} today` : "",
+      reward: [s && `${s} shiny sticker${s === 1 ? "" : "s"}`, f && `flow ${f}/${FLOW_MAX}`].filter(Boolean).join(" · "),
+    };
+  };
+  const noteHtml = () => { const b = noteBits(); return `<section class="spark notecard" data-note="1"><div class="sparkinner"><div class="coverart" aria-hidden="true">✳ ✴ ✦</div><span class="eyebrow">${b.eyebrow}</span><h2 class="notehero">A little play.<br>A lovely little pause.</h2><p class="todaycount"${b.count ? "" : " hidden"}>${b.count}</p><p class="rewardline"${b.reward ? "" : " hidden"}>${b.reward}</p><p class="lovenote"><span aria-hidden="true">♡</span> Created with love from Devansh</p><button class="linkish aboutlink" type="button" data-about="1">Why this exists</button><p class="small">Keep scrolling for yesterday’s sparks ↓</p></div></section>`; };
+  function refreshNote() {
+    const b = noteBits();
+    feed.querySelectorAll(".notecard").forEach((c) => {
+      c.querySelector(".eyebrow").textContent = b.eyebrow;
+      const tc = c.querySelector(".todaycount"), rl = c.querySelector(".rewardline");
+      tc.innerHTML = b.count; tc.hidden = !b.count;
+      rl.textContent = b.reward; rl.hidden = !b.reward;
+    });
+  }
   const endHtml = () => `<section class="spark endcard" data-end="1"><div class="sparkinner"><div class="coverart" aria-hidden="true">✿ ✳ ✿</div><h2>That’s the whole garden.</h2><p>You’ve reached ${FEED_DAYS - 1} days back. New sparks arrive every morning.</p><button class="btn" type="button" data-top="1">Back to today ↑</button></div></section>`;
 
   function appendDay() {
@@ -282,15 +300,12 @@ if (document.getElementById?.("feed")) {
 
   function refreshHeader() {
     const n = feedCount(feedToday);
-    $("#todayCount").textContent = `${n}/${feedOrder(difficulty, feedToday).length}`;
-    const left = revealsLeft(rewards.reveals, difficulty, today()), rc = $("#revealCount");
-    rc.hidden = left === Infinity;
-    $("#todayPill").classList.toggle("hasreveals", left !== Infinity);
-    rc.textContent = left === Infinity ? "" : ` · 🔑 ${left}`;
-    rc.title = `${left} reveal${left === 1 ? "" : "s"} left today`;
-    $("#todayPill").setAttribute("aria-label", `Today: ${n} of ${feedOrder(difficulty, feedToday).length} solved${left === Infinity ? "" : `, ${left} reveal${left === 1 ? "" : "s"} left`}. Jump to a day`);
+    const total = feedOrder(difficulty, feedToday).length;
+    // Reveals left are shown in the Reveal confirm, not here.
+    $("#todayCount").textContent = `${n}/${total}`;
+    $("#todayPill").setAttribute("aria-label", `Today: ${n} of ${total} solved. Jump to a day`);
     $("#levelPill").textContent = levelName();
-    feed.querySelectorAll(".todaycountnum").forEach((b) => (b.textContent = n));
+    refreshNote();
   }
   function refreshCard(card) {
     const done = feedDone(card.dataset.day, +card.dataset.idx);
@@ -327,7 +342,7 @@ if (document.getElementById?.("feed")) {
     $("#announce").textContent = `Solved! ${n} of ${total} sparks ${isToday ? "today" : "that day"}.`;
     const chip = document.createElement("div");
     chip.className = "solvedchip";
-    chip.innerHTML = `✦ Solved <b>${Math.max(0, n - 1)}</b>/${total}${streak > 1 ? ` <small>×${streak} streak</small>` : ""}`;
+    chip.innerHTML = `✦ Solved <b>${Math.max(0, n - 1)}</b>/${total}`;
     card.querySelector(".sparkinner").append(chip);
     setTimeout(() => (chip.querySelector("b").textContent = n), reduceMotion.matches ? 0 : 350);
     setTimeout(() => chip.remove(), 2600);
@@ -450,8 +465,7 @@ if (document.getElementById?.("feed")) {
     bar.setAttribute("aria-valuenow", f.value);
     bar.title = f.golden ? "Flow full — golden day!" : `Flow ${f.value} of ${FLOW_MAX}: solve without hints to fill it`;
     document.body.classList.toggle("golden", f.golden);
-    feed.querySelectorAll(".stickercount").forEach((b) => (b.textContent = rewards.stickers.length));
-    feed.querySelectorAll(".flowcount").forEach((b) => (b.textContent = f.value));
+    refreshNote();
   }
   feed.addEventListener("click", (e) => {
     const b = e.target.closest(".spark.live .stage button");

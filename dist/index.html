@@ -28,7 +28,7 @@
     <header class="feedbar">
       <a class="brand" href="#" aria-label="Little Sparks, back to the top of today"><span>✳</span> little sparks</a>
       <div class="pills">
-        <button class="pill" id="todayPill" type="button" aria-label="Jump to a day"><span class="todaylabel">Today · </span><b id="todayCount">0/16</b><span id="revealCount" class="revealcount" hidden></span></button>
+        <button class="pill" id="todayPill" type="button" aria-label="Jump to a day"><span class="todaylabel">Today · </span><b id="todayCount"></b></button>
         <button class="pill soundpill" id="soundPill" type="button" aria-pressed="true" aria-label="Sound on. Turn chimes off"><span aria-hidden="true">🔔</span></button>
         <button class="pill" id="levelPill" type="button" aria-label="Change difficulty">Medium</button>
         <button class="pill lbpill" id="lbPill" type="button" aria-label="Leaderboard" hidden><span aria-hidden="true">🏆</span></button>
@@ -79,7 +79,7 @@
       <div class="modalhead"><h2>Hello there ✳</h2><button class="quiet" data-close aria-label="Not now">✕</button></div>
       <form id="lbNameForm" class="lbform">
         <label for="lbName">What name should appear on the little leaderboard?</label>
-        <input id="lbName" type="text" autofocus maxlength="20" autocomplete="nickname" autocapitalize="words" enterkeyhint="done" required />
+        <input id="lbName" type="text" maxlength="20" autocomplete="nickname" autocapitalize="words" enterkeyhint="done" required />
         <p id="lbNameError" class="lberror" role="alert"></p>
         <button type="submit" class="lbsave">Save my name</button>
         <p class="lbhint">Same name on another device? You'll share one score.</p>

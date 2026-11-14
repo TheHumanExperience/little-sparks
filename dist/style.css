@@ -33,7 +33,6 @@ body.feedmode .brand span { font-size: 26px; margin-right: 5px; }
 .pills { display: flex; gap: 6px; }
 .pill { border: 1px solid #d3d9c8; background: #fffdf7; color: var(--ink); border-radius: 999px; padding: 7px 12px; font-size: 13px; font-weight: 600; white-space: nowrap; }
 .pill b { font-variant-numeric: tabular-nums; }
-.revealcount { font-variant-numeric: tabular-nums; font-weight: 500; opacity: 0.75; }
 .pill.bump { animation: bump 0.6s ease; }
 @keyframes bump { 30% { transform: scale(1.18); background: #f6e3b5; } 100% { transform: none; } }
 #feed { flex: 1; min-height: 0; width: 100%; max-width: none; padding: 0; margin: 0; overflow-y: auto; overscroll-behavior: contain; scroll-snap-type: y mandatory; scrollbar-width: none; }
@@ -66,7 +65,7 @@ body.feedmode .brand span { font-size: 26px; margin-right: 5px; }
 .introdots { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; max-width: 260px; margin: 8px auto; }
 .introdots i{ width: 10px; height: 10px; border-radius: 50%; background: #dfe3d6; }
 .introdots i.done { background: #507258; }
-.notecard .sparkinner { align-items: center; text-align: center; overflow: hidden; }
+.notecard .sparkinner { justify-content: center; align-items: center; text-align: center; overflow: hidden; }
 .notecard .coverart { margin-top: 8px; }
 .todaycount b { font-size: 22px; color: #416449; }
 #days button { display: flex; justify-content: space-between; width: 100%; }
@@ -261,7 +260,6 @@ button { -webkit-user-select: none; user-select: none; -webkit-touch-callout: no
 .flowbar i { display: block; height: 100%; width: calc(var(--flow, 0) * 100%); background: linear-gradient(90deg, #f2c94c, #e9a23b); border-radius: 0 3px 3px 0; transition: width 0.6s ease; }
 body.golden .flowbar i { background: linear-gradient(90deg, #e9a23b, #f6d77a, #e9a23b); }
 .rewardline { color: #7a6a3a; font-size: 14px; margin: 6px 0 0; }
-.solvedchip small { font-size: 11px; opacity: 0.85; font-weight: 600; }
 .toast { position: fixed; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom)); transform: translateX(-50%); z-index: 30; background: #2f4a37; color: #fff; padding: 12px 18px; border-radius: 999px; font-weight: 600; font-size: 15px; box-shadow: 0 8px 24px #0003; white-space: nowrap; animation: toastin 0.35s ease-out; transition: opacity 0.4s, transform 0.4s; }
 .toast.sticker { background: linear-gradient(110deg, #7b6cd9, #4fa3c7, #6cc49a, #e3a34a); }
 .toast.gold { background: linear-gradient(110deg, #b9822a, #e9b949, #b9822a); color: #2a1d05; }
@@ -298,7 +296,6 @@ body.golden .feedbar .brand span { color: #c8901f; }
 .retrybar:empty { display: none; }
 .retrybar button { pointer-events: auto; min-height: 44px; padding: 0 12px; border: 1px solid #cdd6c4; border-radius: 999px; background: #fff; color: #355a40; font: inherit; font-weight: 600; }
 @media (max-width: 340px) { .todaylabel { display: none; } }
-@media (max-width: 430px) { #todayPill.hasreveals .todaylabel { display: none; } }
 .sparkfoot:has(.retrybar:not(:empty)) .nextspark { display: none; }
 .sparkinner > .stage, .sparkinner > .sparkfoot { flex-shrink: 0; flex-basis: auto; }
 

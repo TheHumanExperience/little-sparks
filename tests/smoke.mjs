@@ -53,6 +53,14 @@ for (const [engine, launch, ctxOpts] of engines) {
   };
   let cards = 0;
   await page.goto(PAGE);
+  // Her very first open (nothing saved): straight to a card, no sheet, and no zeros on the note.
+  await page.evaluate(() => localStorage.clear());
+  await page.reload();
+  await page.waitForSelector(".spark.live .stage");
+  await page.waitForTimeout(900);
+  const first = await page.evaluate(() => ({ modal: document.querySelectorAll("dialog[open]").length, note: document.querySelector(".notecard")?.innerText || "" }));
+  check(first.modal === 0, `${engine} first open has no sheet`);
+  check(!/\b0\b|streak/.test(first.note) && /today’s note/i.test(first.note) && /Created with love from Devansh/.test(first.note), `${engine} note card shows no zeros before any play`, first.note);
   for (const lv of [0, 1, 2]) {
     await fresh(lv);
     check(await page.evaluate((l) => difficulty === l, lv), `${engine} L${lv} level applied`);
@@ -60,8 +68,8 @@ for (const [engine, launch, ctxOpts] of engines) {
     const shown = await page.evaluate(() => document.querySelectorAll(`.spark[data-day="${today()}"]`).length);
     check(shown === order.length, `${engine} L${lv} today shows ${order.length} cards`, `got ${shown}`);
     check(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `${engine} L${lv} no page overflow`);
-    const pillReveals = () => page.evaluate(() => { const r = document.querySelector("#revealCount"); return r.hidden ? "hidden" : r.textContent.trim(); });
-    check(await pillReveals() === ["hidden", "· 🔑 5", "· 🔑 3"][lv], `${engine} L${lv} header shows reveals left`, await pillReveals());
+    const pill = await page.evaluate(() => document.querySelector("#todayPill").textContent.trim());
+    check(/^Today · 0\/\d+$/.test(pill), `${engine} L${lv} header shows today's count, no reveals`, pill);
     for (const idx of order) {
       const tag = `${engine} L${lv} #${idx}`;
       try { await goTo(idx); } catch { check(false, `${tag} becomes live`); await shot(`L${lv}-${idx}-fail`); continue; }
@@ -93,7 +101,15 @@ for (const [engine, launch, ctxOpts] of engines) {
       cards++;
     }
     check(await page.evaluate(() => feedOrder().every((i) => !feedDone(today(), i))), `${engine} L${lv} reveals never count`);
-    if (lv) check(await pillReveals() === ["", "· 🔑 4", "· 🔑 2"][lv], `${engine} L${lv} header reveal count drops after a reveal`, await pillReveals());
+    check(/· 0\//.test(await page.evaluate(() => document.querySelector("#todayPill").textContent)), `${engine} L${lv} reveals leave the header count at 0`);
+    if (lv) {
+      // Reveals left now live in the Reveal confirm, and drop after a reveal.
+      await goTo(order[1]);
+      await page.locator(".spark.live .revealbtn").tap();
+      const ask = await page.locator(".spark.live").innerText();
+      check(ask.includes(`${[0, 4, 2][lv]} reveal${lv === 2 ? "s" : "s"} left today`), `${engine} L${lv} Reveal confirm shows reveals left`, ask.slice(-160));
+      await page.locator(".spark.live [data-no]").tap();
+    }
   }
   // A real solve by touch: Pocket Sudoku on Gentle → solved badge and header count.
   const solvePocket = async () => {
@@ -110,7 +126,8 @@ for (const [engine, launch, ctxOpts] of engines) {
   check(/·\s*1\/\d+/.test(await page.locator("#todayPill").innerText()), `${engine} header counts the solve`);
   // A solved card's Next skips solved cards; the day sheet jumps to the next unsolved one.
   check((await page.locator(".spark.live .nextspark").innerText()).includes("Next to play"), `${engine} solved card offers Next to play`);
-  const order = await page.evaluate(() => { const o = feedOrder(); all[progressKey(today())].games[o[2]] = { done: true }; persist(); return o; });
+  // Use today's dated order (the warm-up opener moves cards around), starting one before the live card.
+  const order = await page.evaluate(() => { const o = feedOrder(difficulty, today()), k = o.indexOf(+document.querySelector(".spark.live").dataset.idx); all[progressKey(today())].games[o[k + 1]] = { done: true }; persist(); return o.slice(k - 1); });
   await page.locator(".spark.live .nextspark").tap();
   await page.waitForSelector(`.spark.live[data-idx="${order[3]}"]`, { timeout: 5000 }).catch(() => {});
   check(await page.evaluate((i) => +document.querySelector(".spark.live")?.dataset.idx === i, order[3]), `${engine} Next unsolved skips a solved card`);
@@ -118,7 +135,7 @@ for (const [engine, launch, ctxOpts] of engines) {
   check((await page.locator("#nextUnsolved .btn").innerText()).includes("Next puzzle to play"), `${engine} day sheet offers the next puzzle to play`);
   await page.locator("#nextUnsolved .btn").tap();
   await page.waitForSelector(`.spark.live[data-idx="${order[4]}"]`, { timeout: 5000 }).catch(() => {});
-  check(await page.evaluate((i) => +document.querySelector(".spark.live")?.dataset.idx === i && !document.querySelector("#daysSheet").open, order[4]), `${engine} day sheet jumps to the next unsolved card`);
+  check(await page.evaluate((i) => +document.querySelector(".spark.live")?.dataset.idx === i && !document.querySelector("#daysSheet").open, order[4]), `${engine} day sheet jumps to the next unsolved card`, await page.evaluate(() => [document.querySelector(".spark.live")?.dataset.idx, document.querySelector("#daysSheet").open, document.querySelector("#nameSheet")?.open]).then(JSON.stringify));
   // The brand returns to today's first card.
   await page.locator(".brand").tap();
   await page.waitForTimeout(1000);
@@ -253,16 +270,18 @@ for (const [engine, launch, ctxOpts] of engines) {
   const lbStore = () => page.evaluate(() => JSON.parse(localStorage.getItem("little-sparks-leaderboard-v1") || "{}"));
   check(await page.locator("#lbPill").isVisible(), `${engine} 🏆 shown with config`);
   check(await page.evaluate(() => { const r = document.querySelector("#lbPill").getBoundingClientRect(); return document.documentElement.scrollWidth <= innerWidth && r.right <= innerWidth && r.right > innerWidth - 80; }), `${engine} 🏆 sits top-right without overflow`);
-  try { await page.waitForSelector("#nameSheet[open]", { timeout: 3000 }); } catch { check(false, `${engine} first visit asks for a name`); }
+  await page.waitForTimeout(1200);
+  check(await page.locator("#nameSheet[open]").count() === 0, `${engine} no name sheet on load`);
+  offline = true;
+  await solvePocket();
+  try { await page.waitForSelector("#nameSheet[open]", { timeout: 5000 }); } catch { check(false, `${engine} first solve asks for a name`); }
   await page.locator("#lbName").fill("   ");
   await page.locator("#lbNameForm .lbsave").tap();
   check(await page.locator("#nameSheet[open]").count() === 1 && /1 to 20/.test(await page.locator("#lbNameError").innerText()), `${engine} blank name is refused`);
   await page.locator("#lbName").fill("  Nidhi  ");
   await page.locator("#lbNameForm .lbsave").tap();
   await page.waitForTimeout(300);
-  check(calls.some((c) => c.fn === "join_or_create" && c.body.p_name === "Nidhi" && c.auth === undefined && c.apikey === "sb_publishable_test"), `${engine} name saved to Supabase (trimmed; publishable key only in apikey, no Bearer)`);
-  offline = true;
-  await solvePocket();
+  check(await page.locator("#nameSheet[open]").count() === 0 && (await lbStore()).name === "Nidhi", `${engine} name kept offline (trimmed)`);
   const reveal = await page.evaluate(() => feedOrder()[2]);
   await goTo(reveal);
   await page.locator(".spark.live .revealbtn").tap();
@@ -273,6 +292,7 @@ for (const [engine, launch, ctxOpts] of engines) {
   offline = false;
   await page.locator("#lbPill").tap();
   await page.waitForSelector("#lbList li.me", { timeout: 4000 }).catch(() => {});
+  check(calls.some((c) => c.fn === "join_or_create" && c.body.p_name === "Nidhi" && c.auth === undefined && c.apikey === "sb_publishable_test"), `${engine} name saved to Supabase (publishable key only in apikey, no Bearer)`);
   check(calls.filter((c) => c.fn === "record_solve").length === 1 && calls.some((c) => c.fn === "record_solve" && c.body.p_level === 0 && c.body.p_game === 1), `${engine} queued solve syncs once when back online`, JSON.stringify(calls.map((c) => c.fn + ":" + JSON.stringify(c.body))) + " open=" + await page.evaluate(() => [...document.querySelectorAll("dialog[open]")].map((d) => d.id)));
   check(((await lbStore()).queue || []).length === 0, `${engine} queue empties after sync`);
   check(/Nidhi/.test(await page.locator("#lbList li.me").innerText().catch(() => "")) && (await page.locator("#lbList").innerHTML()).includes("Asha &lt;b&gt;"), `${engine} board highlights you and escapes names`);
