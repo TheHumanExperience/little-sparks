@@ -200,7 +200,7 @@ A warm, botanical stationery palette: greens and creams at rest, candlelight gol
 
 - **Display** (400, 34px): Note-card and day-intro headlines such as "A little play." Milestone cards scale this up to 38px and 46px.
 - **Headline** (400, 30px, 26px at 380px wide and below): The puzzle title on every card.
-- **Love Note** (400, 24px): The line "Created with love from Devansh", set in the display face.
+- **Love Note** (400, 24px): The note card line "For every mom doing the thinking for two", set in the display face. The "Why this exists" sheet ends with "Created with love from Devansh".
 - **Sheet Title** (400, 26px, uppercase, 1px tracking): Headings on bottom sheets, currently set in Georgia.
 - **Body** (400, 16px; 14–15px with 1.5 line height for puzzle prose): Puzzle text and clues.
 - **Body Small** (400, 13px, 1.55 line height): How-to copy and helper notes.
@@ -299,7 +299,7 @@ A shiny card carries a slow 4s holographic border, the only multicolor treatment
 ### Do:
 
 - **Do** keep resting screens cream, green, and still, so that the first burst of gold means something.
-- **Do** set the love note in the display face and keep it prominent on the note card, reading exactly "Created with love from Devansh".
+- **Do** set the love note in the display face and keep it prominent on the note card, reading exactly "For every mom doing the thinking for two".
 - **Do** use Fountain Ink instead of black, and warm neutrals instead of grey.
 - **Do** keep touchable controls at least 44px tall and text inputs at 16px or larger.
 - **Do** give every animation a calm, still fallback under reduced motion.
