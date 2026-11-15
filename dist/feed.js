@@ -168,7 +168,7 @@ if (document.getElementById?.("feed")) {
       reward: [s && `${s} shiny sticker${s === 1 ? "" : "s"}`, f && `flow ${f}/${FLOW_MAX}`].filter(Boolean).join(" · "),
     };
   };
-  const noteHtml = () => { const b = noteBits(); return `<section class="spark notecard" data-note="1"><div class="sparkinner"><div class="coverart" aria-hidden="true">✳ ✴ ✦</div><span class="eyebrow">${b.eyebrow}</span><h2 class="notehero">A little play.<br>A lovely little pause.</h2><p class="todaycount"${b.count ? "" : " hidden"}>${b.count}</p><p class="rewardline"${b.reward ? "" : " hidden"}>${b.reward}</p><p class="lovenote"><span aria-hidden="true">♡</span> Created with love from Devansh</p><button class="linkish aboutlink" type="button" data-about="1">Why this exists</button><p class="small">Keep scrolling for yesterday’s sparks ↓</p></div></section>`; };
+  const noteHtml = () => { const b = noteBits(); return `<section class="spark notecard" data-note="1"><div class="sparkinner"><div class="coverart" aria-hidden="true">✳ ✴ ✦</div><span class="eyebrow">${b.eyebrow}</span><h2 class="notehero">A little play.<br>A lovely little pause.</h2><p class="todaycount"${b.count ? "" : " hidden"}>${b.count}</p><p class="rewardline"${b.reward ? "" : " hidden"}>${b.reward}</p><p class="lovenote"><span aria-hidden="true">♡</span> For every mom doing the thinking for two</p><button class="linkish aboutlink" type="button" data-about="1">Why this exists</button><p class="small">Keep scrolling for yesterday’s sparks ↓</p></div></section>`; };
   function refreshNote() {
     const b = noteBits();
     feed.querySelectorAll(".notecard").forEach((c) => {

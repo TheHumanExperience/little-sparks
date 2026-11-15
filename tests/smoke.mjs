@@ -60,7 +60,7 @@ for (const [engine, launch, ctxOpts] of engines) {
   await page.waitForTimeout(900);
   const first = await page.evaluate(() => ({ modal: document.querySelectorAll("dialog[open]").length, note: document.querySelector(".notecard")?.innerText || "" }));
   check(first.modal === 0, `${engine} first open has no sheet`);
-  check(!/\b0\b|streak/.test(first.note) && /today’s note/i.test(first.note) && /Created with love from Devansh/.test(first.note), `${engine} note card shows no zeros before any play`, first.note);
+  check(!/\b0\b|streak/.test(first.note) && /today’s note/i.test(first.note) && /For every mom doing the thinking for two/.test(first.note) && !/Devansh/.test(first.note), `${engine} note card shows no zeros before any play`, first.note);
   for (const lv of [0, 1, 2]) {
     await fresh(lv);
     check(await page.evaluate((l) => difficulty === l, lv), `${engine} L${lv} level applied`);

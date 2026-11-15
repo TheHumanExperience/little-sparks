@@ -92,5 +92,5 @@ if (feedCount(d) !== 4) fail("old Starlines saves must not count or break");
 if (Object.entries(all[progressKey(d)].games).filter(([i, g]) => +i < 5 && g.done).length !== 2) fail("legacy 5-game count changed");
 feedOrder(0).length + "/" + feedOrder(1).length + "/" + feedOrder(2).length + " cards (Gentle/Medium/Tricky) × " + FEED_DAYS + " days";
 `, context);
-if (!fs.readFileSync("dist/feed.js", "utf8").includes("Created with love from Devansh")) throw Error("note card message missing");
+if (!fs.readFileSync("dist/feed.js", "utf8").includes("For every mom doing the thinking for two")) throw Error("note card message missing");
 console.log("Feed OK:", result);

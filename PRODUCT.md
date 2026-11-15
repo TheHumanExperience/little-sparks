@@ -48,7 +48,7 @@ It was made by one person for one person. A puzzle app can copy the feed, the ga
 ## Brand Commitments
 
 - **Name:** Little Sparks, with a wax seal pressed with a spark and a small heart as its logo (`brand/`), and the ✳ spark as its in-app mark.
-- **The love note is the emotional heart of the product and stays prominent.** It reads exactly: "Created with love from Devansh".
+- **The love note is the emotional heart of the product and stays prominent.** On the note card it reads exactly: "For every mom doing the thinking for two" (no name, since she shares the site with friends). The "Why this exists" sheet ends with "Created with love from Devansh".
 - **Voice:** warm and calm, with no pressure. Never exam or test language; no "CAT", "Quant", "LRDI", "MCQ", or "TITA" labels. Reasoning cards are presented as logical reasoning puzzles.
 - **No ads, ever.**
 

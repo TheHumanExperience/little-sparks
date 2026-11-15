@@ -1,6 +1,6 @@
 # Little Sparks — agent guide
 
-**Intent.** A cosy daily puzzle gift for Nidhi. The love note reads exactly "Created with love from Devansh". Keep the tone warm and calm: no exam or test language, no pressure, no ads. It is mobile-first (iOS Safari is the main target) and is a static, zero-build app in `dist/`. It is served from GitHub Pages at https://little-sparks.in. Use relative URLs only, so it keeps working locally and from any path, with no CDNs or frameworks. Saved progress is tied to the site's address, so changing the domain strands it.
+**Intent.** A cosy daily puzzle gift for Nidhi. The note card's love note reads exactly "For every mom doing the thinking for two", with no name because Nidhi shares the site with friends; only the "Why this exists" sheet ends with "Created with love from Devansh". Keep the tone warm and calm: no exam or test language, no pressure, no ads. It is mobile-first (iOS Safari is the main target) and is a static, zero-build app in `dist/`. It is served from GitHub Pages at https://little-sparks.in. Use relative URLs only, so it keeps working locally and from any path, with no CDNs or frameworks. Saved progress is tied to the site's address, so changing the domain strands it.
 
 Read this file first. Open README.md (player-facing rules and hosting), CONTENT.md (content rules), PRODUCT.md (who it is for and what to protect) or DESIGN.md (visual system) only when you need them.
 

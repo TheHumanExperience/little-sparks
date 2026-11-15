@@ -21,7 +21,7 @@ Run `npm run verify` and `npm run smoke` first. Then check:
 - **Rewards integrity:** reveals, replays and hints can't farm credit, streak, flow, stickers or milestones.
 - **Wording**
   - No exam labels ("CAT", "Quant", "LRDI", "MCQ", "TITA"). Present cards as logical reasoning puzzles.
-  - The note reads "Created with love from Devansh".
+  - The note card reads "For every mom doing the thinking for two" (no name); the "Why this exists" sheet ends with "Created with love from Devansh".
 - **Photos:** only free licences (public domain or CC). Each has `credit`, `source` and `licenseUrl`, and hints never show the year.
 - **Leaderboard:** `dist/leaderboard-config.js` holds only the project URL and the public publishable/anon key. Never commit a service_role or secret key, and escape every name before using innerHTML. Anon may only execute the SECURITY DEFINER RPCs, with no table rights. Player ids are never returned in lists.
 - **Static app:** no build step, no script CDNs or frameworks, relative URLs only, so the site works locally and from any path.
