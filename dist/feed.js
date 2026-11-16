@@ -65,6 +65,14 @@ function feedNextUnsolved(d, i, from = today()) {
   for (let n = 1; n <= list.length; n++) { const c = list[(at + n + list.length) % list.length]; if (!feedDone(c.d, c.i)) return c; }
   return null;
 }
+/* A card's own "Next" stays inside its day: the next card of that day still to play, after (d, i) and
+   wrapping round to the day's earlier cards. null once the day is complete, so Next simply goes on to
+   the following card (today's note card, or the next day's intro) instead of leaping to another day. */
+function feedNextInDay(d, i) {
+  const o = feedOrder(difficulty, d), at = o.indexOf(i);
+  for (let n = 1; n < o.length; n++) { const c = o[(at + n) % o.length]; if (!feedDone(d, c)) return c; }
+  return null;
+}
 function feedDayName(offset, d) {
   if (offset === 0) return "Today";
   if (offset === 1) return "Yesterday";
@@ -155,7 +163,7 @@ if (document.getElementById?.("feed")) {
   const revealedNow = (d, i) => { const g = all[progressKey(d)]?.games?.[i]; return !!(g?.revealed && g.done); };
   const cardHtml = (d, offset, i, n) => {
     const g = feedGame(i, d), done = feedDone(d, i), shiny = isShiny(d, i);
-    return `<section class="spark ${done ? "is-done" : ""} ${shiny ? "shiny" : ""}" data-day="${d}" data-idx="${i}" aria-label="${g.name}, ${feedDayName(offset, d)}"><div class="sparkinner"><div class="sparkhead"><span>${String(n + 1).padStart(2, "0")} / ${feedOrder(difficulty, d).length} · ${g.type}</span><span class="sparkday">${shiny ? `<b class="shinytag">✧ Shiny</b> ` : ""}${feedDayName(offset, d)}</span></div><h2 class="sparktitle">${g.name} <span class="donebadge" ${done ? "" : "hidden"}>✓</span></h2><div class="stage">${coverHtml(g, done)}</div><div class="sparkfoot"><button class="retry" type="button" aria-label="Clear and retry ${g.name}" title="Clear &amp; retry"><span aria-hidden="true">↺</span></button><button class="revealbtn" type="button" ${done || revealedNow(d, i) ? "hidden" : ""}>Reveal answer</button><span class="retrybar" role="status"></span><button class="nextspark" type="button">${done && feedNextUnsolved(d, i, feedToday) ? "Next to play ↓" : "Next spark ↓"}</button></div></div></section>`;
+    return `<section class="spark ${done ? "is-done" : ""} ${shiny ? "shiny" : ""}" data-day="${d}" data-idx="${i}" aria-label="${g.name}, ${feedDayName(offset, d)}"><div class="sparkinner"><div class="sparkhead"><span>${String(n + 1).padStart(2, "0")} / ${feedOrder(difficulty, d).length} · ${g.type}</span><span class="sparkday">${shiny ? `<b class="shinytag">✧ Shiny</b> ` : ""}${feedDayName(offset, d)}</span></div><h2 class="sparktitle">${g.name} <span class="donebadge" ${done ? "" : "hidden"}>✓</span></h2><div class="stage">${coverHtml(g, done)}</div><div class="sparkfoot"><button class="retry" type="button" aria-label="Clear and retry ${g.name}" title="Clear &amp; retry"><span aria-hidden="true">↺</span></button><button class="revealbtn" type="button" ${done || revealedNow(d, i) ? "hidden" : ""}>Reveal answer</button><span class="retrybar" role="status"></span><button class="nextspark" type="button">${done && feedNextInDay(d, i) !== null ? "Next to play ↓" : "Next spark ↓"}</button></div></div></section>`;
   };
   const coverHtml = (g, done) => `<div class="cover"><div class="coverart" aria-hidden="true">${g.art}</div><p>${g.blurb}</p><span class="coverhint">${done ? "✓ Solved — scroll here to see it again" : "Settle here to play"}</span></div>`;
   const introHtml = (d, offset) => `<section class="spark dayintro" data-day="${d}" data-intro="1"><div class="sparkinner"><span class="eyebrow">${offset === 1 ? "Yesterday" : offset + " days ago"}</span><h2>${new Date(d + "T12:00:00").toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" })}</h2><p class="introcount"><b>${feedCount(d)}</b> of ${feedOrder(difficulty, d).length} sparks solved</p><div class="introdots">${feedOrder(difficulty, d).map((i) => `<i class="${feedDone(d, i) ? "done" : ""}"></i>`).join("")}</div><p class="small">Every puzzle from that day, waiting just below. ↓</p></div></section>`;
@@ -205,7 +213,7 @@ if (document.getElementById?.("feed")) {
     if (live) freeze(live);
     live = null;
     window.sparkKeys = null;
-    if (!card.dataset.idx) return;
+    if (!card.dataset.idx) { if (card.dataset.note) greetNote(card); return; }
     live = card;
     const i = +card.dataset.idx, stage = card.querySelector(".stage");
     day = card.dataset.day;
@@ -263,18 +271,17 @@ if (document.getElementById?.("feed")) {
     appendDay();
     scrollToCard(findCard(d, i), smooth);
   }
-  // On a solved card "Next" skips ahead to the next card still to play; otherwise it is the next card.
+  // On a solved card "Next" skips to the day's next card still to play; otherwise, or once the day is
+  // complete, it is simply the next card (after today's last card, that is the note card).
+  const nextTarget = (card) => (feedDone(card.dataset.day, +card.dataset.idx) ? feedNextInDay(card.dataset.day, +card.dataset.idx) : null);
   function nextLabel(card) {
-    const btn = card.querySelector(".nextspark"), done = feedDone(card.dataset.day, +card.dataset.idx);
-    const to = done && feedNextUnsolved(card.dataset.day, +card.dataset.idx, feedToday);
-    btn.textContent = to ? "Next to play ↓" : "Next spark ↓";
+    card.querySelector(".nextspark").textContent = nextTarget(card) !== null ? "Next to play ↓" : "Next spark ↓";
   }
   feed.addEventListener("click", (e) => {
     const next = e.target.closest(".nextspark");
     if (next) {
-      const list = cards(), c = next.closest(".spark"), done = feedDone(c.dataset.day, +c.dataset.idx);
-      const to = done && feedNextUnsolved(c.dataset.day, +c.dataset.idx, feedToday);
-      if (to) jumpTo(to.d, to.i, true); else scrollToCard(list[list.indexOf(c) + 1], true);
+      const list = cards(), c = next.closest(".spark"), to = nextTarget(c);
+      if (to !== null) jumpTo(c.dataset.day, to, true); else scrollToCard(list[list.indexOf(c) + 1], true);
     }
     if (e.target.closest("[data-top]")) scrollToCard(cards()[0], true);
     if (e.target.closest("[data-about]")) $("#aboutSheet").showModal();
@@ -351,9 +358,34 @@ if (document.getElementById?.("feed")) {
     if (sticker) toast(`✧ Shiny sticker! You have ${rewards.stickers.length}.`, "sticker");
     if (!wasGolden && rewards.flow.golden) toast("Flow full! Golden cards for the rest of today ✦", "gold", sticker ? 1400 : 0);
     if (milestone) celebrateMilestone(milestone);
+    if (milestone === "all" && isToday) noteArmed = `${feedToday}:${difficulty}`;
     if (reduceMotion.matches) return;
     try { if ("vibrate" in navigator) navigator.vibrate(milestone ? [30, 50, 30, 50, 60] : [20, 40, 20]); } catch {}
     card.append(makeBurst(burstSize(streak), 1 + Math.min(streak - 1, 6) * 0.12));
+  }
+
+  /* After the player's own final solve of today, the note card greets them once: a small, gentle moment
+     following the big "All of them!" milestone. It is armed only by that solve (celebrate never runs for
+     reveals or replays), so simply arriving at the note card, or reopening a finished day, stays quiet. */
+  let noteArmed = "";
+  function greetNote(card) {
+    const total = feedOrder(difficulty, feedToday).length;
+    if (noteArmed !== `${feedToday}:${difficulty}` || feedCount(feedToday) !== total) return;
+    noteArmed = "";
+    setTimeout(() => {
+      card.classList.remove("celebrating");
+      void card.offsetWidth;
+      card.classList.add("celebrating");
+      setTimeout(() => card.classList.remove("celebrating"), 1600);
+      const chip = document.createElement("div");
+      chip.className = "solvedchip";
+      chip.textContent = `✿ All ${total} sparks today`;
+      card.querySelector(".sparkinner").append(chip);
+      setTimeout(() => chip.remove(), 2600);
+      $("#announce").textContent = `All ${total} sparks solved today.`;
+      chime([chimeFreq(1), chimeFreq(3), chimeFreq(5)]);
+      if (!reduceMotion.matches) card.append(makeBurst(36, 1.1, ["✿", "❀", "✦", "♡"]));
+    }, reduceMotion.matches ? 0 : 450);
   }
 
   function celebrateReplay(card, revealed) {

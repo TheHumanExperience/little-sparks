@@ -73,6 +73,13 @@ if (feedCount(d) !== 4) fail("feedCount should count all 20 cards");
   delete all[progressKey(from)].games[order[2]];
   n = feedNextUnsolved(feedDate(FEED_DAYS - 1, from), feedOrder(difficulty, feedDate(FEED_DAYS - 1, from)).at(-1), from);
   if (n.d !== from || n.i !== order[2]) fail("next unsolved should wrap round to today");
+  // A card's own Next stays inside its day: it wraps back to the day's gaps and is null once the day is complete.
+  all[progressKey(from)].games = Object.fromEntries(order.filter((_, n) => n !== 2 && n !== order.length - 1).map((i) => [i, { done: true }]));
+  if (feedNextInDay(from, order[5]) !== order.at(-1)) fail("next in day should go to the day's later gap");
+  all[progressKey(from)].games[order.at(-1)] = { done: true };
+  if (feedNextInDay(from, order.at(-1)) !== order[2]) fail("solving the last card should wrap back to the day's earlier gap, not another day");
+  all[progressKey(from)].games[order[2]] = { done: true };
+  if (feedNextInDay(from, order.at(-1)) !== null) fail("a complete day has no next in day (Next goes on to the note card)");
   for (let k = 0; k < FEED_DAYS; k++) all[progressKey(feedDate(k, from))] = { games: Object.fromEntries(feedOrder(difficulty, feedDate(k, from)).map((i) => [i, { done: true }])) };
   if (feedNextUnsolved(from, order[0], from) !== null) fail("next unsolved should be null when everything is solved");
   for (const k of Object.keys(all)) delete all[k]; Object.assign(all, JSON.parse(keep)); }
