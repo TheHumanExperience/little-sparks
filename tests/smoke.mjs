@@ -47,7 +47,13 @@ for (const [engine, launch, ctxOpts] of engines) {
     await page.reload();
     await page.waitForSelector(".spark.live .stage");
   };
+  // Always opens the card fresh. If it's already live (the day's warm-up opener is live on load), step to the
+  // next card first, so a model a test pinned after load (e.g. Matchsticks in AHA_CACHE) is actually drawn.
   const goTo = async (idx) => {
+    if (await page.evaluate((i) => +document.querySelector(".spark.live")?.dataset.idx === i, idx)) {
+      await page.evaluate(() => { const c = document.querySelector(".spark.live").nextElementSibling; feed.scrollTo(0, c.offsetTop); });
+      await page.waitForFunction((i) => +document.querySelector(".spark.live")?.dataset.idx !== i, idx, { timeout: 5000 });
+    }
     await page.evaluate((i) => { const c = document.querySelector(`.spark[data-day="${today()}"][data-idx="${i}"]`); feed.scrollTo(0, c.offsetTop); }, idx);
     await page.waitForSelector(`.spark.live[data-idx="${idx}"] .stage #board`, { timeout: 5000 });
   };

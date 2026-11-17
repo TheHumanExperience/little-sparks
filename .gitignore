@@ -3,3 +3,4 @@ tests/shots/
 /.github
 
 __pycache__/
+.idea/
