@@ -171,15 +171,35 @@ function lbInit() {
     if ($("#lbSheet").open) show(current);
   };
   nameSheet.addEventListener("close", () => { if (!st.asked) { st.asked = true; save(); } });
+  $("#lbNotNow").onclick = () => nameSheet.close();
+
+  /* Leave the board, on this phone only: it forgets the name and stops sending points. Nothing is
+     deleted on the server (no one can remove anyone); the name fades off each board as its period
+     ends. A fresh id means joining again starts clean, and the same name rejoins the same player. */
+  function askLeave() {
+    $("#lbMe").innerHTML = `Leave the board? This phone stops adding points and forgets your name. Your name stays on the boards until each one resets (Day tomorrow, Week on Monday, Month at month end). Your puzzles stay here.
+      <span class="lbleave"><button type="button" class="linkish" id="lbLeaveYes">Leave the board</button><button type="button" class="linkish" id="lbLeaveNo">Stay on it</button></span>`;
+    $("#lbLeaveYes").onclick = leave;
+    $("#lbLeaveNo").onclick = renderMe;
+    $("#lbLeaveNo").focus?.();
+  }
+  function leave() {
+    st = { ...st, id: lbUuid(), name: "", synced: false, asked: true, sent: {}, queue: [] };
+    save();
+    lbToast("You've left the board. Your puzzles are all still here ✳");
+    renderMe();
+    show(current);
+  }
 
   /* Leaderboard sheet with Day / Week / Month tabs. */
   let current = "day";
   const tabs = [...document.querySelectorAll("#lbTabs [data-period]")];
   function renderMe() {
     $("#lbMe").innerHTML = st.name
-      ? `Playing as <b>${lbEsc(st.name)}</b> <button type="button" class="linkish" id="lbEdit">Edit name</button>`
+      ? `Playing as <b>${lbEsc(st.name)}</b> <button type="button" class="linkish" id="lbEdit">Edit name</button> <button type="button" class="linkish lbquiet" id="lbLeave">Leave the board</button>`
       : `<button type="button" class="linkish" id="lbEdit">Add your name to join the board</button>`;
     $("#lbEdit").onclick = askName;
+    if (st.name) $("#lbLeave").onclick = askLeave;
     const n = st.queue.length;
     $("#lbPending").textContent = n ? `${n} solve${n > 1 ? "s" : ""} waiting to sync.` : "";
   }

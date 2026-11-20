@@ -397,7 +397,7 @@ for (const [engine, launch, ctxOpts] of engines) {
     if (failures > before) await pp.screenshot({ path: join(await mkdir(shotsDir, { recursive: true }).then(() => shotsDir), `${engine}-petal.png`) }).catch(() => {});
     await ctx.close();
   }
-  // Leaderboard against a mocked Supabase (route interception): name, offline queue, sync, tabs, same-name join.
+  // Leaderboard against a mocked Supabase (route interception): name, offline queue, sync, tabs, same-name join, leave, Not now.
   const calls = [];
   let offline = false, fkOnce = false;
   const DEV = "11111111-1111-4111-8111-111111111111";
@@ -495,6 +495,33 @@ for (const [engine, launch, ctxOpts] of engines) {
   await page.waitForTimeout(600);
   const healed = await lbStore();
   check(healed.id === DEV && healed.synced && !("taken" in healed) && (await page.locator("dialog[open]").count()) === 0, `${engine} old "name taken" device rejoins automatically on load`);
+  // Leave the board: a quiet link in the 🏆 sheet and a gentle confirm. It only happens on this phone:
+  // no server call can remove a player, the name is forgotten and the next solves stay local.
+  calls.length = 0;
+  await page.locator("#lbPill").tap();
+  await page.waitForSelector("#lbLeave");
+  check((await page.locator("header #lbLeave").count()) === 0, `${engine} Leave the board lives in the sheet, not the header`);
+  await page.locator("#lbLeave").tap();
+  check(/Leave the board\? This phone stops adding points and forgets your name\. Your name stays on the boards until each one resets/.test(await page.locator("#lbMe").innerText()), `${engine} leaving asks first`);
+  await page.locator("#lbLeaveNo").tap();
+  check(await page.locator("#lbLeave").isVisible() && (await lbStore()).name === "Devansh", `${engine} Stay on it keeps the player`);
+  await page.locator("#lbLeave").tap();
+  await page.locator("#lbLeaveYes").tap();
+  await page.waitForTimeout(600);
+  const left = await lbStore();
+  check(left.name === "" && left.id !== DEV && left.asked && !(left.queue || []).length && calls.every((c) => c.fn === "leaderboard"), `${engine} leaving forgets the name on this phone and never asks the server to remove anyone`, JSON.stringify(calls.map((c) => c.fn)));
+  check(/Add your name to join the board/.test(await page.locator("#lbMe").innerText()) && /left the board/.test(await page.locator(".toast").last().innerText().catch(() => "")), `${engine} after leaving the sheet offers to join again`);
+  // Not now closes the name sheet without saving; later solves never ask again or send anything.
+  await page.locator("#lbEdit").tap();
+  await page.waitForSelector("#nameSheet[open]");
+  check(await page.evaluate(() => document.querySelector("#lbNotNow").getBoundingClientRect().height >= 44), `${engine} Not now is a 44px target`);
+  await page.locator("#lbNotNow").tap();
+  check((await page.locator("#nameSheet[open]").count()) === 0 && (await lbStore()).name === "", `${engine} Not now closes the name sheet without a name`);
+  await page.locator("#lbSheet [data-close]").tap().catch(() => {});
+  calls.length = 0;
+  await page.evaluate((g) => lbSolved(istDate(), 0, g), await page.evaluate(() => feedOrder(0)[6]));
+  await page.waitForTimeout(3200);
+  check((await page.locator("#nameSheet[open]").count()) === 0 && !calls.some((c) => c.fn === "record_solve"), `${engine} without a name, solves stay on the phone and the sheet isn't pushed again`);
   await page.unroute("**/leaderboard-config.js*");
   await page.unroute("https://lb.test/**");
   check(errors.length === 0, `${engine} no page errors`, errors.slice(0, 3).join(" | "));

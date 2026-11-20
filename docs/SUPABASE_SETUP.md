@@ -40,6 +40,7 @@ Points don't sync between steps 1 and 3, but they wait in each browser and are s
   - Each date × level × game counts only once; the server enforces this with its primary key.
 - **Time.** Day, Week (starting Monday) and Month follow India time. Only puzzles dated today ±1 day count, so archive days don't.
 - **Offline.** Points earned offline are queued in the browser and sent later.
+- **Optional.** The name sheet opens once, a moment after the first real solve, with a "Not now" button; without a name nothing is sent. A named player can tap "Leave the board" in the 🏆 sheet. Leaving only happens on that phone: it forgets the name and stops sending points. Nothing is deleted on the server, so no one can remove anyone else; the name drops off each board as its day, week or month ends. To remove a player at once, use the housekeeping SQL below.
 - **Identity.** Each browser gets a random id kept in localStorage. There is no login, and clearing site data starts a new player.
 - **Same name = same player.** Names match ignoring case and spaces, so "De vansh" is "Devansh". Typing a name that already exists on another device joins that player and shares one score. Any points the device already had move across, and a puzzle solved on both counts once. This is trust-based: there are no logins, so anyone who types a name joins that score.
 
