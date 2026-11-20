@@ -321,43 +321,50 @@
   "title": "A sign to the pier",
   "alt": "A green street sign in a looping script with an arrow, above a busy street.",
   "clue": "Read the sign: rounded letters with little loops, and a pier on a river that carries the city's boats.",
-  "story": "The sign points to Pratu Nam Pier on a canal in Bangkok. Thai script has 44 consonants and no spaces between words."
+  "story": "The sign points to Pratu Nam Pier on a canal in Bangkok. Thai script has 44 consonants and no spaces between words.",
+  "city": "Bangkok"
  },
  "t-tbilisi": {
   "title": "Carved wooden balconies",
   "alt": "An old house with carved wooden balconies among cypress trees and a lamp post.",
   "clue": "Carved wooden balconies like these hang over the old streets of a capital in the Caucasus.",
-  "story": "Old Tbilisi is famous for its carved wooden balconies. Georgian is written in its own alphabet, used for no other national language."
+  "story": "Old Tbilisi is famous for its carved wooden balconies. Georgian is written in its own alphabet, used for no other national language.",
+  "city": "Tbilisi"
  },
  "t-colombo": {
   "title": "A west-coast town street",
   "alt": "A busy street with three-wheeled taxis, motorbikes, shop signs and a domed building.",
   "clue": "Three-wheeler taxis and shop signs in a rounded script; this island sits just off a big subcontinent's southern tip.",
-  "story": "This is Mannar Road in Puttalam, on Sri Lanka's west coast. The rounded letters on the signs are Sinhala, and tuk-tuks are the everyday taxi."
+  "story": "This is Mannar Road in Puttalam, on Sri Lanka's west coast. The rounded letters on the signs are Sinhala, and tuk-tuks are the everyday taxi.",
+  "city": null
  },
  "t-dhaka": {
   "title": "Rickshaws at rest",
   "alt": "A row of cycle rickshaws with colourful hoods parked on a street under trees.",
   "clue": "Colourfully decorated cycle rickshaws are everywhere in this river-delta capital, once called the 'rickshaw capital of the world'.",
-  "story": "Dhaka in Bangladesh has hundreds of thousands of cycle rickshaws. Painting their hoods is a folk art of its own."
+  "story": "Dhaka in Bangladesh has hundreds of thousands of cycle rickshaws. Painting their hoods is a folk art of its own.",
+  "city": "Dhaka"
  },
  "t-pakistan": {
   "title": "A painted truck in the mountains",
   "alt": "A brightly painted and decorated truck on a mountain highway between rocky peaks.",
   "clue": "Trucks decorated with flowers, mirrors and chains drive a high mountain highway towards China.",
-  "story": "Truck art is a famous folk art in Pakistan. This road, the Karakoram Highway, is one of the highest paved roads in the world."
+  "story": "Truck art is a famous folk art in Pakistan. This road, the Karakoram Highway, is one of the highest paved roads in the world.",
+  "city": null
  },
  "t-jeepney": {
   "title": "A long chrome jeep",
   "alt": "A long chrome jeep-like bus at a junction under tangled power lines and tall buildings.",
   "clue": "Long chrome jeeps, first rebuilt from army surplus after 1945, are the everyday bus in this island nation's capital.",
-  "story": "Jeepneys in Manila were first made from American army jeeps left after the Second World War. They are known as the 'kings of the road'."
+  "story": "Jeepneys in Manila were first made from American army jeeps left after the Second World War. They are known as the 'kings of the road'.",
+  "city": "Manila"
  },
  "t-mongolia": {
   "title": "A felt tent on the steppe",
   "alt": "A round white felt tent standing alone on wide, dry grassland under a big sky.",
   "clue": "A land of nomads, where families still live in round felt tents that can be packed up in an hour.",
-  "story": "The ger is the traditional home in Mongolia; this one stands on the steppe near Mandalgovi. Its door traditionally faces south, and many families still live in one."
+  "story": "The ger is the traditional home in Mongolia; this one stands on the steppe near Mandalgovi. Its door traditionally faces south, and many families still live in one.",
+  "city": null
  },
  "m-uluru": {
   "title": "A red rock at sunset",
@@ -369,91 +376,106 @@
   "title": "Sacks in the spice market",
   "alt": "Open sacks of spices and dried goods with handwritten price cards in a flowing right-to-left script.",
   "clue": "Read the price cards: a right-to-left script, in an old market in a big city on a great northern river.",
-  "story": "This is the spice market in Khan el-Khalili, Cairo, a bazaar trading since the 1300s. The labels are written in Arabic."
+  "story": "This is the spice market in Khan el-Khalili, Cairo, a bazaar trading since the 1300s. The labels are written in Arabic.",
+  "city": "Cairo"
  },
  "t-porto": {
   "title": "Houses along the river",
   "alt": "Colourful houses stacked up a steep riverbank, with boats on a wide river.",
   "clue": "Colourful houses tumble down to a river that gave its name to a sweet wine.",
-  "story": "The Ribeira quarter of Porto lines the Douro river. Port wine was shipped downriver from the vineyards in flat-bottomed boats called rabelos."
+  "story": "The Ribeira quarter of Porto lines the Douro river. Port wine was shipped downriver from the vineyards in flat-bottomed boats called rabelos.",
+  "city": "Porto"
  },
  "t-quebec": {
   "title": "A castle-like hotel above the old town",
   "alt": "A green-roofed, castle-like hotel above old stone houses, with snow in a park in front.",
   "clue": "A walled old town where the street signs are in French, on a cliff above a great river.",
-  "story": "Quebec City is the only walled city north of Mexico in the Americas. The castle-like building is the Château Frontenac hotel, opened in 1893."
+  "story": "Quebec City is the only walled city north of Mexico in the Americas. The castle-like building is the Château Frontenac hotel, opened in 1893.",
+  "city": "Quebec City"
  },
  "t-nairobi": {
   "title": "A painted minibus",
   "alt": "A minibus covered in bright graffiti-style art at a busy city junction.",
   "clue": "Brightly painted shared minibuses, often with music blaring, are how this East African capital gets around.",
-  "story": "Matatus are the shared minibuses of Nairobi in Kenya. Owners compete to have the boldest art, lights and music."
+  "story": "Matatus are the shared minibuses of Nairobi in Kenya. Owners compete to have the boldest art, lights and music.",
+  "city": "Nairobi"
  },
  "t-accra": {
   "title": "A busy market",
   "alt": "A crowded market with stalls of tomatoes, shoes, baskets and colourful goods under umbrellas.",
   "clue": "A great open-air market in a West African capital on the Gulf of Guinea.",
-  "story": "Makola Market in Accra, Ghana, is one of the biggest markets in West Africa. Most of its traders are women, known as market queens."
+  "story": "Makola Market in Accra, Ghana, is one of the biggest markets in West Africa. Most of its traders are women, known as market queens.",
+  "city": "Accra"
  },
  "t-kolkata": {
   "title": "A yellow taxi",
   "alt": "A round-shouldered yellow taxi on a city street, with another behind and a sun umbrella stall.",
   "clue": "Rounded yellow taxis from a car first built in 1958, in a big city on a branch of a holy river.",
-  "story": "The yellow Hindustan Ambassador taxis of Kolkata are a symbol of the city. The Ambassador was made in West Bengal for over 50 years."
+  "story": "The yellow Hindustan Ambassador taxis of Kolkata are a symbol of the city. The Ambassador was made in West Bengal for over 50 years.",
+  "city": "Kolkata"
  },
  "t-bali": {
   "title": "Terraces of rice",
   "alt": "Steep green rice terraces among coconut palms.",
   "clue": "Rice terraces watered by a 1,000-year-old shared system run by temples, on an island of Hindu temples.",
-  "story": "These terraces are in Bali, Indonesia. Their water is shared through subak, a co-operative system recognised by UNESCO."
+  "story": "These terraces are in Bali, Indonesia. Their water is shared through subak, a co-operative system recognised by UNESCO.",
+  "city": null
  },
  "t-yerevan": {
   "title": "A round theatre",
   "alt": "A round stone theatre building with arched windows on a wide square under a clear blue sky.",
   "clue": "A capital built of pink and grey volcanic stone, in sight of a mountain from the story of Noah's ark.",
-  "story": "The Opera Theatre in Yerevan, Armenia, was designed by Alexander Tamanian and opened in 1933."
+  "story": "The Opera Theatre in Yerevan, Armenia, was designed by Alexander Tamanian and opened in 1933.",
+  "city": "Yerevan"
  },
  "t-marrakech": {
   "title": "Lanterns in the souk",
   "alt": "Dozens of pierced metal lanterns hanging and glowing in a shop.",
   "clue": "Pierced brass lanterns in the metalworkers' lane of a red-walled old city.",
-  "story": "Souk Haddadine in Marrakech is the blacksmiths' and metalworkers' market. The city's walls and houses are built from red earth."
+  "story": "Souk Haddadine in Marrakech is the blacksmiths' and metalworkers' market. The city's walls and houses are built from red earth.",
+  "city": "Marrakesh"
  },
  "t-laos": {
   "title": "Monks at prayer",
   "alt": "Monks in saffron robes kneeling before a golden seated Buddha in a red and gold temple.",
   "clue": "Saffron-robed monks in a temple of red and gold, in a quiet royal town where two rivers meet.",
-  "story": "This is Wat Sensoukharam in Luang Prabang, Laos. Every dawn, monks walk the streets to receive offerings of sticky rice."
+  "story": "This is Wat Sensoukharam in Luang Prabang, Laos. Every dawn, monks walk the streets to receive offerings of sticky rice.",
+  "city": "Luang Prabang"
  },
  "t-hanoi": {
   "title": "Motorbikes at the lights",
   "alt": "A crowd of riders on scooters waiting at a city junction, under a shop sign with lots of accent marks.",
   "clue": "Read the shop sign: a Latin alphabet with many stacked accent marks, in a capital where motorbikes outnumber cars.",
-  "story": "This is Hanoi, Vietnam. Vietnamese is written in Latin letters with extra marks that show its six tones."
+  "story": "This is Hanoi, Vietnam. Vietnamese is written in Latin letters with extra marks that show its six tones.",
+  "city": "Hanoi"
  },
  "t-seoul": {
   "title": "A festival for an alphabet",
   "alt": "Dancers on an outdoor stage beside a large seated bronze statue of a king, with a mountain behind.",
   "clue": "A seated king who invented an alphabet in 1443, in a capital ringed by mountains.",
-  "story": "This stage was set up beside the statue of King Sejong in Seoul, South Korea, to celebrate Hangul, the alphabet he created. Hangul Day is a national holiday on 9 October."
+  "story": "This stage was set up beside the statue of King Sejong in Seoul, South Korea, to celebrate Hangul, the alphabet he created. Hangul Day is a national holiday on 9 October.",
+  "city": "Seoul"
  },
  "t-lapaz": {
   "title": "A city below the peaks",
   "alt": "Office blocks in a city filling a deep valley, with a snowy mountain beyond.",
   "clue": "A city so high in the Andes that its everyday public transport is a network of cable cars.",
-  "story": "La Paz in Bolivia sits about 3,600 metres above sea level. Its Mi Teleférico cable cars are the world's largest urban cable car network."
+  "story": "La Paz in Bolivia sits about 3,600 metres above sea level. Its Mi Teleférico cable cars are the world's largest urban cable car network.",
+  "city": "La Paz"
  },
  "t-oaxaca": {
   "title": "A colourful street",
   "alt": "A street of brightly painted houses leading to a twin-towered stone church.",
   "clue": "Bright painted houses and a baroque church in a southern city known for chocolate and seven kinds of mole sauce.",
-  "story": "This street is in Oaxaca, Mexico. The city is famous for its mole sauces, its markets and its Day of the Dead celebrations."
+  "story": "This street is in Oaxaca, Mexico. The city is famous for its mole sauces, its markets and its Day of the Dead celebrations.",
+  "city": "Oaxaca"
  },
  "t-japanstreet": {
   "title": "A tower in the night city",
   "alt": "A city of skyscrapers at night with a glowing orange-and-white lattice tower in the middle.",
   "clue": "A red-and-white lattice tower, inspired by one in Paris, glowing in one of the world's biggest cities.",
-  "story": "Tokyo Tower in Japan opened in 1958. At 333 metres it is a little taller than the Eiffel Tower, which inspired it."
+  "story": "Tokyo Tower in Japan opened in 1958. At 333 metres it is a little taller than the Eiffel Tower, which inspired it.",
+  "city": "Tokyo"
  },
  "g-machu": {
   "title": "A city in the clouds",
@@ -507,31 +529,36 @@
   "title": "A blue and white minibus",
   "alt": "A blue-and-white minibus taxi on a busy street.",
   "clue": "Blue-and-white minibuses carry most people around this highland capital, the seat of the African Union.",
-  "story": "Addis Ababa in Ethiopia sits about 2,400 metres high. Its blue-and-white minibuses are the city's everyday transport."
+  "story": "Addis Ababa in Ethiopia sits about 2,400 metres high. Its blue-and-white minibuses are the city's everyday transport.",
+  "city": "Addis Ababa"
  },
  "t-istanbul": {
   "title": "A red tram from above",
   "alt": "Looking down on a busy pedestrian street with a small red vintage tram passing through.",
   "clue": "A red nostalgic tram on a busy avenue, in a city that sits on two continents.",
-  "story": "Istiklal Avenue in Istanbul, Turkey, carries a restored red tram. The city spreads across both Europe and Asia."
+  "story": "Istiklal Avenue in Istanbul, Turkey, carries a restored red tram. The city spreads across both Europe and Asia.",
+  "city": "Istanbul"
  },
  "t-krakow": {
   "title": "Arcades on the square",
   "alt": "A long Renaissance hall with arched arcades and café umbrellas on a large market square.",
   "clue": "A Renaissance cloth hall on one of the largest medieval market squares in Europe.",
-  "story": "The Cloth Hall stands on the Main Market Square in Kraków, Poland. Traders have sold cloth and goods here since the 1300s."
+  "story": "The Cloth Hall stands on the Main Market Square in Kraków, Poland. Traders have sold cloth and goods here since the 1300s.",
+  "city": "Kraków"
  },
  "t-moscow": {
   "title": "A wooden church in the snow",
   "alt": "A small dark wooden church with a steep pointed roof among frosty birch trees and snow.",
   "clue": "Log churches built without nails, birch trees and deep winter snow, in a historic town north-east of a great capital.",
-  "story": "This wooden Church of St Nicholas stands in Suzdal, Russia. It was moved there from a village in 1960 as part of a museum of wooden architecture."
+  "story": "This wooden Church of St Nicholas stands in Suzdal, Russia. It was moved there from a village in 1960 as part of a museum of wooden architecture.",
+  "city": null
  },
  "t-cusco": {
   "title": "A cathedral on the square",
   "alt": "A large stone cathedral with twin bell towers above steps where people sit in the sun.",
   "clue": "A colonial cathedral built on Inca foundations, in a mountain city that was once an empire's capital.",
-  "story": "Cusco Cathedral in Peru was built from 1560 to 1654, partly with stones taken from Inca buildings. Cusco was the capital of the Inca Empire."
+  "story": "Cusco Cathedral in Peru was built from 1560 to 1654, partly with stones taken from Inca buildings. Cusco was the capital of the Inca Empire.",
+  "city": "Cusco"
  },
  "m-hallstatt": {
   "title": "A village on the lake",
@@ -543,25 +570,29 @@
   "title": "A house on the hill",
   "alt": "A pale blue wooden house with a red roof and dormer windows on a hillside street with old lamp posts.",
   "clue": "Painted wooden houses on steep hills above a Pacific port, linked to the harbour by old funicular lifts.",
-  "story": "This house is on Cerro Alegre in Valparaíso, Chile. Many hillside houses were built by European merchants in the 1800s, and old funiculars still climb the slopes."
+  "story": "This house is on Cerro Alegre in Valparaíso, Chile. Many hillside houses were built by European merchants in the 1800s, and old funiculars still climb the slopes.",
+  "city": "Valparaíso"
  },
  "t-greekvillage": {
   "title": "White houses on the hillside",
   "alt": "A small village of white and stone houses on a terraced hillside with olive trees.",
   "clue": "White cube houses among olive terraces, on a long mountainous island in the Mediterranean.",
-  "story": "This is the village of Sklavi near Sitia on Crete, Greece. Crete has some of the oldest olive trees in the world."
+  "story": "This is the village of Sklavi near Sitia on Crete, Greece. Crete has some of the oldest olive trees in the world.",
+  "city": null
  },
  "t-sweden": {
   "title": "Red houses in the frost",
   "alt": "Red wooden houses with white trim among frosted birch trees in winter.",
   "clue": "Wooden houses painted a deep red made from copper-mine waste, among birches in a northern kingdom.",
-  "story": "These red houses were built for paper-mill workers at Hallstavik, Sweden, in 1914–15. The paint, Falu red, comes from the copper mine at Falun."
+  "story": "These red houses were built for paper-mill workers at Hallstavik, Sweden, in 1914–15. The paint, Falu red, comes from the copper mine at Falun.",
+  "city": null
  },
  "t-ireland": {
   "title": "A lighthouse on the bay",
   "alt": "A small white lighthouse on a green clifftop at the mouth of a bay, with patchwork fields behind.",
   "clue": "A small lighthouse on a peninsula of green fields at the far western edge of Europe, where Gaelic is still spoken.",
-  "story": "Dingle Lighthouse marks the entrance to Dingle Bay in County Kerry, Ireland. The Dingle peninsula is part of the Gaeltacht, where Irish is an everyday language."
+  "story": "Dingle Lighthouse marks the entrance to Dingle Bay in County Kerry, Ireland. The Dingle peninsula is part of the Gaeltacht, where Irish is an everyday language.",
+  "city": null
  },
  "g-vatican": {
   "title": "A dome above a great square",
@@ -687,60 +718,1035 @@
   "title": "Painted boats in the harbour",
   "alt": "Brightly painted wooden fishing boats in blue, yellow and green floating in a harbour in front of a town of pale stone houses.",
   "clue": "Brightly painted fishing boats, each with a watchful eye on its bow, in a small island nation's harbour.",
-  "story": "These are luzzu boats in Marsaxlokk, a fishing village in Malta. The eye painted on each bow is said to go back to the Phoenicians and to watch over the fishermen."
+  "story": "These are luzzu boats in Marsaxlokk, a fishing village in Malta. The eye painted on each bow is said to go back to the Phoenicians and to watch over the fishermen.",
+  "city": null
  },
  "t-tallinn": {
   "title": "A town hall with a spire",
   "alt": "A Gothic stone town hall with a slender spire on a cobbled square, with colourful old houses and café umbrellas.",
   "clue": "A Gothic town hall with a slender spire on a cobbled medieval square near the Baltic Sea.",
-  "story": "Tallinn Town Hall in Estonia is the oldest surviving town hall in Northern Europe. The weathervane on its spire, Old Thomas, is a symbol of the city."
+  "story": "Tallinn Town Hall in Estonia is the oldest surviving town hall in Northern Europe. The weathervane on its spire, Old Thomas, is a symbol of the city.",
+  "city": "Tallinn"
  },
  "t-lagos": {
   "title": "A yellow minibus",
   "alt": "A yellow minibus with black stripes driving past a footbridge and brick buildings on a busy road.",
   "clue": "Yellow minibuses with black stripes carry millions of people around a huge West African city.",
-  "story": "Danfo minibuses are the yellow-and-black buses of Lagos, Nigeria. Their conductors call out the destinations as they go, and the city has some of Africa's busiest roads."
+  "story": "Danfo minibuses are the yellow-and-black buses of Lagos, Nigeria. Their conductors call out the destinations as they go, and the city has some of Africa's busiest roads.",
+  "city": "Lagos"
  },
  "t-colonia": {
   "title": "A cobbled lane to the river",
   "alt": "A cobbled lane between old pastel houses and flowering trees, sloping down to a wide brown river.",
   "clue": "A cobbled colonial lane sloping down to a river so wide it looks like the sea.",
-  "story": "This lane is in Colonia del Sacramento, Uruguay, founded by the Portuguese in 1680. Across the wide Río de la Plata lies Buenos Aires."
+  "story": "This lane is in Colonia del Sacramento, Uruguay, founded by the Portuguese in 1680. Across the wide Río de la Plata lies Buenos Aires.",
+  "city": "Colonia del Sacramento"
  },
  "t-jiufen": {
   "title": "Stairs between teahouses",
   "alt": "A steep stepped lane between small shops with red lanterns and signs in Chinese characters.",
   "clue": "Steep lanes of teahouses in an old gold-mining town, with shop signs in traditional characters.",
-  "story": "Jiufen in Taiwan grew rich in a gold rush in the 1890s. Its lantern-lit lanes and teahouses look out over the sea, and Taiwan writes Chinese in traditional characters."
+  "story": "Jiufen in Taiwan grew rich in a gold rush in the 1890s. Its lantern-lit lanes and teahouses look out over the sea, and Taiwan writes Chinese in traditional characters.",
+  "city": null
  },
  "t-bokaap": {
   "title": "A pink house",
   "alt": "A bright pink house front with painted aloe plants, wooden-framed windows and a balcony with magenta balusters.",
   "clue": "A candy-pink house in a hillside quarter famous for painting its homes in bright colours.",
-  "story": "This house is on Wale Street in the Bo-Kaap, Cape Town, South Africa. The quarter's houses are painted bright colours, and it is famous for its Cape Malay food."
+  "story": "This house is on Wale Street in the Bo-Kaap, Cape Town, South Africa. The quarter's houses are painted bright colours, and it is famous for its Cape Malay food.",
+  "city": "Cape Town"
  },
  "t-rothenburg": {
   "title": "A half-timbered corner",
   "alt": "A cobbled street fork with a half-timbered yellow house, pastel houses and a stone gate tower, with walkers.",
   "clue": "Half-timbered houses and a gate tower in a walled medieval town on a \"Romantic Road\".",
-  "story": "The Plönlein, \"little square\", is in Rothenburg ob der Tauber, Germany. The town's medieval walls still run all the way round, and you can walk along them."
+  "story": "The Plönlein, \"little square\", is in Rothenburg ob der Tauber, Germany. The town's medieval walls still run all the way round, and you can walk along them.",
+  "city": "Rothenburg ob der Tauber"
  },
  "t-zanzibar": {
   "title": "Verandas by a garden",
   "alt": "Old white houses with dark red trim and wooden verandas beside a small garden with a flowering bush and big trees.",
   "clue": "Shady old merchant houses with deep verandas on a spice island in the Indian Ocean.",
-  "story": "This square is in Stone Town, the old heart of Zanzibar City in Tanzania. Zanzibar was famous for its cloves, and Swahili, Arab, Indian and European styles mix in its buildings."
+  "story": "This square is in Stone Town, the old heart of Zanzibar City in Tanzania. Zanzibar was famous for its cloves, and Swahili, Arab, Indian and European styles mix in its buildings.",
+  "city": "Zanzibar City"
  },
  "t-okavango": {
   "title": "Poling through the delta",
   "alt": "A person standing in a narrow wooden canoe and pushing it along with a pole across calm blue water and reeds.",
   "clue": "Poling a dugout canoe through a delta whose river flows into a desert and never reaches the sea.",
-  "story": "The Okavango Delta in Botswana is fed by a river that runs into the Kalahari and spreads out instead of reaching the sea. Guides pole visitors through it in canoes called mokoro."
+  "story": "The Okavango Delta in Botswana is fed by a river that runs into the Kalahari and spreads out instead of reaching the sea. Guides pole visitors through it in canoes called mokoro.",
+  "city": null
  },
  "t-nizwa": {
   "title": "Battlements and a minaret",
   "alt": "Rounded sandy battlements of a fort in the foreground, with a minaret and a town below and hazy mountains behind.",
   "clue": "Fort battlements and a mosque minaret in a mountain oasis town known for its dates and silver.",
-  "story": "Nizwa Fort in Oman was built in the 1600s around a huge round tower, with views over the palm groves. The town holds a lively Friday market and is known for its dates."
+  "story": "Nizwa Fort in Oman was built in the 1600s around a huge round tower, with views over the palm groves. The town holds a lively Friday market and is known for its dates.",
+  "city": "Nizwa"
+ },
+ "g-goldentemple": {
+  "title": "A golden temple on a pool",
+  "alt": "A gilded temple in the middle of a still pool, with white marble walkways and a barefoot pilgrim in a white turban.",
+  "clue": "A gilded shrine in a sacred pool, whose free community kitchen feeds tens of thousands of visitors every day.",
+  "story": "The Harmandir Sahib, or Golden Temple, in Amritsar is the holiest shrine of the Sikh faith. Its langar kitchen serves a free meal to anyone who comes, every day of the year."
+ },
+ "g-gateway": {
+  "title": "An arch by the harbour",
+  "alt": "A grand stone arch on a waterfront, beside a hotel with a red dome and a tall tower, with ferries bobbing in front.",
+  "clue": "A waterfront arch built to welcome a visiting king and queen, beside a famous red-domed hotel on the Arabian Sea.",
+  "story": "The Gateway of India in Mumbai was finished in 1924. Ferries leave from its steps for the cave temples of Elephanta Island."
+ },
+ "g-victoriamem": {
+  "title": "A white marble memorial",
+  "alt": "A white marble palace with a great central dome topped by a dark statue of an angel, behind neat green gardens.",
+  "clue": "A marble memorial to a queen-empress, in the city that was once the capital of the British Raj.",
+  "story": "The Victoria Memorial in Kolkata opened in 1921 and is now a museum. The bronze Angel of Victory on its dome turns with the wind."
+ },
+ "g-konark": {
+  "title": "A stone chariot wheel",
+  "alt": "A huge carved stone wheel with eight wide spokes, set into a temple wall covered in small carved figures.",
+  "clue": "One of 24 carved wheels on a temple built as the chariot of the sun god, near the eastern coast.",
+  "story": "The Konark Sun Temple in Odisha was built in the 13th century as a giant stone chariot. Its wheels work as sundials, and one appears on the ten-rupee note."
+ },
+ "g-lotus": {
+  "title": "A temple like a flower",
+  "alt": "A white building shaped like a half-open lotus flower, its marble petals rising above blue pools and visitors.",
+  "clue": "A house of worship shaped like a lotus, open to people of every faith, in a capital city.",
+  "story": "The Lotus Temple in Delhi is a Bahá'í house of worship, opened in 1986. Its 27 marble petals are arranged in clusters of three."
+ },
+ "g-humayun": {
+  "title": "A garden tomb",
+  "alt": "A red sandstone tomb with a white marble dome, at the end of a long water channel in a formal garden.",
+  "clue": "A garden tomb for a Mughal emperor, built decades before a more famous marble one and an inspiration for it.",
+  "story": "Humayun's Tomb in Delhi was finished in 1570, commissioned by the emperor's widow, Bega Begum. It was the first great garden tomb of its kind."
+ },
+ "g-louvre": {
+  "title": "A glass pyramid",
+  "alt": "A glass pyramid glowing at dusk in a courtyard surrounded by grand old palace wings.",
+  "clue": "A glass pyramid entrance in the courtyard of a royal palace that became the world's most visited art museum.",
+  "story": "The Louvre in Paris was a royal palace before it became a museum in 1793. I. M. Pei's glass pyramid entrance opened in 1989."
+ },
+ "g-edinburgh": {
+  "title": "A castle on a rock",
+  "alt": "A stone castle along the top of a steep volcanic crag, above green gardens where people sit on the grass.",
+  "clue": "A castle on the plug of an old volcano, above gardens in a city that hosts a huge arts festival every August.",
+  "story": "Edinburgh Castle in Scotland sits on Castle Rock, the core of a volcano that died out about 350 million years ago. A cannon is fired from it at one o'clock most days."
+ },
+ "g-trevi": {
+  "title": "A grand fountain",
+  "alt": "A huge baroque fountain built into a palace wall, with a marble sea god, horses and rocks above a turquoise pool.",
+  "clue": "Toss a coin over your shoulder into this baroque fountain and, the story goes, you will return to the city.",
+  "story": "The Trevi Fountain in Rome was finished in 1762. Around three thousand euros in coins are thrown in each day, and they go to charity."
+ },
+ "g-florence": {
+  "title": "A red dome at dusk",
+  "alt": "A cathedral with a vast red-brick dome and a striped bell tower rising over a city of terracotta roofs, with hills behind.",
+  "clue": "The biggest brick dome ever built, in the city where the Renaissance began.",
+  "story": "Florence Cathedral's dome was designed by Filippo Brunelleschi and finished in 1436. Climbing its 463 steps takes you between its inner and outer shells."
+ },
+ "g-belem": {
+  "title": "A tower in the river",
+  "alt": "A white stone tower with little domed turrets, standing in a wide river and reached by a wooden walkway.",
+  "clue": "A white tower that guarded the river mouth where the great ocean voyages of discovery set out.",
+  "story": "The Belém Tower in Lisbon was built around 1519. Explorers sailed past it on their way to the ocean."
+ },
+ "g-meteora": {
+  "title": "A monastery on a rock",
+  "alt": "A monastery with red tiled roofs perched on top of a sheer rock pillar, among wooded cliffs.",
+  "clue": "Monasteries perched on giant rock pillars, once reached only by ladders and baskets pulled up on ropes.",
+  "story": "Meteora in Greece means 'suspended in the air'. Monks built these monasteries from the 14th century, and six are still lived in."
+ },
+ "g-atomium": {
+  "title": "A giant atom",
+  "alt": "Shiny metal spheres joined by tubes like a giant model of an atom, lit up with little lights against a dusky sky.",
+  "clue": "A building shaped like an iron crystal magnified billions of times, made for a world's fair.",
+  "story": "The Atomium in Brussels was built for the 1958 World's Fair. Visitors ride escalators through its tubes between the spheres."
+ },
+ "g-schonbrunn": {
+  "title": "A summer palace",
+  "alt": "A long yellow palace with formal gardens in front, seen from a hill over a city of red roofs.",
+  "clue": "The summer palace of an empire's royal family, with a zoo in its garden that is the oldest in the world still open.",
+  "story": "Schönbrunn Palace in Vienna has 1,441 rooms. Its zoo opened in 1752."
+ },
+ "g-rushmore": {
+  "title": "Faces in the mountain",
+  "alt": "Four giant faces of men carved into a granite cliff under a deep blue sky, with pine trees and rubble below.",
+  "clue": "Four leaders' faces, each about 18 metres tall, carved into a granite mountain in the Black Hills.",
+  "story": "Mount Rushmore in South Dakota was carved between 1927 and 1941. It shows presidents Washington, Jefferson, Theodore Roosevelt and Lincoln."
+ },
+ "g-niagara": {
+  "title": "A horseshoe of water",
+  "alt": "A wide curved waterfall throwing up clouds of mist, with a rainbow and a small tour boat in the green water below.",
+  "clue": "A horseshoe-shaped waterfall on a border river between two great lakes, visited by boats that sail right into the spray.",
+  "story": "The Horseshoe Falls at Niagara are mostly on the Canadian side of the border. Boats have carried visitors into the mist since 1846."
+ },
+ "g-sugarloaf": {
+  "title": "A cable car over the bay",
+  "alt": "A glass cable car gliding over a wooded peak, high above a bay full of small boats and a city of tall buildings.",
+  "clue": "A cable car up a granite peak at the mouth of a bay, in a city famous for its carnival and beaches.",
+  "story": "The cable car up Sugarloaf Mountain in Rio de Janeiro opened in 1912. From the top you can see Copacabana beach and the Christ the Redeemer statue."
+ },
+ "g-lalibela": {
+  "title": "A church cut into the rock",
+  "alt": "A cross-shaped church carved down into solid red rock, standing in a deep pit at sunset, with hills behind.",
+  "clue": "A church carved downwards from a single block of rock, shaped like a cross, in the highlands of the Horn of Africa.",
+  "story": "The Church of Saint George in Lalibela, Ethiopia, was cut out of the rock about 800 years ago. Lalibela has eleven such churches, still used for worship."
+ },
+ "g-harbourbridge": {
+  "title": "A steel arch at night",
+  "alt": "A huge steel arch bridge lit up at night over a harbour, with stone pylons at each end and city lights behind.",
+  "clue": "A steel arch bridge nicknamed 'the Coathanger', near a famous opera house with roofs like sails.",
+  "story": "The Sydney Harbour Bridge opened in 1932. Visitors can climb over the top of its arch, 134 metres above the water."
+ },
+ "g-himeji": {
+  "title": "A white castle",
+  "alt": "A white castle of stacked curved roofs rising above trees and a stone wall reflected in a moat.",
+  "clue": "A brilliant white castle nicknamed the White Heron, which survived wars and earthquakes for over 400 years.",
+  "story": "Himeji Castle in Japan was finished in its present form in 1609. Its white plaster walls helped protect the wooden building from fire."
+ },
+ "g-kinkakuji": {
+  "title": "A golden pavilion",
+  "alt": "A pavilion covered in gold leaf beside a still pond with pine-covered islands, mirrored in the water.",
+  "clue": "A pavilion covered in gold leaf, beside a mirror pond, in a city of a thousand temples.",
+  "story": "Kinkaku-ji, the Golden Pavilion, is a Zen temple in Kyoto. The building was rebuilt in 1955 after a fire, and its gold was renewed in the 1980s."
+ },
+ "g-grandpalace": {
+  "title": "Golden spires by a white wall",
+  "alt": "Golden spires and tiled temple roofs behind a long white wall, mirrored in a puddle, as a monk in a saffron robe walks past.",
+  "clue": "A royal palace and temple of glittering spires, home to a small, much-loved statue of the Buddha carved from green stone.",
+  "story": "The Grand Palace in Bangkok was built from 1782. Inside its walls stands the Temple of the Emerald Buddha, the most sacred temple in Thailand."
+ },
+ "g-everest": {
+  "title": "The highest peak at sunset",
+  "alt": "Snowy mountain peaks under a deep violet sky, with the tallest summit glowing red in the last sunlight.",
+  "clue": "The highest mountain on Earth, seen from the trekking trails on its southern side, home of the Sherpa people.",
+  "story": "Mount Everest stands 8,849 metres tall on the border of Nepal and China. Locally it is called Sagarmatha and Chomolungma."
+ },
+ "g-bluemosque": {
+  "title": "A courtyard at dusk",
+  "alt": "A great mosque with cascading domes and slender minarets, glowing gold at dusk behind an arcaded marble courtyard.",
+  "clue": "A mosque with six minarets, named for the blue tiles inside, facing a great domed church-turned-museum across a park.",
+  "story": "The Sultan Ahmed Mosque in Istanbul, known as the Blue Mosque, was finished in 1616. More than 20,000 hand-made tiles line its walls inside."
+ },
+ "g-azadi": {
+  "title": "A tower of freedom",
+  "alt": "A tall white marble tower with a curved arch and a honeycomb pattern, seen from below against a black night sky.",
+  "clue": "A marble gateway tower whose name means freedom, mixing old Persian arches with modern shapes.",
+  "story": "The Azadi Tower in Tehran was built in 1971. Its design draws on Persian architecture from before and after the coming of Islam."
+ },
+ "g-eljem": {
+  "title": "An arena in a small town",
+  "alt": "A huge oval stone arena with rows of arches, seen from the air in the middle of a town of low, pale houses.",
+  "clue": "One of the largest Roman arenas ever built, standing in a small North African town that grew up around it.",
+  "story": "The amphitheatre of El Jem in Tunisia was built around 238 AD and could seat about 35,000 people. It is among the best preserved Roman ruins anywhere."
+ },
+ "g-versailles": {
+  "title": "A hall of mirrors",
+  "alt": "A long palace gallery lined with tall mirrors, crystal chandeliers and golden statues, with a painted ceiling and sunlight on the floor.",
+  "clue": "A long gallery of 357 mirrors in a king's palace, where a treaty ending a world war was signed.",
+  "story": "The Hall of Mirrors at the Palace of Versailles, near Paris, was finished in 1684. The Treaty of Versailles was signed there in 1919."
+ },
+ "g-tanahlot": {
+  "title": "A temple on a sea rock",
+  "alt": "A small temple with thatched roofs on a rocky island in the surf, with visitors on the wet rocks in front.",
+  "clue": "A sea temple on a rock that becomes an island at high tide, on a famous island of rice terraces and dancers.",
+  "story": "Tanah Lot is one of the sea temples of Bali, built around the 16th century. Sea snakes living in the rocks are said to guard it."
+ },
+ "g-charminar": {
+  "title": "Four minarets over the old city",
+  "alt": "A square stone monument with four tall minarets, seen from above in the middle of a busy old city, with a large mosque nearby.",
+  "clue": "A square monument with four minarets at the heart of an old city famous for pearls and biryani.",
+  "story": "The Charminar in Hyderabad was built in 1591. Its name means 'four minarets', and the bustling Laad Bazaar of bangles spreads out around it."
+ },
+ "g-meenakshi": {
+  "title": "A tower of a thousand figures",
+  "alt": "A towering temple gateway covered from base to top in brightly painted sculptures of gods and animals, against a blue sky.",
+  "clue": "One of fourteen towering temple gateways covered in painted gods, in an ancient southern city on the Vaigai river.",
+  "story": "The Meenakshi Amman Temple in Madurai is dedicated to the goddess Meenakshi. Its tallest gateway tower is about 52 metres high, and the figures are repainted every few years."
+ },
+ "g-brandenburg": {
+  "title": "A gate with a chariot",
+  "alt": "A grand sandstone gate of tall columns, topped by a bronze statue of a goddess driving a four-horse chariot.",
+  "clue": "A city gate topped by a four-horse chariot, which stood beside a wall that divided the city for 28 years.",
+  "story": "The Brandenburg Gate in Berlin was finished in 1791. When the Berlin Wall fell in 1989, crowds gathered here to celebrate."
+ },
+ "g-torres": {
+  "title": "Horns of granite",
+  "alt": "Jagged mountain peaks of pale granite capped with dark rock and snow, rising above green hills under a bright sky.",
+  "clue": "Granite peaks capped with dark rock like horns, in a national park near the southern tip of a long, thin country.",
+  "story": "The Cuernos, or 'Horns', of Torres del Paine in Chilean Patagonia are pale granite capped with darker, older rock. Strong winds and guanacos are common on its trails."
+ },
+ "g-teotihuacan": {
+  "title": "A city of pyramids",
+  "alt": "A wide stepped stone pyramid at the end of a long avenue, with smaller platforms on either side and mountains beyond.",
+  "clue": "An ancient city of great pyramids and a long avenue, built long before the Aztecs found it and named it 'the place of the gods'.",
+  "story": "Teotihuacan, near Mexico City, was one of the largest cities in the world around 500 AD. The pyramid in this view is the Pyramid of the Moon."
+ },
+ "g-abusimbel": {
+  "title": "Giants in the cliff",
+  "alt": "A temple front carved straight into a sandstone cliff, with tall standing statues of a king and queen either side of the door.",
+  "clue": "Temples carved into a cliff by a great pharaoh, moved piece by piece to higher ground when a huge dam was built.",
+  "story": "The temples of Abu Simbel in Egypt were cut into the rock over 3,200 years ago. In the 1960s they were sawn into blocks and moved to save them from the rising Lake Nasser."
+ },
+ "g-terracotta": {
+  "title": "An army of clay",
+  "alt": "Rows of life-size clay soldiers and horses standing in an earthen pit, each face slightly different.",
+  "clue": "Thousands of life-size clay soldiers buried to guard the tomb of the first emperor to unite a great land.",
+  "story": "The Terracotta Army near Xi'an was found by farmers digging a well in 1974. More than 8,000 soldiers were made, and no two faces are alike."
+ },
+ "g-templeheaven": {
+  "title": "A round hall of blue roofs",
+  "alt": "A round wooden hall with three tiers of deep blue roofs and a golden top, on a white marble terrace with crowds below.",
+  "clue": "A round hall with three blue roofs, where emperors prayed each year for a good harvest.",
+  "story": "The Hall of Prayer for Good Harvests at the Temple of Heaven in Beijing is built of wood without a single nail. The blue roofs stand for the sky."
+ },
+ "g-pompeii": {
+  "title": "A town under the volcano",
+  "alt": "Broken white stone columns and old brick ruins in a wide open square, with a mountain rising behind under white clouds.",
+  "clue": "A Roman town buried in volcanic ash in a single day, with the volcano that did it still in view.",
+  "story": "Pompeii, near Naples, was buried when Mount Vesuvius erupted in 79 AD. The ash preserved its streets, paintings and even loaves of bread."
+ },
+ "g-grandcanyon": {
+  "title": "A canyon of red layers",
+  "alt": "A vast canyon of red, orange and purple rock layers stretching to the horizon, with clouds and a faint rainbow above.",
+  "clue": "A canyon more than a kilometre and a half deep, carved by a river over millions of years in a dry south-western state.",
+  "story": "The Grand Canyon in Arizona was carved by the Colorado River. Its lowest rocks are nearly two billion years old."
+ },
+ "g-hassan": {
+  "title": "A minaret by the ocean",
+  "alt": "A very tall square minaret covered in green and cream tilework, framed by a carved archway in warm evening light.",
+  "clue": "A mosque with one of the tallest minarets in the world, built partly over the Atlantic Ocean in a big port city.",
+  "story": "The Hassan II Mosque in Casablanca was finished in 1993. Its minaret rises 210 metres, and part of the prayer hall has a glass floor over the sea."
+ },
+ "g-pamukkale": {
+  "title": "White terraces",
+  "alt": "Snow-white stone terraces with shallow pools of water stepping down a hillside, with visitors walking barefoot along the top.",
+  "clue": "Hot springs that left white mineral terraces down a hillside, beside the ruins of an ancient Greek spa city.",
+  "story": "Pamukkale means 'cotton castle' in Turkish. The terraces are made of travertine left by warm, mineral-rich spring water over thousands of years."
+ },
+ "g-pantheon": {
+  "title": "An open eye in a dome",
+  "alt": "Looking straight up into a huge coffered concrete dome with a round opening to the sky at its centre.",
+  "clue": "An ancient temple whose great concrete dome, with a round opening at the top, is still the largest unreinforced one in the world.",
+  "story": "The Pantheon in Rome was finished around 125 AD. Rain falls through the oculus in its dome and drains away through small holes in the floor."
+ },
+ "g-mezquita": {
+  "title": "A mosque and a bridge",
+  "alt": "A long stone bridge of many arches crossing a shallow green river towards a great golden building with a bell tower.",
+  "clue": "A vast old mosque with a cathedral built inside it, beside a Roman bridge in a southern city once ruled by the Moors.",
+  "story": "The Mosque-Cathedral of Córdoba was begun in 785 and has a forest of more than 800 columns. A cathedral was built in its centre in the 16th century."
+ },
+ "g-guggenheim": {
+  "title": "A museum of silver curves",
+  "alt": "A museum of swooping, shining metal curves beside a river, with a red arch bridge and a giant flower-like sculpture nearby.",
+  "clue": "A museum covered in curving titanium panels, which turned a northern industrial port into an art destination.",
+  "story": "The Guggenheim Museum Bilbao, designed by Frank Gehry, opened in 1997. Its walls are clad in about 33,000 thin sheets of titanium."
+ },
+ "g-lincoln": {
+  "title": "A temple to a president",
+  "alt": "A white marble building like a Greek temple, with a row of tall columns at the top of wide steps, under a blue sky.",
+  "clue": "A marble memorial with 36 columns, one for each state in the union when the president it honours died.",
+  "story": "The Lincoln Memorial in Washington, D.C., opened in 1922. Martin Luther King Jr. gave his 'I Have a Dream' speech on its steps in 1963."
+ },
+ "g-itsukushima": {
+  "title": "A gate in the sea",
+  "alt": "A huge red wooden gate standing in calm blue sea water, with green wooded hills behind.",
+  "clue": "A giant red shrine gate that seems to float on the sea at high tide, on a sacred island where deer roam free.",
+  "story": "The great torii of Itsukushima Shrine on Miyajima, Japan, stands in the sea by its own weight. At low tide visitors can walk out to it."
+ },
+ "g-prambanan": {
+  "title": "A cluster of stone spires",
+  "alt": "Tall pointed temple towers of dark carved stone rising above fields of fallen blocks, under a blue sky with white clouds.",
+  "clue": "Soaring Hindu temple spires built over a thousand years ago, not far from a great Buddhist monument on the same island.",
+  "story": "Prambanan in Central Java was built in the 9th century for Shiva, Vishnu and Brahma. Its main temple is 47 metres tall."
+ },
+ "g-amer": {
+  "title": "A fort on the hills",
+  "alt": "A honey-coloured hilltop fort palace around a big courtyard full of visitors, with walls snaking over the hills behind.",
+  "clue": "A hilltop fort palace of honey-coloured stone above a lake, near the 'Pink City', where elephants once carried visitors up.",
+  "story": "Amer Fort near Jaipur was built from 1592 by Raja Man Singh. Inside is the Sheesh Mahal, a hall covered in thousands of tiny mirrors."
+ },
+ "g-karnak": {
+  "title": "An avenue of rams",
+  "alt": "A row of stone sphinxes with rams' heads, each guarding a small statue of a king, in front of massive sandstone walls.",
+  "clue": "A vast temple complex of giant columns and ram-headed sphinxes beside the Nile, on the site of an ancient capital.",
+  "story": "The Karnak temple complex at Luxor in Egypt was added to by kings over about 2,000 years. Its great hall holds 134 huge columns."
+ },
+ "g-parkguell": {
+  "title": "Gingerbread houses",
+  "alt": "Two fairy-tale houses with wavy white roofs and a tower covered in blue and white tiles, above a crowded entrance and a city stretching to the sea.",
+  "clue": "A hillside park of wavy tiled buildings by the same architect as a famous unfinished basilica in the same city.",
+  "story": "Park Güell in Barcelona was designed by Antoni Gaudí and opened to the public in 1926. Its famous long bench is covered in broken tile mosaic."
+ },
+ "g-arc": {
+  "title": "A triumphal arch",
+  "alt": "A massive carved stone arch lit up at dusk, with a slim iron tower glowing in the distance.",
+  "clue": "A triumphal arch at the meeting of twelve avenues, with an unknown soldier's tomb and an eternal flame beneath it.",
+  "story": "The Arc de Triomphe in Paris was finished in 1836. A flame for the Unknown Soldier has burned under it since 1923."
+ },
+ "m-hampi": {
+  "title": "A temple tower among boulders",
+  "alt": "A tall tiered temple tower of carved stone above a dusty path, with a landscape of huge rounded boulders behind and two women walking.",
+  "clue": "A towering temple gateway in the ruined capital of a great southern empire, set among hills of giant balanced boulders.",
+  "story": "Hampi in Karnataka was the capital of the Vijayanagara Empire in the 1500s. The Virupaksha Temple has been in worship for over a thousand years."
+ },
+ "m-varanasi": {
+  "title": "Steps down to a holy river",
+  "alt": "Old sandstone palaces and long stone steps leading down to a wide river, with wooden rowing boats moored along the bank.",
+  "clue": "Stone steps down to a sacred river in one of the oldest living cities on Earth, where evening prayers are sung with fire.",
+  "story": "Varanasi stands on the banks of the Ganges and has more than 80 ghats, or riverside steps. Pilgrims come to bathe in the river at dawn."
+ },
+ "m-jaisalmer": {
+  "title": "A golden fort",
+  "alt": "Massive round bastions of golden sandstone rising above a stone wall, under a blue sky with white clouds.",
+  "clue": "A 'Golden Fort' of yellow sandstone in the Thar Desert, where thousands of people still live inside the walls.",
+  "story": "Jaisalmer Fort in Rajasthan was built in 1156. It is one of the few living forts in the world, with homes, shops and temples inside."
+ },
+ "m-udaipur": {
+  "title": "Palaces on a lake",
+  "alt": "White and cream palaces and houses along the shore of a calm lake, with a large hilltop palace behind.",
+  "clue": "A 'City of Lakes' with white palaces on the water, founded by a Rajput king in the hills of the north-west.",
+  "story": "Udaipur in Rajasthan sits on Lake Pichola. Its City Palace was added to by many rulers over about 400 years."
+ },
+ "m-alleppey": {
+  "title": "A houseboat on the backwaters",
+  "alt": "A wooden houseboat with a curved roof of woven palm and bamboo, floating on calm water lined with coconut palms.",
+  "clue": "A rice-barge turned houseboat with a roof of woven palm leaves, on a maze of palm-lined lagoons by the Arabian Sea.",
+  "story": "The kettuvallam houseboats of the Kerala backwaters were once used to carry rice and spices. Today visitors stay on them and drift through the canals."
+ },
+ "m-thiksey": {
+  "title": "A monastery on a hill",
+  "alt": "A many-storeyed white monastery with red-topped buildings stacked up a dry, rocky hillside under a deep blue sky.",
+  "clue": "A white monastery stacked up a hillside in a high, dry mountain desert, sometimes called 'Little Tibet'.",
+  "story": "Thiksey Monastery in Ladakh is built in the style of the Potala Palace in Lhasa. It houses a two-storey statue of the Maitreya Buddha."
+ },
+ "m-khajuraho": {
+  "title": "A carved stone temple",
+  "alt": "A sandstone temple with a tall curved spire and pillared porches, every surface covered in fine carvings, on a wide open lawn.",
+  "clue": "Sandstone temples covered in thousands of carved figures, built by the Chandela kings a thousand years ago in the heart of the country.",
+  "story": "The temples of Khajuraho in Madhya Pradesh were built between 950 and 1050. Of about 85 temples, around 25 still stand."
+ },
+ "m-shoretemple": {
+  "title": "A temple by the sea",
+  "alt": "Two pyramid-shaped stone temple towers, weathered by sea wind, glowing in warm evening light.",
+  "clue": "A granite temple on the beach of the Bay of Bengal, built by the Pallava kings and battered by sea winds for 1,300 years.",
+  "story": "The Shore Temple at Mahabalipuram in Tamil Nadu was built around 700 AD. The 2004 tsunami uncovered more old carvings in the sand nearby."
+ },
+ "m-ellora": {
+  "title": "A temple cut from a cliff",
+  "alt": "A temple carved down out of a single grey rock cliff, with stone elephants and deep galleries cut into the walls around it.",
+  "clue": "A whole temple carved downwards out of one rock cliff, among caves of three faiths on a western plateau.",
+  "story": "The Kailasa Temple at Ellora in Maharashtra was cut from the rock in the 8th century. Workers removed about 200,000 tonnes of stone to make it."
+ },
+ "m-kyoto": {
+  "title": "A lane to a pagoda",
+  "alt": "A quiet stone lane between old wooden townhouses with paper lanterns, leading up to a five-storey wooden pagoda.",
+  "clue": "A sloping lane of wooden teahouses below a five-storey pagoda, in an old imperial capital of temples and geishas.",
+  "story": "The Yasaka Pagoda in Kyoto's Higashiyama district was rebuilt in 1440. Its lanes are among the best-kept old streets in Japan."
+ },
+ "m-shirakawago": {
+  "title": "A steep thatched farmhouse",
+  "alt": "A big wooden farmhouse with a very steep, thick thatched roof, with a garden and visitors in front and forested hills behind.",
+  "clue": "Farmhouses with steep thatched roofs like hands joined in prayer, built to shed heavy mountain snow.",
+  "story": "The gassho-zukuri houses of Shirakawa-go in Japan have roofs up to 60 degrees steep. Villagers rethatch them together every few decades."
+ },
+ "m-luangprabang": {
+  "title": "A temple with sweeping roofs",
+  "alt": "A temple with low, layered roofs sweeping almost to the ground, gold decoration on dark wood, and white steps.",
+  "clue": "A temple with layered roofs sweeping to the ground, in a royal town where the Mekong meets another river, and monks collect alms at dawn.",
+  "story": "Wat Xieng Thong in Luang Prabang, Laos, was built in 1560. The whole old town is a World Heritage Site."
+ },
+ "m-guilin": {
+  "title": "A river among karst peaks",
+  "alt": "A winding river through flat green fields, among dozens of steep, rounded limestone peaks fading into the haze.",
+  "clue": "Steep limestone peaks along a winding river, a landscape painted on the country's 20-yuan banknote.",
+  "story": "The Li River runs between Guilin and Yangshuo in southern China. Its karst hills are hundreds of millions of years old."
+ },
+ "m-jiuzhaigou": {
+  "title": "A turquoise lake",
+  "alt": "A perfectly still turquoise lake reflecting steep forested mountainsides and a rocky peak.",
+  "clue": "Lakes of startling turquoise in a mountain valley of nine Tibetan villages, near the home of the giant panda.",
+  "story": "The lakes of Jiuzhaigou in Sichuan get their colour from minerals and very clear water. Fallen trees can be seen lying on the lake beds."
+ },
+ "m-charyn": {
+  "title": "A canyon of red towers",
+  "alt": "A deep canyon of red and orange sandstone cliffs and towers winding away into a wide, dry landscape.",
+  "clue": "A red sandstone canyon on the steppe, sometimes called the little brother of a famous one in America, near the old capital Almaty.",
+  "story": "Charyn Canyon in Kazakhstan is about 80 kilometres long. Its 'Valley of Castles' has rock towers shaped by wind and water."
+ },
+ "m-darvaza": {
+  "title": "A crater on fire",
+  "alt": "A huge crater in a flat desert, with flames burning in many places across its floor and rocky walls.",
+  "clue": "A gas crater in the Karakum Desert that has been burning since it was set alight in 1971.",
+  "story": "The Darvaza gas crater in Turkmenistan is nicknamed the 'Door to Hell'. It is about 70 metres wide and glows at night."
+ },
+ "m-iskanderkul": {
+  "title": "A turquoise mountain lake",
+  "alt": "A bright turquoise lake winding between steep, bare mountain slopes in shades of red, grey and green.",
+  "clue": "A turquoise lake in the Fann Mountains, in a small mountain country north of Afghanistan.",
+  "story": "The Fann Mountains in Tajikistan are dotted with turquoise lakes. Legend says nearby Iskanderkul is named after Alexander the Great."
+ },
+ "m-wadirum": {
+  "title": "Red sand and rock",
+  "alt": "Huge red sandstone rock formations rising from orange desert sand under a clear blue sky.",
+  "clue": "A 'Valley of the Moon' of red sand and towering sandstone, north of the Red Sea, where many films set on Mars are shot.",
+  "story": "Wadi Rum in Jordan is a protected desert of sandstone and granite. Bedouin families have lived there for centuries."
+ },
+ "m-banaue": {
+  "title": "A village in the terraces",
+  "alt": "A small village of houses with red and silver roofs among curving, flooded rice terraces climbing a mountainside.",
+  "clue": "Rice terraces carved into mountains by the Ifugao people about 2,000 years ago, on a northern island of a country of 7,000 islands.",
+  "story": "The Batad rice terraces near Banaue in the Philippines form a giant amphitheatre. They are still farmed by hand."
+ },
+ "m-gardensbay": {
+  "title": "A steel supertree",
+  "alt": "Looking up at a giant steel tree-like tower with a crown of branching metal arms against a cloudy sky.",
+  "clue": "Giant steel 'supertrees' covered in plants, in a garden on reclaimed land in a small island city-state near the equator.",
+  "story": "The Supertree Grove at Gardens by the Bay in Singapore opened in 2012. The trees are up to 50 metres tall and light up in a show every evening."
+ },
+ "m-hunza": {
+  "title": "A valley of poplars",
+  "alt": "A green valley of poplar trees and terraced fields beside a winding river, surrounded by bare brown mountains and snowy peaks.",
+  "clue": "A green valley of apricot orchards and poplars on the old Silk Road, ringed by some of the highest peaks of the Karakoram.",
+  "story": "The Hunza Valley in Pakistan lies along the Karakoram Highway. Its villages are famous for apricots and for views of Rakaposhi, over 7,700 metres tall."
+ },
+ "m-gobi": {
+  "title": "Singing dunes",
+  "alt": "Long pale sand dunes stretching to the horizon beside a strip of green grass, under a blue sky with small clouds.",
+  "clue": "Huge 'singing' sand dunes in a cold desert in the south of a land of nomads, horses and round felt tents.",
+  "story": "Khongoryn Els in Mongolia's Gobi Desert stretches for about 180 kilometres. The dunes hum when the wind moves the sand."
+ },
+ "m-ella": {
+  "title": "A bridge of nine arches",
+  "alt": "A curving stone railway bridge of tall arches crossing a valley thick with jungle.",
+  "clue": "A railway viaduct of nine stone arches in the green hill country of a teardrop-shaped island famous for tea.",
+  "story": "The Nine Arch Bridge near Ella in Sri Lanka was finished in 1921 and is built of stone, brick and cement without steel. Blue trains cross it several times a day."
+ },
+ "m-plitvice": {
+  "title": "Waterfalls into turquoise",
+  "alt": "Dozens of thin waterfalls pouring down a mossy green cliff into a clear turquoise pool.",
+  "clue": "Sixteen terraced lakes joined by waterfalls, in a forest park in the hills near the Adriatic coast.",
+  "story": "The Plitvice Lakes in Croatia are separated by natural dams of travertine that grow a little every year. Wooden boardwalks run right over the water."
+ },
+ "m-positano": {
+  "title": "A village on a cliff",
+  "alt": "Pastel houses stacked steeply up a hillside above the sea, seen from a terrace with pots of lemons.",
+  "clue": "Pastel houses tumbling down a cliff to the sea, on a coast famous for lemons and winding roads south of Naples.",
+  "story": "Positano on the Amalfi Coast of Italy was once a poor fishing village. Today its steep lanes are mostly stairs, and lemons grown nearby are made into limoncello."
+ },
+ "m-colmar": {
+  "title": "Half-timbered houses by a canal",
+  "alt": "Colourful half-timbered houses with flower boxes lining a still canal, reflected in the water.",
+  "clue": "Painted half-timbered houses along a canal nicknamed 'Little Venice', in a wine region on a river border with its eastern neighbour.",
+  "story": "Colmar in Alsace, France, is known for its old houses and canals. The Statue of Liberty's sculptor, Auguste Bartholdi, was born there."
+ },
+ "m-lofoten": {
+  "title": "A fishing village under peaks",
+  "alt": "Red and white wooden houses along the shore of a still bay, beneath jagged rocky mountains.",
+  "clue": "Red fishing cabins under jagged peaks on islands far above the Arctic Circle, where cod is dried on wooden racks.",
+  "story": "Reine is a fishing village in the Lofoten Islands of Norway. In summer the sun never sets there, and in winter the northern lights appear."
+ },
+ "m-ronda": {
+  "title": "A bridge over a gorge",
+  "alt": "A tall stone bridge spanning a deep gorge between sheer cliffs, with white buildings perched on the edge.",
+  "clue": "A town split by a deep gorge and joined by an 18th-century stone bridge, in the hills of the south, birthplace of modern bullfighting.",
+  "story": "The Puente Nuevo in Ronda, Spain, was finished in 1793 and stands about 98 metres above the river. It took over 40 years to build."
+ },
+ "m-krumlov": {
+  "title": "A castle tower above a river",
+  "alt": "A painted castle tower and red roofs above a wide shallow river with a wooden bridge and colourful houses.",
+  "clue": "A painted castle tower above a bend of the Vltava, in a small medieval town in the south of a country in the heart of Europe.",
+  "story": "Český Krumlov in the Czech Republic has a castle that is the second largest in the country. Its old town has hardly changed since the 1700s."
+ },
+ "m-sighisoara": {
+  "title": "A cobbled old street",
+  "alt": "A quiet cobbled lane between brightly painted houses in orange, green and yellow, with wooden shutters.",
+  "clue": "Painted houses in a hilltop citadel in Transylvania, where a famous 15th-century prince was said to have been born.",
+  "story": "Sighișoara in Romania is one of the last lived-in medieval citadels in Europe. Vlad the Impaler, who inspired Dracula, was born there."
+ },
+ "m-giants": {
+  "title": "Stepping stones of a giant",
+  "alt": "Thousands of six-sided stone columns stepping down into a wild blue sea, with walkers on the cliffs.",
+  "clue": "About 40,000 six-sided basalt columns by the sea, said in legend to be stepping stones built by a giant to cross to Scotland.",
+  "story": "The Giant's Causeway in Northern Ireland formed when lava cooled and cracked about 50 million years ago. Most of the columns are hexagons."
+ },
+ "m-rainbow": {
+  "title": "A mountain of stripes",
+  "alt": "A mountain ridge striped in bands of red, purple, cream and green, with hikers resting at the top.",
+  "clue": "A mountain striped like a rainbow by minerals, high in the Andes above 5,000 metres, near the old Inca capital.",
+  "story": "Vinicunca, the Rainbow Mountain in Peru, was covered by ice until recent decades. Its colours come from minerals such as iron oxide."
+ },
+ "m-antigua": {
+  "title": "An arch below a volcano",
+  "alt": "A yellow arch with a clock tower over a cobbled street of colourful houses, with a large volcano behind.",
+  "clue": "A yellow arch across a cobbled street in an old colonial capital ringed by three volcanoes in Central America.",
+  "story": "The Santa Catalina Arch in Antigua Guatemala was built in the 1600s so nuns could cross the street unseen. The Volcán de Agua rises behind it."
+ },
+ "m-antelope": {
+  "title": "A canyon of waves",
+  "alt": "Looking up through a narrow slot canyon of smooth, flowing red sandstone walls to a strip of blue sky.",
+  "clue": "A slot canyon of smooth wave-shaped red sandstone, carved by flash floods on Navajo land in the south-west.",
+  "story": "Antelope Canyon in Arizona can only be visited with a Navajo guide. Sunbeams shine down into it at midday in summer."
+ },
+ "m-pelourinho": {
+  "title": "A colonial square",
+  "alt": "A sloping cobbled square with colourful colonial buildings, a large sky-blue one in the middle, and people strolling.",
+  "clue": "A sloping square of colourful colonial buildings in the old centre of the first capital of a huge South American country.",
+  "story": "Pelourinho is the historic centre of Salvador, Brazil. The city's African heritage lives on in its music, food and capoeira."
+ },
+ "m-cocora": {
+  "title": "The tallest palms",
+  "alt": "Very tall, thin palm trees standing on a bright green hillside, fading into the mist.",
+  "clue": "The world's tallest palm trees, up to 60 metres high, in a misty valley of the coffee-growing Andes.",
+  "story": "The Cocora Valley in Colombia is home to the Quindío wax palm, the national tree. The palms can live for more than a hundred years."
+ },
+ "m-quilotoa": {
+  "title": "A lake in a crater",
+  "alt": "A large green-blue lake filling a deep volcanic crater, ringed by steep slopes under a sky of big white clouds.",
+  "clue": "A water-filled volcanic crater high in the Andes, on a hiking loop through Kichwa villages on the equator's line of volcanoes.",
+  "story": "Quilotoa in Ecuador is a crater lake about three kilometres wide, formed when a volcano collapsed some 800 years ago. Minerals turn the water green and blue."
+ },
+ "m-atacama": {
+  "title": "The Valley of the Moon",
+  "alt": "A dry valley of pale sand, salt crusts and eroded rock ridges, with a great sandstone wall like an amphitheatre behind.",
+  "clue": "A 'Valley of the Moon' of salt and sand in the driest non-polar desert on Earth, high on a long Pacific coast.",
+  "story": "Valle de la Luna lies near San Pedro de Atacama in Chile. Some weather stations in the Atacama Desert have never recorded rain."
+ },
+ "m-tulum": {
+  "title": "Ruins above a Caribbean beach",
+  "alt": "A small stone temple on a rocky headland above a white beach and bright turquoise sea, framed by palm trees.",
+  "clue": "A walled Maya city on a cliff above the Caribbean Sea, one of the last the Maya built and lived in.",
+  "story": "Tulum on the Yucatán Peninsula of Mexico was a busy Maya port around 1200 to 1500. The small Temple of the God of the Winds stands right above the sea."
+ },
+ "m-aitbenhaddou": {
+  "title": "Camels by a mud-brick village",
+  "alt": "Two pale camels nose to nose in front of the towers and walls of a village built of red earth, among palm trees.",
+  "clue": "A fortified village of red earth on an old caravan route over the Atlas Mountains, seen in many films.",
+  "story": "Aït Benhaddou in Morocco is a ksar, a group of earthen buildings behind high walls. Its walls are repaired with mud after the winter rains."
+ },
+ "m-tsingy": {
+  "title": "A forest of stone needles",
+  "alt": "A landscape of sharp grey limestone pinnacles packed tightly together, with a strip of green forest beyond.",
+  "clue": "A 'forest' of razor-sharp limestone needles on a large island off south-east Africa, home of lemurs.",
+  "story": "Tsingy de Bemaraha in Madagascar gets its name from a Malagasy word meaning 'where one cannot walk barefoot'. Rope bridges cross between the pinnacles."
+ },
+ "m-ghardaia": {
+  "title": "A desert town on a hill",
+  "alt": "A dense town of pale, flat-roofed houses climbing a low hill in a dry red-brown valley, with a minaret at the top.",
+  "clue": "Five fortified hill towns in a valley of the Sahara, whose simple cube houses inspired modern architects.",
+  "story": "Ghardaïa in Algeria is one of the towns of the M'zab valley, founded about a thousand years ago. The architect Le Corbusier admired its plain houses."
+ },
+ "m-capecoast": {
+  "title": "A white castle by the sea",
+  "alt": "A large whitewashed castle courtyard with a double staircase, old cannons and cannonballs, under a hazy sky.",
+  "clue": "A whitewashed castle on the Gulf of Guinea, a sad reminder of the Atlantic slave trade on the old Gold Coast.",
+  "story": "Cape Coast Castle in Ghana was built by European traders in the 1600s. Today it is a museum that remembers the people held there."
+ },
+ "m-reef": {
+  "title": "A reef from the air",
+  "alt": "Seen from a plane: turquoise shallows, dark patches of coral and a small white sand island in a deep blue sea.",
+  "clue": "The largest coral reef system in the world, so big it can be seen from space, off a north-eastern coast.",
+  "story": "The Great Barrier Reef off Queensland, Australia, stretches for about 2,300 kilometres. It is made of nearly 3,000 separate reefs."
+ },
+ "m-tongariro": {
+  "title": "Emerald lakes",
+  "alt": "Bright green crater lakes below steaming volcanic slopes of dark rock and red earth.",
+  "clue": "Bright green crater lakes on a famous volcanic day hike, in a volcanic park sacred to the Māori people.",
+  "story": "The Emerald Lakes lie on the Tongariro Alpine Crossing in New Zealand. Their colour comes from minerals washed down from the volcano."
+ },
+ "m-tosua": {
+  "title": "A swimming hole in the earth",
+  "alt": "A deep round hole in the ground lined with ferns and vines, with a long wooden ladder down to clear green seawater.",
+  "clue": "A giant swimming hole joined to the sea by a lava tube, on an island nation of the South Pacific.",
+  "story": "To Sua Ocean Trench on Upolu, Samoa, is about 30 metres deep. Swimmers climb down a long wooden ladder to reach the water."
+ },
+ "m-khiva": {
+  "title": "A forest of wooden pillars",
+  "alt": "A prayer hall filled with rows of carved wooden columns under a flat timber ceiling, with light falling through an opening.",
+  "clue": "A mosque hall of over 200 carved wooden pillars, inside the walled inner town of an old Silk Road oasis.",
+  "story": "The Juma Mosque in Khiva, Uzbekistan, has 213 wooden columns; a few are about a thousand years old. Khiva's inner town, Itchan Kala, is ringed by mud-brick walls."
+ },
+ "m-songkol": {
+  "title": "A horse by a high lake",
+  "alt": "A dark horse standing on a wide grassy plain beside a big blue lake, with low mountains on the far shore.",
+  "clue": "A high mountain lake where nomad herders bring their horses and set up felt yurts each summer, in the Tian Shan.",
+  "story": "Song-Köl in Kyrgyzstan lies about 3,000 metres up. Its lakeside pastures are used only in summer; in winter the lake freezes over."
+ },
+ "m-cameron": {
+  "title": "Hills of tea",
+  "alt": "Rounded hills covered in neat rows of bright green tea bushes, with forest above and grey clouds.",
+  "clue": "Tea gardens in cool highlands that colonial planters opened in the 1920s, a few hours from a tropical capital of twin towers.",
+  "story": "The Cameron Highlands in Malaysia are about 1,500 metres up, cool enough for tea. Its plantations also grow strawberries and vegetables."
+ },
+ "m-lencois": {
+  "title": "Sand and lagoons",
+  "alt": "Seen from above: wide pale sand bars and shallow lagoons with patches of green scrub, stretching towards white dunes.",
+  "clue": "White dunes and rainwater lagoons near the equator on an Atlantic coast, in a country famous for its rainforest.",
+  "story": "The Lençóis Maranhenses in north-eastern Brazil fill with rain each year, making thousands of lagoons between the dunes. Fish appear in them every rainy season."
+ },
+ "m-cinqueterre": {
+  "title": "Terraces above the sea",
+  "alt": "Steep hillside vineyards on stone terraces dropping to a deep blue sea, with coastal villages beyond.",
+  "clue": "Five fishing villages linked by footpaths along a steep coast of vineyards above the Ligurian Sea.",
+  "story": "The Cinque Terre villages lie on the Ligurian coast. Their dry-stone terraces stretch for thousands of kilometres and were built by hand over centuries."
+ },
+ "m-peyto": {
+  "title": "A wolf-shaped lake",
+  "alt": "A milky turquoise lake in a forested valley between grey mountains, under a sky of white clouds.",
+  "clue": "A glacier-fed turquoise lake shaped like a wolf's head, high in the Rocky Mountains along the Icefields Parkway.",
+  "story": "Peyto Lake in Banff National Park, Canada, gets its colour from rock flour carried in by glacier meltwater. It is named after an early mountain guide, Bill Peyto."
+ },
+ "m-fitzroy": {
+  "title": "Granite spires over a lake",
+  "alt": "Jagged granite spires capped with snow rising above green hills and a dark lake, in golden evening light.",
+  "clue": "Jagged granite peaks on the Patagonian ice field, in a trekking village that calls itself the national capital of trekking.",
+  "story": "Monte Fitz Roy in Argentina is 3,405 metres tall. The Tehuelche people called it Chaltén, the 'smoking mountain', because clouds often gather at its top."
+ },
+ "m-lamu": {
+  "title": "An old Swahili town",
+  "alt": "An old town of whitewashed stone houses and a mosque beside a waterfront full of small boats, seen from the air.",
+  "clue": "An old Swahili stone town on an island in the Indian Ocean, where donkeys still carry goods because there are hardly any cars.",
+  "story": "Lamu Old Town in Kenya is the oldest continuously lived-in Swahili town in East Africa. Dhows still sail from its harbour."
+ },
+ "m-bandiagara": {
+  "title": "Granaries under a cliff",
+  "alt": "Tall round and square mud-brick granaries and houses packed against the foot of a high sandstone cliff.",
+  "clue": "Mud-brick villages and granaries built along a 150-kilometre cliff by the Dogon people, south of the great bend of the Niger.",
+  "story": "The Bandiagara Escarpment in Mali is home to the Dogon, who have lived there since around the 14th century. Older cliff dwellings were built by the Tellem people before them."
+ },
+ "m-bungle": {
+  "title": "Beehive domes",
+  "alt": "A rounded rock dome striped in orange and grey bands like a beehive, with grass and pale trees at its base.",
+  "clue": "Striped orange-and-black sandstone domes like giant beehives, in the remote north-west outback.",
+  "story": "The Bungle Bungle Range in Purnululu National Park, Australia, was little known outside the area until the 1980s. The dark stripes are bacteria living in the rock."
+ },
+ "t-kochinets": {
+  "title": "A fishing net at sunrise",
+  "alt": "A huge cantilevered fishing net on a wooden frame, lifted out of golden water at sunrise, with palm trees behind and birds flying.",
+  "clue": "Giant shore-operated fishing nets, said to have come with traders from the Far East, on the backwaters of a south-western coast of coconut palms.",
+  "story": "These Chinese fishing nets on Ashtamudi Lake in Kollam, Kerala, are worked by a team of fishermen using counterweights of stone. Kochi has the most famous row of them.",
+  "city": null
+ },
+ "t-pushkar": {
+  "title": "An old herder at a camel fair",
+  "alt": "An old man with a white beard and a big pale turban leaning on a stick, with many camels resting on sandy ground behind him.",
+  "clue": "A giant turban and thousands of camels at a yearly desert fair beside a holy lake, in a north-western state of forts.",
+  "story": "The Pushkar Camel Fair in Rajasthan, India, brings thousands of camels, horses and cattle to the desert town every November. It ends with a full-moon bathing festival in the lake.",
+  "city": null
+ },
+ "t-devaraja": {
+  "title": "A busy market gate",
+  "alt": "A crowded street full of parked scooters and market umbrellas in front of a long yellow colonial-style market building and a decorated clock tower.",
+  "clue": "Scooters, umbrellas and a pastel clock tower by an old market famous for jasmine, betel leaves and sandalwood, in a southern palace city.",
+  "story": "Devaraja Market in Mysuru, Karnataka, India, has been running for over 130 years. Its flower sellers stack marigolds and jasmine into tall, bright pyramids.",
+  "city": "Mysuru"
+ },
+ "t-toytrain": {
+  "title": "A little blue mountain train",
+  "alt": "A small blue diesel locomotive pulling two blue carriages on narrow tracks beside a winding road through green forest.",
+  "clue": "A narrow-gauge 'toy train' that climbs to a hill station of tea gardens in the eastern Himalaya, sharing the road with cars.",
+  "story": "The Darjeeling Himalayan Railway in West Bengal, India, opened in 1881. Its tracks are just 610 millimetres apart and loop and zigzag up the mountains.",
+  "city": null
+ },
+ "t-amsterdam": {
+  "title": "A bike by a painted door",
+  "alt": "A bicycle leaning on an old shopfront covered in colourful graffiti, with tall wooden doors and a brick pavement.",
+  "clue": "Bicycles outnumber people in this canal city, where old merchant houses have narrow doors and big windows.",
+  "story": "Amsterdam in the Netherlands has more bicycles than people, about 880,000 of them. Thousands are fished out of its canals every year.",
+  "city": "Amsterdam"
+ },
+ "t-paris": {
+  "title": "Teddy bears at a café",
+  "alt": "Giant teddy bears sitting at small marble tables on a café pavement, among woven bistro chairs, with a wide street behind.",
+  "clue": "Woven rattan bistro chairs facing the street, a café custom of a capital famous for its pavement terraces.",
+  "story": "These bears sat at a café in Paris's 6th arrondissement when cafés were closed during the pandemic. Paris cafés line their chairs up facing the street, so people can watch passers-by.",
+  "city": "Paris"
+ },
+ "t-nyhavn": {
+  "title": "Painted houses by a harbour",
+  "alt": "A row of tall, brightly painted gabled townhouses along a canal with old wooden sailing ships and crowded café tables.",
+  "clue": "Brightly painted harbour houses and wooden ships, where a famous writer of fairy tales once lived, in a Nordic capital.",
+  "story": "Nyhavn in Copenhagen, Denmark, was dug in the 1670s. Hans Christian Andersen lived in three of its houses.",
+  "city": "Copenhagen"
+ },
+ "t-helsinki": {
+  "title": "A tram in the snow",
+  "alt": "A dark tram curving through a snowy junction between tall city buildings, with cars and a few people under falling snow.",
+  "clue": "A tram on a snowy morning in a Nordic capital on the Baltic, where winters are long and saunas are everywhere.",
+  "story": "Helsinki in Finland has run electric trams since 1900. Finland has around three million saunas for about 5.6 million people.",
+  "city": "Helsinki"
+ },
+ "t-prague": {
+  "title": "A red and cream tram",
+  "alt": "A red and cream tram with a pantograph on top, running on tracks beside a wide road, lit by low evening sun.",
+  "clue": "A red-and-cream tram of a design built in huge numbers nearby, in a 'city of a hundred spires' on the Vltava.",
+  "story": "Tatra T3 trams like this were built in Prague, Czech Republic, and over 13,000 were made. Prague still runs them on its streets.",
+  "city": "Prague"
+ },
+ "t-sofia": {
+  "title": "A yellow tram on a leafy street",
+  "alt": "A yellow two-car tram on tracks along a tree-lined street with parked cars and old apartment buildings.",
+  "clue": "A yellow tram on a leafy street in a Balkan capital at the foot of Vitosha mountain, where signs are in Cyrillic.",
+  "story": "Sofia in Bulgaria opened its first tram line in 1901. Bulgaria was the first country to use the Cyrillic alphabet officially.",
+  "city": "Sofia"
+ },
+ "t-lviv": {
+  "title": "Rooftops of an old town",
+  "alt": "Old town rooftops in red and grey around a green-domed church and a square, seen from high above, with green hills beyond.",
+  "clue": "Rooftops of an old town known for its coffee houses and chocolate, near the western border of the largest country entirely in Europe.",
+  "story": "Lviv in western Ukraine has a historic centre on the World Heritage list. Its market square, Rynok, has 44 old houses around the town hall.",
+  "city": "Lviv"
+ },
+ "t-taipeinight": {
+  "title": "A night market",
+  "alt": "A crowded night market street under glowing round lanterns with large characters, lit shop signs and food stalls.",
+  "clue": "Lanterns and signs in traditional characters over a crowded night market, on an island famous for street snacks and bubble tea.",
+  "story": "Linjiang Street Night Market in Taipei, Taiwan, is known for its food stalls. Taiwan's night markets started as places to eat and shop after the day's heat.",
+  "city": "Taipei"
+ },
+ "t-phnompenh": {
+  "title": "A tuk-tuk at the kerb",
+  "alt": "A motorbike hitched to an orange covered passenger carriage with padded seats, parked by a leafy pavement with flowers.",
+  "clue": "A motorbike pulling a covered trailer for passengers, the usual taxi in a riverside capital where the Mekong meets the Tonlé Sap.",
+  "story": "In Phnom Penh, Cambodia, a 'remork' tuk-tuk is a motorbike towing a passenger carriage. Drivers often decorate their carriages.",
+  "city": "Phnom Penh"
+ },
+ "t-jakarta": {
+  "title": "A row of orange three-wheelers",
+  "alt": "Several orange three-wheeled taxis with black canvas roofs parked in a row along a city street.",
+  "clue": "Orange three-wheeled 'bajaj' taxis, named after the company that first made them, on the streets of a huge capital on Java.",
+  "story": "Bajaj taxis have been part of Jakarta, Indonesia, since the 1970s. Newer blue ones run on natural gas.",
+  "city": "Jakarta"
+ },
+ "t-kathmandu": {
+  "title": "Lighting butter lamps",
+  "alt": "A woman in a blue top and orange scarf lighting rows of small brass oil lamps at a street shrine in a busy market.",
+  "clue": "Butter lamps lit at a street shrine in an old bazaar of a Himalayan capital, where Hindu and Buddhist traditions mix.",
+  "story": "Asan Tole is one of the oldest market squares in Kathmandu, Nepal. Its small Annapurna temple is busy with people lighting lamps all day.",
+  "city": "Kathmandu"
+ },
+ "t-tehran": {
+  "title": "A bazaar roof of stars",
+  "alt": "Looking up at brick domes in a covered bazaar, patterned with intricate star shapes around small skylights.",
+  "clue": "Brick domes patterned like stars over a covered bazaar, built by master builders of a land of old caravanserais.",
+  "story": "This is the roof of the grand bazaar in Qom, Iran. Persian builders have made such patterned brick vaults, called muqarnas and karbandi, for centuries.",
+  "city": "Qom"
+ },
+ "t-amman": {
+  "title": "A late-night shawarma shop",
+  "alt": "A brightly lit corner shop with a big Arabic sign, where people queue at the counter for sandwiches at night.",
+  "clue": "Arabic signs and a queue for shawarma in a capital built over seven hills, near the Dead Sea.",
+  "story": "Downtown Amman in Jordan is famous for cheap and busy food shops. The city was once called Philadelphia in Roman times.",
+  "city": "Amman"
+ },
+ "t-doha": {
+  "title": "A stone souq",
+  "alt": "A long covered passage of rough stone walls with blue shutters and wooden beams poking out, seen from above.",
+  "clue": "A rebuilt old souq of mud and stone with wooden beams, in a Gulf capital on a small peninsula.",
+  "story": "Souq Waqif in Doha, Qatar, was rebuilt in 2006 in the old style. It sells spices, falcons and traditional clothes.",
+  "city": "Doha"
+ },
+ "t-baku": {
+  "title": "A mosque in the old city",
+  "alt": "A sandstone mosque with a dome and a short round minaret beside a quiet street with parked cars and walkers.",
+  "clue": "A sandstone mosque inside the walled old city of a windy capital on the Caspian Sea.",
+  "story": "The Juma Mosque stands in Icherisheher, the old city of Baku, Azerbaijan. Baku's name is often said to mean 'city of winds'.",
+  "city": "Baku"
+ },
+ "t-almaty": {
+  "title": "A trolleybus stop",
+  "alt": "A blue and white trolleybus with a Cyrillic destination sign at a stop on a wide street lined with bare trees.",
+  "clue": "A trolleybus with Cyrillic signs in a former capital at the foot of snowy mountains, famous for its apples.",
+  "story": "Almaty was the capital of Kazakhstan until 1997. Its name is linked to the word for apple, and wild apples first grew in the hills around it.",
+  "city": "Almaty"
+ },
+ "t-bishkek": {
+  "title": "Felt slippers",
+  "alt": "A pile of handmade felt slippers, stitched with red and blue swirling patterns, on a market stall.",
+  "clue": "Felt slippers stitched with ram's-horn swirls in a bazaar of a mountain land whose flag shows a yurt's roof.",
+  "story": "Felt-making is an old craft in Kyrgyzstan, where nomads have long made yurts and rugs from sheep's wool. These were at the Osh Bazaar in Bishkek.",
+  "city": null
+ },
+ "t-tashkent": {
+  "title": "An old van by a bazaar",
+  "alt": "An old red and white minibus with a flat front, parked by a pavement near market stalls and another yellow van.",
+  "clue": "A Soviet-era minibus near a great domed bazaar in the largest city of Central Asia.",
+  "story": "This old RAF van was parked near Chorsu Bazaar in Tashkent, Uzbekistan. Tashkent rebuilt much of its centre after an earthquake in 1966.",
+  "city": "Tashkent"
+ },
+ "t-dakar": {
+  "title": "A painted bus",
+  "alt": "A blue, yellow and orange minibus with painted decorations and passengers at the windows, on a sandy roadside.",
+  "clue": "A hand-painted 'car rapide' minibus, a symbol of a city on the westernmost point of mainland Africa.",
+  "story": "The car rapide buses of Dakar, Senegal, are painted with bright colours and eyes to keep away bad luck. Newer buses are slowly replacing them.",
+  "city": "Dakar"
+ },
+ "t-kampala": {
+  "title": "A bike full of jerrycans",
+  "alt": "A man pushing a bicycle loaded with dozens of yellow plastic jerrycans along a brick pavement beside a red-brick wall.",
+  "clue": "A bicycle piled with yellow jerrycans in a hilly capital on the shores of Africa's largest lake.",
+  "story": "Kampala in Uganda is built on hills near Lake Victoria. Bikes and boda-boda motorbikes carry all kinds of loads around the city.",
+  "city": "Kampala"
+ },
+ "t-kigali": {
+  "title": "A street of patterned dresses",
+  "alt": "A shady street with a woman in a bright patterned dress holding a child's hand, motorbikes and parked cars, and clothes for sale.",
+  "clue": "Motorbike taxis and bright wax-print dresses in a clean, hilly capital known as a 'land of a thousand hills'.",
+  "story": "Kigali in Rwanda is known for its tidy streets; plastic bags have been banned there since 2008. On one Saturday each month, people do community work together.",
+  "city": "Kigali"
+ },
+ "t-tunis": {
+  "title": "A hat maker's shop",
+  "alt": "An older man in a grey coat shaping red felt hats on a wooden table, with stacks of hats and boxes all around.",
+  "clue": "Red felt chechia hats made by hand in a covered souk of a Mediterranean capital near the ruins of Carthage.",
+  "story": "Chechia makers in the souk of Tunis, Tunisia, knit, felt, dye and brush each hat by hand. The craft came with Andalusian refugees in the 1600s.",
+  "city": "Tunis"
+ },
+ "t-madagascar": {
+  "title": "A zebu cart in a creek",
+  "alt": "A cart pulled by humped cattle wading along a shallow muddy creek between tall reeds and autumn-coloured trees.",
+  "clue": "Humped zebu cattle pulling a cart through water, on a huge island where these cattle are a sign of wealth.",
+  "story": "Zebu carts are a common way to carry goods in rural Madagascar. Families measure wealth in zebu, which are central to many ceremonies.",
+  "city": null
+ },
+ "t-luxor": {
+  "title": "Sailboats on a wide river",
+  "alt": "A crowd of white wooden sailboats with tall masts moored on a broad river, with a cruise ship and a green bank beyond.",
+  "clue": "Wooden feluccas with tall masts waiting on a great river, in a city built on the site of ancient Thebes.",
+  "story": "Feluccas have sailed the Nile for thousands of years. In Luxor, Egypt, they carry visitors between the temples on the east bank and the tombs on the west.",
+  "city": "Luxor"
+ },
+ "t-neworleans": {
+  "title": "A balcony party",
+  "alt": "Three men on an iron-railed balcony draped with ribbons and bead necklaces, laughing and waving under grey shutters.",
+  "clue": "Beads and ribbons on an iron balcony during a famous carnival in a jazz city on a great river delta.",
+  "story": "This photo shows Mardi Gras in the French Quarter of New Orleans, United States, in 1982. Throwing bead necklaces from balconies is a carnival tradition.",
+  "city": "New Orleans"
+ },
+ "t-chickenbus": {
+  "title": "A painted bus",
+  "alt": "A brightly painted old school bus in red and green with a chrome grille, parked on a dirt street by small shops in the hills.",
+  "clue": "A retired school bus painted in bold colours, now a 'chicken bus' climbing the highland roads of Central America.",
+  "story": "Guatemala's chicken buses are old school buses from the north, repainted and decorated. This one was in the mountain town of Zunil.",
+  "city": null
+ },
+ "t-havanacar": {
+  "title": "A blue classic car",
+  "alt": "A sky-blue 1950s car parked in a lane of brightly painted houses covered in murals and metal sculptures.",
+  "clue": "A 1950s car parked in a lane full of Afro-Caribbean murals, in a capital on a big island south of Florida.",
+  "story": "Callejón de Hamel in Havana, Cuba, is an alley of murals and sculptures celebrating Afro-Cuban culture. Cuba is famous for its classic cars kept running for decades.",
+  "city": "Havana"
+ },
+ "t-quito": {
+  "title": "An old street in the hills",
+  "alt": "A sloping colonial street with balconies, a yellow taxi, a red bus and a policeman in a yellow vest, with green mountains behind.",
+  "clue": "A colonial street with wrought-iron balconies in a high capital just south of the equator, ringed by volcanoes.",
+  "story": "This is a street in the old town of Quito, Ecuador, one of the first places named a World Heritage Site. Quito sits about 2,850 metres up.",
+  "city": "Quito"
+ },
+ "t-laboca": {
+  "title": "A painted street corner",
+  "alt": "A corner of colourful houses painted blue, yellow, green and red, with balconies, a mural and people strolling.",
+  "clue": "Houses painted with leftover ship's paint in an old port barrio, home of the tango and a famous blue-and-gold football club.",
+  "story": "Caminito in the La Boca neighbourhood of Buenos Aires, Argentina, was painted by dock workers' families with leftover paint. Tango dancers perform in its streets.",
+  "city": "Buenos Aires"
+ },
+ "t-medellin": {
+  "title": "Cable cars over hillside homes",
+  "alt": "Cable car cabins gliding above a hillside covered in red-brick houses, with green buses below and mountains behind.",
+  "clue": "Cable cars run as public transport up to hillside neighbourhoods in a valley city once called the 'city of eternal spring'.",
+  "story": "Medellín in Colombia opened its Metrocable in 2004 to link hillside neighbourhoods to the metro. It cut journeys from hours to minutes.",
+  "city": "Medellín"
+ },
+ "t-melbourne": {
+  "title": "A green tram",
+  "alt": "A long modern tram with a green pattern stopping on a busy city street beside old stone and new buildings.",
+  "clue": "A city with the largest tram network in the world, in the south-east of an island continent.",
+  "story": "Melbourne in Australia has about 250 kilometres of tram track, the largest network in the world. Trams in the city centre are free to ride.",
+  "city": "Melbourne"
+ },
+ "t-chandnichowk": {
+  "title": "A spice market from above",
+  "alt": "Looking down on an old market courtyard with sacks and baskets of spices, men sitting on stools, blue tarpaulins and tangled wires.",
+  "clue": "Sacks of chillies and turmeric in a wholesale spice market in the lanes of an old walled Mughal city.",
+  "story": "Khari Baoli in Old Delhi, India, has been a spice market since the 1600s and is one of the largest in Asia. Its lanes run off Chandni Chowk.",
+  "city": "Delhi"
+ },
+ "t-flowermarket": {
+  "title": "Mountains of marigolds",
+  "alt": "Huge sacks overflowing with orange and yellow marigolds on a market street, with a woman in a yellow sari walking past.",
+  "clue": "Marigolds sold by the sackful for garlands, at a flower market by the bridge of a great eastern river city.",
+  "story": "Mallick Ghat Flower Market in Kolkata, India, sits beside the Howrah Bridge on the Hooghly river. Over a century old, it sells flowers for weddings, festivals and temples.",
+  "city": "Kolkata"
+ },
+ "t-assamtea": {
+  "title": "Picking tea",
+  "alt": "Three women with bright headscarves and wicker baskets on their backs picking leaves in a green tea garden under tall shade trees.",
+  "clue": "Tea pickers with baskets carried from the forehead, in the low, rainy Brahmaputra valley that grows a strong, malty tea.",
+  "story": "Assam in north-east India grows more tea than almost anywhere else on Earth. Shade trees protect the bushes, and pickers take 'two leaves and a bud'.",
+  "city": null
+ },
+ "t-autorickshaw": {
+  "title": "A three-wheeler by a brick wall",
+  "alt": "A black and yellow three-wheeled auto rickshaw with a canvas roof and a driver inside, parked by an old red-brick wall.",
+  "clue": "A black-and-yellow three-wheeler with Devanagari lettering on its roof, the everyday taxi of a country of over a billion people.",
+  "story": "Auto rickshaws are the most common shared taxis in India. Most run on compressed natural gas in big cities to keep the air cleaner.",
+  "city": null
+ },
+ "t-hongkongtram": {
+  "title": "Towers by the harbour",
+  "alt": "Very tall, slim apartment towers rising behind a curved modern station building with gardens and people walking.",
+  "clue": "Some of the tallest homes in the world, packed on reclaimed land beside a harbour, in a city that was a British colony until 1997.",
+  "story": "The Kowloon waterfront in Hong Kong, China, is built on land reclaimed from the sea. Hong Kong has more skyscrapers than any other city.",
+  "city": "Hong Kong"
+ },
+ "t-budapesttram": {
+  "title": "A yellow tram by the river",
+  "alt": "A long yellow and white tram on a raised track beside a road, with green railings, trees and old buildings behind.",
+  "clue": "A yellow tram running along the banks of the Danube, in a capital made of two old towns joined by bridges.",
+  "story": "Tram line 2 in Budapest, Hungary, runs beside the Danube past the Parliament. Buda and Pest joined into one city in 1873.",
+  "city": "Budapest"
+ },
+ "t-viennacafe": {
+  "title": "A café menu board",
+  "alt": "A yellow-tiled café front with lace curtains, a chalk menu board in German and a little serving trolley outside.",
+  "clue": "A coffee house whose chalkboard offers goulash and Sunday concerts, in a capital where coffee-house culture is a listed heritage.",
+  "story": "Café Bräunerhof in Vienna, Austria, holds afternoon concerts at weekends. Viennese coffee-house culture is on UNESCO's list of intangible heritage.",
+  "city": "Vienna"
+ },
+ "t-hawker": {
+  "title": "A hawker centre",
+  "alt": "A big open food hall with rows of tables and stools, stalls with signs in English and Chinese, and a woman in a mask in front.",
+  "clue": "A food hall of cheap stalls with signs in English and Chinese, in a tiny island city-state at the tip of a peninsula.",
+  "story": "Hawker centres in Singapore were built to move street food stalls indoors. In 2020 hawker culture was added to UNESCO's heritage list.",
+  "city": "Singapore"
+ },
+ "t-chiangmai": {
+  "title": "Red shared taxis",
+  "alt": "A row of red pickup trucks fitted with roofs and benches, parked by a bus station with signs in a looped script.",
+  "clue": "Red pickup-truck taxis with two benches in the back, in a northern city of hundreds of temples and an old moat.",
+  "story": "The red songthaews of Chiang Mai, Thailand, work like shared taxis: you wave one down and tell the driver where you want to go.",
+  "city": "Chiang Mai"
+ },
+ "t-mexicocity": {
+  "title": "Workers waiting for jobs",
+  "alt": "Men sitting under umbrellas on a pavement beside a stone church railing, with hand-painted signs offering plumbing, gas and electrical work.",
+  "clue": "Tradesmen wait by a cathedral railing with hand-painted Spanish signs, in a capital built on the site of the Aztec city Tenochtitlan.",
+  "story": "Plumbers, painters and electricians wait for customers outside the Metropolitan Cathedral in Mexico City. They have gathered there for generations.",
+  "city": "Mexico City"
+ },
+ "t-fes": {
+  "title": "A leather tannery",
+  "alt": "Rows of round stone vats filled with brown, red and white dyes, with workers standing among them in an old walled yard.",
+  "clue": "Stone dye vats of a medieval leather tannery, in a car-free walled medina in the north of a land of the Atlas Mountains.",
+  "story": "The Chouara tannery in Fes, Morocco, has worked leather in the same way for about a thousand years. Dyes come from plants such as poppy, indigo and saffron.",
+  "city": "Fes"
+ },
+ "t-kualalumpur": {
+  "title": "A covered market street",
+  "alt": "A busy market street under a glass roof with red lanterns, shops with Chinese signs and stalls of bags and clothes.",
+  "clue": "A covered Chinatown street of red lanterns and bargain stalls, in a capital whose name means 'muddy confluence'.",
+  "story": "Petaling Street is the heart of Chinatown in Kuala Lumpur, Malaysia. Its night market sells everything from food to watches.",
+  "city": "Kuala Lumpur"
  }
 }

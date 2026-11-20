@@ -35,3 +35,7 @@ Decisions made while building [`docs/new-games-spec.md`](../new-games-spec.md) (
 - **`PLACE_V2_FROM` is the day after the pool deploy,** so that day's photos stay as they are and the bigger pool and the Tricky city question start cleanly the next morning.
 - **After the pool ships, fix:** self-host the fonts (no-CDN rule), add the smoke test to the Pages workflow, and run a read-only codebase quality review with fixes proposed, not made. Speeding up verify was not chosen. See [Environment findings](environment-findings.md).
 - **No reminder for removing Time Lens;** it stays recorded here and in CONTENT.md for on or after 2026-12-22.
+
+## 2026-11-21, photo pool (step 5)
+
+- **Where in the World pool (spec step 5):** v1 is pinned by id (`PLACE_V1` in `dist/globe.js`) rather than by order, so build-places can keep sorting by id. `PLACE_V2_FROM` stays the placeholder `9999-12-31` until step 6. The pool grew from 40 / 43 / 41 to 90 / 99 / 88 (Gentle / Medium / Tricky); every downloaded photo was looked at and roughly a third were rejected (wrong subject, readable place names, flags, dull or badly cropped). Added on request along the way: no repeated id, Commons file, image or place (`PLACE_ALIASES` in verify-places.cjs); CC photos must name their author (four were blank and were filled from their file pages); every Tricky photo records a `city` (69 named, 19 null) for a city question to be built later.

@@ -122,3 +122,157 @@ t-rothenburg	2	Germany	Rothenburg Plönlein	File:Plönlein, Rothenburg ob der Ta
 t-zanzibar	2	Tanzania	Stone Town	File:North Kelele Square Stone Town Oct26 A7CR 14685.jpg
 t-okavango	2	Botswana	Okavango mokoro	File:Travesía del delta del Okavango en makoro, Botsuana, 2018-07-31, DD 07.jpg
 t-nizwa	2	Oman	Nizwa Fort	File:Nizwa Fort and Minaret of Friday Mosque.JPG
+# Added 2026-11-21 for the place-v2 cycle
+g-goldentemple	0	India	Golden Temple Amritsar Harmandir Sahib
+g-gateway	0	India	Gateway of India Mumbai
+g-victoriamem	0	India	Victoria Memorial Kolkata
+g-konark	0	India	Konark Sun Temple
+g-lotus	0	India	Lotus Temple Delhi
+g-charminar	0	India	Charminar monument Hyderabad
+g-meenakshi	0	India	Meenakshi Amman Temple gopurams Madurai
+g-humayun	0	India	Humayun's Tomb Delhi
+g-louvre	0	France	Louvre Pyramid Paris
+g-edinburgh	0	United Kingdom	Edinburgh Castle
+g-brandenburg	0	Germany	Brandenburger Tor Berlin Pariser Platz
+g-trevi	0	Italy	Trevi Fountain Rome
+g-florence	0	Italy	Florence Cathedral Duomo
+g-belem	0	Portugal	Belém Tower Lisbon
+g-meteora	0	Greece	Meteora monasteries
+g-atomium	0	Belgium	Atomium Brussels
+g-schonbrunn	0	Austria	Schönbrunn Palace Vienna
+g-grandcanyon	0	United States	Grand Canyon
+g-rushmore	0	United States	Mount Rushmore
+g-niagara	0	Canada	Horseshoe Falls Niagara
+g-sugarloaf	0	Brazil	Sugarloaf Mountain Rio de Janeiro
+g-torres	0	Chile	Torres del Paine towers granite peaks
+g-teotihuacan	0	Mexico	Teotihuacan Avenue of the Dead Pyramid
+g-abusimbel	0	Egypt	Abu Simbel Great Temple facade colossi
+g-hassan	0	Morocco	Hassan II Mosque
+g-lalibela	0	Ethiopia	Church of Saint George Lalibela
+g-harbourbridge	0	Australia	Sydney Harbour Bridge
+g-terracotta	0	China	Terracotta Army pit 1 warriors
+g-templeheaven	0	China	Hall of Prayer for Good Harvests Temple of Heaven
+g-himeji	0	Japan	Himeji Castle
+g-kinkakuji	0	Japan	Kinkaku-ji Kyoto
+g-grandpalace	0	Thailand	Grand Palace Bangkok
+g-everest	0	Nepal	Mount Everest
+g-pamukkale	0	Turkey	Pamukkale
+g-bluemosque	0	Turkey	Sultan Ahmed Mosque Istanbul
+g-azadi	0	Iran	Azadi Tower Tehran
+g-eljem	0	Tunisia	Amphitheatre of El Jem
+g-pompeii	0	Italy	Pompeii Forum Vesuvius
+g-versailles	0	France	Palace of Versailles
+g-tanahlot	0	Indonesia	Tanah Lot temple Bali
+g-pantheon	0	Italy	Pantheon Rome
+g-mezquita	0	Spain	Mezquita Córdoba
+g-guggenheim	0	Spain	Guggenheim Bilbao
+g-lincoln	0	United States	Lincoln Memorial
+g-itsukushima	0	Japan	Itsukushima torii
+g-prambanan	0	Indonesia	Prambanan
+g-amer	0	India	Amber Fort Jaipur
+g-karnak	0	Egypt	Karnak Temple
+g-parkguell	0	Spain	Park Güell
+g-arc	0	France	Arc de Triomphe
+m-hampi	1	India	Hampi Virupaksha temple boulders
+m-varanasi	1	India	Varanasi ghats Ganges
+m-jaisalmer	1	India	Jaisalmer Fort
+m-udaipur	1	India	Udaipur City Palace Lake Pichola
+m-alleppey	1	India	Alappuzha backwaters houseboat
+m-thiksey	1	India	Thiksey Monastery Ladakh
+m-khajuraho	1	India	Khajuraho temple
+m-shoretemple	1	India	Shore Temple Mahabalipuram
+m-ellora	1	India	Ellora Kailasa temple
+m-kyoto	1	Japan	Kyoto Yasaka Pagoda Higashiyama street
+m-shirakawago	1	Japan	Shirakawa-go gassho houses
+m-luangprabang	1	Laos	Luang Prabang Wat Xieng Thong
+m-guilin	1	China	Li River karst Guilin Yangshuo
+m-jiuzhaigou	1	China	Jiuzhaigou lake
+m-khiva	1	Uzbekistan	Khiva
+m-songkol	1	Kyrgyzstan	Song Kol
+m-charyn	1	Kazakhstan	Charyn Canyon
+m-darvaza	1	Turkmenistan	Darvaza gas crater
+m-iskanderkul	1	Tajikistan	Iskanderkul lake
+m-wadirum	1	Jordan	Wadi Rum desert
+m-banaue	1	Philippines	Banaue Rice Terraces
+m-cameron	1	Malaysia	Cameron Highlands
+m-gardensbay	1	Singapore	Gardens by the Bay Supertree Grove
+m-hunza	1	Pakistan	Hunza Valley Karimabad
+m-gobi	1	Mongolia	Gobi desert Khongoryn Els dunes
+m-ella	1	Sri Lanka	Nine Arch Bridge Ella
+m-plitvice	1	Croatia	Plitvice Lakes waterfalls
+m-positano	1	Italy	Positano Amalfi Coast
+m-colmar	1	France	Colmar Petite Venise
+m-lofoten	1	Norway	Lofoten Reine
+m-ronda	1	Spain	Ronda Puente Nuevo
+m-krumlov	1	Czech Republic	Český Krumlov
+m-sighisoara	1	Romania	Sighișoara citadel
+m-giants	1	United Kingdom	Giant's Causeway
+m-rainbow	1	Peru	Vinicunca Rainbow Mountain
+m-antigua	1	Guatemala	Antigua Guatemala Santa Catalina arch volcano
+m-antelope	1	United States	Antelope Canyon
+m-lencois	1	Brazil	Lençóis Maranhenses
+m-pelourinho	1	Brazil	Pelourinho Salvador
+m-cocora	1	Colombia	Cocora Valley wax palms
+m-quilotoa	1	Ecuador	Quilotoa crater lake
+m-atacama	1	Chile	Valle de la Luna Atacama
+m-tulum	1	Mexico	Tulum ruins sea
+m-aitbenhaddou	1	Morocco	Aït Benhaddou
+m-tsingy	1	Madagascar	Tsingy de Bemaraha
+m-ghardaia	1	Algeria	Ghardaïa M'zab valley
+m-capecoast	1	Ghana	Cape Coast Castle
+m-reef	1	Australia	Great Barrier Reef aerial
+m-tongariro	1	New Zealand	Tongariro Emerald Lakes
+m-tosua	1	Samoa	To Sua Ocean Trench
+m-cinqueterre	1	Italy	Manarola
+m-peyto	1	Canada	Peyto Lake
+m-fitzroy	1	Argentina	Fitz Roy
+m-lamu	1	Kenya	Lamu Old Town
+m-bandiagara	1	Mali	Bandiagara Dogon village
+m-bungle	1	Australia	Bungle Bungle Range
+t-chandnichowk	2	India	Old Delhi street
+t-kochinets	2	India	Chinese fishing nets Kochi
+t-flowermarket	2	India	flower market India
+t-pushkar	2	India	Pushkar camel fair
+t-assamtea	2	India	tea plucking women India
+t-devaraja	2	India	Devaraja Market Mysore
+t-toytrain	2	India	Darjeeling toy train
+t-autorickshaw	2	India	auto rickshaw India
+t-amsterdam	2	Netherlands	Amsterdam canal bicycles
+t-paris	2	France	Paris café terrace street
+t-nyhavn	2	Denmark	Nyhavn Copenhagen
+t-helsinki	2	Finland	Helsinki tram street
+t-prague	2	Czech Republic	Prague tram street
+t-sofia	2	Bulgaria	Sofia tram
+t-lviv	2	Ukraine	Lviv old town street
+t-taipeinight	2	Taiwan	Taipei night market
+t-phnompenh	2	Cambodia	Phnom Penh street tuk-tuk
+t-jakarta	2	Indonesia	Jakarta bajaj street
+t-kathmandu	2	Nepal	Asan Tole Kathmandu
+t-tehran	2	Iran	Tehran Grand Bazaar
+t-amman	2	Jordan	Amman downtown street
+t-doha	2	Qatar	Souq Waqif Doha
+t-baku	2	Azerbaijan	Baku old city street
+t-almaty	2	Kazakhstan	Almaty Green Bazaar
+t-bishkek	2	Kyrgyzstan	Osh Bazaar Bishkek
+t-tashkent	2	Uzbekistan	Tashkent Chorsu Bazaar
+t-dakar	2	Senegal	Dakar car rapide
+t-kampala	2	Uganda	Kampala boda boda street
+t-kigali	2	Rwanda	Kigali street
+t-tunis	2	Tunisia	Tunis medina souk
+t-madagascar	2	Madagascar	zebu cart Madagascar road
+t-luxor	2	Egypt	felucca Nile Luxor
+t-neworleans	2	United States	French Quarter New Orleans balconies
+t-chickenbus	2	Guatemala	Guatemala chicken bus
+t-havanacar	2	Cuba	Havana classic car street
+t-quito	2	Ecuador	Quito old town street
+t-laboca	2	Argentina	Caminito La Boca
+t-medellin	2	Colombia	Medellín Metrocable
+t-melbourne	2	Australia	Melbourne tram street
+t-hongkongtram	2	China	Hong Kong tram street
+t-budapesttram	2	Hungary	Budapest tram
+t-viennacafe	2	Austria	Viennese coffee house
+t-hawker	2	Singapore	hawker centre Singapore
+t-chiangmai	2	Thailand	songthaew Chiang Mai
+t-mexicocity	2	Mexico	Mexico City street vendor
+t-fes	2	Morocco	Fes tannery
+t-kualalumpur	2	Malaysia	Kuala Lumpur Chinatown Petaling Street

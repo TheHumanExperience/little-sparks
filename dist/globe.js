@@ -42,6 +42,31 @@ for (const [continent, regions] of Object.entries(WORLD_REGIONS))
 
 const placeById = (id) => PLACES.find((p) => p.id === id);
 const placePool = (lvl) => PLACES.filter((p) => p.level === lvl && !p.retired);
+// Days before PLACE_V2_FROM keep the v1 cycle over the original 124 photos, pinned here by id in
+// their original order, so growing PLACES never changes an archive day. From PLACE_V2_FROM each
+// level cycles its whole pool ("place-v2-"), newer photos first so the switch repeats nothing.
+const PLACE_V2_FROM = "9999-12-31";
+const PLACE_V1 = [
+  "g-acropolis g-alhambra g-angkor g-basil g-bigben g-borobudur g-burj g-charles g-chichen g-cntower g-colosseum g-eiffel g-forbidden g-fuji g-giza g-goldengate g-greatwall g-gyeongbok g-hagia g-kilimanjaro g-kinderdijk g-liberty g-machu g-marina g-milford g-moai g-montstmichel g-neuschwanstein g-opera g-perito g-petra g-petronas g-pisa g-redeemer g-sagrada g-table g-taj g-vatican g-victoria g-watarun",
+  "m-angel m-apostles m-bagan m-baobab m-bled m-boudha m-brussels m-budapest m-cappadocia m-cartagena m-chefchaouen m-chocolate m-djenne m-dubrovnik m-galapagos m-geiranger m-hallstatt m-halong m-havana m-hawamahal m-iceland m-inari m-isfahan m-landwasser m-lisbon m-london m-maldives m-matterhorn m-moher m-monument m-moraine m-registan m-santorini m-sigiriya m-sossusvlei m-stonehenge m-taipei m-tigersnest m-tikal m-uluru m-uyuni m-venice m-zhangjiajie",
+  "t-accra t-addis t-bali t-bangkok t-bokaap t-cairo t-colombo t-colonia t-cusco t-dhaka t-greekvillage t-hanoi t-ireland t-istanbul t-japanstreet t-jeepney t-jiufen t-kolkata t-krakow t-lagos t-laos t-lapaz t-malta t-marrakech t-mongolia t-moscow t-nairobi t-nizwa t-oaxaca t-okavango t-pakistan t-porto t-quebec t-rothenburg t-seoul t-sweden t-tallinn t-tbilisi t-valparaiso t-yerevan t-zanzibar",
+].map((ids) => ids.split(" "));
+const PLACE_V2_ORDER = new Map();
+// The v2 order: up to 31 newer photos (shuffled), then the rest of the pool (shuffled).
+function placeV2Order(lvl) {
+  if (!PLACE_V2_ORDER.has(lvl)) {
+    const r = rng("place-v2-" + lvl), v1 = new Set(PLACE_V1[lvl]), pool = placePool(lvl);
+    const fresh = shuffle(pool.filter((p) => !v1.has(p.id)), r), lead = fresh.slice(0, 31);
+    PLACE_V2_ORDER.set(lvl, [...lead, ...shuffle([...fresh.slice(31), ...pool.filter((p) => v1.has(p.id))], r)]);
+  }
+  return PLACE_V2_ORDER.get(lvl);
+}
+// The day's photo. `from` is only overridden by verify-places.cjs to test the v2 cycle.
+function placePick(d, lvl, from = PLACE_V2_FROM) {
+  if (d < from) return placeById(PLACE_V1[lvl][cycleIndex(PLACE_V1[lvl].length, "place-v1-" + lvl, d, lvl * 7)]);
+  const order = placeV2Order(lvl);
+  return order[mod(calendarIndex(d) - calendarIndex(from), order.length)];
+}
 // Three other countries plus the answer, shuffled. Gentle: three other continents. Medium: one from
 // the same region, one more from the same continent, one from elsewhere. Tricky: same region first.
 function placeOptions(country, lvl, r) {
@@ -58,8 +83,8 @@ function placeOptions(country, lvl, r) {
   } else out = [...pick(sameRegion, 3), ...pick(sameContinent, 3)].slice(0, 3);
   return shuffle([country, ...out], r);
 }
-function placeModel(d, lvl = difficulty) {
-  const pool = placePool(lvl), place = pool[cycleIndex(pool.length, "place-v1-" + lvl, d, lvl * 7)];
+function placeModel(d, lvl = difficulty, from = PLACE_V2_FROM) {
+  const place = placePick(d, lvl, from);
   return { place, options: placeOptions(place.country, lvl, rng(puzzleSeed(d) + "place")) };
 }
 function savedPlace(d, s) {
