@@ -40,6 +40,7 @@ Prefer `npm run smoke` over manual screenshots. Take screenshots only when a hum
 | `tools/` | Offline content tools. `history/*.bundle` holds the original Sites commits (archival). |
 | `PRODUCT.md`, `DESIGN.md`, `.impeccable/design.json` | Product brief, visual system, and the design tokens' generated sidecar. |
 | `docs/tech-stack.md` | Languages, tool versions, supported browsers, CI and hosting. |
+| `docs/wiki/` | Dated record of decisions, working rules (including the cleanup rule) and environment findings. Read `docs/wiki/index.md` before larger work. |
 | `brand/` | Logo masters and exports. Not deployed. |
 | `LICENSE` | All rights reserved, with third-party exclusions. The site shows the matching notice in the level sheet. |
 
