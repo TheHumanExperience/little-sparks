@@ -2,7 +2,8 @@
 // deterministically, the brute-force solver finds exactly one answer and it matches, multiple-choice
 // options are unique and contain the answer, each day shows five different categories,
 // wording barely repeats within 61 days, old index-3 progress stays on the legacy card,
-// and days played before the nineteen-category ring keep their original rotation.
+// days played before the nineteen-category ring keep their original rotation, every day before
+// NEW_GAMES_FROM keeps its rotation-2 categories, and rotation 3 (with Who Knows?) runs from that date.
 const fs = require("fs"), vm = require("vm");
 const { context } = require("./tests/load-app.cjs").loadApp();
 const t0 = Date.now();
@@ -34,9 +35,20 @@ for (let lv = 0; lv < 3; lv++) {
       history.push(tx); questions++;
     }
   }
-  // The real per-slot questions shown in the feed.
+  // Before NEW_GAMES_FROM an unplayed day keeps rotation 2, with exactly the categories the nineteen-category ring gave.
+  const OLD_RING = [10, 0, 1, 12, 11, 2, 3, 14, 13, 4, 5, 15, 16, 6, 7, 17, 18, 8, 9];
+  all = {};
+  for (const d of dates) {
+    if (d >= NEW_GAMES_FROM) continue;
+    const s0 = mod(calendarIndex(d) * 3 + lv * 7, 19), old = shuffle([0, 1, 2, 3, 4].map((j) => OLD_RING[mod(s0 + j, 19)]), rng(puzzleSeed(d) + "|aha-order-v2"));
+    if (ahaRotation(d) !== 2 || JSON.stringify(ahaCategories(d)) !== JSON.stringify(old)) fail("days before NEW_GAMES_FROM must keep their categories: " + d + " L" + lv);
+  }
+  // The real per-slot questions shown in the feed, under rotation 3 (pinned through the saved flag, since
+  // NEW_GAMES_FROM may still be a far-future placeholder).
   const catDays = new Map();
   for (const d of dates) {
+    all = { [progressKey(d)]: { games: { [AHA_SLOTS[0]]: { aha: 3 } } } };
+    if (ahaRotation(d) !== 3) fail("a saved aha: 3 flag must pin rotation 3: " + d);
     const cats = ahaCategories(d);
     if (cats.length !== 5 || new Set(cats).size !== 5) fail("a day needs five different categories: " + d);
     if (!cats.some((x) => AHA_CATS[x].group === "numbers") || !cats.some((x) => AHA_CATS[x].group === "logic")) fail("each day should mix number and logic puzzles: " + d);
@@ -67,10 +79,46 @@ for (let lv = 0; lv < 3; lv++) {
       }
     }
   }
+  all = {};
   if (seenCats.size !== N) fail("level " + lv + " never shows some categories");
   const counts = [...catDays.values()];
   if (Math.min(...counts) < 366 * 5 / N * 0.7) fail("categories are unevenly rotated: " + counts);
 }
+// Who Knows?: candidates are the options on every level, sized by level, and the dialogue has the agreed shapes.
+const KN = AHA_CATS.findIndex((c) => c.id === "knows");
+if (KN < 0 || AHA_CATS[KN].group !== "logic" || AHA_GEN[KN] !== genKnows) fail("knows must be a logic category with genKnows");
+let knows = 0;
+for (let lv = 0; lv < 3; lv++) {
+  difficulty = lv;
+  const [lo, hi] = [[6, 8], [8, 10], [10, 12]][lv], shapes = new Set(), themes = new Set();
+  for (const d of dates) {
+    all = { [progressKey(d)]: { games: { [AHA_SLOTS[0]]: { aha: 3 } } } };
+    const q = AHA_GEN[KN](rng(puzzleSeed(d) + "|verify|" + KN), lv), n = q.data.cands.length, L = q.data.lines;
+    if (n < lo || n > hi || q.options.length !== n || q.options.join() !== q.data.labels.join()) fail("knows candidates must be the options: " + d + " L" + lv);
+    if (!KNOWS_SHAPES[lv].some((sh) => JSON.stringify(sh.map(({ w, ops }) => ({ w, ops }))) === JSON.stringify(L))) fail("knows dialogue must be one of the level's shapes: " + d);
+    const tr = knowsTrace(q.data, true);
+    if (tr.some((t, k) => k && t.length >= tr[k - 1].length)) fail("every line of a knows dialogue must rule something out: " + d);
+    if (q.clues.length !== L.length || q.why.split(". ").length < L.length) fail("knows needs one clue and one why sentence per line: " + d);
+    shapes.add(JSON.stringify(L)); themes.add(q.table.head[0]);
+    const cats = ahaCategories(d), slot = cats.indexOf(KN);
+    if (slot >= 0) { AHA_CACHE.clear(); const m = ahaModel(d, slot); if (m.kind !== "choice" || m.options.length !== m.data.cands.length || !ahaCheck(m, m.a)) fail("knows must be a choice card on every level: " + d); knows++; }
+  }
+  if (shapes.size !== 2 || themes.size < (lv === 2 ? 5 : 6)) fail("knows level " + lv + " should use both shapes and its themes: " + shapes.size + " " + themes.size);
+}
+// Rotation by date and saved flag: empty days before NEW_GAMES_FROM use 2, from it 3; flags 1, 2 and 3 pin a played day.
+difficulty = 1;
+all = {};
+// (The day after the 9999-12-31 placeholder would be year 10000, which sorts before it, so it is checked only once the date is real.)
+const dayBefore = feedDate(1, NEW_GAMES_FROM), after = [feedDate(-5, NEW_GAMES_FROM)].filter((x) => x > NEW_GAMES_FROM);
+if (ahaRotation(dayBefore) !== 2 || ahaRotation(NEW_GAMES_FROM) !== 3 || after.some((x) => ahaRotation(x) !== 3)) fail("rotation 3 starts on NEW_GAMES_FROM");
+for (const [dd, flag, want] of [[NEW_GAMES_FROM, 2, 2], [NEW_GAMES_FROM, 1, 1], [dayBefore, 3, 3], ...after.map((x) => [x, 2, 2])]) {
+  all = { [progressKey(dd)]: { games: { [AHA_SLOTS[3]]: { aha: flag, done: true } } } };
+  if (ahaRotation(dd) !== want) fail("saved aha: " + flag + " must keep rotation " + want + " on " + dd);
+}
+all = {};
+if (JSON.stringify([...AHA_RING_V3].sort((a, b) => a - b)) !== JSON.stringify([...Array(N).keys()]) || AHA_RING_V3.filter((c) => c !== KN).join() !== AHA_RING.join()) fail("AHA_RING_V3 is AHA_RING with knows added");
+if (AHA_RING_V3.some((c, k) => AHA_CATS[c].group === "numbers" && AHA_CATS[AHA_RING_V3[(k + 1) % N]].group === "numbers")) fail("AHA_RING_V3 must never put two number categories side by side");
+if (!knows) fail("no Who Knows? card was shown under rotation 3");
 if (repeats / questions > 0.01) fail("wording repeats too often within 61 days: " + repeats + "/" + questions);
 // Legacy index 3, skill badges and reset.
 difficulty = 1;
@@ -98,6 +146,6 @@ for (const dd of dates.slice(0, 40)) {
 }
 all = {};
 if (!eqChecked) fail("no Matchsticks card was checked");
-({ questions, repeats, N, eqChecked });
+({ questions, repeats, N, eqChecked, knows });
 `, context);
-console.log(`Aha track OK: ${result.questions} generated questions (${result.N} categories × 3 levels × 366 days), ${result.repeats} wording repeats within 61 days, ${result.eqChecked} typed Matchsticks cards accept only the one-move answer, in ${Date.now() - t0} ms`);
+console.log(`Aha track OK: ${result.questions} generated questions (${result.N} categories × 3 levels × 366 days), ${result.repeats} wording repeats within 61 days, ${result.eqChecked} typed Matchsticks cards accept only the one-move answer, ${result.knows} Who Knows? cards shown under rotation 3, in ${Date.now() - t0} ms`);
