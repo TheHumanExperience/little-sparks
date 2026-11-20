@@ -122,3 +122,54 @@ t-rothenburg	2	Germany	Rothenburg Plönlein	File:Plönlein, Rothenburg ob der Ta
 t-zanzibar	2	Tanzania	Stone Town	File:North Kelele Square Stone Town Oct26 A7CR 14685.jpg
 t-okavango	2	Botswana	Okavango mokoro	File:Travesía del delta del Okavango en makoro, Botsuana, 2018-07-31, DD 07.jpg
 t-nizwa	2	Oman	Nizwa Fort	File:Nizwa Fort and Minaret of Friday Mosque.JPG
+# Added 2026-11-21 for the place-v2 cycle
+g-goldentemple	0	India	Golden Temple Amritsar Harmandir Sahib
+g-gateway	0	India	Gateway of India Mumbai
+g-victoriamem	0	India	Victoria Memorial Kolkata
+g-konark	0	India	Konark Sun Temple
+g-lotus	0	India	Lotus Temple Delhi
+g-charminar	0	India	Charminar monument Hyderabad
+g-meenakshi	0	India	Meenakshi Amman Temple gopurams Madurai
+g-humayun	0	India	Humayun's Tomb Delhi
+g-louvre	0	France	Louvre Pyramid Paris
+g-edinburgh	0	United Kingdom	Edinburgh Castle
+g-brandenburg	0	Germany	Brandenburger Tor Berlin Pariser Platz
+g-trevi	0	Italy	Trevi Fountain Rome
+g-florence	0	Italy	Florence Cathedral Duomo
+g-belem	0	Portugal	Belém Tower Lisbon
+g-meteora	0	Greece	Meteora monasteries
+g-atomium	0	Belgium	Atomium Brussels
+g-schonbrunn	0	Austria	Schönbrunn Palace Vienna
+g-grandcanyon	0	United States	Grand Canyon
+g-rushmore	0	United States	Mount Rushmore
+g-niagara	0	Canada	Horseshoe Falls Niagara
+g-sugarloaf	0	Brazil	Sugarloaf Mountain Rio de Janeiro
+g-torres	0	Chile	Torres del Paine towers granite peaks
+g-teotihuacan	0	Mexico	Teotihuacan Avenue of the Dead Pyramid
+g-abusimbel	0	Egypt	Abu Simbel Great Temple facade colossi
+g-hassan	0	Morocco	Hassan II Mosque
+g-lalibela	0	Ethiopia	Church of Saint George Lalibela
+g-harbourbridge	0	Australia	Sydney Harbour Bridge
+g-terracotta	0	China	Terracotta Army pit 1 warriors
+g-templeheaven	0	China	Hall of Prayer for Good Harvests Temple of Heaven
+g-himeji	0	Japan	Himeji Castle
+g-kinkakuji	0	Japan	Kinkaku-ji Kyoto
+g-grandpalace	0	Thailand	Grand Palace Bangkok
+g-everest	0	Nepal	Mount Everest
+g-pamukkale	0	Turkey	Pamukkale
+g-bluemosque	0	Turkey	Sultan Ahmed Mosque Istanbul
+g-azadi	0	Iran	Azadi Tower Tehran
+g-eljem	0	Tunisia	Amphitheatre of El Jem
+g-pompeii	0	Italy	Pompeii Forum Vesuvius
+g-versailles	0	France	Palace of Versailles
+g-tanahlot	0	Indonesia	Tanah Lot temple Bali
+g-pantheon	0	Italy	Pantheon Rome
+g-mezquita	0	Spain	Mezquita Córdoba
+g-guggenheim	0	Spain	Guggenheim Bilbao
+g-lincoln	0	United States	Lincoln Memorial
+g-itsukushima	0	Japan	Itsukushima torii
+g-prambanan	0	Indonesia	Prambanan
+g-amer	0	India	Amber Fort Jaipur
+g-karnak	0	Egypt	Karnak Temple
+g-parkguell	0	Spain	Park Güell
+g-arc	0	France	Arc de Triomphe

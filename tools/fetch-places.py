@@ -66,7 +66,7 @@ def licence(title):
         m = re.search(r'\{\{[^}]*?\b(' + pat + r')\b', low)
         if m:
             v = re.search(r'(\d\.\d)', m.group(1))
-            author = re.search(r'\|\s*author\s*=\s*([^\n]*)', raw, re.I)
+            author = re.search(r'\|\s*(?:author|photographer)\s*=\s*([^\n]*)', raw, re.I)
             return {'licence': name.format(v.group(1) if v else '4.0') if '{}' in name else name, 'licenseUrl': url.format(v.group(1) if v else '4.0') if '{}' in url else url,
                     'artist': clean(author.group(1)) if author else '',
                     'description': clean((re.search(r'\{\{\s*en\s*\|\s*(?:1=)?([^\n]*)', raw) or re.search(r'description\s*=\s*([^\n]*)', raw, re.I) or [None, ''])[1])[:300]}
@@ -98,14 +98,14 @@ def main(listfile, metafile, *skip):
         pid, level, country, q, *exact = line.split('\t')
         if pid in meta: continue
         for title in (exact or search(q)):
-            if title in skips.get(pid, []): continue
+            if title in skips.get(pid, []) or any(v.get('file') == title for k, v in meta.items() if not k.startswith('_')): continue
             lic = licence(title)
             out = ROOT / 'dist' / 'places' / f'{pid}.jpg'
             if not lic or not image(title, out): continue
             meta[pid] = {'level': int(level), 'country': country, 'file': title, **lic,
                          'source': 'https://commons.wikimedia.org/wiki/' + urllib.parse.quote(title.replace(' ', '_'), safe=':_(),.-'),
                          'bytes': out.stat().st_size}
-            print(pid, '←', title, '|', lic['licence'], '|', lic['artist'][:40], flush=True)
+            print(pid, '←', title, '|', lic['licence'], '|', lic['artist'][:40] or 'NO AUTHOR FOUND: fill in artist from the file page', flush=True)
             break
         else:
             print(pid, 'NOTHING FOUND for', q, flush=True)

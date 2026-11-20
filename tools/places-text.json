@@ -742,5 +742,305 @@
   "alt": "Rounded sandy battlements of a fort in the foreground, with a minaret and a town below and hazy mountains behind.",
   "clue": "Fort battlements and a mosque minaret in a mountain oasis town known for its dates and silver.",
   "story": "Nizwa Fort in Oman was built in the 1600s around a huge round tower, with views over the palm groves. The town holds a lively Friday market and is known for its dates."
+ },
+ "g-goldentemple": {
+  "title": "A golden temple on a pool",
+  "alt": "A gilded temple in the middle of a still pool, with white marble walkways and a barefoot pilgrim in a white turban.",
+  "clue": "A gilded shrine in a sacred pool, whose free community kitchen feeds tens of thousands of visitors every day.",
+  "story": "The Harmandir Sahib, or Golden Temple, in Amritsar is the holiest shrine of the Sikh faith. Its langar kitchen serves a free meal to anyone who comes, every day of the year."
+ },
+ "g-gateway": {
+  "title": "An arch by the harbour",
+  "alt": "A grand stone arch on a waterfront, beside a hotel with a red dome and a tall tower, with ferries bobbing in front.",
+  "clue": "A waterfront arch built to welcome a visiting king and queen, beside a famous red-domed hotel on the Arabian Sea.",
+  "story": "The Gateway of India in Mumbai was finished in 1924. Ferries leave from its steps for the cave temples of Elephanta Island."
+ },
+ "g-victoriamem": {
+  "title": "A white marble memorial",
+  "alt": "A white marble palace with a great central dome topped by a dark statue of an angel, behind neat green gardens.",
+  "clue": "A marble memorial to a queen-empress, in the city that was once the capital of the British Raj.",
+  "story": "The Victoria Memorial in Kolkata opened in 1921 and is now a museum. The bronze Angel of Victory on its dome turns with the wind."
+ },
+ "g-konark": {
+  "title": "A stone chariot wheel",
+  "alt": "A huge carved stone wheel with eight wide spokes, set into a temple wall covered in small carved figures.",
+  "clue": "One of 24 carved wheels on a temple built as the chariot of the sun god, near the eastern coast.",
+  "story": "The Konark Sun Temple in Odisha was built in the 13th century as a giant stone chariot. Its wheels work as sundials, and one appears on the ten-rupee note."
+ },
+ "g-lotus": {
+  "title": "A temple like a flower",
+  "alt": "A white building shaped like a half-open lotus flower, its marble petals rising above blue pools and visitors.",
+  "clue": "A house of worship shaped like a lotus, open to people of every faith, in a capital city.",
+  "story": "The Lotus Temple in Delhi is a Bahá'í house of worship, opened in 1986. Its 27 marble petals are arranged in clusters of three."
+ },
+ "g-humayun": {
+  "title": "A garden tomb",
+  "alt": "A red sandstone tomb with a white marble dome, at the end of a long water channel in a formal garden.",
+  "clue": "A garden tomb for a Mughal emperor, built decades before a more famous marble one and an inspiration for it.",
+  "story": "Humayun's Tomb in Delhi was finished in 1570, commissioned by the emperor's widow, Bega Begum. It was the first great garden tomb of its kind."
+ },
+ "g-louvre": {
+  "title": "A glass pyramid",
+  "alt": "A glass pyramid glowing at dusk in a courtyard surrounded by grand old palace wings.",
+  "clue": "A glass pyramid entrance in the courtyard of a royal palace that became the world's most visited art museum.",
+  "story": "The Louvre in Paris was a royal palace before it became a museum in 1793. I. M. Pei's glass pyramid entrance opened in 1989."
+ },
+ "g-edinburgh": {
+  "title": "A castle on a rock",
+  "alt": "A stone castle along the top of a steep volcanic crag, above green gardens where people sit on the grass.",
+  "clue": "A castle on the plug of an old volcano, above gardens in a city that hosts a huge arts festival every August.",
+  "story": "Edinburgh Castle in Scotland sits on Castle Rock, the core of a volcano that died out about 350 million years ago. A cannon is fired from it at one o'clock most days."
+ },
+ "g-trevi": {
+  "title": "A grand fountain",
+  "alt": "A huge baroque fountain built into a palace wall, with a marble sea god, horses and rocks above a turquoise pool.",
+  "clue": "Toss a coin over your shoulder into this baroque fountain and, the story goes, you will return to the city.",
+  "story": "The Trevi Fountain in Rome was finished in 1762. Around three thousand euros in coins are thrown in each day, and they go to charity."
+ },
+ "g-florence": {
+  "title": "A red dome at dusk",
+  "alt": "A cathedral with a vast red-brick dome and a striped bell tower rising over a city of terracotta roofs, with hills behind.",
+  "clue": "The biggest brick dome ever built, in the city where the Renaissance began.",
+  "story": "Florence Cathedral's dome was designed by Filippo Brunelleschi and finished in 1436. Climbing its 463 steps takes you between its inner and outer shells."
+ },
+ "g-belem": {
+  "title": "A tower in the river",
+  "alt": "A white stone tower with little domed turrets, standing in a wide river and reached by a wooden walkway.",
+  "clue": "A white tower that guarded the river mouth where the great ocean voyages of discovery set out.",
+  "story": "The Belém Tower in Lisbon was built around 1519. Explorers sailed past it on their way to the ocean."
+ },
+ "g-meteora": {
+  "title": "A monastery on a rock",
+  "alt": "A monastery with red tiled roofs perched on top of a sheer rock pillar, among wooded cliffs.",
+  "clue": "Monasteries perched on giant rock pillars, once reached only by ladders and baskets pulled up on ropes.",
+  "story": "Meteora in Greece means 'suspended in the air'. Monks built these monasteries from the 14th century, and six are still lived in."
+ },
+ "g-atomium": {
+  "title": "A giant atom",
+  "alt": "Shiny metal spheres joined by tubes like a giant model of an atom, lit up with little lights against a dusky sky.",
+  "clue": "A building shaped like an iron crystal magnified billions of times, made for a world's fair.",
+  "story": "The Atomium in Brussels was built for the 1958 World's Fair. Visitors ride escalators through its tubes between the spheres."
+ },
+ "g-schonbrunn": {
+  "title": "A summer palace",
+  "alt": "A long yellow palace with formal gardens in front, seen from a hill over a city of red roofs.",
+  "clue": "The summer palace of an empire's royal family, with a zoo in its garden that is the oldest in the world still open.",
+  "story": "Schönbrunn Palace in Vienna has 1,441 rooms. Its zoo opened in 1752."
+ },
+ "g-rushmore": {
+  "title": "Faces in the mountain",
+  "alt": "Four giant faces of men carved into a granite cliff under a deep blue sky, with pine trees and rubble below.",
+  "clue": "Four leaders' faces, each about 18 metres tall, carved into a granite mountain in the Black Hills.",
+  "story": "Mount Rushmore in South Dakota was carved between 1927 and 1941. It shows presidents Washington, Jefferson, Theodore Roosevelt and Lincoln."
+ },
+ "g-niagara": {
+  "title": "A horseshoe of water",
+  "alt": "A wide curved waterfall throwing up clouds of mist, with a rainbow and a small tour boat in the green water below.",
+  "clue": "A horseshoe-shaped waterfall on a border river between two great lakes, visited by boats that sail right into the spray.",
+  "story": "The Horseshoe Falls at Niagara are mostly on the Canadian side of the border. Boats have carried visitors into the mist since 1846."
+ },
+ "g-sugarloaf": {
+  "title": "A cable car over the bay",
+  "alt": "A glass cable car gliding over a wooded peak, high above a bay full of small boats and a city of tall buildings.",
+  "clue": "A cable car up a granite peak at the mouth of a bay, in a city famous for its carnival and beaches.",
+  "story": "The cable car up Sugarloaf Mountain in Rio de Janeiro opened in 1912. From the top you can see Copacabana beach and the Christ the Redeemer statue."
+ },
+ "g-lalibela": {
+  "title": "A church cut into the rock",
+  "alt": "A cross-shaped church carved down into solid red rock, standing in a deep pit at sunset, with hills behind.",
+  "clue": "A church carved downwards from a single block of rock, shaped like a cross, in the highlands of the Horn of Africa.",
+  "story": "The Church of Saint George in Lalibela, Ethiopia, was cut out of the rock about 800 years ago. Lalibela has eleven such churches, still used for worship."
+ },
+ "g-harbourbridge": {
+  "title": "A steel arch at night",
+  "alt": "A huge steel arch bridge lit up at night over a harbour, with stone pylons at each end and city lights behind.",
+  "clue": "A steel arch bridge nicknamed 'the Coathanger', near a famous opera house with roofs like sails.",
+  "story": "The Sydney Harbour Bridge opened in 1932. Visitors can climb over the top of its arch, 134 metres above the water."
+ },
+ "g-himeji": {
+  "title": "A white castle",
+  "alt": "A white castle of stacked curved roofs rising above trees and a stone wall reflected in a moat.",
+  "clue": "A brilliant white castle nicknamed the White Heron, which survived wars and earthquakes for over 400 years.",
+  "story": "Himeji Castle in Japan was finished in its present form in 1609. Its white plaster walls helped protect the wooden building from fire."
+ },
+ "g-kinkakuji": {
+  "title": "A golden pavilion",
+  "alt": "A pavilion covered in gold leaf beside a still pond with pine-covered islands, mirrored in the water.",
+  "clue": "A pavilion covered in gold leaf, beside a mirror pond, in a city of a thousand temples.",
+  "story": "Kinkaku-ji, the Golden Pavilion, is a Zen temple in Kyoto. The building was rebuilt in 1955 after a fire, and its gold was renewed in the 1980s."
+ },
+ "g-grandpalace": {
+  "title": "Golden spires by a white wall",
+  "alt": "Golden spires and tiled temple roofs behind a long white wall, mirrored in a puddle, as a monk in a saffron robe walks past.",
+  "clue": "A royal palace and temple of glittering spires, home to a small, much-loved statue of the Buddha carved from green stone.",
+  "story": "The Grand Palace in Bangkok was built from 1782. Inside its walls stands the Temple of the Emerald Buddha, the most sacred temple in Thailand."
+ },
+ "g-everest": {
+  "title": "The highest peak at sunset",
+  "alt": "Snowy mountain peaks under a deep violet sky, with the tallest summit glowing red in the last sunlight.",
+  "clue": "The highest mountain on Earth, seen from the trekking trails on its southern side, home of the Sherpa people.",
+  "story": "Mount Everest stands 8,849 metres tall on the border of Nepal and China. Locally it is called Sagarmatha and Chomolungma."
+ },
+ "g-bluemosque": {
+  "title": "A courtyard at dusk",
+  "alt": "A great mosque with cascading domes and slender minarets, glowing gold at dusk behind an arcaded marble courtyard.",
+  "clue": "A mosque with six minarets, named for the blue tiles inside, facing a great domed church-turned-museum across a park.",
+  "story": "The Sultan Ahmed Mosque in Istanbul, known as the Blue Mosque, was finished in 1616. More than 20,000 hand-made tiles line its walls inside."
+ },
+ "g-azadi": {
+  "title": "A tower of freedom",
+  "alt": "A tall white marble tower with a curved arch and a honeycomb pattern, seen from below against a black night sky.",
+  "clue": "A marble gateway tower whose name means freedom, mixing old Persian arches with modern shapes.",
+  "story": "The Azadi Tower in Tehran was built in 1971. Its design draws on Persian architecture from before and after the coming of Islam."
+ },
+ "g-eljem": {
+  "title": "An arena in a small town",
+  "alt": "A huge oval stone arena with rows of arches, seen from the air in the middle of a town of low, pale houses.",
+  "clue": "One of the largest Roman arenas ever built, standing in a small North African town that grew up around it.",
+  "story": "The amphitheatre of El Jem in Tunisia was built around 238 AD and could seat about 35,000 people. It is among the best preserved Roman ruins anywhere."
+ },
+ "g-versailles": {
+  "title": "A hall of mirrors",
+  "alt": "A long palace gallery lined with tall mirrors, crystal chandeliers and golden statues, with a painted ceiling and sunlight on the floor.",
+  "clue": "A long gallery of 357 mirrors in a king's palace, where a treaty ending a world war was signed.",
+  "story": "The Hall of Mirrors at the Palace of Versailles, near Paris, was finished in 1684. The Treaty of Versailles was signed there in 1919."
+ },
+ "g-tanahlot": {
+  "title": "A temple on a sea rock",
+  "alt": "A small temple with thatched roofs on a rocky island in the surf, with visitors on the wet rocks in front.",
+  "clue": "A sea temple on a rock that becomes an island at high tide, on a famous island of rice terraces and dancers.",
+  "story": "Tanah Lot is one of the sea temples of Bali, built around the 16th century. Sea snakes living in the rocks are said to guard it."
+ },
+ "g-charminar": {
+  "title": "Four minarets over the old city",
+  "alt": "A square stone monument with four tall minarets, seen from above in the middle of a busy old city, with a large mosque nearby.",
+  "clue": "A square monument with four minarets at the heart of an old city famous for pearls and biryani.",
+  "story": "The Charminar in Hyderabad was built in 1591. Its name means 'four minarets', and the bustling Laad Bazaar of bangles spreads out around it."
+ },
+ "g-meenakshi": {
+  "title": "A tower of a thousand figures",
+  "alt": "A towering temple gateway covered from base to top in brightly painted sculptures of gods and animals, against a blue sky.",
+  "clue": "One of fourteen towering temple gateways covered in painted gods, in an ancient southern city on the Vaigai river.",
+  "story": "The Meenakshi Amman Temple in Madurai is dedicated to the goddess Meenakshi. Its tallest gateway tower is about 52 metres high, and the figures are repainted every few years."
+ },
+ "g-brandenburg": {
+  "title": "A gate with a chariot",
+  "alt": "A grand sandstone gate of tall columns, topped by a bronze statue of a goddess driving a four-horse chariot.",
+  "clue": "A city gate topped by a four-horse chariot, which stood beside a wall that divided the city for 28 years.",
+  "story": "The Brandenburg Gate in Berlin was finished in 1791. When the Berlin Wall fell in 1989, crowds gathered here to celebrate."
+ },
+ "g-torres": {
+  "title": "Horns of granite",
+  "alt": "Jagged mountain peaks of pale granite capped with dark rock and snow, rising above green hills under a bright sky.",
+  "clue": "Granite peaks capped with dark rock like horns, in a national park near the southern tip of a long, thin country.",
+  "story": "The Cuernos, or 'Horns', of Torres del Paine in Chilean Patagonia are pale granite capped with darker, older rock. Strong winds and guanacos are common on its trails."
+ },
+ "g-teotihuacan": {
+  "title": "A city of pyramids",
+  "alt": "A wide stepped stone pyramid at the end of a long avenue, with smaller platforms on either side and mountains beyond.",
+  "clue": "An ancient city of great pyramids and a long avenue, built long before the Aztecs found it and named it 'the place of the gods'.",
+  "story": "Teotihuacan, near Mexico City, was one of the largest cities in the world around 500 AD. The pyramid in this view is the Pyramid of the Moon."
+ },
+ "g-abusimbel": {
+  "title": "Giants in the cliff",
+  "alt": "A temple front carved straight into a sandstone cliff, with tall standing statues of a king and queen either side of the door.",
+  "clue": "Temples carved into a cliff by a great pharaoh, moved piece by piece to higher ground when a huge dam was built.",
+  "story": "The temples of Abu Simbel in Egypt were cut into the rock over 3,200 years ago. In the 1960s they were sawn into blocks and moved to save them from the rising Lake Nasser."
+ },
+ "g-terracotta": {
+  "title": "An army of clay",
+  "alt": "Rows of life-size clay soldiers and horses standing in an earthen pit, each face slightly different.",
+  "clue": "Thousands of life-size clay soldiers buried to guard the tomb of the first emperor to unite a great land.",
+  "story": "The Terracotta Army near Xi'an was found by farmers digging a well in 1974. More than 8,000 soldiers were made, and no two faces are alike."
+ },
+ "g-templeheaven": {
+  "title": "A round hall of blue roofs",
+  "alt": "A round wooden hall with three tiers of deep blue roofs and a golden top, on a white marble terrace with crowds below.",
+  "clue": "A round hall with three blue roofs, where emperors prayed each year for a good harvest.",
+  "story": "The Hall of Prayer for Good Harvests at the Temple of Heaven in Beijing is built of wood without a single nail. The blue roofs stand for the sky."
+ },
+ "g-pompeii": {
+  "title": "A town under the volcano",
+  "alt": "Broken white stone columns and old brick ruins in a wide open square, with a mountain rising behind under white clouds.",
+  "clue": "A Roman town buried in volcanic ash in a single day, with the volcano that did it still in view.",
+  "story": "Pompeii, near Naples, was buried when Mount Vesuvius erupted in 79 AD. The ash preserved its streets, paintings and even loaves of bread."
+ },
+ "g-grandcanyon": {
+  "title": "A canyon of red layers",
+  "alt": "A vast canyon of red, orange and purple rock layers stretching to the horizon, with clouds and a faint rainbow above.",
+  "clue": "A canyon more than a kilometre and a half deep, carved by a river over millions of years in a dry south-western state.",
+  "story": "The Grand Canyon in Arizona was carved by the Colorado River. Its lowest rocks are nearly two billion years old."
+ },
+ "g-hassan": {
+  "title": "A minaret by the ocean",
+  "alt": "A very tall square minaret covered in green and cream tilework, framed by a carved archway in warm evening light.",
+  "clue": "A mosque with one of the tallest minarets in the world, built partly over the Atlantic Ocean in a big port city.",
+  "story": "The Hassan II Mosque in Casablanca was finished in 1993. Its minaret rises 210 metres, and part of the prayer hall has a glass floor over the sea."
+ },
+ "g-pamukkale": {
+  "title": "White terraces",
+  "alt": "Snow-white stone terraces with shallow pools of water stepping down a hillside, with visitors walking barefoot along the top.",
+  "clue": "Hot springs that left white mineral terraces down a hillside, beside the ruins of an ancient Greek spa city.",
+  "story": "Pamukkale means 'cotton castle' in Turkish. The terraces are made of travertine left by warm, mineral-rich spring water over thousands of years."
+ },
+ "g-pantheon": {
+  "title": "An open eye in a dome",
+  "alt": "Looking straight up into a huge coffered concrete dome with a round opening to the sky at its centre.",
+  "clue": "An ancient temple whose great concrete dome, with a round opening at the top, is still the largest unreinforced one in the world.",
+  "story": "The Pantheon in Rome was finished around 125 AD. Rain falls through the oculus in its dome and drains away through small holes in the floor."
+ },
+ "g-mezquita": {
+  "title": "A mosque and a bridge",
+  "alt": "A long stone bridge of many arches crossing a shallow green river towards a great golden building with a bell tower.",
+  "clue": "A vast old mosque with a cathedral built inside it, beside a Roman bridge in a southern city once ruled by the Moors.",
+  "story": "The Mosque-Cathedral of Córdoba was begun in 785 and has a forest of more than 800 columns. A cathedral was built in its centre in the 16th century."
+ },
+ "g-guggenheim": {
+  "title": "A museum of silver curves",
+  "alt": "A museum of swooping, shining metal curves beside a river, with a red arch bridge and a giant flower-like sculpture nearby.",
+  "clue": "A museum covered in curving titanium panels, which turned a northern industrial port into an art destination.",
+  "story": "The Guggenheim Museum Bilbao, designed by Frank Gehry, opened in 1997. Its walls are clad in about 33,000 thin sheets of titanium."
+ },
+ "g-lincoln": {
+  "title": "A temple to a president",
+  "alt": "A white marble building like a Greek temple, with a row of tall columns at the top of wide steps, under a blue sky.",
+  "clue": "A marble memorial with 36 columns, one for each state in the union when the president it honours died.",
+  "story": "The Lincoln Memorial in Washington, D.C., opened in 1922. Martin Luther King Jr. gave his 'I Have a Dream' speech on its steps in 1963."
+ },
+ "g-itsukushima": {
+  "title": "A gate in the sea",
+  "alt": "A huge red wooden gate standing in calm blue sea water, with green wooded hills behind.",
+  "clue": "A giant red shrine gate that seems to float on the sea at high tide, on a sacred island where deer roam free.",
+  "story": "The great torii of Itsukushima Shrine on Miyajima, Japan, stands in the sea by its own weight. At low tide visitors can walk out to it."
+ },
+ "g-prambanan": {
+  "title": "A cluster of stone spires",
+  "alt": "Tall pointed temple towers of dark carved stone rising above fields of fallen blocks, under a blue sky with white clouds.",
+  "clue": "Soaring Hindu temple spires built over a thousand years ago, not far from a great Buddhist monument on the same island.",
+  "story": "Prambanan in Central Java was built in the 9th century for Shiva, Vishnu and Brahma. Its main temple is 47 metres tall."
+ },
+ "g-amer": {
+  "title": "A fort on the hills",
+  "alt": "A honey-coloured hilltop fort palace around a big courtyard full of visitors, with walls snaking over the hills behind.",
+  "clue": "A hilltop fort palace of honey-coloured stone above a lake, near the 'Pink City', where elephants once carried visitors up.",
+  "story": "Amer Fort near Jaipur was built from 1592 by Raja Man Singh. Inside is the Sheesh Mahal, a hall covered in thousands of tiny mirrors."
+ },
+ "g-karnak": {
+  "title": "An avenue of rams",
+  "alt": "A row of stone sphinxes with rams' heads, each guarding a small statue of a king, in front of massive sandstone walls.",
+  "clue": "A vast temple complex of giant columns and ram-headed sphinxes beside the Nile, on the site of an ancient capital.",
+  "story": "The Karnak temple complex at Luxor in Egypt was added to by kings over about 2,000 years. Its great hall holds 134 huge columns."
+ },
+ "g-parkguell": {
+  "title": "Gingerbread houses",
+  "alt": "Two fairy-tale houses with wavy white roofs and a tower covered in blue and white tiles, above a crowded entrance and a city stretching to the sea.",
+  "clue": "A hillside park of wavy tiled buildings by the same architect as a famous unfinished basilica in the same city.",
+  "story": "Park Güell in Barcelona was designed by Antoni Gaudí and opened to the public in 1926. Its famous long bench is covered in broken tile mosaic."
+ },
+ "g-arc": {
+  "title": "A triumphal arch",
+  "alt": "A massive carved stone arch lit up at dusk, with a slim iron tower glowing in the distance.",
+  "clue": "A triumphal arch at the meeting of twelve avenues, with an unknown soldier's tomb and an eternal flame beneath it.",
+  "story": "The Arc de Triomphe in Paris was finished in 1836. A flame for the Unknown Soldier has burned under it since 1923."
  }
 }

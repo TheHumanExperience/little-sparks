@@ -60,6 +60,39 @@
   ],
   "t-wales": [
    "File:Recreated Celtic Village, Museum of Welsh Life. - geograph.org.uk - 138611.jpg"
+  ],
+  "g-charminar": [
+   "File:Minaret of charminar 12032012.jpg"
+  ],
+  "g-meenakshi": [
+   "File:Gopuram Madurai.jpg"
+  ],
+  "g-brandenburg": [
+   "File:Brandenburg Gate Quadriga at Night.jpg"
+  ],
+  "g-torres": [
+   "File:Lesser rhea (Rhea pennata pennata) Torres del Paine.jpg"
+  ],
+  "g-teotihuacan": [
+   "File:Right border sun temple.jpg"
+  ],
+  "g-abusimbel": [
+   "File:Templo de Ramsés II, Abu Simbel, Egipto, 2022-04-02, DD 74-76 HDR.jpg"
+  ],
+  "g-hassan": [
+   "File:Hassan II Mosque Plaza.jpg"
+  ],
+  "g-terracotta": [
+   "File:Xian China Terracotta-Army-Museum-04.jpg"
+  ],
+  "g-templeheaven": [
+   "File:Peking Himmelstempel Tor-20110103-RM-155055.jpg"
+  ],
+  "g-pamukkale": [
+   "File:Pamukkale 01.jpg"
+  ],
+  "g-pompeii": [
+   "File:Pompeii Ruins & Mt. Vesuvius (48442337717).jpg"
   ]
  },
  "g-eiffel": {
@@ -233,7 +266,7 @@
   "file": "File:Attica 06-13 Athens 50 View from Philopappos - Acropolis Hill.jpg",
   "licence": "CC BY-SA 3.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
-  "artist": "",
+  "artist": "A.Savin",
   "description": "View from Philopappos Hill in Athens (Attica, Greece) — Acropolis of Athens}}",
   "source": "https://commons.wikimedia.org/wiki/File:Attica_06-13_Athens_50_View_from_Philopappos_-_Acropolis_Hill.jpg",
   "bytes": 98641
@@ -860,7 +893,7 @@
   "file": "File:Celebrating The Invention Of Hangul 1 (125014281).jpeg",
   "licence": "CC BY 3.0",
   "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
-  "artist": "",
+  "artist": "Taehyung Jin",
   "description": "500px provided description: Dancing to celebrate the invention of Hangul, Korean Original Character [#Ballet ,#Seoul ,#Hangul ,#A7m2]",
   "source": "https://commons.wikimedia.org/wiki/File:Celebrating_The_Invention_Of_Hangul_1_(125014281).jpeg",
   "bytes": 85749
@@ -882,7 +915,7 @@
   "file": "File:Mexico.Oax.Oaxaca.streets.01.jpg",
   "licence": "CC BY-SA 2.0",
   "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
-  "artist": "",
+  "artist": "Hajor",
   "description": "",
   "source": "https://commons.wikimedia.org/wiki/File:Mexico.Oax.Oaxaca.streets.01.jpg",
   "bytes": 80561
@@ -1425,5 +1458,555 @@
   "description": "Colorful houses in Wale Street, Bo-Kaap, Cape Town, South Africa",
   "source": "https://commons.wikimedia.org/wiki/File:Cape_Town_(ZA),_Wale_Street_--_2024_--_3536.jpg",
   "bytes": 93613
+ },
+ "g-goldentemple": {
+  "level": 0,
+  "country": "India",
+  "file": "File:Sikh pilgrim at the Golden Temple (Harmandir Sahib) in Amritsar, India.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Paulrudd",
+  "description": "Sikh pilgrim at the Harmandir Sahib (Golden Temple) in Amritsar, India. The man has just had a .}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Sikh_pilgrim_at_the_Golden_Temple_(Harmandir_Sahib)_in_Amritsar,_India.jpg",
+  "bytes": 90547
+ },
+ "g-gateway": {
+  "level": 0,
+  "country": "India",
+  "file": "File:Panoramic view of Taj Palace Hotel and Taj Tower with the iconic Gateway of India in the background.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "iMahesh",
+  "description": "Panoramic view of Taj Palace Hotel and Taj Tower with the iconic Gateway of India in the background, overlooking the Arabian Sea in Mumbai}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Panoramic_view_of_Taj_Palace_Hotel_and_Taj_Tower_with_the_iconic_Gateway_of_India_in_the_background.jpg",
+  "bytes": 74247
+ },
+ "g-victoriamem": {
+  "level": 0,
+  "country": "India",
+  "file": "File:Victoria Memorial situated in Kolkata.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Subhrajyoti07",
+  "description": "The Victoria Memorial is a large marble building in Kolkata (formerly Calcutta), West Bengal, India, which was built between 1906 and 1921. It is dedicated to the memory of Queen Victoria (1819–1901) and is now a museum and tourist destination under the auspices of the Ministry of Culture. The memor",
+  "source": "https://commons.wikimedia.org/wiki/File:Victoria_Memorial_situated_in_Kolkata.jpg",
+  "bytes": 50652
+ },
+ "g-konark": {
+  "level": 0,
+  "country": "India",
+  "file": "File:Wheel engraved in the 13th century built Konark Sun Temple in Orissa, India.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Joydeep",
+  "description": "Wheel engraved in the 13th century built Konark Sun Temple in Orissa, India.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Wheel_engraved_in_the_13th_century_built_Konark_Sun_Temple_in_Orissa,_India.jpg",
+  "bytes": 160309
+ },
+ "g-lotus": {
+  "level": 0,
+  "country": "India",
+  "file": "File:Lotus Temple-Panoroma-Visit During WCI 2016- IMG 6471.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Bijay chaurasia",
+  "description": "The Lotus Temple, located in New Delhi, India, is a Bahá'í House of Worship completed in 1986",
+  "source": "https://commons.wikimedia.org/wiki/File:Lotus_Temple-Panoroma-Visit_During_WCI_2016-_IMG_6471.jpg",
+  "bytes": 59043
+ },
+ "g-humayun": {
+  "level": 0,
+  "country": "India",
+  "file": "File:20191205 Grobowiec Humajuna w Delhi 1055 6794.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Jakub Hałun",
+  "description": "Main monument of Humayun's Tomb, Delhi}}",
+  "source": "https://commons.wikimedia.org/wiki/File:20191205_Grobowiec_Humajuna_w_Delhi_1055_6794.jpg",
+  "bytes": 69682
+ },
+ "g-louvre": {
+  "level": 0,
+  "country": "France",
+  "file": "File:Cour Napoléon at night - Louvre.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Benh LIEU SONG",
+  "description": "Courtyard of the Museum of Louvre, and its pyramid. This picture is a panorama made from stitching three pictures with Hugin.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Cour_Napol%C3%A9on_at_night_-_Louvre.jpg",
+  "bytes": 41149
+ },
+ "g-edinburgh": {
+  "level": 0,
+  "country": "United Kingdom",
+  "file": "File:Castle, City of Edinburgh (IMG 20190628 180330).jpg",
+  "licence": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+  "artist": "Matti Blume",
+  "description": "",
+  "source": "https://commons.wikimedia.org/wiki/File:Castle,_City_of_Edinburgh_(IMG_20190628_180330).jpg",
+  "bytes": 93066
+ },
+ "g-trevi": {
+  "level": 0,
+  "country": "Italy",
+  "file": "File:Fontaine Trevi - Rome.jpg",
+  "licence": "CC0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "artist": "Wilfredo Rafael Rodriguez Hernandez",
+  "description": "y un ancho de , es la fuente barroca más grande de la ciudad y una de las más famosas del mundo.|en=The Trevi Fountain (in Italian Fontana di Trevi), Rome, Italy. This 18th-century fountain is located in the Trevi district in Rome, Italy. It was designed by Italian architect Nicola Salvi and complet",
+  "source": "https://commons.wikimedia.org/wiki/File:Fontaine_Trevi_-_Rome.jpg",
+  "bytes": 86729
+ },
+ "g-florence": {
+  "level": 0,
+  "country": "Italy",
+  "file": "File:Florence Cathedral seen from Piazzale Michelangelo night dllu.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Dllu",
+  "description": "The seen from at night.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Florence_Cathedral_seen_from_Piazzale_Michelangelo_night_dllu.jpg",
+  "bytes": 83409
+ },
+ "g-belem": {
+  "level": 0,
+  "country": "Portugal",
+  "file": "File:Torre de Belém and wooden bridge - landscape view - Lisbon - 2026-05-14.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Norbert Nagel",
+  "description": "Torre de Belém and its wooden bridge on the Tagus, Lisbon, Portugal. The landscape view shows the wooden bridge approaching from the right and the tree-lined riverbank behind the tower.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Torre_de_Bel%C3%A9m_and_wooden_bridge_-_landscape_view_-_Lisbon_-_2026-05-14.jpg",
+  "bytes": 59758
+ },
+ "g-meteora": {
+  "level": 0,
+  "country": "Greece",
+  "file": "File:Roussanou Monastery, Meteora.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Bernard Gagnon",
+  "description": "Roussanou Monastery, Meteora, Greece}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Roussanou_Monastery,_Meteora.jpg",
+  "bytes": 146611
+ },
+ "g-atomium": {
+  "level": 0,
+  "country": "Belgium",
+  "file": "File:Atomium, Bruselas, Bélgica, 2021-12-15, DD 148-150 HDR.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Diego Delso",
+  "description": "Atomium, Brussels, Belgium}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Atomium,_Bruselas,_B%C3%A9lgica,_2021-12-15,_DD_148-150_HDR.jpg",
+  "bytes": 67032
+ },
+ "g-schonbrunn": {
+  "level": 0,
+  "country": "Austria",
+  "file": "File:Schloss Schönbrunn Wien 2014 (Zuschnitt 1).jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Der Wolf im Wald/Author/Canon EOS 5D Mark II",
+  "description": "Schönbrunn Palace in Vienna, Austria}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Schloss_Sch%C3%B6nbrunn_Wien_2014_(Zuschnitt_1).jpg",
+  "bytes": 89709
+ },
+ "g-rushmore": {
+  "level": 0,
+  "country": "United States",
+  "file": "File:Mount Rushmore detail view (100MP).jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Der Wolf im Wald/Author/Canon EOS 5DS",
+  "description": "Mount Rushmore National Memorial in South Dakota, United States}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Mount_Rushmore_detail_view_(100MP).jpg",
+  "bytes": 120367
+ },
+ "g-niagara": {
+  "level": 0,
+  "country": "Canada",
+  "file": "File:Maid of the Mist VII approaching the Horseshoe Falls, West view 20170418 1.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "DXR",
+  "description": "A west view of the Horseshoe Falls, shown as Maid of the Mist VII is approaching. A rainbow is visible due to the large amount of mist caused by the waterfall}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Maid_of_the_Mist_VII_approaching_the_Horseshoe_Falls,_West_view_20170418_1.jpg",
+  "bytes": 51803
+ },
+ "g-sugarloaf": {
+  "level": 0,
+  "country": "Brazil",
+  "file": "File:Sugarloaf Cable Car viewed from Rio de Janeiro, Brazil.jpg",
+  "licence": "CC0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "artist": "Wilfredo Rafael Rodriguez Hernandez",
+  "description": "",
+  "source": "https://commons.wikimedia.org/wiki/File:Sugarloaf_Cable_Car_viewed_from_Rio_de_Janeiro,_Brazil.jpg",
+  "bytes": 111451
+ },
+ "g-lalibela": {
+  "level": 0,
+  "country": "Ethiopia",
+  "file": "File:Ethiopia - sunset at Church of Saint George, Lalibela 01.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Thomas Fuhrmann",
+  "description": "the sunset at Church of Saint George, Lalibela - taken during an overlanding trip to Ethiopia in 2019 - taken by Thomas Fuhrmann, SnowmanStudios - see more pictures on www.snowmanstudios.de}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Ethiopia_-_sunset_at_Church_of_Saint_George,_Lalibela_01.jpg",
+  "bytes": 100261
+ },
+ "g-harbourbridge": {
+  "level": 0,
+  "country": "Australia",
+  "file": "File:Sydney Harbour Bridge from Circular Quay.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "JJ Harrison (https://www.jjharrison.com.au/)",
+  "description": "Sydney Harbour Bridge from Circular Quay, Sydney, New South Wales, Australia.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Sydney_Harbour_Bridge_from_Circular_Quay.jpg",
+  "bytes": 42980
+ },
+ "g-himeji": {
+  "level": 0,
+  "country": "Japan",
+  "file": "File:Himeji Castle, November 2016 -02.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Martin Falbisoner",
+  "description": "Himeji Castle, UNESCO World Heritage Site Ref. Number 661, is a hilltop Japanese castle complex located in Himeji, Hyōgo Prefecture. The castle is regarded as the finest surviving example of prototypical Japanese castle architecture, comprising a network of 83 buildings with advanced defensive syste",
+  "source": "https://commons.wikimedia.org/wiki/File:Himeji_Castle,_November_2016_-02.jpg",
+  "bytes": 92039
+ },
+ "g-kinkakuji": {
+  "level": 0,
+  "country": "Japan",
+  "file": "File:Water reflection of Kinkaku-ji Temple a sunny day, Kyoto, Japan.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Basile Morin",
+  "description": "Wide-frame view and water reflection of Kinkaku-ji Temple, a sunny day, Kyoto, Japan.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Water_reflection_of_Kinkaku-ji_Temple_a_sunny_day,_Kyoto,_Japan.jpg",
+  "bytes": 92853
+ },
+ "g-grandpalace": {
+  "level": 0,
+  "country": "Thailand",
+  "file": "File:Temple of the Emerald Buddha.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Nawit science",
+  "description": "Monk walks in the morning after the rain in front of the (Wat Phra Kaew), part of the , Bangkok, Thailand.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Temple_of_the_Emerald_Buddha.jpg",
+  "bytes": 70687
+ },
+ "g-everest": {
+  "level": 0,
+  "country": "Nepal",
+  "file": "File:Sunset view of Everest.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Nir B. Gurung",
+  "description": "Mount Everest is the Himalaya mountain range located in the Mahalangur Himal sub-range of the Himalayas. The China–Nepal border runs across its summit point.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Sunset_view_of_Everest.jpg",
+  "bytes": 55463
+ },
+ "g-bluemosque": {
+  "level": 0,
+  "country": "Turkey",
+  "file": "File:Blue Mosque Courtyard Dusk Wikimedia Commons.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Benh LIEU SONG (Flickr)",
+  "description": "Panoramic view of the courtyard of the Blue Mosque, in Istanbul, Turkey. The courtyard has a square shape, but the mercator projection necessary to squeeze all the field of view into the frame bends the horizontal lines. Panorama created with Hugin.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Blue_Mosque_Courtyard_Dusk_Wikimedia_Commons.jpg",
+  "bytes": 81315
+ },
+ "g-azadi": {
+  "level": 0,
+  "country": "Iran",
+  "file": "File:Azadi Tower at night in low angle.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "بهادر های زاده",
+  "description": "Azadi Tower at night, Tehran , Iran.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Azadi_Tower_at_night_in_low_angle.jpg",
+  "bytes": 74239
+ },
+ "g-eljem": {
+  "level": 0,
+  "country": "Tunisia",
+  "file": "File:Amphithéâtre d’El Jem vue aerienne (2023) 1.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Skander zarrad",
+  "description": "Roman The El Jem Amphitheater, also 'Colosseum of Thysdrus', present-day El Jem, Tunisia}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Amphith%C3%A9%C3%A2tre_d%E2%80%99El_Jem_vue_aerienne_(2023)_1.jpg",
+  "bytes": 145059
+ },
+ "g-versailles": {
+  "level": 0,
+  "country": "France",
+  "file": "File:Chateau Versailles Galerie des Glaces.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Myrabella",
+  "description": "Galerie des Glaces (Hall of Mirrors) in the Palace of Versailles, Versailles, France.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Chateau_Versailles_Galerie_des_Glaces.jpg",
+  "bytes": 130342
+ },
+ "g-tanahlot": {
+  "level": 0,
+  "country": "Indonesia",
+  "file": "File:Tanah-Lot Bali Indonesia Pura-Tanah-Lot-01.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "CEphoto, Uwe Aranas",
+  "description": "Tanah Lot, Bali, Indonesia: Pura Tanah Lot at sunset }}",
+  "source": "https://commons.wikimedia.org/wiki/File:Tanah-Lot_Bali_Indonesia_Pura-Tanah-Lot-01.jpg",
+  "bytes": 111509
+ },
+ "g-charminar": {
+  "level": 0,
+  "country": "India",
+  "file": "File:Aerial view of Charminar and its locality.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "iMahesh",
+  "description": "Aerial view of Charminar and its locality}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Aerial_view_of_Charminar_and_its_locality.jpg",
+  "bytes": 129367
+ },
+ "g-meenakshi": {
+  "level": 0,
+  "country": "India",
+  "file": "File:S-TN-34 Meenakshi Amman Temple South Gopuram enriched with delicate Stucco works.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "MADHURANTHAKAN JAGADEESAN",
+  "description": "Meenakshi Amman Temple South Gopuram enriched with delicate Stucco works painted with vivid and vibrant colours}}",
+  "source": "https://commons.wikimedia.org/wiki/File:S-TN-34_Meenakshi_Amman_Temple_South_Gopuram_enriched_with_delicate_Stucco_works.jpg",
+  "bytes": 125378
+ },
+ "g-brandenburg": {
+  "level": 0,
+  "country": "Germany",
+  "file": "File:Brandenburger Tor morgens.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Der Wolf im Wald/Author",
+  "description": "The Brandenburg Gate in Berlin, Germany}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Brandenburger_Tor_morgens.jpg",
+  "bytes": 67731
+ },
+ "g-torres": {
+  "level": 0,
+  "country": "Chile",
+  "file": "File:Cretaceous sedimentary rocks intruded by a Miocene granite laccolith.jpg",
+  "licence": "CC BY 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+  "artist": "James St. John",
+  "description": "Cretaceous sedimentary rocks intruded by a Miocene granite laccolith (Cuernos del Paine, Torres del Paine National Park, Andes Mountains, Chile)",
+  "source": "https://commons.wikimedia.org/wiki/File:Cretaceous_sedimentary_rocks_intruded_by_a_Miocene_granite_laccolith.jpg",
+  "bytes": 81774
+ },
+ "g-teotihuacan": {
+  "level": 0,
+  "country": "Mexico",
+  "file": "File:Teotihuacán, México, 2013-10-13, DD 45.JPG",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Diego Delso",
+  "description": "The Pyramid of the Moon in Teotihuacan, México}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Teotihuac%C3%A1n,_M%C3%A9xico,_2013-10-13,_DD_45.JPG",
+  "bytes": 79988
+ },
+ "g-abusimbel": {
+  "level": 0,
+  "country": "Egypt",
+  "file": "File:Templo de Nefertari, Abu Simbel, Egipto, 2022-04-02, DD 153.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Diego Delso",
+  "description": "Temple of Nefertari, Abu Simbel, Egypt. The temple, also called Small Temple of Abu Simbel, was built about northeast of the temple of Ramesses&nbsp;II and was dedicated to the goddess Hathor and Ramesses&nbsp;II's chief consort, Nefertari. This was in fact the second time in ancient Egyptian histor",
+  "source": "https://commons.wikimedia.org/wiki/File:Templo_de_Nefertari,_Abu_Simbel,_Egipto,_2022-04-02,_DD_153.jpg",
+  "bytes": 109980
+ },
+ "g-terracotta": {
+  "level": 0,
+  "country": "China",
+  "file": "File:Qin Shihuang Terracotta Army, Pit 1 Warriors & Horses.jpg",
+  "licence": "CC0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "artist": "Gary Todd",
+  "description": "Lintong: Terracotta Army of Qin Shihuang. Complete indexed photo collection at www.WorldHistoryPics.com.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Qin_Shihuang_Terracotta_Army,_Pit_1_Warriors_%26_Horses.jpg",
+  "bytes": 60622
+ },
+ "g-templeheaven": {
+  "level": 0,
+  "country": "China",
+  "file": "File:Hall of Prayer for Good Harvest.JPG",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Fong Chen",
+  "description": "The Hall of Prayer for Good Harvest at the Temple of Heaven in Beijing. April，2010}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Hall_of_Prayer_for_Good_Harvest.JPG",
+  "bytes": 72802
+ },
+ "g-pompeii": {
+  "level": 0,
+  "country": "Italy",
+  "file": "File:Forum (Pompeii) and the Vesuvio.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Commonists",
+  "description": "Forum (Pompeii) and the Vesuvio}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Forum_(Pompeii)_and_the_Vesuvio.jpg",
+  "bytes": 89419
+ },
+ "g-grandcanyon": {
+  "level": 0,
+  "country": "United States",
+  "file": "File:Grand Canyon Hopi Point with rainbow 2013.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Tuxyso",
+  "description": "View from Hopi Point over Grand Canyon with rainbow}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Grand_Canyon_Hopi_Point_with_rainbow_2013.jpg",
+  "bytes": 97453
+ },
+ "g-hassan": {
+  "level": 0,
+  "country": "Morocco",
+  "file": "File:Whispers of Gold - Hassan II Mosque at Dusk.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "OussamaHamama",
+  "description": "Bathed in the gentle glow of twilight, the majestic minaret of Hassan II Mosque rises like a beacon between sky and sea. Framed by delicate Moorish arches, the intricately carved stone drinks in the day’s final light, turning ancient craft into a glowing masterpiece of peace and devotion.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Whispers_of_Gold_-_Hassan_II_Mosque_at_Dusk.jpg",
+  "bytes": 58280
+ },
+ "g-pamukkale": {
+  "level": 0,
+  "country": "Turkey",
+  "file": "File:Pamukkale 02.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Bernard Gagnon",
+  "description": "Travertine terraces of Pamukkale, Turkey}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Pamukkale_02.jpg",
+  "bytes": 127078
+ },
+ "g-pantheon": {
+  "level": 0,
+  "country": "Italy",
+  "file": "File:Dome of Pantheon (Rome).jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Livioandronico2013",
+  "description": "Dome of Pantheon (Rome)}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Dome_of_Pantheon_(Rome).jpg",
+  "bytes": 57877
+ },
+ "g-mezquita": {
+  "level": 0,
+  "country": "Spain",
+  "file": "File:Centro Histórico, 16.9 -- 2023 -- Córdoba, España.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Jose María Ligero Loarte",
+  "description": "Views of the Historic centre of Córdoba from the Guadalquivir River, from where the Mosque-Cathedral and the Roman Bridge stand out, declared a World Heritage Site by UNESCO in 1994. In the image you can also see the Puerta del Puente, the Triunfo de San Rafael and part of the Episcopal Palace.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Centro_Hist%C3%B3rico,_16.9_--_2023_--_C%C3%B3rdoba,_Espa%C3%B1a.jpg",
+  "bytes": 96938
+ },
+ "g-guggenheim": {
+  "level": 0,
+  "country": "Spain",
+  "file": "File:Museo Guggenheim -- 2021 -- Bilbao, Euskadi, España.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "José Ligero Loarte",
+  "description": "Guggenheim Museum Bilbao from Northwest. Three sculptures from the museum's collection can be seen outside: Tulips by Jeff Koons, Tall Tree & The Eye by Anish Kapoor, and Maman by Louise Bourgeois. The Salve Bridge stands out with its red portico.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Museo_Guggenheim_--_2021_--_Bilbao,_Euskadi,_Espa%C3%B1a.jpg",
+  "bytes": 89078
+ },
+ "g-lincoln": {
+  "level": 0,
+  "country": "United States",
+  "file": "File:Lincoln Memorial east side.JPG",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Martin Falbisoner",
+  "description": "Lincoln Memorial, east side.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Lincoln_Memorial_east_side.JPG",
+  "bytes": 51350
+ },
+ "g-itsukushima": {
+  "level": 0,
+  "country": "Japan",
+  "file": "File:Itsukushima Gate.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "JordyMeow",
+  "description": "The torii gate at Itsukushima Shrine on the island of Itsukushima (popularly known as Miyajima) in Hiroshima Prefecture, Japan}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Itsukushima_Gate.jpg",
+  "bytes": 95263
+ },
+ "g-prambanan": {
+  "level": 0,
+  "country": "Indonesia",
+  "file": "File:Prambanan temple, Central Java, Indonesia, 20220818 1311 9139.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Jakub Hałun",
+  "description": "View of Prambanan temple, Java, Indonesia}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Prambanan_temple,_Central_Java,_Indonesia,_20220818_1311_9139.jpg",
+  "bytes": 110549
+ },
+ "g-amer": {
+  "level": 0,
+  "country": "India",
+  "file": "File:Amber Fort, Jaipur, 20191219 1011 9509.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Jakub Hałun",
+  "description": "Jaleb Chowk courtyard, Amber Fort, Jaipur}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Amber_Fort,_Jaipur,_20191219_1011_9509.jpg",
+  "bytes": 76694
+ },
+ "g-karnak": {
+  "level": 0,
+  "country": "Egypt",
+  "file": "File:Templo de Karnak, Luxor, Egipto, 2022-04-03, DD 144.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Diego Delso",
+  "description": "Karnak Temple, Luxor, Egypt}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Templo_de_Karnak,_Luxor,_Egipto,_2022-04-03,_DD_144.jpg",
+  "bytes": 99608
+ },
+ "g-parkguell": {
+  "level": 0,
+  "country": "Spain",
+  "file": "File:Park Güell 02.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Bernard Gagnon",
+  "description": "Houses in Park Güell designed by Antoni Gaudi, Barcelona, Spain}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Park_G%C3%BCell_02.jpg",
+  "bytes": 125915
+ },
+ "g-arc": {
+  "level": 0,
+  "country": "France",
+  "file": "File:Arc de Triomphe de l'Étoile at night vertical fix.jpg",
+  "licence": "CC0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "artist": "Wilfredo Rafael Rodriguez Hernandez",
+  "description": "",
+  "source": "https://commons.wikimedia.org/wiki/File:Arc_de_Triomphe_de_l%27%C3%89toile_at_night_vertical_fix.jpg",
+  "bytes": 81788
  }
 }

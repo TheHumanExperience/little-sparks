@@ -14,6 +14,9 @@ for (const p of PLACES) {
   if (!WORLD_COUNTRY[p.country]) fail(p.id + ": country not in WORLD_REGIONS: " + p.country);
   if (!fs.existsSync("dist/" + p.image)) fail(p.id + ": missing image " + p.image);
   if (!FREE.test(p.licence) || !p.source.startsWith("https://commons.wikimedia.org/") || !p.credit) fail(p.id + ": licence or credit " + p.licence);
+  // CC BY and BY-SA need the author: an empty artist builds to "Unknown photographer / ...".
+  const author = p.credit.replace(" / Wikimedia Commons", "").trim();
+  if (!/^(public domain|pd|cc0)/i.test(p.licence) && (!author || author === "Unknown photographer")) fail(p.id + ": " + p.licence + " needs its author in the credit (fill artist in tools/places-meta.json)");
   for (const k of ["title", "alt", "clue", "story"]) if (!p[k] || p[k].length < 8) fail(p.id + ": missing " + k);
   if (new RegExp("\\\\b" + p.country + "\\\\b", "i").test(p.alt + " " + p.clue)) fail(p.id + ": alt or clue names the country");
   if (![0, 1, 2].includes(p.level)) fail(p.id + ": level");
@@ -80,4 +83,32 @@ $("#actions").children.find((b) => b.textContent === "A gentle hint").onclick();
 if (state(24).hints !== 2) fail("second hint");
 stats.join(" · ");
 `, Object.assign(context, { FEED_DAYS_MIN: 31 }));
-console.log("PASS: Where in the World — free-licence photos with credits, clues and stories; no repeat within 31 days; 3 levels × 366 days deterministic with graded options; v1 picks unchanged; v2 cycle checked; tries, misses, hints and pinned saves. " + out);
+// No photo or place twice: ids, Commons source files and image bytes are unique, and so is the
+// place itself. The place key is the id without its level prefix (g-taj → taj), so the same landmark
+// can't sit at two levels under one name; PLACE_ALIASES maps other names for a place already in the
+// pool onto its key, so it can't come back under a new id either. Add to it when a new id could be
+// another name for an existing place.
+const PLACE_ALIASES = {
+  tajmahal: "taj", pyramids: "giza", sphinx: "giza", angkorwat: "angkor", stbasil: "basil", stbasils: "basil", kremlin: "basil",
+  christ: "redeemer", corcovado: "redeemer", parthenon: "acropolis", harbour: "opera", sydney: "opera", operahouse: "opera",
+  everest: "everest", sagarmatha: "everest", hagiasophia: "hagia", bluemosque: "bluemosque", sultanahmet: "bluemosque",
+  forbiddencity: "forbidden", greatwallofchina: "greatwall", mutianyu: "greatwall", victoriafalls: "victoria", mosioatunya: "victoria",
+  goldengatebridge: "goldengate", statueofliberty: "liberty", bigbenlondon: "bigben", westminster: "bigben", eiffeltower: "eiffel",
+  leaningtower: "pisa", stpeters: "vatican", sistine: "vatican", sagradafamilia: "sagrada", machupicchu: "machu", easterisland: "moai",
+  rapanui: "moai", petronastowers: "petronas", burjkhalifa: "burj", hawa: "hawamahal", windspalace: "hawamahal", halongbay: "halong",
+  salar: "uyuni", uyunisalt: "uyuni", twelveapostles: "apostles", ayersrock: "uluru", cliffsofmoher: "moher", monumentvalley: "monument",
+  tigernest: "tigersnest", taktsang: "tigersnest", registansquare: "registan", stonetown: "zanzibar", grandplace: "brussels",
+  amritsar: "goldentemple", harmandir: "goldentemple", indiagate: "gateway", qutbminar: "qutub", qutb: "qutub",
+};
+{
+  const crypto = require("crypto"), seen = new Map();
+  const once = (kind, key, id) => { if (seen.has(kind + ":" + key)) throw Error(`duplicate ${kind}: ${id} and ${seen.get(kind + ":" + key)} (${key})`); seen.set(kind + ":" + key, id); };
+  for (const p of vm.runInContext("PLACES", context)) {
+    once("id", p.id, p.id);
+    once("Commons file", decodeURIComponent(p.source.split("/wiki/")[1]).replace(/_/g, " ").toLowerCase(), p.id);
+    once("image", crypto.createHash("sha256").update(fs.readFileSync("dist/" + p.image)).digest("hex"), p.id);
+    const slug = p.id.replace(/^[gmt]-/, "");
+    once("place", PLACE_ALIASES[slug] || slug, p.id);
+  }
+}
+console.log("PASS: Where in the World — free-licence photos with credits, clues and stories; no duplicate id, Commons file, image or place; no repeat within 31 days; 3 levels × 366 days deterministic with graded options; v1 picks unchanged; v2 cycle checked; tries, misses, hints and pinned saves. " + out);
