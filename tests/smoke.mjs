@@ -24,10 +24,13 @@ const server = createServer(async (req, res) => {
 await new Promise((r) => server.listen(0, "127.0.0.1", r));
 const PAGE = `http://127.0.0.1:${server.address().port}/index.html`;
 
+// Every context runs on India time: the site's audience and the leaderboard's day (istDate) are IST, and today() reads the
+// device clock, so CI in UTC would otherwise see yesterday's feed for 5½ hours each night.
+const TIMEZONE = "Asia/Kolkata";
 const launchChromium = async () => { try { return await chromium.launch(); } catch { return chromium.launch({ channel: "chrome" }); } };
 const engines = [
-  ["webkit", () => webkit.launch(), { ...devices["iPhone 13"] }],
-  ["chromium", launchChromium, { viewport: { width: 360, height: 740 }, isMobile: true, hasTouch: true, deviceScaleFactor: 2 }],
+  ["webkit", () => webkit.launch(), { ...devices["iPhone 13"], timezoneId: TIMEZONE }],
+  ["chromium", launchChromium, { viewport: { width: 360, height: 740 }, isMobile: true, hasTouch: true, deviceScaleFactor: 2, timezoneId: TIMEZONE }],
 ].filter(([n]) => !ONLY || n === ONLY);
 
 const lines = [], summary = [];
@@ -118,8 +121,9 @@ for (const [engine, launch, ctxOpts] of engines) {
     }
     // The day before NEW_GAMES_FROM keeps Time Lens (5) and Time Lens Duel (15) while it is in the 31-day archive
     // (until 2026-12-21): open it from the day sheet and check both cards render with no new games beside them.
-    const tl = await page.evaluate(() => { const d = feedDate(1, NEW_GAMES_FROM), o = feedOrder(difficulty, d); return { d, inArchive: d >= feedDate(FEED_DAYS - 1), n: o.length, old: o.includes(5) && o.includes(15) && !o.includes(25) && !o.includes(26) }; });
-    if (tl.inArchive) {
+    // Only once that day is strictly past: on the day itself the loop above has already revealed every Gentle card.
+    const tl = await page.evaluate(() => { const d = feedDate(1, NEW_GAMES_FROM), o = feedOrder(difficulty, d); return { d, past: d < today(), inArchive: d >= feedDate(FEED_DAYS - 1), n: o.length, old: o.includes(5) && o.includes(15) && !o.includes(25) && !o.includes(26) }; });
+    if (tl.past && tl.inArchive) {
       check(tl.n === 20 && tl.old, `${engine} L${lv} ${tl.d} keeps Time Lens and Time Lens Duel`, JSON.stringify(tl));
       await page.locator("#todayPill").tap();
       await page.locator(`#days [data-jump="${tl.d}"]`).tap();
@@ -224,7 +228,9 @@ for (const [engine, launch, ctxOpts] of engines) {
   await page.locator('.spark.live [data-bc="2"]').tap(); await page.waitForTimeout(80);
   check(await page.evaluate(() => state(23).beds.length === 0), `${engine} tapping a bed clears it`);
   await page.setViewportSize(vp); await fresh(1); await goTo(23);
-  check(/seed packet/.test(await page.locator(".spark.live #rules").innerText()) && await page.locator(".spark.live #rules .bmini").count() === 2, `${engine} beds How to play has the sentence and the 3 × 3 example`);
+  // textContent, not innerText: on days when Garden Beds is the Medium warm-up opener it was live on load, so it is
+  // started and its How to play is collapsed (closed <details> content has no innerText).
+  check(/seed packet/.test(await page.locator(".spark.live #rules").textContent()) && await page.locator(".spark.live #rules .bmini").count() === 2, `${engine} beds How to play has the sentence and the 3 × 3 example`);
   const rects = await page.evaluate(() => bedsModel(day).rects), bn = await page.evaluate(() => bedsModel(day).n);
   for (const [k, [y, x, h, w]] of rects.entries()) {
     if (k === rects.length - 1) check(await page.evaluate(() => !state(23).done), `${engine} beds not solved early`);
