@@ -197,7 +197,7 @@ git push origin sites-history
 
 ## Hosting and credits
 
-The site is live at https://little-sparks.in and hosted on GitHub Pages. Every push to `main` runs the validation scripts and deploys `dist/` via `.github/workflows/pages.yml`.
+The site is live at https://little-sparks.in and hosted on GitHub Pages. Every push to `main` runs the validation scripts and the browser smoke test, and deploys `dist/` via `.github/workflows/pages.yml`.
 
 - **Domain:** DNS is managed at GoDaddy: four `A` and four `AAAA` records on `@` point to GitHub Pages, and `www` is a CNAME to `thehumanexperience.github.io`. A `_github-pages-challenge-TheHumanExperience` TXT record keeps the domain verified, so leave it in place.
 - **Custom domain setting:** it lives in the repository's Settings → Pages. Deploys go through GitHub Actions, so there is no `CNAME` file.

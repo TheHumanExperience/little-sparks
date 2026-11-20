@@ -7,7 +7,7 @@ Read this file first. Open README.md (player-facing rules and hosting), CONTENT.
 ## Commands
 ```sh
 npm run verify                         # all verify*.cjs (CI runs the same loop); verify-sparks takes about 65s
-npm i && npm run smoke                 # headless WebKit + Chromium smoke test of every card × 3 levels
+npm i && npm run smoke                 # headless WebKit + Chromium smoke test of every card × 3 levels (CI runs it too)
 npm run smoke -- --shots               # add screenshots to tests/shots/ (gitignored); default = only on failure
 python3 -m http.server 8000 --directory dist   # manual run
 node tools/build-ladders.cjs           # rebuild dist/ladders.js after editing its word list

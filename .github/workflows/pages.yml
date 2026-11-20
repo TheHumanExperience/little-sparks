@@ -22,8 +22,36 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
       - name: Validate puzzles and content
         run: for f in verify*.cjs; do echo "== $f"; node "$f"; done
+      - name: Install dev tooling (Playwright)
+        run: npm ci
+      - name: Read Playwright version
+        id: pw
+        run: echo "version=$(node -p "require('./package-lock.json').packages['node_modules/playwright'].version")" >> "$GITHUB_OUTPUT"
+      - name: Cache Playwright browsers
+        id: pw-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ steps.pw.outputs.version }}-chromium-webkit
+      - name: Install Playwright browsers and system deps
+        if: steps.pw-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps chromium webkit
+      - name: Install Playwright system deps (browsers cached)
+        if: steps.pw-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium webkit
+      - name: Browser smoke test (WebKit and Chromium)
+        run: npm run smoke
+      - name: Upload smoke screenshots on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-shots
+          path: tests/shots/
+          if-no-files-found: ignore
+          retention-days: 7
       - name: Stamp asset versions (cache-bust)
         run: sed -i "s/__BUILD__/${GITHUB_SHA::7}/g" dist/index.html && ! grep -q __BUILD__ dist/index.html
       - uses: actions/configure-pages@v5
