@@ -142,7 +142,7 @@ Every check loads the app through `tests/load-app.cjs`, which runs every script 
 
 Or run `npm run verify`. For a headless browser smoke test of every card at all three levels in WebKit and Chromium, run `npm install && npm run smoke` (it also tests the leaderboard against a mocked Supabase). Add `-- --shots` to save screenshots to `tests/shots/`; by default it saves them only on failure.
 
-Contributors and coding agents should start with [AGENTS.md](AGENTS.md) and check [REVIEW.md](REVIEW.md) before handing off. Who the app is for and what it must protect are in [PRODUCT.md](PRODUCT.md), and its visual system is in [DESIGN.md](DESIGN.md).
+Contributors and coding agents should start with [AGENTS.md](AGENTS.md) and check [REVIEW.md](REVIEW.md) before handing off. Who the app is for and what it must protect are in [PRODUCT.md](PRODUCT.md), its visual system is in [DESIGN.md](DESIGN.md), and its tech stack and versions are in [docs/tech-stack.md](docs/tech-stack.md).
 
 | Script | Checks |
 | --- | --- |
