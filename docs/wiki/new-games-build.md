@@ -20,3 +20,7 @@ Decisions made while building [`docs/new-games-spec.md`](../new-games-spec.md) (
 - **Archive days keep Time Lens,** as the spec says. Its code and photos are removed in a follow-up once it has aged out of the 31-day archive (on or after 2026-12-22).
 - **The photo pool may ship later.** If step 5 isn't ready when the games are, deploy the games without it; `PLACE_V2_FROM` is a separate date, so the pool can follow in its own deploy.
 - **Deploying still needs Devansh's go-ahead** to push to `main` ([Working rules](working-rules.md)).
+
+## 2026-11-21, step 6
+
+- **`NEW_GAMES_FROM` set to `2026-11-21`.** Checks that only moved the cutover with a test date now also check the real date: `verify-feed.cjs` compares every day's order against the no-new-games order (days before 2026-11-21 equal, later days with 25 and 26 swapped in), `verify-petal.cjs` and `verify-code.cjs` check the day before and the day itself, and `verify-aha.cjs` checks that unplayed days show Who Knows? from the cutover without a saved flag. `tests/smoke.mjs` opens 2026-11-20 from the day sheet at every level and checks Time Lens and Time Lens Duel still render there while that day is in the archive (until 2026-12-21).

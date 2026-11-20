@@ -1,7 +1,7 @@
 // Checks Code Garden (state 26): every level × 366 days is deterministic, varied, shaped as promised per level,
 // and has exactly one code that fits its clues (brute force over every code). Also the scoring, a wrong check
 // adding a correct clue row, the hint, the reveal and its "why not", and the card's place in the feed from
-// NEW_GAMES_FROM (checked with a test date, since the real cutover may still be a far-future placeholder).
+// NEW_GAMES_FROM (checked with a test date and on the real cutover).
 const vm = require("vm");
 const { context } = require("./tests/load-app.cjs").loadApp();
 const t0 = Date.now();
@@ -84,6 +84,7 @@ for (const lvl of [0, 1, 2]) {
   all[progressKey(T)] = { games: { 26: revealState(T, 26, {}) } };
   if (feedCount(T) !== 0) fail("a revealed Code Garden never counts");
   FEED_UNTIL[15] = FEED_SINCE[26] = real;
+  for (const lv of [0, 1, 2]) if (!feedOrder(lv, real).includes(26) || feedOrder(lv, real).includes(15) || feedOrder(lv, feedDate(1, real)).includes(26) || !feedOrder(lv, feedDate(1, real)).includes(15)) fail("on the real cutover Code Garden replaces Time Lens Duel, and the day before keeps it, at level " + lv);
   for (const k of Object.keys(all)) delete all[k]; Object.assign(all, JSON.parse(keep)); }
 stats.map((s, l) => ["Gentle", "Medium", "Tricky"][l] + "{" + CODE_LEVELS[l].slots + " of " + CODE_LEVELS[l].kinds + ",avgClues:" + (s.rows / days.length).toFixed(2) + (CODE_LEVELS[l].repeats ? ",repeatDays:" + s.repeats : "") + "}").join(" ");
 `, context);

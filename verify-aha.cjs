@@ -43,8 +43,8 @@ for (let lv = 0; lv < 3; lv++) {
     const s0 = mod(calendarIndex(d) * 3 + lv * 7, 19), old = shuffle([0, 1, 2, 3, 4].map((j) => OLD_RING[mod(s0 + j, 19)]), rng(puzzleSeed(d) + "|aha-order-v2"));
     if (ahaRotation(d) !== 2 || JSON.stringify(ahaCategories(d)) !== JSON.stringify(old)) fail("days before NEW_GAMES_FROM must keep their categories: " + d + " L" + lv);
   }
-  // The real per-slot questions shown in the feed, under rotation 3 (pinned through the saved flag, since
-  // NEW_GAMES_FROM may still be a far-future placeholder).
+  // The real per-slot questions shown in the feed, under rotation 3 for all 366 days (pinned through the saved flag,
+  // since most of these days are before NEW_GAMES_FROM).
   const catDays = new Map();
   for (const d of dates) {
     all = { [progressKey(d)]: { games: { [AHA_SLOTS[0]]: { aha: 3 } } } };
@@ -108,8 +108,11 @@ for (let lv = 0; lv < 3; lv++) {
 // Rotation by date and saved flag: empty days before NEW_GAMES_FROM use 2, from it 3; flags 1, 2 and 3 pin a played day.
 difficulty = 1;
 all = {};
-// (The day after the 9999-12-31 placeholder would be year 10000, which sorts before it, so it is checked only once the date is real.)
-const dayBefore = feedDate(1, NEW_GAMES_FROM), after = [feedDate(-5, NEW_GAMES_FROM)].filter((x) => x > NEW_GAMES_FROM);
+const dayBefore = feedDate(1, NEW_GAMES_FROM), after = [feedDate(-5, NEW_GAMES_FROM)];
+if (!/^\\d{4}-\\d{2}-\\d{2}$/.test(NEW_GAMES_FROM) || !(after[0] > NEW_GAMES_FROM)) fail("NEW_GAMES_FROM must be a real YYYY-MM-DD date: " + NEW_GAMES_FROM);
+// Unplayed days from the cutover on show Who Knows? at every level, without any saved flag.
+for (const lv of [0, 1, 2]) { difficulty = lv; if (!Array.from({ length: 40 }, (_, k) => feedDate(-k, NEW_GAMES_FROM)).some((x) => ahaRotation(x) === 3 && ahaCategories(x).includes(KN))) fail("Who Knows? must show from NEW_GAMES_FROM at level " + lv); }
+difficulty = 1;
 if (ahaRotation(dayBefore) !== 2 || ahaRotation(NEW_GAMES_FROM) !== 3 || after.some((x) => ahaRotation(x) !== 3)) fail("rotation 3 starts on NEW_GAMES_FROM");
 for (const [dd, flag, want] of [[NEW_GAMES_FROM, 2, 2], [NEW_GAMES_FROM, 1, 1], [dayBefore, 3, 3], ...after.map((x) => [x, 2, 2])]) {
   all = { [progressKey(dd)]: { games: { [AHA_SLOTS[3]]: { aha: flag, done: true } } } };

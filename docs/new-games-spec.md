@@ -1,6 +1,6 @@
 # New games spec: retire Time Lens, add Last Petal, Code Garden and Who Knows?
 
-Status: ready to build · Written 2026-11-19 · Owner: Devansh
+Status: steps 1–4 shipped on branch `new-games` with `NEW_GAMES_FROM` = 2026-11-21; step 5 (the photo pool) follows in a later deploy · Written 2026-11-19 · Owner: Devansh
 
 Read `AGENTS.md` first (especially "Add a game", "Remove a game", "Determinism rules" and the storage rules), then `CONTENT.md`. This spec doesn't repeat those rules; it says how they apply here.
 

@@ -3,9 +3,9 @@
 function calendarIndex(d){const [y,m,n]=d.split('-').map(Number);return Math.floor(Date.UTC(y,m-1,n)/86400000)}
 function mod(n,m){return ((n%m)+m)%m}
 /* The day the new games start (docs/new-games-spec.md): Last Petal (25) and Code Garden (26) take the feed slots of
-   Time Lens (5) and Time Lens Duel (15), and later content changes switch on the same day. Days before it never change.
-   A far-future placeholder while the build is unfinished, so live days stay as they are; set it to the ship date. */
-const NEW_GAMES_FROM='9999-12-31';
+   Time Lens (5) and Time Lens Duel (15), and Aha rotation 3 (with Who Knows?) starts on the same day. Days before it
+   never change. Set to the ship date, 2026-11-21. */
+const NEW_GAMES_FROM='2026-11-21';
 function freshContent(d,i){const s=all[progressKey(d)]?.games?.[i];return !s?.started||s.contentVersion===2}
 const WORD_CYCLE=shuffle(words,rng('little-sparks-words-v2'));
 /* Letterlight answers (v3): everyday words a fluent non-native reader knows, no plurals, few rare letters and no big

@@ -110,7 +110,7 @@ for (const lvl of [0, 1, 2]) {
   reset(); openSpark(25);
   if (!/A WINNING FIRST MOVE/.test($("#board").innerHTML) || !$("#board").innerHTML.includes(m.rules.idea) || actions().length) fail("reveal shows the winning first move and the idea, level " + lvl);
 }
-// The feed: Last Petal takes Time Lens's slot only from the cutover (checked with a test date, as in verify-feed).
+// The feed: Last Petal takes Time Lens's slot only from the cutover (a test date, as in verify-feed, then the real one).
 { const real = NEW_GAMES_FROM, T = "2026-12-01", set = (t) => { FEED_UNTIL[5] = FEED_SINCE[25] = t; };
   set(T);
   for (const lv of [0, 1, 2]) {
@@ -119,7 +119,7 @@ for (const lvl of [0, 1, 2]) {
     const p = feedPlan(lv, T); if (p[p.indexOf(25) - 1] !== FEED_FAMILIES.bloom[lv]) fail("Last Petal sits right after bloom");
   }
   set(real);
-  if (real > "2027-01-01" && feedOrder(1, "2026-12-15").includes(25)) fail("with the placeholder date, live days keep Time Lens"); }
+  for (const lv of [0, 1, 2]) if (!feedOrder(lv, real).includes(25) || feedOrder(lv, real).includes(5) || feedOrder(lv, feedDate(1, real)).includes(25) || !feedOrder(lv, feedDate(1, real)).includes(5)) fail("on the real cutover Last Petal replaces Time Lens, and the day before keeps it, at level " + lv); }
 stats.map((s, l) => ["Gentle", "Medium", "Tricky"][l] + "{avgPetals:" + (s.petals / days.length).toFixed(1) + ",beeTurns:" + (s.beeTurns / days.length).toFixed(1) + ",kinds:" + JSON.stringify(s.kinds).replace(/"/g, "") + "}").join(" ");
 `, context);
 console.log("PASS: Last Petal — 3 levels × 366 days deterministic and winnable (solver-checked), bee keeps its rule, replay, Try again, hint and reveal (" + ((Date.now() - t0) / 1000).toFixed(1) + "s). " + summary);

@@ -98,7 +98,7 @@ for (const lv of [0, 1, 2]) {
   if (n && n.d === old) fail("next to play must not send you to a card an earlier day never had");
   for (const k of Object.keys(all)) delete all[k]; Object.assign(all, JSON.parse(keep)); }
 // New-games cutover: on NEW_GAMES_FROM, Last Petal (25) and Code Garden (26) take the slots of Time Lens (5) and
-// Time Lens Duel (15). NEW_GAMES_FROM may still be a far-future placeholder, so both sides are checked with a test date.
+// Time Lens Duel (15). Both sides are checked on the real date (2026-11-21) and, across 400 days, with a test date.
 { const real = NEW_GAMES_FROM, T = "2026-12-01", keep = JSON.stringify(all), slots = FEED_PLAN.filter(Array.isArray);
   const setCutover = (t) => { FEED_UNTIL[5] = FEED_UNTIL[15] = FEED_SINCE[25] = FEED_SINCE[26] = t; };
   if (!/^\\d{4}-\\d{2}-\\d{2}$/.test(real)) fail("NEW_GAMES_FROM must be a YYYY-MM-DD date: " + real);
@@ -108,15 +108,21 @@ for (const lv of [0, 1, 2]) {
   if (FEED_PLAN.flat().filter((x) => [5, 15, 25, 26].includes(x)).length !== 4) fail("5, 15, 25 and 26 must each appear once in FEED_PLAN");
   if (FEED_PLAN.flat().includes(7)) fail("retired index 7 must never be reused");
   const days = Array.from({ length: 400 }, (_, k) => feedDate(k, "2027-03-31"));
-  const before = Object.fromEntries([0, 1, 2].map((lv) => [lv, days.map((d) => feedOrder(lv, d).join())]));
-  // Real date: the day before NEW_GAMES_FROM keeps Time Lens. Until SPARKS[25]/[26] exist, every day keeps them.
+  // Each day's order without the new games (cutover moved past every test day), and with the real cutover.
+  const orders = () => Object.fromEntries([0, 1, 2].map((lv) => [lv, days.map((d) => feedOrder(lv, d).join())]));
+  setCutover("9999-12-31"); const before = orders(); setCutover(real); const live = orders();
+  const swap = (o) => o.split(",").map(Number).map((i) => (i === 5 ? 25 : i === 15 ? 26 : i)).join();
+  for (const lv of [0, 1, 2]) days.forEach((d, k) => { if (live[lv][k] !== (d < real ? before[lv][k] : swap(before[lv][k]))) fail("with the real cutover, days before it keep their order and later days swap in the new games: " + d + " at level " + lv); });
+  // Real date: the day before NEW_GAMES_FROM keeps Time Lens, and from it the new games take its slots.
   const stubbed = [25, 26].filter((i) => !SPARKS[i]);
   for (const lv of [0, 1, 2]) for (const day of [feedDate(1, real), real]) {
     const o = feedOrder(lv, day);
     if (o.length !== 20) fail("20 cards on " + day + " at level " + lv);
     if (day < real && (!o.includes(5) || !o.includes(15) || o.includes(25) || o.includes(26))) fail("days before NEW_GAMES_FROM keep Time Lens at level " + lv);
+    if (day === real && (o.includes(5) || o.includes(15) || !o.includes(25) || !o.includes(26))) fail("NEW_GAMES_FROM shows Last Petal and Code Garden in place of Time Lens at level " + lv);
     if (stubbed.some((i) => o.includes(i))) fail("a game that does not exist yet must never be in the feed: " + day);
   }
+  if (stubbed.length) fail("Last Petal and Code Garden must both exist once NEW_GAMES_FROM is set");
   setCutover(T);
   if (stubbed.length === 2) for (const lv of [0, 1, 2]) { const o = feedOrder(lv, "2026-12-05"); if (o.length !== 20 || !o.includes(5) || !o.includes(15) || o.includes(25) || o.includes(26)) fail("before the new games exist their slots keep Time Lens at level " + lv); }
   for (const i of stubbed) SPARKS[i] = { name: "Stub " + i, type: "Stub", art: "·", render() {} };
@@ -125,7 +131,7 @@ for (const lv of [0, 1, 2]) {
     if (o.length !== n || new Set(o).size !== n) fail(n + " distinct cards on " + d + " at level " + lv);
     if (now ? o.includes(5) || o.includes(15) || !o.includes(25) || !o.includes(26) : o.includes(25) || o.includes(26) || !o.includes(5) || !o.includes(15)) fail("wrong side of the cutover on " + d + " at level " + lv);
     if (!now && o.join() !== before[lv][k]) fail("days before the cutover must not change: " + d + " at level " + lv);
-    if (now) { const old = before[lv][k].split(",").map(Number).map((i) => (i === 5 ? 25 : i === 15 ? 26 : i)); if (o.join() !== old.join()) fail("the new games must take the old slots exactly on " + d + " at level " + lv); }
+    if (now && o.join() !== swap(before[lv][k])) fail("the new games must take the old slots exactly on " + d + " at level " + lv);
     if (now && (p[p.indexOf(25) - 1] !== FEED_FAMILIES.bloom[lv] || p[p.indexOf(26) - 1] !== FEED_FAMILIES.neighbours[lv])) fail("slot positions on " + d);
   });
   openerChecks("2027-03-31");
@@ -146,7 +152,7 @@ for (const lv of [0, 1, 2]) {
   for (const i of stubbed) delete SPARKS[i];
   setCutover(real);
   for (const k of Object.keys(all)) delete all[k]; Object.assign(all, JSON.parse(keep));
-  for (const lv of [0, 1, 2]) if (days.some((d, k) => feedOrder(lv, d).join() !== before[lv][k])) fail("restoring the real cutover must restore every day"); }
+  for (const lv of [0, 1, 2]) if (days.some((d, k) => feedOrder(lv, d).join() !== live[lv][k])) fail("restoring the real cutover must restore every day"); }
 all[progressKey(d)].games[7] = { done: true };
 if (feedCount(d) !== 4) fail("old Starlines saves must not count or break");
 if (Object.entries(all[progressKey(d)].games).filter(([i, g]) => +i < 5 && g.done).length !== 2) fail("legacy 5-game count changed");

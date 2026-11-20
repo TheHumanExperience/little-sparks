@@ -116,6 +116,25 @@ for (const [engine, launch, ctxOpts] of engines) {
       check(ask.includes(`${[0, 4, 2][lv]} reveal${lv === 2 ? "s" : "s"} left today`), `${engine} L${lv} Reveal confirm shows reveals left`, ask.slice(-160));
       await page.locator(".spark.live [data-no]").tap();
     }
+    // The day before NEW_GAMES_FROM keeps Time Lens (5) and Time Lens Duel (15) while it is in the 31-day archive
+    // (until 2026-12-21): open it from the day sheet and check both cards render with no new games beside them.
+    const tl = await page.evaluate(() => { const d = feedDate(1, NEW_GAMES_FROM), o = feedOrder(difficulty, d); return { d, inArchive: d >= feedDate(FEED_DAYS - 1), n: o.length, old: o.includes(5) && o.includes(15) && !o.includes(25) && !o.includes(26) }; });
+    if (tl.inArchive) {
+      check(tl.n === 20 && tl.old, `${engine} L${lv} ${tl.d} keeps Time Lens and Time Lens Duel`, JSON.stringify(tl));
+      await page.locator("#todayPill").tap();
+      await page.locator(`#days [data-jump="${tl.d}"]`).tap();
+      for (const idx of [5, 15]) {
+        const tag = `${engine} L${lv} ${tl.d} #${idx}`;
+        try {
+          await page.evaluate(([d, i]) => { const c = document.querySelector(`.spark[data-day="${d}"][data-idx="${i}"]`); feed.scrollTo(0, c.offsetTop); }, [tl.d, idx]);
+          await page.waitForSelector(`.spark.live[data-day="${tl.d}"][data-idx="${idx}"] .stage #board`, { timeout: 5000 });
+        } catch { check(false, `${tag} becomes live`); await shot(`L${lv}-${idx}-archive-fail`); continue; }
+        const a = await page.evaluate(() => { const c = document.querySelector(".spark.live"), inner = c.querySelector(".sparkinner");
+          return { board: c.querySelector("#board").innerHTML.length, overflow: inner.scrollWidth - inner.clientWidth, retry: !!c.querySelector(".retry[aria-label]"), reveal: !!c.querySelector(".revealbtn:not([hidden])") }; });
+        if (!check(a.board > 20 && a.overflow <= 1 && a.retry && a.reveal, `${tag} renders on the archive day`, JSON.stringify(a))) await shot(`L${lv}-${idx}-archive`);
+        cards++;
+      }
+    }
   }
   // A real solve by touch: Pocket Sudoku on Gentle → solved badge and header count.
   const solvePocket = async () => {
@@ -233,8 +252,8 @@ for (const [engine, launch, ctxOpts] of engines) {
   for (const c of wt.slice(0, 2)) { await page.locator(`.spark.live [data-place="${c}"]`).tap(); await page.waitForTimeout(150); }
   check(await page.evaluate(() => state(24).done && state(24).missed && state(24).revealed && !feedDone(day, 24)), `${engine} two misses on Tricky end the round without counting`);
   check(/(^|[\s·])0\/20\b/.test(await page.locator("#todayPill").innerText()), `${engine} a missed place round isn't counted`);
-  // Code Garden (26) shows only from NEW_GAMES_FROM, so it gets its own page whose clock starts on that day
-  // (an init script shifts Date; today is kept if it is later). Tricky on an iPhone SE: one wrong check, then solve by touch.
+  // Code Garden (26) shows only from NEW_GAMES_FROM, so it gets its own page whose clock starts no earlier than that day
+  // (an init script shifts Date only if today is before it; since 2026-11-21 it is today). Tricky on an iPhone SE: one wrong check, then solve by touch.
   {
     const from = (await readFile(join(root, "daily-content.js"), "utf8")).match(/NEW_GAMES_FROM\s*=\s*'(\d{4}-\d{2}-\d{2})'/)[1];
     const cg = await (await browser.newContext(ctxOpts)).newPage();
@@ -286,7 +305,8 @@ for (const [engine, launch, ctxOpts] of engines) {
   await page.locator(".spark.live #ahaInput").fill(" " + ms.a.replace(/−/g, "-").replace(/ /g, "") + " "); await page.locator(".spark.live #ahaInput").press("Enter");
   await page.waitForTimeout(200);
   check(await page.evaluate((i) => state(i).done && !state(i).revealed, ms.idx), `${engine} Matchsticks solves by typing ${ms.a}`);
-  // Who Knows? (iPhone SE): NEW_GAMES_FROM is rewritten to today so the Aha block uses rotation 3. The first level whose
+  // Who Knows? (iPhone SE): NEW_GAMES_FROM is rewritten to today so the Aha block uses rotation 3 (a no-op on the
+  // cutover day itself, and it keeps the check valid if the date is ever moved). The first level whose
   // block shows Who Knows? today is used; if none does, its question is pinned to slot 0 like Matchsticks above.
   const cutover = await page.evaluate(() => today());
   await page.route("**/daily-content.js*", async (r) => { const res = await r.fetch(); await r.fulfill({ response: res, body: (await res.text()).replace(/const NEW_GAMES_FROM='[^']*'/, `const NEW_GAMES_FROM='${cutover}'`) }); });
@@ -319,9 +339,9 @@ for (const [engine, launch, ctxOpts] of engines) {
     await page.keyboard.type(w2.toLowerCase()); await page.keyboard.press("Enter");
     check(await page.evaluate(() => state(13).steps.length) === 3, `${engine} ladder Enter key still submits`);
   }
-  // Last Petal (25). NEW_GAMES_FROM may still be a far-future placeholder, so this runs in its own context whose
-  // init script moves the cutover to today, the moment feed.js looks for #feed (after its FEED_SINCE/FEED_UNTIL
-  // exist, before the first card is drawn), the way verify-feed.cjs moves it with a test date.
+  // Last Petal (25). This runs in its own context whose init script sets the Time Lens cutover to today, the moment
+  // feed.js looks for #feed (after its FEED_SINCE/FEED_UNTIL exist, before the first card is drawn), the way
+  // verify-feed.cjs moves it with a test date. From NEW_GAMES_FROM on, today already shows Last Petal.
   {
     const ctx = await browser.newContext(ctxOpts), pp = await ctx.newPage();
     await ctx.route("**/leaderboard-config.js*", (r) => r.fulfill({ contentType: "text/javascript", body: 'const SUPABASE_URL = ""; const SUPABASE_ANON_KEY = "";' }));
