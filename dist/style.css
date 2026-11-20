@@ -179,6 +179,20 @@ dialog.sheet h2 { font-size: 26px; margin: 0; }
 #rules .bmini { display: grid; grid-template: repeat(3, 26px) / repeat(3, 26px); gap: 2px; }
 #rules .bmini > span { display: grid; place-items: center; border-radius: 4px; border: 1px dashed #c9bfa6; background: #f4ecd9; font-size: 13px; font-weight: 700; color: #6a4523; }
 #rules .bmini > i { border: 3px solid #7c5a2f; border-radius: 6px; background: rgba(120, 170, 90, 0.18); }
+/* Last Petal: flowers are petals laid round a numbered core; taken petals drop and fade. */
+.petalrow { display: flex; justify-content: center; gap: 10px; margin: 10px 0 4px; }
+.pflower { position: relative; width: var(--s); height: var(--s); flex: 0 0 auto; padding: 0; border: 1px solid #d3dccb; border-radius: 50%; background: #f0f2e8; color: var(--ink); }
+.pflower.picked { background: #e3ecda; border-color: #547359; box-shadow: 0 0 0 2px #547359; }
+.pflower.hinted, .pflower.shown, .ptake.hinted { outline: 3px solid #a45a2b; outline-offset: 2px; }
+.pflower:disabled { cursor: default; opacity: 1; }
+.petal { position: absolute; left: 50%; top: 50%; width: var(--pw); height: calc(var(--s) * 0.22); margin: calc(var(--s) * -0.11) 0 0 calc(var(--pw) / -2); border-radius: 50% 50% 45% 45%; background: #f3c1cc; border: 1px solid #d98ea2; transform: rotate(var(--a)) translateY(calc(-1 * var(--r))); }
+.petal.gone { animation: petalfall 0.7s ease-in forwards; }
+@keyframes petalfall { to { transform: translateY(calc(var(--s) * 0.6)) rotate(calc(var(--a) + 50deg)) translateY(calc(-1 * var(--r))); opacity: 0; } }
+.pcore { position: absolute; left: 50%; top: 50%; width: calc(var(--s) * 0.34); height: calc(var(--s) * 0.34); transform: translate(-50%, -50%); display: grid; place-items: center; border-radius: 50%; background: #fffdf8; border: 1px solid #d3dccb; font-size: 18px; font-variant-numeric: tabular-nums; }
+.petalturn { text-align: center; font-size: 14px; color: #607063; margin: 8px 0 6px; }
+.petaltakes { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.petaltakes .choice { width: auto; min-width: 72px; min-height: 44px; margin: 0; padding: 10px 12px; text-align: center; }
+@media (prefers-reduced-motion: reduce) { .petal.gone { display: none; } }
 .sixgrid { display: grid; grid-template-columns: repeat(6, 1fr); max-width: 330px; margin: 6px auto; border: 2px solid #6b7f62; border-radius: 8px; overflow: hidden; }
 .six { position: relative; aspect-ratio: 1; border: 0; border-right: 1px solid #cdd6c4; border-bottom: 1px solid #cdd6c4; background: #fffdf8; color: #3c5a76; font-size: 20px; padding: 0; min-width: 0; }
 .six:nth-child(6n) { border-right: 0; }
