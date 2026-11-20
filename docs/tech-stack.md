@@ -14,7 +14,7 @@ What Little Sparks is built with, and which versions it needs. Facts here were c
 | Storage | Browser `localStorage` | n/a |
 | Leaderboard (optional) | Supabase (Postgres) over its REST API, called with `fetch` | No SDK |
 | Checks | Node.js scripts (`verify*.cjs`) using the `vm` module | Node 20 in CI |
-| Browser smoke test | Playwright (WebKit and Chromium) | 1.65.0 |
+| Browser smoke test | Playwright (WebKit and Chromium), locally and in CI | 1.65.0 |
 | Content tools | Python 3 scripts, plus one Node script | Python 3.9+, Pillow |
 | Fonts | Google Fonts: DM Sans, Libre Caslon Display | Loaded by `@import` in `style.css` |
 
@@ -61,12 +61,16 @@ The verify scripts load the real app through `tests/load-app.cjs`, which runs ev
 
 `.github/workflows/pages.yml` runs on every push to `main` (and by hand):
 
-1. `actions/checkout@v4`, `actions/setup-node@v4` with Node 20.
+1. `actions/checkout@v4`, `actions/setup-node@v4` with Node 20 (npm cache on).
 2. Runs every `verify*.cjs`. A failure stops the deploy.
-3. Stamps the short commit SHA into `dist/index.html` in place of `__BUILD__`.
-4. Uploads `dist/` with `actions/upload-pages-artifact@v3` and deploys with `actions/deploy-pages@v4`.
+3. `npm ci`, then `npx playwright install --with-deps chromium webkit`. The browsers in `~/.cache/ms-playwright` are cached with `actions/cache@v4`, keyed on the Playwright version in `package-lock.json`; on a cache hit only `npx playwright install-deps` runs for the system libraries. Bumping Playwright in the lock file starts a fresh cache.
+4. Runs `npm run smoke` (headless WebKit and Chromium). A failure stops the deploy and uploads `tests/shots/` as the `smoke-shots` workflow artifact (kept 7 days), so the failure screenshots can be inspected.
+5. Stamps the short commit SHA into `dist/index.html` in place of `__BUILD__`.
+6. Uploads `dist/` with `actions/upload-pages-artifact@v3` and deploys with `actions/deploy-pages@v4`.
 
-The smoke test isn't run in CI; run `npm run smoke` locally before committing.
+The smoke test adds roughly 2 to 4 minutes to a deploy (less with a warm browser cache). Still run `npm run smoke` locally before committing.
+
+`.gitignore` lists `/.github`, but `.github/workflows/pages.yml` is tracked, so git still tracks it, but staging a change to it needs `git add -f` (or `git add -u`).
 
 ## Size
 
