@@ -297,6 +297,64 @@ for (const [engine, launch, ctxOpts] of engines) {
     await page.keyboard.type(w2.toLowerCase()); await page.keyboard.press("Enter");
     check(await page.evaluate(() => state(13).steps.length) === 3, `${engine} ladder Enter key still submits`);
   }
+  // Last Petal (25). NEW_GAMES_FROM may still be a far-future placeholder, so this runs in its own context whose
+  // init script moves the cutover to today, the moment feed.js looks for #feed (after its FEED_SINCE/FEED_UNTIL
+  // exist, before the first card is drawn), the way verify-feed.cjs moves it with a test date.
+  {
+    const ctx = await browser.newContext(ctxOpts), pp = await ctx.newPage();
+    await ctx.route("**/leaderboard-config.js*", (r) => r.fulfill({ contentType: "text/javascript", body: 'const SUPABASE_URL = ""; const SUPABASE_ANON_KEY = "";' }));
+    await ctx.route("https://*.supabase.co/**", (r) => r.abort());
+    await ctx.addInitScript(() => {
+      const get = Document.prototype.getElementById;
+      Document.prototype.getElementById = function (id) {
+        if (id === "feed" && !window.petalCutover) try { FEED_UNTIL[5] = FEED_SINCE[25] = today(); window.petalCutover = 1; } catch {}
+        return get.call(this, id);
+      };
+    });
+    pp.on("pageerror", (e) => errors.push(e.message));
+    const openPetal = async (lv) => {
+      await pp.goto(PAGE);
+      await pp.evaluate((l) => { localStorage.clear(); localStorage.setItem("little-sparks-difficulty", String(l)); }, lv);
+      await pp.reload();
+      await pp.waitForSelector(".spark.live .stage");
+      await pp.evaluate(() => { const c = document.querySelector(`.spark[data-day="${today()}"][data-idx="25"]`); feed.scrollTo(0, c.offsetTop); });
+      await pp.waitForSelector('.spark.live[data-idx="25"] .stage #board .pflower', { timeout: 5000 });
+    };
+    const petalGame = () => pp.evaluate(() => { const m = petalModel(day), s = state(25), g = petalReplay(m, s.moves); return { ...g, done: !!s.done, n: s.moves.length, tries: s.tries, win: petalWinningMoves(g.pos, m.rules), give: petalMoves(g.pos, m.rules).find((mv) => petalWins(petalAfter(g.pos, mv), m.rules)) }; });
+    // One move by touch: tap the flower, then its Take button; then wait for the bee's beat to pass.
+    const petalMove = async ([f, t]) => {
+      await pp.locator(`.spark.live [data-pf="${f}"]`).tap();
+      await pp.locator(`.spark.live [data-pt="${t}"]`).tap();
+      await pp.waitForFunction(() => { const s = state(25), g = petalReplay(petalModel(day), s.moves); return s.done || g.over || g.turn === 0; }, null, { timeout: 4000 });
+      await pp.waitForTimeout(50);
+    };
+    try {
+      await openPetal(2);
+      check(await pp.evaluate(() => feedOrder(difficulty, today()).includes(25) && !feedOrder(difficulty, today()).includes(5)), `${engine} Last Petal takes Time Lens's slot from the cutover`);
+      const pf = await pp.evaluate(() => { const card = document.querySelector(".spark.live").getBoundingClientRect(), els = [...document.querySelectorAll(".spark.live .pflower")];
+        return { flowers: els.length, inside: els.every((e) => { const r = e.getBoundingClientRect(); return r.left >= card.left && r.right <= card.right; }), overflow: document.documentElement.scrollWidth > innerWidth, rules: document.querySelector(".spark.live #rules").textContent }; });
+      check(pf.flowers >= 2 && pf.inside && !pf.overflow && /you go first/.test(pf.rules), `${engine} Tricky Last Petal flowers fit the card`, JSON.stringify(pf));
+      let g = await petalGame(), guard = 0;
+      await pp.locator(`.spark.live [data-pf="${g.win[0][0]}"]`).tap();
+      const takeH = await pp.evaluate(() => Math.min(...[...document.querySelectorAll(".spark.live .ptake")].map((b) => b.getBoundingClientRect().height)));
+      check(takeH >= 44, `${engine} Last Petal take buttons are 44px`, String(takeH));
+      while (!g.done && !g.over && guard++ < 40) { await petalMove(g.win[0]); g = await petalGame(); }
+      check(g.done && await pp.evaluate(() => !state(25).revealed && feedDone(today(), 25)), `${engine} Last Petal wins by touch with the solver's moves`, JSON.stringify(g));
+      check(await pp.locator(".spark.live .donebadge:not([hidden])").count() === 1, `${engine} Last Petal shows the solved badge`);
+      // Gentle: a hint highlights a move; then hand the bee the game, lose, and Try again restarts with nothing counted.
+      await openPetal(0);
+      await pp.locator(".spark.live .stage button", { hasText: "Hint: show me a winning move" }).tap();
+      check(await pp.locator(".spark.live .ptake.hinted").count() === 1 && /^Try taking/.test(await pp.locator(".spark.live #feedback").innerText()), `${engine} Last Petal hint highlights a winning move`);
+      g = await petalGame(); guard = 0;
+      while (!g.over && guard++ < 40) { await petalMove(g.give || g.win[0]); g = await petalGame(); }
+      check(g.over && !g.won && !g.done && /The bee took the last petal\. Try again/.test(await pp.locator(".spark.live #feedback").innerText()), `${engine} Last Petal loss is gentle`, JSON.stringify(g));
+      await pp.locator(".spark.live #actions button", { hasText: "Try again" }).tap();
+      g = await petalGame();
+      check(g.n === 0 && g.tries === 1 && !g.done && !(await pp.evaluate(() => feedDone(today(), 25))) && await pp.locator(".spark.live .ptake").count() === 3, `${engine} Last Petal Try again restarts from the day's start`, JSON.stringify(g));
+    } catch (e) { check(false, `${engine} Last Petal by touch`, e.message.split("\n")[0]); }
+    if (failures > before) await pp.screenshot({ path: join(await mkdir(shotsDir, { recursive: true }).then(() => shotsDir), `${engine}-petal.png`) }).catch(() => {});
+    await ctx.close();
+  }
   // Leaderboard against a mocked Supabase (route interception): name, offline queue, sync, tabs, same-name join.
   const calls = [];
   let offline = false, fkOnce = false;
