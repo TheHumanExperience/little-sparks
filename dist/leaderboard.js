@@ -39,7 +39,7 @@ const lbProgressKey = (d, lv) => (lv === 1 ? d : d + "-level-" + lv);
 function lbCatchUp(st, progress, today, orderFor) {
   for (const lv of [0, 1, 2]) for (const n of [-1, 0, 1]) {
     const d = lbAddDays(today, n), games = progress?.[lbProgressKey(d, lv)]?.games || {};
-    const order = orderFor ? orderFor(lv) : Object.keys(games).map(Number);
+    const order = orderFor ? orderFor(lv, d) : Object.keys(games).map(Number);
     for (const g of order) {
       const s = games[g];
       if (s && ((s.done && !s.revealed) || s.credit)) st = lbAward(st, d, lv, g, today).st;
@@ -108,7 +108,7 @@ function lbInit() {
     let progress = {};
     try { progress = JSON.parse(localStorage.getItem("little-sparks-v1") || "{}") || {}; } catch {}
     const before = st.queue.length;
-    st = lbCatchUp(st, progress, istDate(), typeof feedOrder === "function" ? (lv) => feedOrder(lv) : null);
+    st = lbCatchUp(st, progress, istDate(), typeof feedOrder === "function" ? (lv, d) => feedOrder(lv, d) : null);
     if (st.queue.length !== before) save();
   };
   let flushing = null;

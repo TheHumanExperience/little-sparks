@@ -8,16 +8,30 @@
    Neighbours → Little Neighbours / Neighbours Goal / Neighbours Goal.
    The five Aha cards (3, 17–20) sit together as one block. */
 const FEED_FAMILIES = { sudoku: [1, 11, 21], killer: [12, 12, 12], bloom: [4, 14, 14], neighbours: [6, 16, 16] };
-const FEED_PLAN = [0, "sudoku", "killer", 8, 3, 17, 18, 19, 20, 2, 9, "bloom", 5, 10, 22, 13, 23, "neighbours", 15, 24];
+/* A [old, new] entry is one slot that shows the old game until FEED_UNTIL[old] and the new one from
+   FEED_SINCE[new] (the same day), never both. */
+const FEED_PLAN = [0, "sudoku", "killer", 8, 3, 17, 18, 19, 20, 2, 9, "bloom", [5, 25], 10, 22, 13, 23, "neighbours", [15, 26], 24];
 /* Games that joined after launch appear only from their first day, so earlier days keep the cards (and
-   the full-day count) they had. Without a date, the order is today's base order. */
-const FEED_SINCE = { 24: "2026-11-10" };
+   the full-day count) they had; retired games show only before their last day. */
+const FEED_SINCE = { 24: "2026-11-10", 25: NEW_GAMES_FROM, 26: NEW_GAMES_FROM };
+const FEED_UNTIL = { 5: NEW_GAMES_FROM, 15: NEW_GAMES_FROM };
+const feedLive = (i, d) => !(FEED_SINCE[i] && d < FEED_SINCE[i]) && !(FEED_UNTIL[i] && d >= FEED_UNTIL[i]);
+/* Resolves one FEED_PLAN entry for a level and day. A slot's new game is used only once it exists
+   (SPARKS[new]); until then the slot keeps its old game, so no day can lose a card or draw a missing one. */
+const feedSlot = (x, lv, d) => {
+  if (typeof x === "string") return FEED_FAMILIES[x][lv];
+  if (!Array.isArray(x)) return x;
+  const [old, next] = x;
+  return feedLive(next, d) && SPARKS[next] ? next : old;
+};
+/* The day's cards before the warm-up moves to the front. Without a date it is today's set. */
+const feedPlan = (lv = difficulty, d = today()) => FEED_PLAN.map((x) => feedSlot(x, lv, d)).filter((i, n) => Array.isArray(FEED_PLAN[n]) || feedLive(i, d));
 // The day opens with a rotating warm-up: Mirror Garden, the Bloom Trail of the level, Garden Beds or the
 // whole Aha block. It moves to the front and Letterlight takes its old place; every other card keeps its order.
 const FEED_OPENERS = [10, "bloom", 23, "aha"];
 const feedOpener = (d, lv = difficulty) => FEED_OPENERS[mod(calendarIndex(d) + lv, FEED_OPENERS.length)];
 const feedOrder = (lv = difficulty, d) => {
-  const o = FEED_PLAN.map((x) => (typeof x === "string" ? FEED_FAMILIES[x][lv] : x)).filter((i) => !(d && FEED_SINCE[i] && d < FEED_SINCE[i]));
+  const o = feedPlan(lv, d || today());
   if (!d) return o;
   const pick = feedOpener(d, lv), lead = pick === "aha" ? o.filter((i) => AHA_SLOTS.includes(i)) : [typeof pick === "string" ? FEED_FAMILIES[pick][lv] : pick];
   const rest = o.flatMap((i) => (i === lead[0] ? [0] : i === 0 || lead.includes(i) ? [] : [i]));
