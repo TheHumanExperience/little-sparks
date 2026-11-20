@@ -73,6 +73,7 @@ if (kind(400, { code: "P0001", message: "too many solves" }) !== "retry" || kind
 // Same name = same player; old "taken" flags from the sync-code version are dropped.
 if ("taken" in run(`lbLoad(JSON.stringify({ taken: 1, name: "Devansh" }))`)) fail("stale taken flag must not survive");
 const lbjs = fs.readFileSync("dist/leaderboard.js", "utf8");
+if (/leave_board|delete_player|remove_player/.test(lbjs) || /leave_board/.test(fs.readFileSync("supabase/schema.sql", "utf8"))) fail("leaving the board must stay on the phone: no server call can remove a player");
 if (/sync_code|claim_code|upsert_player/.test(lbjs) || !/rpc\("join_or_create", \{ p_from: st\.id, p_name: st\.name \}\)/.test(lbjs)) fail("client must save names only through join_or_create");
 
 // Guard: leaderboard only starts next to a feed.js that reports solves.

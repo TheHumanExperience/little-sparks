@@ -76,13 +76,14 @@
       <p class="lbnote"><span id="lbPending"></span> Each first solve earns Gentle 1 · Medium 3 · Tricky 5 points. India time; weeks start on Monday.</p>
     </dialog>
     <dialog id="nameSheet" class="sheet">
-      <div class="modalhead"><h2>Hello there ✳</h2><button class="quiet" data-close aria-label="Not now">✕</button></div>
+      <div class="modalhead"><h2>Hello there ✳</h2><button class="quiet" data-close aria-label="Close">✕</button></div>
       <form id="lbNameForm" class="lbform">
         <label for="lbName">What name should appear on the little leaderboard?</label>
         <input id="lbName" type="text" maxlength="20" autocomplete="nickname" autocapitalize="words" enterkeyhint="done" required />
         <p id="lbNameError" class="lberror" role="alert"></p>
         <button type="submit" class="lbsave">Save my name</button>
-        <p class="lbhint">Same name on another device? You'll share one score.</p>
+        <button type="button" class="linkish lbnotnow" id="lbNotNow">Not now</button>
+        <p class="lbhint">Same name on another device? You'll share one score. You can join or leave any time from 🏆.</p>
       </form>
     </dialog>
     <script src="valid-words.js?v=__BUILD__"></script>
