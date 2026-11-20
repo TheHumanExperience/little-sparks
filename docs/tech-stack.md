@@ -70,7 +70,7 @@ The verify scripts load the real app through `tests/load-app.cjs`, which runs ev
 
 The smoke test adds roughly 2 to 4 minutes to a deploy (less with a warm browser cache). Still run `npm run smoke` locally before committing.
 
-`.gitignore` lists `/.github`, but `.github/workflows/pages.yml` is tracked, so edits to it are still picked up by git; a new file under `.github/` needs `git add -f`.
+`.gitignore` lists `/.github`, but `.github/workflows/pages.yml` is tracked, so git still tracks it, but staging a change to it needs `git add -f` (or `git add -u`).
 
 ## Size
 
