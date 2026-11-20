@@ -1042,5 +1042,341 @@
   "alt": "A massive carved stone arch lit up at dusk, with a slim iron tower glowing in the distance.",
   "clue": "A triumphal arch at the meeting of twelve avenues, with an unknown soldier's tomb and an eternal flame beneath it.",
   "story": "The Arc de Triomphe in Paris was finished in 1836. A flame for the Unknown Soldier has burned under it since 1923."
+ },
+ "m-hampi": {
+  "title": "A temple tower among boulders",
+  "alt": "A tall tiered temple tower of carved stone above a dusty path, with a landscape of huge rounded boulders behind and two women walking.",
+  "clue": "A towering temple gateway in the ruined capital of a great southern empire, set among hills of giant balanced boulders.",
+  "story": "Hampi in Karnataka was the capital of the Vijayanagara Empire in the 1500s. The Virupaksha Temple has been in worship for over a thousand years."
+ },
+ "m-varanasi": {
+  "title": "Steps down to a holy river",
+  "alt": "Old sandstone palaces and long stone steps leading down to a wide river, with wooden rowing boats moored along the bank.",
+  "clue": "Stone steps down to a sacred river in one of the oldest living cities on Earth, where evening prayers are sung with fire.",
+  "story": "Varanasi stands on the banks of the Ganges and has more than 80 ghats, or riverside steps. Pilgrims come to bathe in the river at dawn."
+ },
+ "m-jaisalmer": {
+  "title": "A golden fort",
+  "alt": "Massive round bastions of golden sandstone rising above a stone wall, under a blue sky with white clouds.",
+  "clue": "A 'Golden Fort' of yellow sandstone in the Thar Desert, where thousands of people still live inside the walls.",
+  "story": "Jaisalmer Fort in Rajasthan was built in 1156. It is one of the few living forts in the world, with homes, shops and temples inside."
+ },
+ "m-udaipur": {
+  "title": "Palaces on a lake",
+  "alt": "White and cream palaces and houses along the shore of a calm lake, with a large hilltop palace behind.",
+  "clue": "A 'City of Lakes' with white palaces on the water, founded by a Rajput king in the hills of the north-west.",
+  "story": "Udaipur in Rajasthan sits on Lake Pichola. Its City Palace was added to by many rulers over about 400 years."
+ },
+ "m-alleppey": {
+  "title": "A houseboat on the backwaters",
+  "alt": "A wooden houseboat with a curved roof of woven palm and bamboo, floating on calm water lined with coconut palms.",
+  "clue": "A rice-barge turned houseboat with a roof of woven palm leaves, on a maze of palm-lined lagoons by the Arabian Sea.",
+  "story": "The kettuvallam houseboats of the Kerala backwaters were once used to carry rice and spices. Today visitors stay on them and drift through the canals."
+ },
+ "m-thiksey": {
+  "title": "A monastery on a hill",
+  "alt": "A many-storeyed white monastery with red-topped buildings stacked up a dry, rocky hillside under a deep blue sky.",
+  "clue": "A white monastery stacked up a hillside in a high, dry mountain desert, sometimes called 'Little Tibet'.",
+  "story": "Thiksey Monastery in Ladakh is built in the style of the Potala Palace in Lhasa. It houses a two-storey statue of the Maitreya Buddha."
+ },
+ "m-khajuraho": {
+  "title": "A carved stone temple",
+  "alt": "A sandstone temple with a tall curved spire and pillared porches, every surface covered in fine carvings, on a wide open lawn.",
+  "clue": "Sandstone temples covered in thousands of carved figures, built by the Chandela kings a thousand years ago in the heart of the country.",
+  "story": "The temples of Khajuraho in Madhya Pradesh were built between 950 and 1050. Of about 85 temples, around 25 still stand."
+ },
+ "m-shoretemple": {
+  "title": "A temple by the sea",
+  "alt": "Two pyramid-shaped stone temple towers, weathered by sea wind, glowing in warm evening light.",
+  "clue": "A granite temple on the beach of the Bay of Bengal, built by the Pallava kings and battered by sea winds for 1,300 years.",
+  "story": "The Shore Temple at Mahabalipuram in Tamil Nadu was built around 700 AD. The 2004 tsunami uncovered more old carvings in the sand nearby."
+ },
+ "m-ellora": {
+  "title": "A temple cut from a cliff",
+  "alt": "A temple carved down out of a single grey rock cliff, with stone elephants and deep galleries cut into the walls around it.",
+  "clue": "A whole temple carved downwards out of one rock cliff, among caves of three faiths on a western plateau.",
+  "story": "The Kailasa Temple at Ellora in Maharashtra was cut from the rock in the 8th century. Workers removed about 200,000 tonnes of stone to make it."
+ },
+ "m-kyoto": {
+  "title": "A lane to a pagoda",
+  "alt": "A quiet stone lane between old wooden townhouses with paper lanterns, leading up to a five-storey wooden pagoda.",
+  "clue": "A sloping lane of wooden teahouses below a five-storey pagoda, in an old imperial capital of temples and geishas.",
+  "story": "The Yasaka Pagoda in Kyoto's Higashiyama district was rebuilt in 1440. Its lanes are among the best-kept old streets in Japan."
+ },
+ "m-shirakawago": {
+  "title": "A steep thatched farmhouse",
+  "alt": "A big wooden farmhouse with a very steep, thick thatched roof, with a garden and visitors in front and forested hills behind.",
+  "clue": "Farmhouses with steep thatched roofs like hands joined in prayer, built to shed heavy mountain snow.",
+  "story": "The gassho-zukuri houses of Shirakawa-go in Japan have roofs up to 60 degrees steep. Villagers rethatch them together every few decades."
+ },
+ "m-luangprabang": {
+  "title": "A temple with sweeping roofs",
+  "alt": "A temple with low, layered roofs sweeping almost to the ground, gold decoration on dark wood, and white steps.",
+  "clue": "A temple with layered roofs sweeping to the ground, in a royal town where the Mekong meets another river, and monks collect alms at dawn.",
+  "story": "Wat Xieng Thong in Luang Prabang, Laos, was built in 1560. The whole old town is a World Heritage Site."
+ },
+ "m-guilin": {
+  "title": "A river among karst peaks",
+  "alt": "A winding river through flat green fields, among dozens of steep, rounded limestone peaks fading into the haze.",
+  "clue": "Steep limestone peaks along a winding river, a landscape painted on the country's 20-yuan banknote.",
+  "story": "The Li River runs between Guilin and Yangshuo in southern China. Its karst hills are hundreds of millions of years old."
+ },
+ "m-jiuzhaigou": {
+  "title": "A turquoise lake",
+  "alt": "A perfectly still turquoise lake reflecting steep forested mountainsides and a rocky peak.",
+  "clue": "Lakes of startling turquoise in a mountain valley of nine Tibetan villages, near the home of the giant panda.",
+  "story": "The lakes of Jiuzhaigou in Sichuan get their colour from minerals and very clear water. Fallen trees can be seen lying on the lake beds."
+ },
+ "m-charyn": {
+  "title": "A canyon of red towers",
+  "alt": "A deep canyon of red and orange sandstone cliffs and towers winding away into a wide, dry landscape.",
+  "clue": "A red sandstone canyon on the steppe, sometimes called the little brother of a famous one in America, near the old capital Almaty.",
+  "story": "Charyn Canyon in Kazakhstan is about 80 kilometres long. Its 'Valley of Castles' has rock towers shaped by wind and water."
+ },
+ "m-darvaza": {
+  "title": "A crater on fire",
+  "alt": "A huge crater in a flat desert, with flames burning in many places across its floor and rocky walls.",
+  "clue": "A gas crater in the Karakum Desert that has been burning since it was set alight in 1971.",
+  "story": "The Darvaza gas crater in Turkmenistan is nicknamed the 'Door to Hell'. It is about 70 metres wide and glows at night."
+ },
+ "m-iskanderkul": {
+  "title": "A turquoise mountain lake",
+  "alt": "A bright turquoise lake winding between steep, bare mountain slopes in shades of red, grey and green.",
+  "clue": "A turquoise lake in the Fann Mountains, in a small mountain country north of Afghanistan.",
+  "story": "The Fann Mountains in Tajikistan are dotted with turquoise lakes. Legend says nearby Iskanderkul is named after Alexander the Great."
+ },
+ "m-wadirum": {
+  "title": "Red sand and rock",
+  "alt": "Huge red sandstone rock formations rising from orange desert sand under a clear blue sky.",
+  "clue": "A 'Valley of the Moon' of red sand and towering sandstone, north of the Red Sea, where many films set on Mars are shot.",
+  "story": "Wadi Rum in Jordan is a protected desert of sandstone and granite. Bedouin families have lived there for centuries."
+ },
+ "m-banaue": {
+  "title": "A village in the terraces",
+  "alt": "A small village of houses with red and silver roofs among curving, flooded rice terraces climbing a mountainside.",
+  "clue": "Rice terraces carved into mountains by the Ifugao people about 2,000 years ago, on a northern island of a country of 7,000 islands.",
+  "story": "The Batad rice terraces near Banaue in the Philippines form a giant amphitheatre. They are still farmed by hand."
+ },
+ "m-gardensbay": {
+  "title": "A steel supertree",
+  "alt": "Looking up at a giant steel tree-like tower with a crown of branching metal arms against a cloudy sky.",
+  "clue": "Giant steel 'supertrees' covered in plants, in a garden on reclaimed land in a small island city-state near the equator.",
+  "story": "The Supertree Grove at Gardens by the Bay in Singapore opened in 2012. The trees are up to 50 metres tall and light up in a show every evening."
+ },
+ "m-hunza": {
+  "title": "A valley of poplars",
+  "alt": "A green valley of poplar trees and terraced fields beside a winding river, surrounded by bare brown mountains and snowy peaks.",
+  "clue": "A green valley of apricot orchards and poplars on the old Silk Road, ringed by some of the highest peaks of the Karakoram.",
+  "story": "The Hunza Valley in Pakistan lies along the Karakoram Highway. Its villages are famous for apricots and for views of Rakaposhi, over 7,700 metres tall."
+ },
+ "m-gobi": {
+  "title": "Singing dunes",
+  "alt": "Long pale sand dunes stretching to the horizon beside a strip of green grass, under a blue sky with small clouds.",
+  "clue": "Huge 'singing' sand dunes in a cold desert in the south of a land of nomads, horses and round felt tents.",
+  "story": "Khongoryn Els in Mongolia's Gobi Desert stretches for about 180 kilometres. The dunes hum when the wind moves the sand."
+ },
+ "m-ella": {
+  "title": "A bridge of nine arches",
+  "alt": "A curving stone railway bridge of tall arches crossing a valley thick with jungle.",
+  "clue": "A railway viaduct of nine stone arches in the green hill country of a teardrop-shaped island famous for tea.",
+  "story": "The Nine Arch Bridge near Ella in Sri Lanka was finished in 1921 and is built of stone, brick and cement without steel. Blue trains cross it several times a day."
+ },
+ "m-plitvice": {
+  "title": "Waterfalls into turquoise",
+  "alt": "Dozens of thin waterfalls pouring down a mossy green cliff into a clear turquoise pool.",
+  "clue": "Sixteen terraced lakes joined by waterfalls, in a forest park in the hills near the Adriatic coast.",
+  "story": "The Plitvice Lakes in Croatia are separated by natural dams of travertine that grow a little every year. Wooden boardwalks run right over the water."
+ },
+ "m-positano": {
+  "title": "A village on a cliff",
+  "alt": "Pastel houses stacked steeply up a hillside above the sea, seen from a terrace with pots of lemons.",
+  "clue": "Pastel houses tumbling down a cliff to the sea, on a coast famous for lemons and winding roads south of Naples.",
+  "story": "Positano on the Amalfi Coast of Italy was once a poor fishing village. Today its steep lanes are mostly stairs, and lemons grown nearby are made into limoncello."
+ },
+ "m-colmar": {
+  "title": "Half-timbered houses by a canal",
+  "alt": "Colourful half-timbered houses with flower boxes lining a still canal, reflected in the water.",
+  "clue": "Painted half-timbered houses along a canal nicknamed 'Little Venice', in a wine region on a river border with its eastern neighbour.",
+  "story": "Colmar in Alsace, France, is known for its old houses and canals. The Statue of Liberty's sculptor, Auguste Bartholdi, was born there."
+ },
+ "m-lofoten": {
+  "title": "A fishing village under peaks",
+  "alt": "Red and white wooden houses along the shore of a still bay, beneath jagged rocky mountains.",
+  "clue": "Red fishing cabins under jagged peaks on islands far above the Arctic Circle, where cod is dried on wooden racks.",
+  "story": "Reine is a fishing village in the Lofoten Islands of Norway. In summer the sun never sets there, and in winter the northern lights appear."
+ },
+ "m-ronda": {
+  "title": "A bridge over a gorge",
+  "alt": "A tall stone bridge spanning a deep gorge between sheer cliffs, with white buildings perched on the edge.",
+  "clue": "A town split by a deep gorge and joined by an 18th-century stone bridge, in the hills of the south, birthplace of modern bullfighting.",
+  "story": "The Puente Nuevo in Ronda, Spain, was finished in 1793 and stands about 98 metres above the river. It took over 40 years to build."
+ },
+ "m-krumlov": {
+  "title": "A castle tower above a river",
+  "alt": "A painted castle tower and red roofs above a wide shallow river with a wooden bridge and colourful houses.",
+  "clue": "A painted castle tower above a bend of the Vltava, in a small medieval town in the south of a country in the heart of Europe.",
+  "story": "Český Krumlov in the Czech Republic has a castle that is the second largest in the country. Its old town has hardly changed since the 1700s."
+ },
+ "m-sighisoara": {
+  "title": "A cobbled old street",
+  "alt": "A quiet cobbled lane between brightly painted houses in orange, green and yellow, with wooden shutters.",
+  "clue": "Painted houses in a hilltop citadel in Transylvania, where a famous 15th-century prince was said to have been born.",
+  "story": "Sighișoara in Romania is one of the last lived-in medieval citadels in Europe. Vlad the Impaler, who inspired Dracula, was born there."
+ },
+ "m-giants": {
+  "title": "Stepping stones of a giant",
+  "alt": "Thousands of six-sided stone columns stepping down into a wild blue sea, with walkers on the cliffs.",
+  "clue": "About 40,000 six-sided basalt columns by the sea, said in legend to be stepping stones built by a giant to cross to Scotland.",
+  "story": "The Giant's Causeway in Northern Ireland formed when lava cooled and cracked about 50 million years ago. Most of the columns are hexagons."
+ },
+ "m-rainbow": {
+  "title": "A mountain of stripes",
+  "alt": "A mountain ridge striped in bands of red, purple, cream and green, with hikers resting at the top.",
+  "clue": "A mountain striped like a rainbow by minerals, high in the Andes above 5,000 metres, near the old Inca capital.",
+  "story": "Vinicunca, the Rainbow Mountain in Peru, was covered by ice until recent decades. Its colours come from minerals such as iron oxide."
+ },
+ "m-antigua": {
+  "title": "An arch below a volcano",
+  "alt": "A yellow arch with a clock tower over a cobbled street of colourful houses, with a large volcano behind.",
+  "clue": "A yellow arch across a cobbled street in an old colonial capital ringed by three volcanoes in Central America.",
+  "story": "The Santa Catalina Arch in Antigua Guatemala was built in the 1600s so nuns could cross the street unseen. The Volcán de Agua rises behind it."
+ },
+ "m-antelope": {
+  "title": "A canyon of waves",
+  "alt": "Looking up through a narrow slot canyon of smooth, flowing red sandstone walls to a strip of blue sky.",
+  "clue": "A slot canyon of smooth wave-shaped red sandstone, carved by flash floods on Navajo land in the south-west.",
+  "story": "Antelope Canyon in Arizona can only be visited with a Navajo guide. Sunbeams shine down into it at midday in summer."
+ },
+ "m-pelourinho": {
+  "title": "A colonial square",
+  "alt": "A sloping cobbled square with colourful colonial buildings, a large sky-blue one in the middle, and people strolling.",
+  "clue": "A sloping square of colourful colonial buildings in the old centre of the first capital of a huge South American country.",
+  "story": "Pelourinho is the historic centre of Salvador, Brazil. The city's African heritage lives on in its music, food and capoeira."
+ },
+ "m-cocora": {
+  "title": "The tallest palms",
+  "alt": "Very tall, thin palm trees standing on a bright green hillside, fading into the mist.",
+  "clue": "The world's tallest palm trees, up to 60 metres high, in a misty valley of the coffee-growing Andes.",
+  "story": "The Cocora Valley in Colombia is home to the Quindío wax palm, the national tree. The palms can live for more than a hundred years."
+ },
+ "m-quilotoa": {
+  "title": "A lake in a crater",
+  "alt": "A large green-blue lake filling a deep volcanic crater, ringed by steep slopes under a sky of big white clouds.",
+  "clue": "A water-filled volcanic crater high in the Andes, on a hiking loop through Kichwa villages on the equator's line of volcanoes.",
+  "story": "Quilotoa in Ecuador is a crater lake about three kilometres wide, formed when a volcano collapsed some 800 years ago. Minerals turn the water green and blue."
+ },
+ "m-atacama": {
+  "title": "The Valley of the Moon",
+  "alt": "A dry valley of pale sand, salt crusts and eroded rock ridges, with a great sandstone wall like an amphitheatre behind.",
+  "clue": "A 'Valley of the Moon' of salt and sand in the driest non-polar desert on Earth, high on a long Pacific coast.",
+  "story": "Valle de la Luna lies near San Pedro de Atacama in Chile. Some weather stations in the Atacama Desert have never recorded rain."
+ },
+ "m-tulum": {
+  "title": "Ruins above a Caribbean beach",
+  "alt": "A small stone temple on a rocky headland above a white beach and bright turquoise sea, framed by palm trees.",
+  "clue": "A walled Maya city on a cliff above the Caribbean Sea, one of the last the Maya built and lived in.",
+  "story": "Tulum on the Yucatán Peninsula of Mexico was a busy Maya port around 1200 to 1500. The small Temple of the God of the Winds stands right above the sea."
+ },
+ "m-aitbenhaddou": {
+  "title": "Camels by a mud-brick village",
+  "alt": "Two pale camels nose to nose in front of the towers and walls of a village built of red earth, among palm trees.",
+  "clue": "A fortified village of red earth on an old caravan route over the Atlas Mountains, seen in many films.",
+  "story": "Aït Benhaddou in Morocco is a ksar, a group of earthen buildings behind high walls. Its walls are repaired with mud after the winter rains."
+ },
+ "m-tsingy": {
+  "title": "A forest of stone needles",
+  "alt": "A landscape of sharp grey limestone pinnacles packed tightly together, with a strip of green forest beyond.",
+  "clue": "A 'forest' of razor-sharp limestone needles on a large island off south-east Africa, home of lemurs.",
+  "story": "Tsingy de Bemaraha in Madagascar gets its name from a Malagasy word meaning 'where one cannot walk barefoot'. Rope bridges cross between the pinnacles."
+ },
+ "m-ghardaia": {
+  "title": "A desert town on a hill",
+  "alt": "A dense town of pale, flat-roofed houses climbing a low hill in a dry red-brown valley, with a minaret at the top.",
+  "clue": "Five fortified hill towns in a valley of the Sahara, whose simple cube houses inspired modern architects.",
+  "story": "Ghardaïa in Algeria is one of the towns of the M'zab valley, founded about a thousand years ago. The architect Le Corbusier admired its plain houses."
+ },
+ "m-capecoast": {
+  "title": "A white castle by the sea",
+  "alt": "A large whitewashed castle courtyard with a double staircase, old cannons and cannonballs, under a hazy sky.",
+  "clue": "A whitewashed castle on the Gulf of Guinea, a sad reminder of the Atlantic slave trade on the old Gold Coast.",
+  "story": "Cape Coast Castle in Ghana was built by European traders in the 1600s. Today it is a museum that remembers the people held there."
+ },
+ "m-reef": {
+  "title": "A reef from the air",
+  "alt": "Seen from a plane: turquoise shallows, dark patches of coral and a small white sand island in a deep blue sea.",
+  "clue": "The largest coral reef system in the world, so big it can be seen from space, off a north-eastern coast.",
+  "story": "The Great Barrier Reef off Queensland, Australia, stretches for about 2,300 kilometres. It is made of nearly 3,000 separate reefs."
+ },
+ "m-tongariro": {
+  "title": "Emerald lakes",
+  "alt": "Bright green crater lakes below steaming volcanic slopes of dark rock and red earth.",
+  "clue": "Bright green crater lakes on a famous volcanic day hike, in a volcanic park sacred to the Māori people.",
+  "story": "The Emerald Lakes lie on the Tongariro Alpine Crossing in New Zealand. Their colour comes from minerals washed down from the volcano."
+ },
+ "m-tosua": {
+  "title": "A swimming hole in the earth",
+  "alt": "A deep round hole in the ground lined with ferns and vines, with a long wooden ladder down to clear green seawater.",
+  "clue": "A giant swimming hole joined to the sea by a lava tube, on an island nation of the South Pacific.",
+  "story": "To Sua Ocean Trench on Upolu, Samoa, is about 30 metres deep. Swimmers climb down a long wooden ladder to reach the water."
+ },
+ "m-khiva": {
+  "title": "A forest of wooden pillars",
+  "alt": "A prayer hall filled with rows of carved wooden columns under a flat timber ceiling, with light falling through an opening.",
+  "clue": "A mosque hall of over 200 carved wooden pillars, inside the walled inner town of an old Silk Road oasis.",
+  "story": "The Juma Mosque in Khiva, Uzbekistan, has 213 wooden columns; a few are about a thousand years old. Khiva's inner town, Itchan Kala, is ringed by mud-brick walls."
+ },
+ "m-songkol": {
+  "title": "A horse by a high lake",
+  "alt": "A dark horse standing on a wide grassy plain beside a big blue lake, with low mountains on the far shore.",
+  "clue": "A high mountain lake where nomad herders bring their horses and set up felt yurts each summer, in the Tian Shan.",
+  "story": "Song-Köl in Kyrgyzstan lies about 3,000 metres up. Its lakeside pastures are used only in summer; in winter the lake freezes over."
+ },
+ "m-cameron": {
+  "title": "Hills of tea",
+  "alt": "Rounded hills covered in neat rows of bright green tea bushes, with forest above and grey clouds.",
+  "clue": "Tea gardens in cool highlands that colonial planters opened in the 1920s, a few hours from a tropical capital of twin towers.",
+  "story": "The Cameron Highlands in Malaysia are about 1,500 metres up, cool enough for tea. Its plantations also grow strawberries and vegetables."
+ },
+ "m-lencois": {
+  "title": "Sand and lagoons",
+  "alt": "Seen from above: wide pale sand bars and shallow lagoons with patches of green scrub, stretching towards white dunes.",
+  "clue": "White dunes and rainwater lagoons near the equator on an Atlantic coast, in a country famous for its rainforest.",
+  "story": "The Lençóis Maranhenses in north-eastern Brazil fill with rain each year, making thousands of lagoons between the dunes. Fish appear in them every rainy season."
+ },
+ "m-cinqueterre": {
+  "title": "Terraces above the sea",
+  "alt": "Steep hillside vineyards on stone terraces dropping to a deep blue sea, with coastal villages beyond.",
+  "clue": "Five fishing villages linked by footpaths along a steep coast of vineyards above the Ligurian Sea.",
+  "story": "The Cinque Terre villages lie on the Ligurian coast. Their dry-stone terraces stretch for thousands of kilometres and were built by hand over centuries."
+ },
+ "m-peyto": {
+  "title": "A wolf-shaped lake",
+  "alt": "A milky turquoise lake in a forested valley between grey mountains, under a sky of white clouds.",
+  "clue": "A glacier-fed turquoise lake shaped like a wolf's head, high in the Rocky Mountains along the Icefields Parkway.",
+  "story": "Peyto Lake in Banff National Park, Canada, gets its colour from rock flour carried in by glacier meltwater. It is named after an early mountain guide, Bill Peyto."
+ },
+ "m-fitzroy": {
+  "title": "Granite spires over a lake",
+  "alt": "Jagged granite spires capped with snow rising above green hills and a dark lake, in golden evening light.",
+  "clue": "Jagged granite peaks on the Patagonian ice field, in a trekking village that calls itself the national capital of trekking.",
+  "story": "Monte Fitz Roy in Argentina is 3,405 metres tall. The Tehuelche people called it Chaltén, the 'smoking mountain', because clouds often gather at its top."
+ },
+ "m-lamu": {
+  "title": "An old Swahili town",
+  "alt": "An old town of whitewashed stone houses and a mosque beside a waterfront full of small boats, seen from the air.",
+  "clue": "An old Swahili stone town on an island in the Indian Ocean, where donkeys still carry goods because there are hardly any cars.",
+  "story": "Lamu Old Town in Kenya is the oldest continuously lived-in Swahili town in East Africa. Dhows still sail from its harbour."
+ },
+ "m-bandiagara": {
+  "title": "Granaries under a cliff",
+  "alt": "Tall round and square mud-brick granaries and houses packed against the foot of a high sandstone cliff.",
+  "clue": "Mud-brick villages and granaries built along a 150-kilometre cliff by the Dogon people, south of the great bend of the Niger.",
+  "story": "The Bandiagara Escarpment in Mali is home to the Dogon, who have lived there since around the 14th century. Older cliff dwellings were built by the Tellem people before them."
+ },
+ "m-bungle": {
+  "title": "Beehive domes",
+  "alt": "A rounded rock dome striped in orange and grey bands like a beehive, with grass and pale trees at its base.",
+  "clue": "Striped orange-and-black sandstone domes like giant beehives, in the remote north-west outback.",
+  "story": "The Bungle Bungle Range in Purnululu National Park, Australia, was little known outside the area until the 1980s. The dark stripes are bacteria living in the rock."
  }
 }

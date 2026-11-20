@@ -93,6 +93,18 @@
   ],
   "g-pompeii": [
    "File:Pompeii Ruins & Mt. Vesuvius (48442337717).jpg"
+  ],
+  "m-khiva": [
+   "File:Стена Ичан-Калы (Ichan-kal’a devori, Itchan Kala walls).jpg"
+  ],
+  "m-songkol": [
+   "File:Kyrgyzstan yurts at Song Kul (48221119097).jpg"
+  ],
+  "m-cameron": [
+   "File:Cameron Bharat Tea Plantation, Cameron Highlands, Malaysia, 20250829 1432 4034.jpg"
+  ],
+  "m-lencois": [
+   "File:Dunas e lagoas dos Lençois Maranhenses (cropped).jpg"
   ]
  },
  "g-eiffel": {
@@ -2008,5 +2020,621 @@
   "description": "",
   "source": "https://commons.wikimedia.org/wiki/File:Arc_de_Triomphe_de_l%27%C3%89toile_at_night_vertical_fix.jpg",
   "bytes": 81788
+ },
+ "m-hampi": {
+  "level": 1,
+  "country": "India",
+  "file": "File:People walking uphill from Virupaksha temple.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "iMahesh",
+  "description": "The image captures a group of people making their way uphill from the Virupaksha Temple, a prominent and historic landmark in Hampi. This ascent is a popular route for both pilgrims and tourists, drawn by the temple's architectural beauty and religious significance. As they walk, the visitors are li",
+  "source": "https://commons.wikimedia.org/wiki/File:People_walking_uphill_from_Virupaksha_temple.jpg",
+  "bytes": 88293
+ },
+ "m-varanasi": {
+  "level": 1,
+  "country": "India",
+  "file": "File:Varanasi Munshi Ghat3.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Marcin Białek",
+  "description": "India as seen from .}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Varanasi_Munshi_Ghat3.jpg",
+  "bytes": 97930
+ },
+ "m-jaisalmer": {
+  "level": 1,
+  "country": "India",
+  "file": "File:Jaisalmer Fort, India.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Clément Bardot",
+  "description": "Jaisalmer Fort, India}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Jaisalmer_Fort,_India.jpg",
+  "bytes": 89889
+ },
+ "m-udaipur": {
+  "level": 1,
+  "country": "India",
+  "file": "File:20191207 Lake Pichola, City Palace, Udaipur, 1516 7254.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Jakub Hałun",
+  "description": "Ghats and houses at the south-east bank of Lake Pichola in Udaipur. City Palace in the background}}",
+  "source": "https://commons.wikimedia.org/wiki/File:20191207_Lake_Pichola,_City_Palace,_Udaipur,_1516_7254.jpg",
+  "bytes": 112596
+ },
+ "m-alleppey": {
+  "level": 1,
+  "country": "India",
+  "file": "File:Nedumudy - Houseboat.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Ingo Mehling",
+  "description": "Houseboat near Nedumudy / Kerala}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Nedumudy_-_Houseboat.jpg",
+  "bytes": 77825
+ },
+ "m-thiksey": {
+  "level": 1,
+  "country": "India",
+  "file": "File:Thiksey Monastery, Ladakh 01.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Bernard Gagnon Canon EOS REBEL T4i",
+  "description": "Thiksey Monastery, Ladakh, India}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Thiksey_Monastery,_Ladakh_01.jpg",
+  "bytes": 67098
+ },
+ "m-khajuraho": {
+  "level": 1,
+  "country": "India",
+  "file": "File:Khajuraho Dulhadeo 2010.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Marcin Białek",
+  "description": "{{mld",
+  "source": "https://commons.wikimedia.org/wiki/File:Khajuraho_Dulhadeo_2010.jpg",
+  "bytes": 78471
+ },
+ "m-shoretemple": {
+  "level": 1,
+  "country": "India",
+  "file": "File:Shore Temple 01.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Bernard Gagnon",
+  "description": "Shore Temple, Mahabalipuram, Tamil Nadu, India}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Shore_Temple_01.jpg",
+  "bytes": 94634
+ },
+ "m-ellora": {
+  "level": 1,
+  "country": "India",
+  "file": "File:Courtyard and Mahabharata Reliefs at the Kailasa Temple, Ellora 01.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Rohit Sharma",
+  "description": "The Kailasa Temple at Ellora (Cave 16) is a remarkable example of rock-cut architecture, commissioned in the 8th century by Rashtrakuta king Krishna I. Carved entirely out of a single basalt rock, the temple represents a monolithic excavation rather than constructed assembly, making it one of the la",
+  "source": "https://commons.wikimedia.org/wiki/File:Courtyard_and_Mahabharata_Reliefs_at_the_Kailasa_Temple,_Ellora_01.jpg",
+  "bytes": 98644
+ },
+ "m-kyoto": {
+  "level": 1,
+  "country": "Japan",
+  "file": "File:Yasaka-dori early morning with street lanterns and the Tower of Yasaka (Hokan-ji Temple), Kyoto, Japan.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Basile Morin",
+  "description": "Yasaka-dori, early morning with street lanterns and the Tower of Yasaka (Hokan-ji Temple), 388 Yasaka Kamimachi, Higashiyama-ku, Kyoto, Japan. Important cultural heritage of Kyoto, Hokan-ji is a high, 5 storey pagoda with a tiled roof that was founded in the 6th century.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Yasaka-dori_early_morning_with_street_lanterns_and_the_Tower_of_Yasaka_(Hokan-ji_Temple),_Kyoto,_Japan.jpg",
+  "bytes": 93623
+ },
+ "m-shirakawago": {
+  "level": 1,
+  "country": "Japan",
+  "file": "File:Shirakawa-go 01.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Gilles Desjardins",
+  "description": "House in Shirakawa-go, in the Gifu prefecture in Japan. Houses of the village are typical of the architectural style known as gasshō-zukuri.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Shirakawa-go_01.jpg",
+  "bytes": 171107
+ },
+ "m-luangprabang": {
+  "level": 1,
+  "country": "Laos",
+  "file": "File:Temple Wat Xieng Thong - Luang Prabang - Laos.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Basile Morin",
+  "description": "Temple Wat Xieng Thong, Luang Prabang, Laos}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Temple_Wat_Xieng_Thong_-_Luang_Prabang_-_Laos.jpg",
+  "bytes": 102777
+ },
+ "m-guilin": {
+  "level": 1,
+  "country": "China",
+  "file": "File:1 li jiang guilin yangshuo 2011.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Chensiyuan",
+  "description": "li jiang li river guilin yangshuo china 2011 karst raft}}",
+  "source": "https://commons.wikimedia.org/wiki/File:1_li_jiang_guilin_yangshuo_2011.jpg",
+  "bytes": 87933
+ },
+ "m-jiuzhaigou": {
+  "level": 1,
+  "country": "China",
+  "file": "File:Jiuzhaigou Sichuan China Panda-Lake-02.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "CEphoto, Uwe Aranas",
+  "description": "Jiuzhaigou Valley, Sichuan, China: Panda Lake}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Jiuzhaigou_Sichuan_China_Panda-Lake-02.jpg",
+  "bytes": 111004
+ },
+ "m-charyn": {
+  "level": 1,
+  "country": "Kazakhstan",
+  "file": "File:Charyn Canyon, Kazakhstan 04.jpg",
+  "licence": "CC0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "artist": "Bgag",
+  "description": "Charyn Canyon, Kazakhstan}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Charyn_Canyon,_Kazakhstan_04.jpg",
+  "bytes": 99197
+ },
+ "m-darvaza": {
+  "level": 1,
+  "country": "Turkmenistan",
+  "file": "File:Darvaza gas crater, Jähennem derwezesi, Door to Hell, Gates of Hell, Derweze, Turkmenistan.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Benjamin Goetzinger",
+  "description": "Darvaza gas crater, Jähennem derwezesi, Door to Hell, Gates of Hell, Derweze, Turkmenistan, a gas crater burning since 1971}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Darvaza_gas_crater,_J%C3%A4hennem_derwezesi,_Door_to_Hell,_Gates_of_Hell,_Derweze,_Turkmenistan.jpg",
+  "bytes": 77860
+ },
+ "m-iskanderkul": {
+  "level": 1,
+  "country": "Tajikistan",
+  "file": "File:Fann Mountains - lake.jpg",
+  "licence": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+  "artist": "Oleg Brovko from Halle (Saale), Germany",
+  "description": "Trekking and climbing in Fann Mountains 2013",
+  "source": "https://commons.wikimedia.org/wiki/File:Fann_Mountains_-_lake.jpg",
+  "bytes": 114465
+ },
+ "m-wadirum": {
+  "level": 1,
+  "country": "Jordan",
+  "file": "File:Wadi rum desert.jpg",
+  "licence": "CC0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "artist": "Peter Chisholm",
+  "description": "Desert in Wadi Rum, Jordan}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Wadi_rum_desert.jpg",
+  "bytes": 99051
+ },
+ "m-banaue": {
+  "level": 1,
+  "country": "Philippines",
+  "file": "File:Banaue Philippines Batad-Rice-Terraces-02.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "CEphoto, Uwe Aranas",
+  "description": "Banaue, Philippines: Batad Rice Terraces}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Banaue_Philippines_Batad-Rice-Terraces-02.jpg",
+  "bytes": 141693
+ },
+ "m-gardensbay": {
+  "level": 1,
+  "country": "Singapore",
+  "file": "File:At Singapore 2023 125 - At Supertree Grove.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Mike Peel/Attribution",
+  "description": "",
+  "source": "https://commons.wikimedia.org/wiki/File:At_Singapore_2023_125_-_At_Supertree_Grove.jpg",
+  "bytes": 115277
+ },
+ "m-hunza": {
+  "level": 1,
+  "country": "Pakistan",
+  "file": "File:Hunza Valley, view from Eagle's Nest.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Alllexxxis",
+  "description": "Hunza valley in Gilgit-Baltistan, Pakistan, from Eagle's Nest. With views on Rakaposhi, Baltit and Altit forts, and Hunza-Nagar river junction.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Hunza_Valley,_view_from_Eagle%27s_Nest.jpg",
+  "bytes": 111872
+ },
+ "m-gobi": {
+  "level": 1,
+  "country": "Mongolia",
+  "file": "File:Khongoryn Els 15.jpg",
+  "licence": "CC0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "artist": "Bernard Gagnon",
+  "description": "Sand dunes of Khongoryn Els, Gobi Desert, Mongolia}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Khongoryn_Els_15.jpg",
+  "bytes": 31300
+ },
+ "m-ella": {
+  "level": 1,
+  "country": "Sri Lanka",
+  "file": "File:Nine arch bridge, Ella, Sri lanka.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Ishan shanuka",
+  "description": "This capture taken after the bomb attacks from ISIS(21st April 2019) Nine arch brige is the most attractive place in Ella, Sri lanka. Every day there was lot of foreigners come to see the beauty of the bridge. But, few weeks from the bomb attacks there are no one come to see her. 1000 of people were",
+  "source": "https://commons.wikimedia.org/wiki/File:Nine_arch_bridge,_Ella,_Sri_lanka.jpg",
+  "bytes": 163902
+ },
+ "m-plitvice": {
+  "level": 1,
+  "country": "Croatia",
+  "file": "File:Plitvice Lakes1.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Tesla Delacroix",
+  "description": "Waterfalls in the Plitvice Lakes National Park in Croatia.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Plitvice_Lakes1.jpg",
+  "bytes": 124648
+ },
+ "m-positano": {
+  "level": 1,
+  "country": "Italy",
+  "file": "File:Positano (Italy) 04.jpg",
+  "licence": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "artist": "Bernard Gagnon",
+  "description": "View of Positano on Amalfi Coast, Italy}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Positano_(Italy)_04.jpg",
+  "bytes": 120787
+ },
+ "m-colmar": {
+  "level": 1,
+  "country": "France",
+  "file": "File:Little Venice in Colmar 01.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Krzysztof Golik",
+  "description": "{{Multilingual description",
+  "source": "https://commons.wikimedia.org/wiki/File:Little_Venice_in_Colmar_01.jpg",
+  "bytes": 125895
+ },
+ "m-lofoten": {
+  "level": 1,
+  "country": "Norway",
+  "file": "File:Reine i Lofoten LC0148.jpg",
+  "licence": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+  "artist": "Jörg Hempel",
+  "description": "Reine on the Lofoten island Moskenesøy}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Reine_i_Lofoten_LC0148.jpg",
+  "bytes": 84804
+ },
+ "m-ronda": {
+  "level": 1,
+  "country": "Spain",
+  "file": "File:View of Puente Nuevo bridge in Ronda Spain.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Moroder/Template:Credits",
+  "description": "View of the \"Ponte Nuevo\" bridge in Ronda}}",
+  "source": "https://commons.wikimedia.org/wiki/File:View_of_Puente_Nuevo_bridge_in_Ronda_Spain.jpg",
+  "bytes": 89330
+ },
+ "m-krumlov": {
+  "level": 1,
+  "country": "Czech Republic",
+  "file": "File:Český Krumlov Castle, Czechia, 20250504 1248 8849.jpg",
+  "licence": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "artist": "Jakub Hałun",
+  "description": "Český Krumlov Castle and a footbridge over the Vltava in Český Krumlov, Czechia}}",
+  "source": "https://commons.wikimedia.org/wiki/File:%C4%8Cesk%C3%BD_Krumlov_Castle,_Czechia,_20250504_1248_8849.jpg",
+  "bytes": 98540
+ },
+ "m-sighisoara": {
+  "level": 1,
+  "country": "Romania",
+  "file": "File:The Streets Of Sighișoara Citadel (8153602163).jpg",
+  "licence": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+  "artist": "Antony Stanley from Gloucester, UK",
+  "description": "The Streets Of Sighișoara Citadel",
+  "source": "https://commons.wikimedia.org/wiki/File:The_Streets_Of_Sighi%C8%99oara_Citadel_(8153602163).jpg",
+  "bytes": 81672
+ },
+ "m-giants": {
+  "level": 1,
+  "country": "United Kingdom",
+  "file": "File:Giant's Causeway (14).JPG",
+  "licence": "CC BY 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+  "artist": "Chmee2",
+  "description": "Giant’s Causeway, Northern Ireland. Hexagonal basalts.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Giant%27s_Causeway_(14).JPG",
+  "bytes": 93955
+ },
+ "m-rainbow": {
+  "level": 1,
+  "country": "Peru",
+  "file": "File:Rainbow Mountain.jpg",
+  "licence": "CC BY 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+  "artist": "Laila Goubran",
+  "description": "Rainbow Mountain or Vinicunca}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Rainbow_Mountain.jpg",
+  "bytes": 65082
+ },
+ "m-antigua": {
+  "level": 1,
+  "country": "Guatemala",
+  "file": "File:Santa Catalina Arch - Antigua Guatemala Feb 2020.jpg",
+  "licence": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+  "artist": "Chad Davis",
+  "description": "The Santa Catalina Arch is one of the distinguishable landmarks in Antigua Guatemala, Guatemala, located on 5th Avenue North. Built in the 17th century, it originally connected the Santa Catalina convent to a school, allowing the cloistered nuns to pass from one building to the other without going o",
+  "source": "https://commons.wikimedia.org/wiki/File:Santa_Catalina_Arch_-_Antigua_Guatemala_Feb_2020.jpg",
+  "bytes": 109469
+ },
+ "m-antelope": {
+  "level": 1,
+  "country": "United States",
+  "file": "File:Lower Antelope Canyon November 2018 006.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "King of Hearts",
+  "description": "Interior of Lower Antelope Canyon",
+  "source": "https://commons.wikimedia.org/wiki/File:Lower_Antelope_Canyon_November_2018_006.jpg",
+  "bytes": 73988
+ },
+ "m-pelourinho": {
+  "level": 1,
+  "country": "Brazil",
+  "file": "File:Largo do Pelourinho, Salvador 20150719-DSC05452.JPG",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Matti Blume",
+  "description": "Largo do Pelourinho, Salvador, Brazil}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Largo_do_Pelourinho,_Salvador_20150719-DSC05452.JPG",
+  "bytes": 91329
+ },
+ "m-cocora": {
+  "level": 1,
+  "country": "Colombia",
+  "file": "File:Valle de Cocora, Colombia 04.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Bernard Gagnon",
+  "description": "Wax palm (Ceroxylon quindiuense) in Cocora Valley, Colombia}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Valle_de_Cocora,_Colombia_04.jpg",
+  "bytes": 61572
+ },
+ "m-quilotoa": {
+  "level": 1,
+  "country": "Ecuador",
+  "file": "File:Panorama quilotoa crater lake ecuador.jpg",
+  "licence": "Public domain",
+  "licenseUrl": "https://en.wikipedia.org/wiki/Public_domain",
+  "artist": "Annom",
+  "description": "Quilotoa craterlake in Ecuador",
+  "source": "https://commons.wikimedia.org/wiki/File:Panorama_quilotoa_crater_lake_ecuador.jpg",
+  "bytes": 107933
+ },
+ "m-atacama": {
+  "level": 1,
+  "country": "Chile",
+  "file": "File:Anfiteatro, Valle de la Luna, San Pedro de Atacama, Chile, 2016-02-01, DD 149.JPG",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Diego Delso",
+  "description": "View of \"the Amfitheater\", a rock formation in Valle de la Luna (in Spanish \"Moon Valley\") during the golden hour, Atacama Desert, Chile. Valle de la Luna is a part of the Reserva Nacional los Flamencos and was declared a Nature Sanctuary in 1982 for its great natural beauty and strange lunar landsc",
+  "source": "https://commons.wikimedia.org/wiki/File:Anfiteatro,_Valle_de_la_Luna,_San_Pedro_de_Atacama,_Chile,_2016-02-01,_DD_149.JPG",
+  "bytes": 51403
+ },
+ "m-tulum": {
+  "level": 1,
+  "country": "Mexico",
+  "file": "File:Tulum - God of the Winds Temple 03.JPG",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Martin Falbisoner",
+  "description": "Tulum - God of the Winds Temple as seen from the south, March 2016}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Tulum_-_God_of_the_Winds_Temple_03.JPG",
+  "bytes": 79578
+ },
+ "m-aitbenhaddou": {
+  "level": 1,
+  "country": "Morocco",
+  "file": "File:Camels at Aït Benhaddou, Saharan caravan route, Morocco (آيت بن حدّو, ⴰⵢⵜ ⵃⴰⴷⴷⵓ).jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Petar Milošević",
+  "description": "Camels at Aït Benhaddou, Saharan caravan route, Marocco",
+  "source": "https://commons.wikimedia.org/wiki/File:Camels_at_A%C3%AFt_Benhaddou,_Saharan_caravan_route,_Morocco_(%D8%A2%D9%8A%D8%AA_%D8%A8%D9%86_%D8%AD%D8%AF%D9%91%D9%88,_%E2%B4%B0%E2%B5%A2%E2%B5%9C_%E2%B5%83%E2%B4%B0%E2%B4%B7%E2%B4%B7%E2%B5%93).jpg",
+  "bytes": 146019
+ },
+ "m-tsingy": {
+  "level": 1,
+  "country": "Madagascar",
+  "file": "File:Tsingy de Bemaraha Strict Nature Reserve.jpg",
+  "licence": "Public domain",
+  "licenseUrl": "https://en.wikipedia.org/wiki/Public_domain",
+  "artist": "",
+  "description": "Tsingy de Bemaraha Strict Nature Reserve, Madagascar",
+  "source": "https://commons.wikimedia.org/wiki/File:Tsingy_de_Bemaraha_Strict_Nature_Reserve.jpg",
+  "bytes": 154991
+ },
+ "m-ghardaia": {
+  "level": 1,
+  "country": "Algeria",
+  "file": "File:Le M'Zab-2.jpg",
+  "licence": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+  "artist": "*Le_M'Zab.jpg: Yves Jalabert",
+  "description": "View over M'Zab valley",
+  "source": "https://commons.wikimedia.org/wiki/File:Le_M%27Zab-2.jpg",
+  "bytes": 110524
+ },
+ "m-capecoast": {
+  "level": 1,
+  "country": "Ghana",
+  "file": "File:Castle, Cape Coast (P1100223).jpg",
+  "licence": "CC BY-SA 2.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+  "artist": "Matti Blume",
+  "description": "",
+  "source": "https://commons.wikimedia.org/wiki/File:Castle,_Cape_Coast_(P1100223).jpg",
+  "bytes": 100457
+ },
+ "m-reef": {
+  "level": 1,
+  "country": "Australia",
+  "file": "File:Aerial View of Great Barrier Reef (Ank Kumar) 04.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Ank Kumar",
+  "description": "Aerial View of Great Barrier Reef}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Aerial_View_of_Great_Barrier_Reef_(Ank_Kumar)_04.jpg",
+  "bytes": 104619
+ },
+ "m-tongariro": {
+  "level": 1,
+  "country": "New Zealand",
+  "file": "File:Emerald Lakes, NZ.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Du Hugin Skulblaka",
+  "description": "colourful lakes \"Emerald Lakes\" in the Tongariro vulcanic area in New Zealand at an altitude of 1700m, image taken 2018 from Red Crater while hiking the Tongariro Alpine Crossing 9km}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Emerald_Lakes,_NZ.jpg",
+  "bytes": 138664
+ },
+ "m-tosua": {
+  "level": 1,
+  "country": "Samoa",
+  "file": "File:To Sua Ocean Trench.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Gelu Purcelu",
+  "description": "|source=",
+  "source": "https://commons.wikimedia.org/wiki/File:To_Sua_Ocean_Trench.jpg",
+  "bytes": 141307
+ },
+ "m-khiva": {
+  "level": 1,
+  "country": "Uzbekistan",
+  "file": "File:Juma Mosque (Khiva) 01.jpg",
+  "licence": "CC0",
+  "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "artist": "Bgag",
+  "description": "Juma Mosque in Khiva}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Juma_Mosque_(Khiva)_01.jpg",
+  "bytes": 113436
+ },
+ "m-songkol": {
+  "level": 1,
+  "country": "Kyrgyzstan",
+  "file": "File:Horse standing by Song Kul Lake - Kyrgyztan.jpg",
+  "licence": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "artist": "ElPrismaDeFer - [https://elprismadefer.com]",
+  "description": "A close-up view of a horse next to Song Kul Lake, an alpine lake located 3,016 meters above sea level in the Naryn region of Kyrgyzstan. Song Kul is known for its beautiful landscapes, high-altitude grasslands, and as a seasonal grazing area for Kyrgyz nomads.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Horse_standing_by_Song_Kul_Lake_-_Kyrgyztan.jpg",
+  "bytes": 89801
+ },
+ "m-cameron": {
+  "level": 1,
+  "country": "Malaysia",
+  "file": "File:Cameron Bharat Tea Plantation, Cameron Highlands, Malaysia, 20250829 1514 4106.jpg",
+  "licence": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "artist": "Jakub Hałun",
+  "description": "Cameron Bharat Tea Plantation, Cameron Highlands, Malaysia}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Cameron_Bharat_Tea_Plantation,_Cameron_Highlands,_Malaysia,_20250829_1514_4106.jpg",
+  "bytes": 136145
+ },
+ "m-lencois": {
+  "level": 1,
+  "country": "Brazil",
+  "file": "File:Parque Nacional dos Lençois Maranhenses Matheus Hobold Sovernigo (01).jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Matheus Hobold Sovernigo",
+  "description": "",
+  "source": "https://commons.wikimedia.org/wiki/File:Parque_Nacional_dos_Len%C3%A7ois_Maranhenses_Matheus_Hobold_Sovernigo_(01).jpg",
+  "bytes": 107303
+ },
+ "m-cinqueterre": {
+  "level": 1,
+  "country": "Italy",
+  "file": "File:Manarola NW Cemetery Corniglia Monterosso Cinque Terre Sep23 A7C 06872.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Tagooty/Template:Credits",
+  "description": "View of coastline NW from above : Manarola cemetery and fields and steep trail to Volastra in foreground, Station and town centre, San Bernardino above, and Punta Mesco. Depicts the north half of coastline, about out of . Cinque Terre, Liguria, Italy}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Manarola_NW_Cemetery_Corniglia_Monterosso_Cinque_Terre_Sep23_A7C_06872.jpg",
+  "bytes": 90251
+ },
+ "m-peyto": {
+  "level": 1,
+  "country": "Canada",
+  "file": "File:Peyto Lake-Banff NP-Canada.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Tobias Alt, Tobi 87",
+  "description": "An attraction of Banff National Park in the Canadian province of Alberta: the turquoise Peyto Lake seen from a viewpoint at Icefields Parkway. This water colour is caused by glacier water, carrying what is often called 'rock flour' (tiny particles causing the water to become more opaque).}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Peyto_Lake-Banff_NP-Canada.jpg",
+  "bytes": 99356
+ },
+ "m-fitzroy": {
+  "level": 1,
+  "country": "Argentina",
+  "file": "File:Fitz Roy group - Laguna Capri - 01.JPG",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Gagea",
+  "description": "East face of the Fitz Roy group (Fitz Roy massif, Santa Cruz Province, Argentina) and the Laguna Capri view from the bank of the Laguna Capri, close to the Campamiento Capri}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Fitz_Roy_group_-_Laguna_Capri_-_01.JPG",
+  "bytes": 87686
+ },
+ "m-lamu": {
+  "level": 1,
+  "country": "Kenya",
+  "file": "File:Lamu Old Town.jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "Almaddy2022",
+  "description": "Lamu Old Town a world Heritage Site.}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Lamu_Old_Town.jpg",
+  "bytes": 99679
+ },
+ "m-bandiagara": {
+  "level": 1,
+  "country": "Mali",
+  "file": "File:Villagedogon.jpg",
+  "licence": "CC BY-SA 3.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "artist": "Kirua",
+  "description": "Dogon village at the bottom of the Bandiagara escarpment, Mali}}",
+  "source": "https://commons.wikimedia.org/wiki/File:Villagedogon.jpg",
+  "bytes": 168520
+ },
+ "m-bungle": {
+  "level": 1,
+  "country": "Australia",
+  "file": "File:A Kimberleys - Australien (Bungle Bungle N.P.).jpg",
+  "licence": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "artist": "W. Bulach",
+  "description": "The national park Purnululu (Bungle Bungle) is known for its striped stone towers.The Purnululu National Park is located in the eastern Kimberley in the Australian state of Western Australia. }}",
+  "source": "https://commons.wikimedia.org/wiki/File:A_Kimberleys_-_Australien_(Bungle_Bungle_N.P.).jpg",
+  "bytes": 140869
  }
 }
