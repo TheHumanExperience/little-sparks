@@ -248,7 +248,7 @@ for (const [engine, launch, ctxOpts] of engines) {
   check(/(^|[\s·])1\/20\b/.test(await page.locator("#todayPill").innerText()), `${engine} the place solve is counted`);
   // Tricky: two misses end the round as missed, which never counts.
   await fresh(2); await goTo(24);
-  const wt = await page.evaluate(() => { const m = savedPlace(day, state(24)); return m.options.filter((c) => c !== m.place.country); });
+  const wt = await page.evaluate(() => { const m = savedPlace(day, state(24)); return m.options.filter((c) => c !== placeAnswer(m)); });
   for (const c of wt.slice(0, 2)) { await page.locator(`.spark.live [data-place="${c}"]`).tap(); await page.waitForTimeout(150); }
   check(await page.evaluate(() => state(24).done && state(24).missed && state(24).revealed && !feedDone(day, 24)), `${engine} two misses on Tricky end the round without counting`);
   check(/(^|[\s·])0\/20\b/.test(await page.locator("#todayPill").innerText()), `${engine} a missed place round isn't counted`);

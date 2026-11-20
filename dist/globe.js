@@ -171,7 +171,7 @@ const placePool = (lvl) => PLACES.filter((p) => p.level === lvl && !p.retired);
 // Days before PLACE_V2_FROM keep the v1 cycle over the original 124 photos, pinned here by id in
 // their original order, so growing PLACES never changes an archive day. From PLACE_V2_FROM each
 // level cycles its whole pool ("place-v2-"), newer photos first so the switch repeats nothing.
-const PLACE_V2_FROM = "9999-12-31";
+const PLACE_V2_FROM = "2026-11-22";
 const PLACE_V1 = [
   "g-acropolis g-alhambra g-angkor g-basil g-bigben g-borobudur g-burj g-charles g-chichen g-cntower g-colosseum g-eiffel g-forbidden g-fuji g-giza g-goldengate g-greatwall g-gyeongbok g-hagia g-kilimanjaro g-kinderdijk g-liberty g-machu g-marina g-milford g-moai g-montstmichel g-neuschwanstein g-opera g-perito g-petra g-petronas g-pisa g-redeemer g-sagrada g-table g-taj g-vatican g-victoria g-watarun",
   "m-angel m-apostles m-bagan m-baobab m-bled m-boudha m-brussels m-budapest m-cappadocia m-cartagena m-chefchaouen m-chocolate m-djenne m-dubrovnik m-galapagos m-geiranger m-hallstatt m-halong m-havana m-hawamahal m-iceland m-inari m-isfahan m-landwasser m-lisbon m-london m-maldives m-matterhorn m-moher m-monument m-moraine m-registan m-santorini m-sigiriya m-sossusvlei m-stonehenge m-taipei m-tigersnest m-tikal m-uluru m-uyuni m-venice m-zhangjiajie",

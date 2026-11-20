@@ -28,14 +28,34 @@ for (const p of PLACES) {
 }
 const days = Array.from({ length: 366 }, (_, n) => new Date(Date.UTC(2026, 0, 1 + n)).toISOString().slice(0, 10));
 const stats = [];
+let realCity = 0;
+// A Tricky city question: four distinct known cities on the photo's continent with the answer once, a
+// same-country decoy when the table has one, a decoy from another country, and hint 1 naming the country
+// (the region for a city-state). Returns how many decoys share the photo's country.
+const cityCountry = (c) => Object.keys(WORLD_CITIES).find((k) => WORLD_CITIES[k].includes(c));
+function checkCity(m, d) {
+  const p = m.place;
+  if (difficulty !== 2 || !p.city || m.city !== p.city || m.options.length !== 4 || new Set(m.options).size !== 4 || m.options.filter((c) => c === p.city).length !== 1) fail("bad city options " + d + " " + m.options);
+  if (m.options.some((c) => !cityCountry(c) || WORLD_COUNTRY[cityCountry(c)].continent !== WORLD_COUNTRY[p.country].continent)) fail("city options must be known cities on the same continent " + d + " " + m.options);
+  const local = m.options.filter((c) => c !== p.city && cityCountry(c) === p.country).length;
+  if (WORLD_CITIES[p.country].length > 1 && local < 1) fail("city question needs a same-country decoy " + d + " " + m.options);
+  if (m.options.filter((c) => c !== p.city && cityCountry(c) !== p.country).length < 1) fail("city question needs a neighbouring-country decoy " + d + " " + m.options);
+  const h = placeHints(m);
+  if (h[0] !== (local ? "It's in " + p.country + "." : "It's in " + WORLD_COUNTRY[p.country].continent + " (" + WORLD_COUNTRY[p.country].region + ").") || h[1] !== p.clue) fail("city hints " + d + " " + h);
+  return local;
+}
 for (const lvl of [0, 1, 2]) {
   difficulty = lvl;
   const pool = placePool(lvl), seen = [];
   if (pool.length < FEED_DAYS_MIN) fail("level " + lvl + " needs at least " + FEED_DAYS_MIN + " photos, has " + pool.length);
-  let sameContinent = 0;
+  let sameContinent = 0, countryDays = 0;
   for (const d of days) {
     const m = placeModel(d), again = placeModel(d), home = WORLD_COUNTRY[m.place.country];
     if (JSON.stringify(m) !== JSON.stringify(again)) fail("not deterministic " + d);
+    seen.push(m.place.id);
+    const asksCity = lvl === 2 && d >= PLACE_V2_FROM && !!m.place.city;
+    if (!!m.city !== asksCity) fail((asksCity ? "a v2 Tricky city photo must ask for the city " : "must ask for the country ") + d + " level " + lvl);
+    if (asksCity) { checkCity(m, d); realCity++; continue; }
     if (m.options.length !== 4 || new Set(m.options).size !== 4 || m.options.filter((c) => c === m.place.country).length !== 1) fail("bad options " + d + " " + m.options);
     if (m.options.some((c) => !WORLD_COUNTRY[c])) fail("unknown option country " + m.options);
     const others = m.options.filter((c) => c !== m.place.country).map((c) => WORLD_COUNTRY[c]);
@@ -43,10 +63,10 @@ for (const lvl of [0, 1, 2]) {
     if (lvl === 1 && (others.filter((o) => o.continent === home.continent).length !== 2)) fail("Medium options: two near, one far " + m.options);
     if (lvl === 2 && others.some((o) => o.continent !== home.continent)) fail("Tricky options must share the continent " + m.options);
     sameContinent += others.filter((o) => o.continent === home.continent).length;
-    seen.push(m.place.id);
+    countryDays++;
   }
   for (let k = 0; k + 31 <= seen.length; k++) if (new Set(seen.slice(k, k + 31)).size !== 31) fail("level " + lvl + " repeats a photo within 31 days near " + days[k]);
-  stats.push(pool.length + " photos, " + (sameContinent / days.length).toFixed(1) + " same-continent decoys");
+  stats.push(pool.length + " photos, " + (sameContinent / countryDays).toFixed(1) + " same-continent decoys");
 }
 // v1 is pinned to the original 124 photos and must pick exactly what it picked before the pool grew:
 // photo and options for every 2026 day on every level (FNV-1a of them). Days before PLACE_V2_FROM use v1.
@@ -87,15 +107,7 @@ for (const lvl of [0, 1, 2]) { difficulty = lvl;
     if (JSON.stringify(m) !== JSON.stringify(placeModel(d, lvl, V2T))) fail("v2 not deterministic " + d);
     if (lvl < 2 || !p.city) { if (m.city || m.options.some((c) => !WORLD_COUNTRY[c]) || !m.options.includes(p.country)) fail("level " + lvl + " " + p.id + " must keep the country question"); continue; }
     cityDays++; if (n < 31) cityFirst31++;
-    if (m.city !== p.city || m.options.length !== 4 || new Set(m.options).size !== 4 || m.options.filter((c) => c === p.city).length !== 1) fail("bad city options " + d + " " + m.options);
-    const country = (c) => Object.keys(WORLD_CITIES).find((k) => WORLD_CITIES[k].includes(c));
-    if (m.options.some((c) => !country(c) || WORLD_COUNTRY[country(c)].continent !== WORLD_COUNTRY[p.country].continent)) fail("city options must be known cities on the same continent " + d + " " + m.options);
-    const local = m.options.filter((c) => c !== p.city && country(c) === p.country).length;
-    if (WORLD_CITIES[p.country].length > 1 && local < 1) fail("city question needs a same-country decoy " + d + " " + m.options);
-    if (m.options.filter((c) => c !== p.city && country(c) !== p.country).length < 1) fail("city question needs a neighbouring-country decoy " + d + " " + m.options);
-    localDecoys += local;
-    const h = placeHints(m);
-    if (h[0] !== (local ? "It's in " + p.country + "." : "It's in " + WORLD_COUNTRY[p.country].continent + " (" + WORLD_COUNTRY[p.country].region + ").") || h[1] !== p.clue) fail("city hints " + d + " " + h);
+    localDecoys += checkCity(m, d);
     // Save round-trip: a saved city question reloads as the same question; a wrong city uses a try, the city solves.
     const pinned = JSON.parse(JSON.stringify({ placeId: p.id, options: m.options, city: m.city })), back = savedPlace(d, pinned);
     if (JSON.stringify(back) !== JSON.stringify(m)) fail("a saved city question must reload unchanged " + d);
@@ -103,6 +115,7 @@ for (const lvl of [0, 1, 2]) { difficulty = lvl;
   }
 }
 if (!cityDays) fail("no Tricky city days");
+if (PLACE_V2_FROM <= days.at(-1) && !realCity) fail("no Tricky city days in 2026 after PLACE_V2_FROM");
 // A country save made without a city (any save from before v2) stays a country question on reload.
 difficulty = 2; { const p = placePool(2).find((p) => p.city), back = savedPlace(V2T, { placeId: p.id, options: ["A", "B", "C", p.country] });
   if (back.city || placeAnswer(back) !== p.country || placeHints(back)[0].includes(p.country)) fail("a pinned country save must stay a country question"); }
@@ -121,8 +134,11 @@ difficulty = 2; { const p = placePool(2).find((p) => p.city), back = savedPlace(
   const r = revealState(d, 24, JSON.parse(JSON.stringify({ placeId: m.place.id, options: m.options, city: m.city })));
   if (r.pick !== m.city || r.revealed !== 1 || !r.done) fail("reveal must pick the city");
   const fresh = revealState(d, 24, {});
-  if (d >= PLACE_V2_FROM || fresh.city || !WORLD_COUNTRY[fresh.pick]) fail("before PLACE_V2_FROM a fresh reveal stays a country question");
+  if (fresh.pick !== placeAnswer(placeModel(d)) || !!fresh.city !== !!placeModel(d).city) fail("a fresh reveal must pick the day's own answer");
+  { const cd = days.find((x) => x >= PLACE_V2_FROM && placeModel(x).city), r2 = cd && revealState(cd, 24, {});
+    if (PLACE_V2_FROM <= days.at(-1) && (!r2 || r2.pick !== placeModel(cd).city || r2.city !== r2.pick)) fail("a fresh reveal on a real v2 city day must pick the city"); }
   $("#actions").children.length = 0; } // the fake DOM keeps buttons across openSpark; start the next render clean
+stats.push("from " + PLACE_V2_FROM + ", " + realCity + " Tricky city days left in 2026");
 stats.push("Tricky city questions on " + cityDays + " of 366 v2 days (" + cityFirst31 + " of the first 31), " + (localDecoys / cityDays).toFixed(1) + " same-country decoys");
 // Tries: Gentle never runs out; Medium and Tricky end after two misses. A pick is remembered.
 difficulty = 0; { const m = placeModel(days[0]), s = {}, wrong = m.options.filter((c) => c !== m.place.country);
