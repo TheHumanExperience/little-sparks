@@ -233,6 +233,46 @@ for (const [engine, launch, ctxOpts] of engines) {
   for (const c of wt.slice(0, 2)) { await page.locator(`.spark.live [data-place="${c}"]`).tap(); await page.waitForTimeout(150); }
   check(await page.evaluate(() => state(24).done && state(24).missed && state(24).revealed && !feedDone(day, 24)), `${engine} two misses on Tricky end the round without counting`);
   check(/(^|[\s·])0\/20\b/.test(await page.locator("#todayPill").innerText()), `${engine} a missed place round isn't counted`);
+  // Code Garden (26) shows only from NEW_GAMES_FROM, so it gets its own page whose clock starts on that day
+  // (an init script shifts Date; today is kept if it is later). Tricky on an iPhone SE: one wrong check, then solve by touch.
+  {
+    const from = (await readFile(join(root, "daily-content.js"), "utf8")).match(/NEW_GAMES_FROM\s*=\s*'(\d{4}-\d{2}-\d{2})'/)[1];
+    const cg = await (await browser.newContext(ctxOpts)).newPage();
+    await cg.addInitScript((d) => {
+      const Real = Date, shift = new Real(d + "T12:00:00").getTime() - Real.now();
+      if (shift > 0) globalThis.Date = class extends Real { constructor(...a) { super(...(a.length ? a : [Real.now() + shift])); } static now() { return Real.now() + shift; } };
+    }, from);
+    await cg.route("**/leaderboard-config.js*", (r) => r.fulfill({ contentType: "text/javascript", body: 'const SUPABASE_URL = ""; const SUPABASE_ANON_KEY = "";' }));
+    cg.on("pageerror", (e) => errors.push("code garden page: " + e.message));
+    await cg.setViewportSize({ width: 375, height: 667 });
+    await cg.goto(PAGE);
+    const open = async (lv) => {
+      await cg.evaluate((l) => { localStorage.clear(); localStorage.setItem("little-sparks-difficulty", String(l)); }, lv);
+      await cg.reload(); await cg.waitForSelector(".spark.live .stage");
+      await cg.evaluate(() => { const c = document.querySelector(`.spark[data-day="${today()}"][data-idx="26"]`); feed.scrollTo(0, c.offsetTop); });
+      await cg.waitForSelector('.spark.live[data-idx="26"] .stage #board .cganswer', { timeout: 5000 });
+    };
+    const fill = async (row) => { for (const [j, k] of row.entries()) { await cg.locator(`.spark.live [data-cs="${j}"]`).tap(); await cg.locator(`.spark.live [data-ck="${k}"]`).tap(); } };
+    try {
+      await open(2);
+      const lay = await cg.evaluate(() => { const card = document.querySelector(".spark.live").getBoundingClientRect(), btns = [...document.querySelectorAll(".spark.live .cgslot, .spark.live .cgpick")];
+        return { n: btns.length, minH: Math.min(...btns.map((b) => b.getBoundingClientRect().height)), minW: Math.min(...btns.map((b) => b.getBoundingClientRect().width)), inside: btns.every((b) => { const r = b.getBoundingClientRect(); return r.left >= card.left && r.right <= card.right; }), overflow: document.documentElement.scrollWidth > innerWidth }; });
+      check(lay.n === 10 && lay.minH >= 44 && lay.minW >= 44 && lay.inside && !lay.overflow, `${engine} 375×667 Tricky Code Garden: 4 spots and 6 flowers, 44px, inside the card`, JSON.stringify(lay));
+      const m = await cg.evaluate(() => { const m = codeModel(day); return { code: m.code, kinds: m.kinds, rows: m.rows.length }; });
+      await fill(m.code.map((k, j) => (j ? k : (k + 1) % m.kinds)));
+      await cg.locator(".spark.live #actions .btn", { hasText: "Check" }).tap(); await cg.waitForTimeout(100);
+      const after = await cg.evaluate(() => ({ s: state(26), rows: document.querySelectorAll(".spark.live .cgrow").length, fb: document.querySelector(".spark.live #feedback").textContent }));
+      check(!after.s.done && after.s.guesses.length === 1 && after.rows === m.rows + 1 && /right spot|wrong spot|no right/.test(after.fb), `${engine} a wrong Code Garden check becomes a clue row`, JSON.stringify(after));
+      await fill(m.code);
+      await cg.locator(".spark.live #actions .btn", { hasText: "Check" }).tap(); await cg.waitForTimeout(300);
+      check(await cg.evaluate(() => state(26).done && !state(26).revealed && feedDone(day, 26) && state(26).guesses.length === 2), `${engine} Code Garden solves by touch after one wrong check`);
+      await open(1);
+      await cg.locator(".spark.live .revealbtn").tap(); await cg.locator(".spark.live [data-yes]").tap(); await cg.waitForTimeout(200);
+      check(await cg.evaluate(() => state(26).revealed === 1 && !feedDone(day, 26) && /Why not/.test(document.querySelector(".spark.live .cgwhy")?.textContent || "")), `${engine} Code Garden reveal shows the code and why, and doesn't count`);
+    } catch (e) { check(false, `${engine} Code Garden on the cutover day`, e.message.split("\n")[0]); }
+    if (SHOTS) await cg.screenshot({ path: join(shotsDir, `${engine}-codegarden.png`) }).catch(() => {});
+    await cg.context().close();
+  }
   // Matchsticks (Medium, iPhone SE): no options, a typed equation that fits, rejects a wrong one and accepts any spacing/signs.
   await page.setViewportSize({ width: 375, height: 667 }); await fresh(1);
   const ms = await page.evaluate(() => { const cat = AHA_CATS.findIndex((c) => c.id === "matchsticks"), d = today(), m = { cat, ...AHA_GEN[cat](rng(puzzleSeed(d) + "|smoke"), 1) };

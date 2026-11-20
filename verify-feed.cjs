@@ -115,7 +115,7 @@ for (const lv of [0, 1, 2]) {
     const o = feedOrder(lv, day);
     if (o.length !== 20) fail("20 cards on " + day + " at level " + lv);
     if (day < real && (!o.includes(5) || !o.includes(15) || o.includes(25) || o.includes(26))) fail("days before NEW_GAMES_FROM keep Time Lens at level " + lv);
-    if (stubbed.length && (o.includes(25) || o.includes(26))) fail("a game that does not exist yet must never be in the feed: " + day);
+    if (stubbed.some((i) => o.includes(i))) fail("a game that does not exist yet must never be in the feed: " + day);
   }
   setCutover(T);
   if (stubbed.length === 2) for (const lv of [0, 1, 2]) { const o = feedOrder(lv, "2026-12-05"); if (o.length !== 20 || !o.includes(5) || !o.includes(15) || o.includes(25) || o.includes(26)) fail("before the new games exist their slots keep Time Lens at level " + lv); }
