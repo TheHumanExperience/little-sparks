@@ -16,7 +16,7 @@ What Little Sparks is built with, and which versions it needs. Facts here were c
 | Checks | Node.js scripts (`verify*.cjs`) using the `vm` module | Node 20 in CI |
 | Browser smoke test | Playwright (WebKit and Chromium) | 1.65.0 |
 | Content tools | Python 3 scripts, plus one Node script | Python 3.9+, Pillow |
-| Fonts | Google Fonts: DM Sans, Libre Caslon Display | Loaded by `@import` in `style.css` |
+| Fonts | DM Sans (variable, 400–700) and Libre Caslon Display, self-hosted WOFF2 in `dist/fonts/` (latin subset from Google Fonts, SIL OFL 1.1) | `@font-face` in `style.css`, preloaded in `index.html`; no external font host |
 
 ## The app (`dist/`)
 
@@ -24,7 +24,8 @@ What Little Sparks is built with, and which versions it needs. Facts here were c
 - **Language level: ES2022.** The code uses optional chaining (`?.`), nullish coalescing (`??`), optional catch binding (`catch {}`) and `Array.prototype.at()`. Don't use features newer than the oldest supported browser below.
 - **CSS** uses `100dvh` and `:has()`, and respects `prefers-reduced-motion`.
 - **Browser APIs:** `localStorage` (saves under `little-sparks-v1`, plus the level and rewards keys), Web Audio (`AudioContext`) for chimes, `navigator.vibrate` where available, `fetch` for the leaderboard.
-- **Assets:** photos are 800px JPEGs in `dist/places/` (Where in the World) and `dist/photos/` (Time Lens). Every local CSS, JS and icon URL carries `?v=__BUILD__`, which CI replaces with the commit SHA to bust caches.
+- **Assets:** photos are 800px JPEGs in `dist/places/` (Where in the World) and `dist/photos/` (Time Lens). Every local CSS, JS and icon URL carries `?v=__BUILD__`, which CI replaces with the commit SHA to bust caches; the font URLs in `style.css` carry it too, and CI stamps `style.css` as well so they match the preloads.
+- **Fonts:** `dist/fonts/` holds two latin-subset WOFF2 files (about 52 KB together) with their OFL licence texts. Characters outside the latin subset fall back to Arial or Georgia. verify-assets fails if any CSS or HTML in `dist/` loads a font or stylesheet from another host.
 - **Determinism:** puzzles come from a seeded PRNG (`rng` in `app.js`, FNV-1a hash into a Mulberry32-style generator) keyed on the date and level, so the same day always gives the same puzzle without a server.
 
 ### Supported browsers
@@ -63,7 +64,7 @@ The verify scripts load the real app through `tests/load-app.cjs`, which runs ev
 
 1. `actions/checkout@v4`, `actions/setup-node@v4` with Node 20.
 2. Runs every `verify*.cjs`. A failure stops the deploy.
-3. Stamps the short commit SHA into `dist/index.html` in place of `__BUILD__`.
+3. Stamps the short commit SHA into `dist/index.html` and `dist/style.css` in place of `__BUILD__`.
 4. Uploads `dist/` with `actions/upload-pages-artifact@v3` and deploys with `actions/deploy-pages@v4`.
 
 The smoke test isn't run in CI; run `npm run smoke` locally before committing.
