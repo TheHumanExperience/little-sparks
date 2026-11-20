@@ -29,3 +29,9 @@ Decisions made while building [`docs/new-games-spec.md`](../new-games-spec.md) (
 
 - **Deployed.** `main` was fast-forwarded to `9a0f0e3` (steps 1–4 and 6) and pushed; the GitHub Pages run succeeded and little-sparks.in served `petal.js?v=9a0f0e3` with `NEW_GAMES_FROM='2026-11-21'`. The photo pool (step 5) ships in a later deploy.
 - **Tricky asks for the city.** From `PLACE_V2_FROM`, Where in the World on Tricky asks for the city whenever the photo has one; nature photos keep the country question. Options mix cities from the same country and neighbouring countries, and hint 1 names the country instead of the continent. The game's explanation (How to play, README) says why: on Tricky the clues are in the streets, so it asks for the city. The photo agent records a `city` (or null) on every Tricky photo; the question is built as its own step after the pool merges.
+
+## 2026-11-21, open questions answered
+
+- **`PLACE_V2_FROM` is the day after the pool deploy,** so that day's photos stay as they are and the bigger pool and the Tricky city question start cleanly the next morning.
+- **After the pool ships, fix:** self-host the fonts (no-CDN rule), add the smoke test to the Pages workflow, and run a read-only codebase quality review with fixes proposed, not made. Speeding up verify was not chosen. See [Environment findings](environment-findings.md).
+- **No reminder for removing Time Lens;** it stays recorded here and in CONTENT.md for on or after 2026-12-22.

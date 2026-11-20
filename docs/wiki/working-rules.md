@@ -6,3 +6,4 @@ Rules Devansh has given agents working on this repo. See also [Cleanup ledger](c
 - **2026-11-21: no persistent notes outside the repo.** This wiki lives in `docs/wiki/` and is committed; agents don't write to Claude's memory folder for this project.
 - **2026-11-21: commit identity.** Commits in this repo use `Devansh Sanghvi <devanshns92@gmail.com>`, set in the repo's local git config. The global config holds a work address, which must never appear in this repo's history; one commit made with it was removed before pushing.
 - **2026-11-21: push only when asked.** Pushes go through the `TheHumanExperience` GitHub account and trigger the GitHub Pages deploy.
+- **2026-11-21: exception to the cleanup rule.** Playwright (`node_modules/`) and its downloaded browsers stay installed so later sessions can run `npm run smoke` without re-downloading. Everything else still goes once its purpose is done.
