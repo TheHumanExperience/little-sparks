@@ -10,4 +10,5 @@ A dated record of decisions, preferences and findings, kept so later sessions do
 
 ## Environment
 - [Environment findings](environment-findings.md): gaps in tooling and conventions found along the way.
+- [Code review, 2026-11-21](code-review-2026-11.md): ranked findings from a read-only review at `2015527`.
 - [Cleanup ledger](cleanup-ledger.md): everything installed or created outside the repo, and when it was removed.

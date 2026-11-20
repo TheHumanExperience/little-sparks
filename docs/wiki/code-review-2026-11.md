@@ -1,0 +1,15 @@
+# Code review, 2026-11-21
+
+A read-only code quality review of `new-games` at `2015527`, done by a subagent on 2026-11-21. Nothing was changed. The findings below are what that review reported at that commit; check them against the code before acting. Related: [Environment findings](environment-findings.md), [Working rules](working-rules.md).
+
+Ranked by impact. "Agent-safety" marks fixes that make future agent work harder to get wrong.
+
+1. **No single game registry (agent-safety, M).** Adding a game touches 9+ places: three registries read in `feedGame` (`dist/feed.js`), four open functions, a 25-branch `revealState` if-chain, `FEED_SINCE`/`FEED_UNTIL`, hard-coded index lists in `verify-feed.cjs`, `tests/smoke.mjs` and the docs. Proposed: a small `registry.js` with adapters for games 0–6, each entry carrying `reveal`, `since`, `until`. Also, the Dot & Match brute force inside `revealState` belongs with `dominoModel`.
+2. **Level is half-explicit (agent-safety, S).** Models such as `lanternModel(d, lvl)` take the level for size and cache key, but `puzzleSeed(d)` reads the global `difficulty`, so a call for another level builds and caches the wrong board. `dist/leaderboard.js` re-implements `progressKey` and has drifted: it lacks the `2026-10-30` `-refresh-1` suffix. The "counts as solved" rule is copied three times. Proposed: optional level arguments on `puzzleSeed`/`progressKey`, passed through every model, and one `countsSolved` helper.
+3. **`dist/aha.js` (123 KB) and `dist/sparks.js` (65 KB) hold many unrelated games (M).** Proposed: split them by game, as with `lanterns.js` and `beds.js`; mechanical, and tests follow the script list in `index.html`.
+4. **Verify is slow and serial (agent-safety, S–M).** About 192 s in sequence; `verify-sparks.cjs` alone took 109 s (AGENTS.md says 65 s), `verify-aha.cjs` 45 s. Proposed: a parallel runner (not named `verify*`), a `VERIFY_DAYS` env var for quick inner loops, and checks as real functions instead of strings passed to `vm`.
+5. **Hints are detected by button text (agent-safety, S).** `HINT_LABEL = /hint|reveal/i` in `dist/feed.js`; renaming a hint button would let hints farm flow. Proposed: a `hintAction` helper that sets `data-hint`, and a verify check that every hint button has it.
+6. **Duplicated renderer scaffolding (S–M).** Clear actions, cell names and long-press timers repeated in every game. Proposed: a small shared kit, adopted in new games and when files are touched.
+7. **`tests/smoke.mjs` grows about 50 lines per game (M).** Proposed: a generic loop over the registry plus per-game modules for gestures.
+8. **Date gates keep breaking tests (agent-safety, S).** `NEW_GAMES_FROM`, `PLACE_V2_FROM`, `STORY_V2_FROM`, `FEED_SINCE`. Proposed: date gates as parameters and a verify helper that runs each gate's checks at the placeholder and at the real date.
+9. **About 330 top-level globals with generic names (low).** Proposed rule for AGENTS.md: new files prefix their top-level names, and new shared helpers go in a readable core file, never in the minified `app.js`.
