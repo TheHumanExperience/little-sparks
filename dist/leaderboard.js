@@ -173,31 +173,22 @@ function lbInit() {
   nameSheet.addEventListener("close", () => { if (!st.asked) { st.asked = true; save(); } });
   $("#lbNotNow").onclick = () => nameSheet.close();
 
-  /* Leave the board: the server removes this player and its points; puzzles saved on this phone stay.
-     A fresh id afterwards means joining again later starts a new player. Offline → nothing changes. */
-  let leaving = false;
+  /* Leave the board, on this phone only: it forgets the name and stops sending points. Nothing is
+     deleted on the server (no one can remove anyone); the name fades off each board as its period
+     ends. A fresh id means joining again starts clean, and the same name rejoins the same player. */
   function askLeave() {
-    $("#lbMe").innerHTML = `Leave the board? Your name and points come off it. Your puzzles stay on this phone.
+    $("#lbMe").innerHTML = `Leave the board? This phone stops adding points and forgets your name. Your name stays on the boards until each one resets (Day tomorrow, Week on Monday, Month at month end). Your puzzles stay here.
       <span class="lbleave"><button type="button" class="linkish" id="lbLeaveYes">Leave the board</button><button type="button" class="linkish" id="lbLeaveNo">Stay on it</button></span>`;
     $("#lbLeaveYes").onclick = leave;
     $("#lbLeaveNo").onclick = renderMe;
     $("#lbLeaveNo").focus?.();
   }
-  async function leave() {
-    if (leaving) return;
-    leaving = true;
-    try {
-      await flushing;
-      if (st.name) await rpc("leave_board", { p_player: st.id });
-      st = { ...st, id: lbUuid(), name: "", synced: false, asked: true, sent: {}, queue: [] };
-      save();
-      lbToast("You've left the board. Your puzzles are all still here ✳");
-      renderMe();
-      show(current);
-    } catch {
-      renderMe();
-      $("#lbPending").textContent = "Couldn't reach the leaderboard to leave it. Try again in a moment.";
-    } finally { leaving = false; }
+  function leave() {
+    st = { ...st, id: lbUuid(), name: "", synced: false, asked: true, sent: {}, queue: [] };
+    save();
+    lbToast("You've left the board. Your puzzles are all still here ✳");
+    renderMe();
+    show(current);
   }
 
   /* Leaderboard sheet with Day / Week / Month tabs. */

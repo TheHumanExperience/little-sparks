@@ -8,5 +8,4 @@ drop function if exists public.norm_sync_code(text);
 drop function if exists public.join_or_create(uuid, text);
 drop function if exists public.record_solve(uuid, date, int, int);
 drop function if exists public.leaderboard(text, uuid);
-drop function if exists public.leave_board(uuid);
 drop function if exists public.ist_today();

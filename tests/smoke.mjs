@@ -495,26 +495,21 @@ for (const [engine, launch, ctxOpts] of engines) {
   await page.waitForTimeout(600);
   const healed = await lbStore();
   check(healed.id === DEV && healed.synced && !("taken" in healed) && (await page.locator("dialog[open]").count()) === 0, `${engine} old "name taken" device rejoins automatically on load`);
-  // Leave the board: a quiet link in the 🏆 sheet, a gentle confirm, offline keeps everything, online removes the player.
+  // Leave the board: a quiet link in the 🏆 sheet and a gentle confirm. It only happens on this phone:
+  // no server call can remove a player, the name is forgotten and the next solves stay local.
   calls.length = 0;
   await page.locator("#lbPill").tap();
   await page.waitForSelector("#lbLeave");
-  check((await page.locator("#lbPill").count()) === 1 && (await page.locator("header #lbLeave").count()) === 0, `${engine} Leave the board lives in the sheet, not the header`);
+  check((await page.locator("header #lbLeave").count()) === 0, `${engine} Leave the board lives in the sheet, not the header`);
   await page.locator("#lbLeave").tap();
-  check(/Leave the board\? Your name and points come off it\. Your puzzles stay on this phone\./.test(await page.locator("#lbMe").innerText()), `${engine} leaving asks first`);
+  check(/Leave the board\? This phone stops adding points and forgets your name\. Your name stays on the boards until each one resets/.test(await page.locator("#lbMe").innerText()), `${engine} leaving asks first`);
   await page.locator("#lbLeaveNo").tap();
-  check(await page.locator("#lbLeave").isVisible(), `${engine} Stay on it keeps the player`);
-  offline = true;
-  await page.locator("#lbLeave").tap();
-  await page.locator("#lbLeaveYes").tap();
-  await page.waitForTimeout(400);
-  check((await lbStore()).name === "Devansh" && /Couldn't reach the leaderboard to leave it/.test(await page.locator("#lbPending").innerText()), `${engine} offline leave changes nothing and says so`);
-  offline = false;
+  check(await page.locator("#lbLeave").isVisible() && (await lbStore()).name === "Devansh", `${engine} Stay on it keeps the player`);
   await page.locator("#lbLeave").tap();
   await page.locator("#lbLeaveYes").tap();
   await page.waitForTimeout(600);
   const left = await lbStore();
-  check(calls.some((c) => c.fn === "leave_board" && c.body.p_player === DEV) && left.name === "" && left.id !== DEV && left.asked && !(left.queue || []).length, `${engine} leaving removes the player on the server and starts a fresh id`, JSON.stringify(left));
+  check(left.name === "" && left.id !== DEV && left.asked && !(left.queue || []).length && calls.every((c) => c.fn === "leaderboard"), `${engine} leaving forgets the name on this phone and never asks the server to remove anyone`, JSON.stringify(calls.map((c) => c.fn)));
   check(/Add your name to join the board/.test(await page.locator("#lbMe").innerText()) && /left the board/.test(await page.locator(".toast").last().innerText().catch(() => "")), `${engine} after leaving the sheet offers to join again`);
   // Not now closes the name sheet without saving; later solves never ask again or send anything.
   await page.locator("#lbEdit").tap();
