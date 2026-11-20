@@ -20,6 +20,9 @@ for (const p of PLACES) {
   for (const k of ["title", "alt", "clue", "story"]) if (!p[k] || p[k].length < 8) fail(p.id + ": missing " + k);
   if (new RegExp("\\\\b" + p.country + "\\\\b", "i").test(p.alt + " " + p.clue)) fail(p.id + ": alt or clue names the country");
   if (![0, 1, 2].includes(p.level)) fail(p.id + ": level");
+  // Tricky photos carry the city they show (common English name), or null for nature and rural scenes.
+  if (p.level === 2 && !(p.city === null || (typeof p.city === "string" && p.city.length > 1))) fail(p.id + ": Tricky needs a city (a name or null)");
+  if (p.city && new RegExp("\\\\b" + p.city + "\\\\b", "i").test(p.alt + " " + p.clue)) fail(p.id + ": alt or clue names the city");
 }
 const days = Array.from({ length: 366 }, (_, n) => new Date(Date.UTC(2026, 0, 1 + n)).toISOString().slice(0, 10));
 const stats = [];

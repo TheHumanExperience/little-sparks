@@ -321,43 +321,50 @@
   "title": "A sign to the pier",
   "alt": "A green street sign in a looping script with an arrow, above a busy street.",
   "clue": "Read the sign: rounded letters with little loops, and a pier on a river that carries the city's boats.",
-  "story": "The sign points to Pratu Nam Pier on a canal in Bangkok. Thai script has 44 consonants and no spaces between words."
+  "story": "The sign points to Pratu Nam Pier on a canal in Bangkok. Thai script has 44 consonants and no spaces between words.",
+  "city": "Bangkok"
  },
  "t-tbilisi": {
   "title": "Carved wooden balconies",
   "alt": "An old house with carved wooden balconies among cypress trees and a lamp post.",
   "clue": "Carved wooden balconies like these hang over the old streets of a capital in the Caucasus.",
-  "story": "Old Tbilisi is famous for its carved wooden balconies. Georgian is written in its own alphabet, used for no other national language."
+  "story": "Old Tbilisi is famous for its carved wooden balconies. Georgian is written in its own alphabet, used for no other national language.",
+  "city": "Tbilisi"
  },
  "t-colombo": {
   "title": "A west-coast town street",
   "alt": "A busy street with three-wheeled taxis, motorbikes, shop signs and a domed building.",
   "clue": "Three-wheeler taxis and shop signs in a rounded script; this island sits just off a big subcontinent's southern tip.",
-  "story": "This is Mannar Road in Puttalam, on Sri Lanka's west coast. The rounded letters on the signs are Sinhala, and tuk-tuks are the everyday taxi."
+  "story": "This is Mannar Road in Puttalam, on Sri Lanka's west coast. The rounded letters on the signs are Sinhala, and tuk-tuks are the everyday taxi.",
+  "city": null
  },
  "t-dhaka": {
   "title": "Rickshaws at rest",
   "alt": "A row of cycle rickshaws with colourful hoods parked on a street under trees.",
   "clue": "Colourfully decorated cycle rickshaws are everywhere in this river-delta capital, once called the 'rickshaw capital of the world'.",
-  "story": "Dhaka in Bangladesh has hundreds of thousands of cycle rickshaws. Painting their hoods is a folk art of its own."
+  "story": "Dhaka in Bangladesh has hundreds of thousands of cycle rickshaws. Painting their hoods is a folk art of its own.",
+  "city": "Dhaka"
  },
  "t-pakistan": {
   "title": "A painted truck in the mountains",
   "alt": "A brightly painted and decorated truck on a mountain highway between rocky peaks.",
   "clue": "Trucks decorated with flowers, mirrors and chains drive a high mountain highway towards China.",
-  "story": "Truck art is a famous folk art in Pakistan. This road, the Karakoram Highway, is one of the highest paved roads in the world."
+  "story": "Truck art is a famous folk art in Pakistan. This road, the Karakoram Highway, is one of the highest paved roads in the world.",
+  "city": null
  },
  "t-jeepney": {
   "title": "A long chrome jeep",
   "alt": "A long chrome jeep-like bus at a junction under tangled power lines and tall buildings.",
   "clue": "Long chrome jeeps, first rebuilt from army surplus after 1945, are the everyday bus in this island nation's capital.",
-  "story": "Jeepneys in Manila were first made from American army jeeps left after the Second World War. They are known as the 'kings of the road'."
+  "story": "Jeepneys in Manila were first made from American army jeeps left after the Second World War. They are known as the 'kings of the road'.",
+  "city": "Manila"
  },
  "t-mongolia": {
   "title": "A felt tent on the steppe",
   "alt": "A round white felt tent standing alone on wide, dry grassland under a big sky.",
   "clue": "A land of nomads, where families still live in round felt tents that can be packed up in an hour.",
-  "story": "The ger is the traditional home in Mongolia; this one stands on the steppe near Mandalgovi. Its door traditionally faces south, and many families still live in one."
+  "story": "The ger is the traditional home in Mongolia; this one stands on the steppe near Mandalgovi. Its door traditionally faces south, and many families still live in one.",
+  "city": null
  },
  "m-uluru": {
   "title": "A red rock at sunset",
@@ -369,91 +376,106 @@
   "title": "Sacks in the spice market",
   "alt": "Open sacks of spices and dried goods with handwritten price cards in a flowing right-to-left script.",
   "clue": "Read the price cards: a right-to-left script, in an old market in a big city on a great northern river.",
-  "story": "This is the spice market in Khan el-Khalili, Cairo, a bazaar trading since the 1300s. The labels are written in Arabic."
+  "story": "This is the spice market in Khan el-Khalili, Cairo, a bazaar trading since the 1300s. The labels are written in Arabic.",
+  "city": "Cairo"
  },
  "t-porto": {
   "title": "Houses along the river",
   "alt": "Colourful houses stacked up a steep riverbank, with boats on a wide river.",
   "clue": "Colourful houses tumble down to a river that gave its name to a sweet wine.",
-  "story": "The Ribeira quarter of Porto lines the Douro river. Port wine was shipped downriver from the vineyards in flat-bottomed boats called rabelos."
+  "story": "The Ribeira quarter of Porto lines the Douro river. Port wine was shipped downriver from the vineyards in flat-bottomed boats called rabelos.",
+  "city": "Porto"
  },
  "t-quebec": {
   "title": "A castle-like hotel above the old town",
   "alt": "A green-roofed, castle-like hotel above old stone houses, with snow in a park in front.",
   "clue": "A walled old town where the street signs are in French, on a cliff above a great river.",
-  "story": "Quebec City is the only walled city north of Mexico in the Americas. The castle-like building is the Château Frontenac hotel, opened in 1893."
+  "story": "Quebec City is the only walled city north of Mexico in the Americas. The castle-like building is the Château Frontenac hotel, opened in 1893.",
+  "city": "Quebec City"
  },
  "t-nairobi": {
   "title": "A painted minibus",
   "alt": "A minibus covered in bright graffiti-style art at a busy city junction.",
   "clue": "Brightly painted shared minibuses, often with music blaring, are how this East African capital gets around.",
-  "story": "Matatus are the shared minibuses of Nairobi in Kenya. Owners compete to have the boldest art, lights and music."
+  "story": "Matatus are the shared minibuses of Nairobi in Kenya. Owners compete to have the boldest art, lights and music.",
+  "city": "Nairobi"
  },
  "t-accra": {
   "title": "A busy market",
   "alt": "A crowded market with stalls of tomatoes, shoes, baskets and colourful goods under umbrellas.",
   "clue": "A great open-air market in a West African capital on the Gulf of Guinea.",
-  "story": "Makola Market in Accra, Ghana, is one of the biggest markets in West Africa. Most of its traders are women, known as market queens."
+  "story": "Makola Market in Accra, Ghana, is one of the biggest markets in West Africa. Most of its traders are women, known as market queens.",
+  "city": "Accra"
  },
  "t-kolkata": {
   "title": "A yellow taxi",
   "alt": "A round-shouldered yellow taxi on a city street, with another behind and a sun umbrella stall.",
   "clue": "Rounded yellow taxis from a car first built in 1958, in a big city on a branch of a holy river.",
-  "story": "The yellow Hindustan Ambassador taxis of Kolkata are a symbol of the city. The Ambassador was made in West Bengal for over 50 years."
+  "story": "The yellow Hindustan Ambassador taxis of Kolkata are a symbol of the city. The Ambassador was made in West Bengal for over 50 years.",
+  "city": "Kolkata"
  },
  "t-bali": {
   "title": "Terraces of rice",
   "alt": "Steep green rice terraces among coconut palms.",
   "clue": "Rice terraces watered by a 1,000-year-old shared system run by temples, on an island of Hindu temples.",
-  "story": "These terraces are in Bali, Indonesia. Their water is shared through subak, a co-operative system recognised by UNESCO."
+  "story": "These terraces are in Bali, Indonesia. Their water is shared through subak, a co-operative system recognised by UNESCO.",
+  "city": null
  },
  "t-yerevan": {
   "title": "A round theatre",
   "alt": "A round stone theatre building with arched windows on a wide square under a clear blue sky.",
   "clue": "A capital built of pink and grey volcanic stone, in sight of a mountain from the story of Noah's ark.",
-  "story": "The Opera Theatre in Yerevan, Armenia, was designed by Alexander Tamanian and opened in 1933."
+  "story": "The Opera Theatre in Yerevan, Armenia, was designed by Alexander Tamanian and opened in 1933.",
+  "city": "Yerevan"
  },
  "t-marrakech": {
   "title": "Lanterns in the souk",
   "alt": "Dozens of pierced metal lanterns hanging and glowing in a shop.",
   "clue": "Pierced brass lanterns in the metalworkers' lane of a red-walled old city.",
-  "story": "Souk Haddadine in Marrakech is the blacksmiths' and metalworkers' market. The city's walls and houses are built from red earth."
+  "story": "Souk Haddadine in Marrakech is the blacksmiths' and metalworkers' market. The city's walls and houses are built from red earth.",
+  "city": "Marrakesh"
  },
  "t-laos": {
   "title": "Monks at prayer",
   "alt": "Monks in saffron robes kneeling before a golden seated Buddha in a red and gold temple.",
   "clue": "Saffron-robed monks in a temple of red and gold, in a quiet royal town where two rivers meet.",
-  "story": "This is Wat Sensoukharam in Luang Prabang, Laos. Every dawn, monks walk the streets to receive offerings of sticky rice."
+  "story": "This is Wat Sensoukharam in Luang Prabang, Laos. Every dawn, monks walk the streets to receive offerings of sticky rice.",
+  "city": "Luang Prabang"
  },
  "t-hanoi": {
   "title": "Motorbikes at the lights",
   "alt": "A crowd of riders on scooters waiting at a city junction, under a shop sign with lots of accent marks.",
   "clue": "Read the shop sign: a Latin alphabet with many stacked accent marks, in a capital where motorbikes outnumber cars.",
-  "story": "This is Hanoi, Vietnam. Vietnamese is written in Latin letters with extra marks that show its six tones."
+  "story": "This is Hanoi, Vietnam. Vietnamese is written in Latin letters with extra marks that show its six tones.",
+  "city": "Hanoi"
  },
  "t-seoul": {
   "title": "A festival for an alphabet",
   "alt": "Dancers on an outdoor stage beside a large seated bronze statue of a king, with a mountain behind.",
   "clue": "A seated king who invented an alphabet in 1443, in a capital ringed by mountains.",
-  "story": "This stage was set up beside the statue of King Sejong in Seoul, South Korea, to celebrate Hangul, the alphabet he created. Hangul Day is a national holiday on 9 October."
+  "story": "This stage was set up beside the statue of King Sejong in Seoul, South Korea, to celebrate Hangul, the alphabet he created. Hangul Day is a national holiday on 9 October.",
+  "city": "Seoul"
  },
  "t-lapaz": {
   "title": "A city below the peaks",
   "alt": "Office blocks in a city filling a deep valley, with a snowy mountain beyond.",
   "clue": "A city so high in the Andes that its everyday public transport is a network of cable cars.",
-  "story": "La Paz in Bolivia sits about 3,600 metres above sea level. Its Mi Teleférico cable cars are the world's largest urban cable car network."
+  "story": "La Paz in Bolivia sits about 3,600 metres above sea level. Its Mi Teleférico cable cars are the world's largest urban cable car network.",
+  "city": "La Paz"
  },
  "t-oaxaca": {
   "title": "A colourful street",
   "alt": "A street of brightly painted houses leading to a twin-towered stone church.",
   "clue": "Bright painted houses and a baroque church in a southern city known for chocolate and seven kinds of mole sauce.",
-  "story": "This street is in Oaxaca, Mexico. The city is famous for its mole sauces, its markets and its Day of the Dead celebrations."
+  "story": "This street is in Oaxaca, Mexico. The city is famous for its mole sauces, its markets and its Day of the Dead celebrations.",
+  "city": "Oaxaca"
  },
  "t-japanstreet": {
   "title": "A tower in the night city",
   "alt": "A city of skyscrapers at night with a glowing orange-and-white lattice tower in the middle.",
   "clue": "A red-and-white lattice tower, inspired by one in Paris, glowing in one of the world's biggest cities.",
-  "story": "Tokyo Tower in Japan opened in 1958. At 333 metres it is a little taller than the Eiffel Tower, which inspired it."
+  "story": "Tokyo Tower in Japan opened in 1958. At 333 metres it is a little taller than the Eiffel Tower, which inspired it.",
+  "city": "Tokyo"
  },
  "g-machu": {
   "title": "A city in the clouds",
@@ -507,31 +529,36 @@
   "title": "A blue and white minibus",
   "alt": "A blue-and-white minibus taxi on a busy street.",
   "clue": "Blue-and-white minibuses carry most people around this highland capital, the seat of the African Union.",
-  "story": "Addis Ababa in Ethiopia sits about 2,400 metres high. Its blue-and-white minibuses are the city's everyday transport."
+  "story": "Addis Ababa in Ethiopia sits about 2,400 metres high. Its blue-and-white minibuses are the city's everyday transport.",
+  "city": "Addis Ababa"
  },
  "t-istanbul": {
   "title": "A red tram from above",
   "alt": "Looking down on a busy pedestrian street with a small red vintage tram passing through.",
   "clue": "A red nostalgic tram on a busy avenue, in a city that sits on two continents.",
-  "story": "Istiklal Avenue in Istanbul, Turkey, carries a restored red tram. The city spreads across both Europe and Asia."
+  "story": "Istiklal Avenue in Istanbul, Turkey, carries a restored red tram. The city spreads across both Europe and Asia.",
+  "city": "Istanbul"
  },
  "t-krakow": {
   "title": "Arcades on the square",
   "alt": "A long Renaissance hall with arched arcades and café umbrellas on a large market square.",
   "clue": "A Renaissance cloth hall on one of the largest medieval market squares in Europe.",
-  "story": "The Cloth Hall stands on the Main Market Square in Kraków, Poland. Traders have sold cloth and goods here since the 1300s."
+  "story": "The Cloth Hall stands on the Main Market Square in Kraków, Poland. Traders have sold cloth and goods here since the 1300s.",
+  "city": "Kraków"
  },
  "t-moscow": {
   "title": "A wooden church in the snow",
   "alt": "A small dark wooden church with a steep pointed roof among frosty birch trees and snow.",
   "clue": "Log churches built without nails, birch trees and deep winter snow, in a historic town north-east of a great capital.",
-  "story": "This wooden Church of St Nicholas stands in Suzdal, Russia. It was moved there from a village in 1960 as part of a museum of wooden architecture."
+  "story": "This wooden Church of St Nicholas stands in Suzdal, Russia. It was moved there from a village in 1960 as part of a museum of wooden architecture.",
+  "city": null
  },
  "t-cusco": {
   "title": "A cathedral on the square",
   "alt": "A large stone cathedral with twin bell towers above steps where people sit in the sun.",
   "clue": "A colonial cathedral built on Inca foundations, in a mountain city that was once an empire's capital.",
-  "story": "Cusco Cathedral in Peru was built from 1560 to 1654, partly with stones taken from Inca buildings. Cusco was the capital of the Inca Empire."
+  "story": "Cusco Cathedral in Peru was built from 1560 to 1654, partly with stones taken from Inca buildings. Cusco was the capital of the Inca Empire.",
+  "city": "Cusco"
  },
  "m-hallstatt": {
   "title": "A village on the lake",
@@ -543,25 +570,29 @@
   "title": "A house on the hill",
   "alt": "A pale blue wooden house with a red roof and dormer windows on a hillside street with old lamp posts.",
   "clue": "Painted wooden houses on steep hills above a Pacific port, linked to the harbour by old funicular lifts.",
-  "story": "This house is on Cerro Alegre in Valparaíso, Chile. Many hillside houses were built by European merchants in the 1800s, and old funiculars still climb the slopes."
+  "story": "This house is on Cerro Alegre in Valparaíso, Chile. Many hillside houses were built by European merchants in the 1800s, and old funiculars still climb the slopes.",
+  "city": "Valparaíso"
  },
  "t-greekvillage": {
   "title": "White houses on the hillside",
   "alt": "A small village of white and stone houses on a terraced hillside with olive trees.",
   "clue": "White cube houses among olive terraces, on a long mountainous island in the Mediterranean.",
-  "story": "This is the village of Sklavi near Sitia on Crete, Greece. Crete has some of the oldest olive trees in the world."
+  "story": "This is the village of Sklavi near Sitia on Crete, Greece. Crete has some of the oldest olive trees in the world.",
+  "city": null
  },
  "t-sweden": {
   "title": "Red houses in the frost",
   "alt": "Red wooden houses with white trim among frosted birch trees in winter.",
   "clue": "Wooden houses painted a deep red made from copper-mine waste, among birches in a northern kingdom.",
-  "story": "These red houses were built for paper-mill workers at Hallstavik, Sweden, in 1914–15. The paint, Falu red, comes from the copper mine at Falun."
+  "story": "These red houses were built for paper-mill workers at Hallstavik, Sweden, in 1914–15. The paint, Falu red, comes from the copper mine at Falun.",
+  "city": null
  },
  "t-ireland": {
   "title": "A lighthouse on the bay",
   "alt": "A small white lighthouse on a green clifftop at the mouth of a bay, with patchwork fields behind.",
   "clue": "A small lighthouse on a peninsula of green fields at the far western edge of Europe, where Gaelic is still spoken.",
-  "story": "Dingle Lighthouse marks the entrance to Dingle Bay in County Kerry, Ireland. The Dingle peninsula is part of the Gaeltacht, where Irish is an everyday language."
+  "story": "Dingle Lighthouse marks the entrance to Dingle Bay in County Kerry, Ireland. The Dingle peninsula is part of the Gaeltacht, where Irish is an everyday language.",
+  "city": null
  },
  "g-vatican": {
   "title": "A dome above a great square",
@@ -687,61 +718,71 @@
   "title": "Painted boats in the harbour",
   "alt": "Brightly painted wooden fishing boats in blue, yellow and green floating in a harbour in front of a town of pale stone houses.",
   "clue": "Brightly painted fishing boats, each with a watchful eye on its bow, in a small island nation's harbour.",
-  "story": "These are luzzu boats in Marsaxlokk, a fishing village in Malta. The eye painted on each bow is said to go back to the Phoenicians and to watch over the fishermen."
+  "story": "These are luzzu boats in Marsaxlokk, a fishing village in Malta. The eye painted on each bow is said to go back to the Phoenicians and to watch over the fishermen.",
+  "city": null
  },
  "t-tallinn": {
   "title": "A town hall with a spire",
   "alt": "A Gothic stone town hall with a slender spire on a cobbled square, with colourful old houses and café umbrellas.",
   "clue": "A Gothic town hall with a slender spire on a cobbled medieval square near the Baltic Sea.",
-  "story": "Tallinn Town Hall in Estonia is the oldest surviving town hall in Northern Europe. The weathervane on its spire, Old Thomas, is a symbol of the city."
+  "story": "Tallinn Town Hall in Estonia is the oldest surviving town hall in Northern Europe. The weathervane on its spire, Old Thomas, is a symbol of the city.",
+  "city": "Tallinn"
  },
  "t-lagos": {
   "title": "A yellow minibus",
   "alt": "A yellow minibus with black stripes driving past a footbridge and brick buildings on a busy road.",
   "clue": "Yellow minibuses with black stripes carry millions of people around a huge West African city.",
-  "story": "Danfo minibuses are the yellow-and-black buses of Lagos, Nigeria. Their conductors call out the destinations as they go, and the city has some of Africa's busiest roads."
+  "story": "Danfo minibuses are the yellow-and-black buses of Lagos, Nigeria. Their conductors call out the destinations as they go, and the city has some of Africa's busiest roads.",
+  "city": "Lagos"
  },
  "t-colonia": {
   "title": "A cobbled lane to the river",
   "alt": "A cobbled lane between old pastel houses and flowering trees, sloping down to a wide brown river.",
   "clue": "A cobbled colonial lane sloping down to a river so wide it looks like the sea.",
-  "story": "This lane is in Colonia del Sacramento, Uruguay, founded by the Portuguese in 1680. Across the wide Río de la Plata lies Buenos Aires."
+  "story": "This lane is in Colonia del Sacramento, Uruguay, founded by the Portuguese in 1680. Across the wide Río de la Plata lies Buenos Aires.",
+  "city": "Colonia del Sacramento"
  },
  "t-jiufen": {
   "title": "Stairs between teahouses",
   "alt": "A steep stepped lane between small shops with red lanterns and signs in Chinese characters.",
   "clue": "Steep lanes of teahouses in an old gold-mining town, with shop signs in traditional characters.",
-  "story": "Jiufen in Taiwan grew rich in a gold rush in the 1890s. Its lantern-lit lanes and teahouses look out over the sea, and Taiwan writes Chinese in traditional characters."
+  "story": "Jiufen in Taiwan grew rich in a gold rush in the 1890s. Its lantern-lit lanes and teahouses look out over the sea, and Taiwan writes Chinese in traditional characters.",
+  "city": null
  },
  "t-bokaap": {
   "title": "A pink house",
   "alt": "A bright pink house front with painted aloe plants, wooden-framed windows and a balcony with magenta balusters.",
   "clue": "A candy-pink house in a hillside quarter famous for painting its homes in bright colours.",
-  "story": "This house is on Wale Street in the Bo-Kaap, Cape Town, South Africa. The quarter's houses are painted bright colours, and it is famous for its Cape Malay food."
+  "story": "This house is on Wale Street in the Bo-Kaap, Cape Town, South Africa. The quarter's houses are painted bright colours, and it is famous for its Cape Malay food.",
+  "city": "Cape Town"
  },
  "t-rothenburg": {
   "title": "A half-timbered corner",
   "alt": "A cobbled street fork with a half-timbered yellow house, pastel houses and a stone gate tower, with walkers.",
   "clue": "Half-timbered houses and a gate tower in a walled medieval town on a \"Romantic Road\".",
-  "story": "The Plönlein, \"little square\", is in Rothenburg ob der Tauber, Germany. The town's medieval walls still run all the way round, and you can walk along them."
+  "story": "The Plönlein, \"little square\", is in Rothenburg ob der Tauber, Germany. The town's medieval walls still run all the way round, and you can walk along them.",
+  "city": "Rothenburg ob der Tauber"
  },
  "t-zanzibar": {
   "title": "Verandas by a garden",
   "alt": "Old white houses with dark red trim and wooden verandas beside a small garden with a flowering bush and big trees.",
   "clue": "Shady old merchant houses with deep verandas on a spice island in the Indian Ocean.",
-  "story": "This square is in Stone Town, the old heart of Zanzibar City in Tanzania. Zanzibar was famous for its cloves, and Swahili, Arab, Indian and European styles mix in its buildings."
+  "story": "This square is in Stone Town, the old heart of Zanzibar City in Tanzania. Zanzibar was famous for its cloves, and Swahili, Arab, Indian and European styles mix in its buildings.",
+  "city": "Zanzibar City"
  },
  "t-okavango": {
   "title": "Poling through the delta",
   "alt": "A person standing in a narrow wooden canoe and pushing it along with a pole across calm blue water and reeds.",
   "clue": "Poling a dugout canoe through a delta whose river flows into a desert and never reaches the sea.",
-  "story": "The Okavango Delta in Botswana is fed by a river that runs into the Kalahari and spreads out instead of reaching the sea. Guides pole visitors through it in canoes called mokoro."
+  "story": "The Okavango Delta in Botswana is fed by a river that runs into the Kalahari and spreads out instead of reaching the sea. Guides pole visitors through it in canoes called mokoro.",
+  "city": null
  },
  "t-nizwa": {
   "title": "Battlements and a minaret",
   "alt": "Rounded sandy battlements of a fort in the foreground, with a minaret and a town below and hazy mountains behind.",
   "clue": "Fort battlements and a mosque minaret in a mountain oasis town known for its dates and silver.",
-  "story": "Nizwa Fort in Oman was built in the 1600s around a huge round tower, with views over the palm groves. The town holds a lively Friday market and is known for its dates."
+  "story": "Nizwa Fort in Oman was built in the 1600s around a huge round tower, with views over the palm groves. The town holds a lively Friday market and is known for its dates.",
+  "city": "Nizwa"
  },
  "g-goldentemple": {
   "title": "A golden temple on a pool",
@@ -1378,5 +1419,334 @@
   "alt": "A rounded rock dome striped in orange and grey bands like a beehive, with grass and pale trees at its base.",
   "clue": "Striped orange-and-black sandstone domes like giant beehives, in the remote north-west outback.",
   "story": "The Bungle Bungle Range in Purnululu National Park, Australia, was little known outside the area until the 1980s. The dark stripes are bacteria living in the rock."
+ },
+ "t-kochinets": {
+  "title": "A fishing net at sunrise",
+  "alt": "A huge cantilevered fishing net on a wooden frame, lifted out of golden water at sunrise, with palm trees behind and birds flying.",
+  "clue": "Giant shore-operated fishing nets, said to have come with traders from the Far East, on the backwaters of a south-western coast of coconut palms.",
+  "story": "These Chinese fishing nets on Ashtamudi Lake in Kollam, Kerala, are worked by a team of fishermen using counterweights of stone. Kochi has the most famous row of them.",
+  "city": null
+ },
+ "t-pushkar": {
+  "title": "An old herder at a camel fair",
+  "alt": "An old man with a white beard and a big pale turban leaning on a stick, with many camels resting on sandy ground behind him.",
+  "clue": "A giant turban and thousands of camels at a yearly desert fair beside a holy lake, in a north-western state of forts.",
+  "story": "The Pushkar Camel Fair in Rajasthan, India, brings thousands of camels, horses and cattle to the desert town every November. It ends with a full-moon bathing festival in the lake.",
+  "city": null
+ },
+ "t-devaraja": {
+  "title": "A busy market gate",
+  "alt": "A crowded street full of parked scooters and market umbrellas in front of a long yellow colonial-style market building and a decorated clock tower.",
+  "clue": "Scooters, umbrellas and a pastel clock tower by an old market famous for jasmine, betel leaves and sandalwood, in a southern palace city.",
+  "story": "Devaraja Market in Mysuru, Karnataka, India, has been running for over 130 years. Its flower sellers stack marigolds and jasmine into tall, bright pyramids.",
+  "city": "Mysuru"
+ },
+ "t-toytrain": {
+  "title": "A little blue mountain train",
+  "alt": "A small blue diesel locomotive pulling two blue carriages on narrow tracks beside a winding road through green forest.",
+  "clue": "A narrow-gauge 'toy train' that climbs to a hill station of tea gardens in the eastern Himalaya, sharing the road with cars.",
+  "story": "The Darjeeling Himalayan Railway in West Bengal, India, opened in 1881. Its tracks are just 610 millimetres apart and loop and zigzag up the mountains.",
+  "city": null
+ },
+ "t-amsterdam": {
+  "title": "A bike by a painted door",
+  "alt": "A bicycle leaning on an old shopfront covered in colourful graffiti, with tall wooden doors and a brick pavement.",
+  "clue": "Bicycles outnumber people in this canal city, where old merchant houses have narrow doors and big windows.",
+  "story": "Amsterdam in the Netherlands has more bicycles than people, about 880,000 of them. Thousands are fished out of its canals every year.",
+  "city": "Amsterdam"
+ },
+ "t-paris": {
+  "title": "Teddy bears at a café",
+  "alt": "Giant teddy bears sitting at small marble tables on a café pavement, among woven bistro chairs, with a wide street behind.",
+  "clue": "Woven rattan bistro chairs facing the street, a café custom of a capital famous for its pavement terraces.",
+  "story": "These bears sat at a café in Paris's 6th arrondissement when cafés were closed during the pandemic. Paris cafés line their chairs up facing the street, so people can watch passers-by.",
+  "city": "Paris"
+ },
+ "t-nyhavn": {
+  "title": "Painted houses by a harbour",
+  "alt": "A row of tall, brightly painted gabled townhouses along a canal with old wooden sailing ships and crowded café tables.",
+  "clue": "Brightly painted harbour houses and wooden ships, where a famous writer of fairy tales once lived, in a Nordic capital.",
+  "story": "Nyhavn in Copenhagen, Denmark, was dug in the 1670s. Hans Christian Andersen lived in three of its houses.",
+  "city": "Copenhagen"
+ },
+ "t-helsinki": {
+  "title": "A tram in the snow",
+  "alt": "A dark tram curving through a snowy junction between tall city buildings, with cars and a few people under falling snow.",
+  "clue": "A tram on a snowy morning in a Nordic capital on the Baltic, where winters are long and saunas are everywhere.",
+  "story": "Helsinki in Finland has run electric trams since 1900. Finland has around three million saunas for about 5.6 million people.",
+  "city": "Helsinki"
+ },
+ "t-prague": {
+  "title": "A red and cream tram",
+  "alt": "A red and cream tram with a pantograph on top, running on tracks beside a wide road, lit by low evening sun.",
+  "clue": "A red-and-cream tram of a design built in huge numbers nearby, in a 'city of a hundred spires' on the Vltava.",
+  "story": "Tatra T3 trams like this were built in Prague, Czech Republic, and over 13,000 were made. Prague still runs them on its streets.",
+  "city": "Prague"
+ },
+ "t-sofia": {
+  "title": "A yellow tram on a leafy street",
+  "alt": "A yellow two-car tram on tracks along a tree-lined street with parked cars and old apartment buildings.",
+  "clue": "A yellow tram on a leafy street in a Balkan capital at the foot of Vitosha mountain, where signs are in Cyrillic.",
+  "story": "Sofia in Bulgaria opened its first tram line in 1901. Bulgaria was the first country to use the Cyrillic alphabet officially.",
+  "city": "Sofia"
+ },
+ "t-lviv": {
+  "title": "Rooftops of an old town",
+  "alt": "Old town rooftops in red and grey around a green-domed church and a square, seen from high above, with green hills beyond.",
+  "clue": "Rooftops of an old town known for its coffee houses and chocolate, near the western border of the largest country entirely in Europe.",
+  "story": "Lviv in western Ukraine has a historic centre on the World Heritage list. Its market square, Rynok, has 44 old houses around the town hall.",
+  "city": "Lviv"
+ },
+ "t-taipeinight": {
+  "title": "A night market",
+  "alt": "A crowded night market street under glowing round lanterns with large characters, lit shop signs and food stalls.",
+  "clue": "Lanterns and signs in traditional characters over a crowded night market, on an island famous for street snacks and bubble tea.",
+  "story": "Linjiang Street Night Market in Taipei, Taiwan, is known for its food stalls. Taiwan's night markets started as places to eat and shop after the day's heat.",
+  "city": "Taipei"
+ },
+ "t-phnompenh": {
+  "title": "A tuk-tuk at the kerb",
+  "alt": "A motorbike hitched to an orange covered passenger carriage with padded seats, parked by a leafy pavement with flowers.",
+  "clue": "A motorbike pulling a covered trailer for passengers, the usual taxi in a riverside capital where the Mekong meets the Tonlé Sap.",
+  "story": "In Phnom Penh, Cambodia, a 'remork' tuk-tuk is a motorbike towing a passenger carriage. Drivers often decorate their carriages.",
+  "city": "Phnom Penh"
+ },
+ "t-jakarta": {
+  "title": "A row of orange three-wheelers",
+  "alt": "Several orange three-wheeled taxis with black canvas roofs parked in a row along a city street.",
+  "clue": "Orange three-wheeled 'bajaj' taxis, named after the company that first made them, on the streets of a huge capital on Java.",
+  "story": "Bajaj taxis have been part of Jakarta, Indonesia, since the 1970s. Newer blue ones run on natural gas.",
+  "city": "Jakarta"
+ },
+ "t-kathmandu": {
+  "title": "Lighting butter lamps",
+  "alt": "A woman in a blue top and orange scarf lighting rows of small brass oil lamps at a street shrine in a busy market.",
+  "clue": "Butter lamps lit at a street shrine in an old bazaar of a Himalayan capital, where Hindu and Buddhist traditions mix.",
+  "story": "Asan Tole is one of the oldest market squares in Kathmandu, Nepal. Its small Annapurna temple is busy with people lighting lamps all day.",
+  "city": "Kathmandu"
+ },
+ "t-tehran": {
+  "title": "A bazaar roof of stars",
+  "alt": "Looking up at brick domes in a covered bazaar, patterned with intricate star shapes around small skylights.",
+  "clue": "Brick domes patterned like stars over a covered bazaar, built by master builders of a land of old caravanserais.",
+  "story": "This is the roof of the grand bazaar in Qom, Iran. Persian builders have made such patterned brick vaults, called muqarnas and karbandi, for centuries.",
+  "city": "Qom"
+ },
+ "t-amman": {
+  "title": "A late-night shawarma shop",
+  "alt": "A brightly lit corner shop with a big Arabic sign, where people queue at the counter for sandwiches at night.",
+  "clue": "Arabic signs and a queue for shawarma in a capital built over seven hills, near the Dead Sea.",
+  "story": "Downtown Amman in Jordan is famous for cheap and busy food shops. The city was once called Philadelphia in Roman times.",
+  "city": "Amman"
+ },
+ "t-doha": {
+  "title": "A stone souq",
+  "alt": "A long covered passage of rough stone walls with blue shutters and wooden beams poking out, seen from above.",
+  "clue": "A rebuilt old souq of mud and stone with wooden beams, in a Gulf capital on a small peninsula.",
+  "story": "Souq Waqif in Doha, Qatar, was rebuilt in 2006 in the old style. It sells spices, falcons and traditional clothes.",
+  "city": "Doha"
+ },
+ "t-baku": {
+  "title": "A mosque in the old city",
+  "alt": "A sandstone mosque with a dome and a short round minaret beside a quiet street with parked cars and walkers.",
+  "clue": "A sandstone mosque inside the walled old city of a windy capital on the Caspian Sea.",
+  "story": "The Juma Mosque stands in Icherisheher, the old city of Baku, Azerbaijan. Baku's name is often said to mean 'city of winds'.",
+  "city": "Baku"
+ },
+ "t-almaty": {
+  "title": "A trolleybus stop",
+  "alt": "A blue and white trolleybus with a Cyrillic destination sign at a stop on a wide street lined with bare trees.",
+  "clue": "A trolleybus with Cyrillic signs in a former capital at the foot of snowy mountains, famous for its apples.",
+  "story": "Almaty was the capital of Kazakhstan until 1997. Its name is linked to the word for apple, and wild apples first grew in the hills around it.",
+  "city": "Almaty"
+ },
+ "t-bishkek": {
+  "title": "Felt slippers",
+  "alt": "A pile of handmade felt slippers, stitched with red and blue swirling patterns, on a market stall.",
+  "clue": "Felt slippers stitched with ram's-horn swirls in a bazaar of a mountain land whose flag shows a yurt's roof.",
+  "story": "Felt-making is an old craft in Kyrgyzstan, where nomads have long made yurts and rugs from sheep's wool. These were at the Osh Bazaar in Bishkek.",
+  "city": null
+ },
+ "t-tashkent": {
+  "title": "An old van by a bazaar",
+  "alt": "An old red and white minibus with a flat front, parked by a pavement near market stalls and another yellow van.",
+  "clue": "A Soviet-era minibus near a great domed bazaar in the largest city of Central Asia.",
+  "story": "This old RAF van was parked near Chorsu Bazaar in Tashkent, Uzbekistan. Tashkent rebuilt much of its centre after an earthquake in 1966.",
+  "city": "Tashkent"
+ },
+ "t-dakar": {
+  "title": "A painted bus",
+  "alt": "A blue, yellow and orange minibus with painted decorations and passengers at the windows, on a sandy roadside.",
+  "clue": "A hand-painted 'car rapide' minibus, a symbol of a city on the westernmost point of mainland Africa.",
+  "story": "The car rapide buses of Dakar, Senegal, are painted with bright colours and eyes to keep away bad luck. Newer buses are slowly replacing them.",
+  "city": "Dakar"
+ },
+ "t-kampala": {
+  "title": "A bike full of jerrycans",
+  "alt": "A man pushing a bicycle loaded with dozens of yellow plastic jerrycans along a brick pavement beside a red-brick wall.",
+  "clue": "A bicycle piled with yellow jerrycans in a hilly capital on the shores of Africa's largest lake.",
+  "story": "Kampala in Uganda is built on hills near Lake Victoria. Bikes and boda-boda motorbikes carry all kinds of loads around the city.",
+  "city": "Kampala"
+ },
+ "t-kigali": {
+  "title": "A street of patterned dresses",
+  "alt": "A shady street with a woman in a bright patterned dress holding a child's hand, motorbikes and parked cars, and clothes for sale.",
+  "clue": "Motorbike taxis and bright wax-print dresses in a clean, hilly capital known as a 'land of a thousand hills'.",
+  "story": "Kigali in Rwanda is known for its tidy streets; plastic bags have been banned there since 2008. On one Saturday each month, people do community work together.",
+  "city": "Kigali"
+ },
+ "t-tunis": {
+  "title": "A hat maker's shop",
+  "alt": "An older man in a grey coat shaping red felt hats on a wooden table, with stacks of hats and boxes all around.",
+  "clue": "Red felt chechia hats made by hand in a covered souk of a Mediterranean capital near the ruins of Carthage.",
+  "story": "Chechia makers in the souk of Tunis, Tunisia, knit, felt, dye and brush each hat by hand. The craft came with Andalusian refugees in the 1600s.",
+  "city": "Tunis"
+ },
+ "t-madagascar": {
+  "title": "A zebu cart in a creek",
+  "alt": "A cart pulled by humped cattle wading along a shallow muddy creek between tall reeds and autumn-coloured trees.",
+  "clue": "Humped zebu cattle pulling a cart through water, on a huge island where these cattle are a sign of wealth.",
+  "story": "Zebu carts are a common way to carry goods in rural Madagascar. Families measure wealth in zebu, which are central to many ceremonies.",
+  "city": null
+ },
+ "t-luxor": {
+  "title": "Sailboats on a wide river",
+  "alt": "A crowd of white wooden sailboats with tall masts moored on a broad river, with a cruise ship and a green bank beyond.",
+  "clue": "Wooden feluccas with tall masts waiting on a great river, in a city built on the site of ancient Thebes.",
+  "story": "Feluccas have sailed the Nile for thousands of years. In Luxor, Egypt, they carry visitors between the temples on the east bank and the tombs on the west.",
+  "city": "Luxor"
+ },
+ "t-neworleans": {
+  "title": "A balcony party",
+  "alt": "Three men on an iron-railed balcony draped with ribbons and bead necklaces, laughing and waving under grey shutters.",
+  "clue": "Beads and ribbons on an iron balcony during a famous carnival in a jazz city on a great river delta.",
+  "story": "This photo shows Mardi Gras in the French Quarter of New Orleans, United States, in 1982. Throwing bead necklaces from balconies is a carnival tradition.",
+  "city": "New Orleans"
+ },
+ "t-chickenbus": {
+  "title": "A painted bus",
+  "alt": "A brightly painted old school bus in red and green with a chrome grille, parked on a dirt street by small shops in the hills.",
+  "clue": "A retired school bus painted in bold colours, now a 'chicken bus' climbing the highland roads of Central America.",
+  "story": "Guatemala's chicken buses are old school buses from the north, repainted and decorated. This one was in the mountain town of Zunil.",
+  "city": null
+ },
+ "t-havanacar": {
+  "title": "A blue classic car",
+  "alt": "A sky-blue 1950s car parked in a lane of brightly painted houses covered in murals and metal sculptures.",
+  "clue": "A 1950s car parked in a lane full of Afro-Caribbean murals, in a capital on a big island south of Florida.",
+  "story": "Callejón de Hamel in Havana, Cuba, is an alley of murals and sculptures celebrating Afro-Cuban culture. Cuba is famous for its classic cars kept running for decades.",
+  "city": "Havana"
+ },
+ "t-quito": {
+  "title": "An old street in the hills",
+  "alt": "A sloping colonial street with balconies, a yellow taxi, a red bus and a policeman in a yellow vest, with green mountains behind.",
+  "clue": "A colonial street with wrought-iron balconies in a high capital just south of the equator, ringed by volcanoes.",
+  "story": "This is a street in the old town of Quito, Ecuador, one of the first places named a World Heritage Site. Quito sits about 2,850 metres up.",
+  "city": "Quito"
+ },
+ "t-laboca": {
+  "title": "A painted street corner",
+  "alt": "A corner of colourful houses painted blue, yellow, green and red, with balconies, a mural and people strolling.",
+  "clue": "Houses painted with leftover ship's paint in an old port barrio, home of the tango and a famous blue-and-gold football club.",
+  "story": "Caminito in the La Boca neighbourhood of Buenos Aires, Argentina, was painted by dock workers' families with leftover paint. Tango dancers perform in its streets.",
+  "city": "Buenos Aires"
+ },
+ "t-medellin": {
+  "title": "Cable cars over hillside homes",
+  "alt": "Cable car cabins gliding above a hillside covered in red-brick houses, with green buses below and mountains behind.",
+  "clue": "Cable cars run as public transport up to hillside neighbourhoods in a valley city once called the 'city of eternal spring'.",
+  "story": "Medellín in Colombia opened its Metrocable in 2004 to link hillside neighbourhoods to the metro. It cut journeys from hours to minutes.",
+  "city": "Medellín"
+ },
+ "t-melbourne": {
+  "title": "A green tram",
+  "alt": "A long modern tram with a green pattern stopping on a busy city street beside old stone and new buildings.",
+  "clue": "A city with the largest tram network in the world, in the south-east of an island continent.",
+  "story": "Melbourne in Australia has about 250 kilometres of tram track, the largest network in the world. Trams in the city centre are free to ride.",
+  "city": "Melbourne"
+ },
+ "t-chandnichowk": {
+  "title": "A spice market from above",
+  "alt": "Looking down on an old market courtyard with sacks and baskets of spices, men sitting on stools, blue tarpaulins and tangled wires.",
+  "clue": "Sacks of chillies and turmeric in a wholesale spice market in the lanes of an old walled Mughal city.",
+  "story": "Khari Baoli in Old Delhi, India, has been a spice market since the 1600s and is one of the largest in Asia. Its lanes run off Chandni Chowk.",
+  "city": "Delhi"
+ },
+ "t-flowermarket": {
+  "title": "Mountains of marigolds",
+  "alt": "Huge sacks overflowing with orange and yellow marigolds on a market street, with a woman in a yellow sari walking past.",
+  "clue": "Marigolds sold by the sackful for garlands, at a flower market by the bridge of a great eastern river city.",
+  "story": "Mallick Ghat Flower Market in Kolkata, India, sits beside the Howrah Bridge on the Hooghly river. Over a century old, it sells flowers for weddings, festivals and temples.",
+  "city": "Kolkata"
+ },
+ "t-assamtea": {
+  "title": "Picking tea",
+  "alt": "Three women with bright headscarves and wicker baskets on their backs picking leaves in a green tea garden under tall shade trees.",
+  "clue": "Tea pickers with baskets carried from the forehead, in the low, rainy Brahmaputra valley that grows a strong, malty tea.",
+  "story": "Assam in north-east India grows more tea than almost anywhere else on Earth. Shade trees protect the bushes, and pickers take 'two leaves and a bud'.",
+  "city": null
+ },
+ "t-autorickshaw": {
+  "title": "A three-wheeler by a brick wall",
+  "alt": "A black and yellow three-wheeled auto rickshaw with a canvas roof and a driver inside, parked by an old red-brick wall.",
+  "clue": "A black-and-yellow three-wheeler with Devanagari lettering on its roof, the everyday taxi of a country of over a billion people.",
+  "story": "Auto rickshaws are the most common shared taxis in India. Most run on compressed natural gas in big cities to keep the air cleaner.",
+  "city": null
+ },
+ "t-hongkongtram": {
+  "title": "Towers by the harbour",
+  "alt": "Very tall, slim apartment towers rising behind a curved modern station building with gardens and people walking.",
+  "clue": "Some of the tallest homes in the world, packed on reclaimed land beside a harbour, in a city that was a British colony until 1997.",
+  "story": "The Kowloon waterfront in Hong Kong, China, is built on land reclaimed from the sea. Hong Kong has more skyscrapers than any other city.",
+  "city": "Hong Kong"
+ },
+ "t-budapesttram": {
+  "title": "A yellow tram by the river",
+  "alt": "A long yellow and white tram on a raised track beside a road, with green railings, trees and old buildings behind.",
+  "clue": "A yellow tram running along the banks of the Danube, in a capital made of two old towns joined by bridges.",
+  "story": "Tram line 2 in Budapest, Hungary, runs beside the Danube past the Parliament. Buda and Pest joined into one city in 1873.",
+  "city": "Budapest"
+ },
+ "t-viennacafe": {
+  "title": "A café menu board",
+  "alt": "A yellow-tiled café front with lace curtains, a chalk menu board in German and a little serving trolley outside.",
+  "clue": "A coffee house whose chalkboard offers goulash and Sunday concerts, in a capital where coffee-house culture is a listed heritage.",
+  "story": "Café Bräunerhof in Vienna, Austria, holds afternoon concerts at weekends. Viennese coffee-house culture is on UNESCO's list of intangible heritage.",
+  "city": "Vienna"
+ },
+ "t-hawker": {
+  "title": "A hawker centre",
+  "alt": "A big open food hall with rows of tables and stools, stalls with signs in English and Chinese, and a woman in a mask in front.",
+  "clue": "A food hall of cheap stalls with signs in English and Chinese, in a tiny island city-state at the tip of a peninsula.",
+  "story": "Hawker centres in Singapore were built to move street food stalls indoors. In 2020 hawker culture was added to UNESCO's heritage list.",
+  "city": "Singapore"
+ },
+ "t-chiangmai": {
+  "title": "Red shared taxis",
+  "alt": "A row of red pickup trucks fitted with roofs and benches, parked by a bus station with signs in a looped script.",
+  "clue": "Red pickup-truck taxis with two benches in the back, in a northern city of hundreds of temples and an old moat.",
+  "story": "The red songthaews of Chiang Mai, Thailand, work like shared taxis: you wave one down and tell the driver where you want to go.",
+  "city": "Chiang Mai"
+ },
+ "t-mexicocity": {
+  "title": "Workers waiting for jobs",
+  "alt": "Men sitting under umbrellas on a pavement beside a stone church railing, with hand-painted signs offering plumbing, gas and electrical work.",
+  "clue": "Tradesmen wait by a cathedral railing with hand-painted Spanish signs, in a capital built on the site of the Aztec city Tenochtitlan.",
+  "story": "Plumbers, painters and electricians wait for customers outside the Metropolitan Cathedral in Mexico City. They have gathered there for generations.",
+  "city": "Mexico City"
+ },
+ "t-fes": {
+  "title": "A leather tannery",
+  "alt": "Rows of round stone vats filled with brown, red and white dyes, with workers standing among them in an old walled yard.",
+  "clue": "Stone dye vats of a medieval leather tannery, in a car-free walled medina in the north of a land of the Atlas Mountains.",
+  "story": "The Chouara tannery in Fes, Morocco, has worked leather in the same way for about a thousand years. Dyes come from plants such as poppy, indigo and saffron.",
+  "city": "Fes"
+ },
+ "t-kualalumpur": {
+  "title": "A covered market street",
+  "alt": "A busy market street under a glass roof with red lanterns, shops with Chinese signs and stalls of bags and clothes.",
+  "clue": "A covered Chinatown street of red lanterns and bargain stalls, in a capital whose name means 'muddy confluence'.",
+  "story": "Petaling Street is the heart of Chinatown in Kuala Lumpur, Malaysia. Its night market sells everything from food to watches.",
+  "city": "Kuala Lumpur"
  }
 }
