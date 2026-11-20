@@ -24,3 +24,8 @@ Decisions made while building [`docs/new-games-spec.md`](../new-games-spec.md) (
 ## 2026-11-21, step 6
 
 - **`NEW_GAMES_FROM` set to `2026-11-21`.** Checks that only moved the cutover with a test date now also check the real date: `verify-feed.cjs` compares every day's order against the no-new-games order (days before 2026-11-21 equal, later days with 25 and 26 swapped in), `verify-petal.cjs` and `verify-code.cjs` check the day before and the day itself, and `verify-aha.cjs` checks that unplayed days show Who Knows? from the cutover without a saved flag. `tests/smoke.mjs` opens 2026-11-20 from the day sheet at every level and checks Time Lens and Time Lens Duel still render there while that day is in the archive (until 2026-12-21).
+
+## 2026-11-21, deploy and Tricky cities
+
+- **Deployed.** `main` was fast-forwarded to `9a0f0e3` (steps 1–4 and 6) and pushed; the GitHub Pages run succeeded and little-sparks.in served `petal.js?v=9a0f0e3` with `NEW_GAMES_FROM='2026-11-21'`. The photo pool (step 5) ships in a later deploy.
+- **Tricky asks for the city.** From `PLACE_V2_FROM`, Where in the World on Tricky asks for the city whenever the photo has one; nature photos keep the country question. Options mix cities from the same country and neighbouring countries, and hint 1 names the country instead of the continent. The game's explanation (How to play, README) says why: on Tricky the clues are in the streets, so it asks for the city. The photo agent records a `city` (or null) on every Tricky photo; the question is built as its own step after the pool merges.
