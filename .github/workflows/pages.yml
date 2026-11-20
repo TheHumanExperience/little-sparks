@@ -53,7 +53,7 @@ jobs:
           if-no-files-found: ignore
           retention-days: 7
       - name: Stamp asset versions (cache-bust)
-        run: sed -i "s/__BUILD__/${GITHUB_SHA::7}/g" dist/index.html && ! grep -q __BUILD__ dist/index.html
+        run: sed -i "s/__BUILD__/${GITHUB_SHA::7}/g" dist/index.html dist/style.css && ! grep -q __BUILD__ dist/index.html dist/style.css
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

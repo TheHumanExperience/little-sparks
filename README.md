@@ -167,7 +167,7 @@ Contributors and coding agents should start with [AGENTS.md](AGENTS.md) and chec
 | `verify-places.cjs` | Where in the World: every photo has a free licence, a credit (with the author for CC photos), a clue and a story, and its country is in the table; every Tricky city is in the city table (`WORLD_CITIES`) under its own country and no city is listed twice; under v2, every Tricky city day offers four distinct cities from its continent with the answer once, a same-country decoy where the table has one and a neighbouring one, hint 1 names the country, and city saves, wrong picks and Reveal answer reload correctly, while null-city days, Gentle and Medium stay country questions; no id, Commons file, image or place appears twice; every Tricky photo has a `city` (or null) that its alt text and clue don't name; days before `PLACE_V2_FROM` pick exactly the original v1 photos and options, and the v2 cycle never repeats within 31 days; no photo repeats within 31 days at a level; 3 levels × 366 days are deterministic, with four distinct countries graded by level and the answer exactly once; tries, misses, hints and pinned saves. |
 | `verify-feed.cjs` | Feed order, the new-games cutover (both sides, on 2026-11-21 and with a test date), the daily warm-up opener, the 31-day window, and that `feed.js` does nothing on a page without the feed. |
 | `verify-leaderboard.cjs` | Points 1/3/5, one claim per date × level × game, India-time day, Monday-week and month boundaries, the offline queue (round trip, pruning), name cleaning and escaping, same name = same player, the committed config being empty or a public publishable/anon key only, and that schema.sql keeps the same rules and lock-down. |
-| `verify-assets.cjs` | Every local CSS, JS and icon reference in `index.html` uses `?v=__BUILD__` and exists; the Pages workflow stamps the commit SHA in before upload, so returning visitors never get stale files. |
+| `verify-assets.cjs` | Every local CSS, JS, icon and font reference in `index.html` and `style.css` uses `?v=__BUILD__` and exists, and the font preloads match the `@font-face` URLs; the Pages workflow stamps the commit SHA into both files before upload, so returning visitors never get stale files. No CSS or HTML in `dist/` may load a font or stylesheet from another host. |
 | `verify-rewards.cjs` | Which cards are shiny never changes, and about 5% of cards are shiny across 366 days. Also checks the flow-meter rules, burst and milestone sizes, the rising chime, that clear & retry only affects that one puzzle on that day and level, and the reveal limits (unlimited/5/3 per day, free re-reveal, refresh on a new day, revealed cards never count, every game's revealed state is complete). |
 
 `dist/ladders.js` is generated. After editing the word list in `tools/build-ladders.cjs`, rebuild it:
@@ -207,7 +207,7 @@ The site is live at https://little-sparks.in and hosted on GitHub Pages. Every p
 The existing Sites hosting configuration is retained in `.openai/hosting.json`.
 This GitHub copy is not automatically synchronized with future Sites changes.
 
-Photo source links and credits are preserved in `dist/photos.js`. Third-party assets retain their applicable rights and attribution requirements.
+Photo source links and credits are preserved in `dist/photos.js`. The DM Sans and Libre Caslon Display fonts are self-hosted in `dist/fonts/` under the SIL Open Font License 1.1 (licence texts beside the files). Third-party assets retain their applicable rights and attribution requirements.
 
 ## Copyright
 
