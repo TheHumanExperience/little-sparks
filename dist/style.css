@@ -413,8 +413,8 @@ body.golden .feedbar .brand span { color: #c8901f; }
 
 /* Where in the World */
 .placeframe img { height: 300px; object-fit: cover; }
-.placeopts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 14px 0 4px; }
-.placeopts .choice { margin: 0; min-height: 48px; text-align: center; font-size: 15px; }
+.placeopts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 14px 0 4px; }
+.placeopts .choice { margin: 0; min-height: 48px; text-align: center; font-size: 15px; overflow-wrap: anywhere; hyphens: auto; }
 .placeopts .ruled { opacity: .45; text-decoration: line-through; }
 .placeopts .right { background: #52775a; border-color: #52775a; color: #fff; }
 @media (max-width: 520px) { .placeframe img { height: 240px; } }

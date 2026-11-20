@@ -252,6 +252,24 @@ for (const [engine, launch, ctxOpts] of engines) {
   for (const c of wt.slice(0, 2)) { await page.locator(`.spark.live [data-place="${c}"]`).tap(); await page.waitForTimeout(150); }
   check(await page.evaluate(() => state(24).done && state(24).missed && state(24).revealed && !feedDone(day, 24)), `${engine} two misses on Tricky end the round without counting`);
   check(/(^|[\s·])0\/20\b/.test(await page.locator("#todayPill").innerText()), `${engine} a missed place round isn't counted`);
+  // Tricky city question (iPhone SE): PLACE_V2_FROM is rewritten so that today is the v2 day showing the first
+  // Tricky photo with a city. Four 44px cities, hint 1 names the country, a wrong city fades, the city solves and counts.
+  {
+    const from = await page.evaluate(() => feedDate(placeV2Order(2).findIndex((p) => p.city)));
+    await page.route("**/globe.js*", async (r) => { const res = await r.fetch(); await r.fulfill({ response: res, body: (await res.text()).replace(/const PLACE_V2_FROM = "[^"]*"/, `const PLACE_V2_FROM = "${from}"`) }); });
+    await fresh(2); await goTo(24);
+    const wc = await page.evaluate(() => { const m = savedPlace(day, state(24)), card = document.querySelector(".spark.live").getBoundingClientRect(), opts = [...document.querySelectorAll(".spark.live .placeopt")];
+      return { from: PLACE_V2_FROM, city: m.city, hint: placeHints(m)[0], wrong: m.options.filter((c) => c !== m.city), names: opts.map((o) => o.dataset.place), rules: document.querySelector(".spark.live #rules").textContent,
+        minH: Math.min(...opts.map((o) => o.getBoundingClientRect().height)), inside: opts.every((o) => { const r = o.getBoundingClientRect(); return r.left >= card.left && r.right <= card.right; }), overflow: document.documentElement.scrollWidth > innerWidth }; });
+    check(wc.from === from && wc.city && wc.names.length === 4 && wc.names.includes(wc.city) && /name the city/.test(wc.rules) && wc.minH >= 44 && wc.inside && !wc.overflow, `${engine} Tricky asks for the city with four 44px cities inside the card`, JSON.stringify(wc));
+    await page.locator(".spark.live .stage button", { hasText: "A gentle hint" }).tap();
+    check((await page.locator(".spark.live #feedback").innerText()).includes(wc.hint) && /^It's in /.test(wc.hint), `${engine} city hint 1 names the country`, wc.hint);
+    await page.locator(`.spark.live [data-place="${wc.wrong[0]}"]`).tap();
+    check(await page.evaluate((c) => { const b = document.querySelector(`.spark.live [data-place="${c}"]`); return b.classList.contains("ruled") && b.disabled && !state(24).done; }, wc.wrong[0]), `${engine} a wrong city fades and doesn't solve`);
+    await page.locator(`.spark.live [data-place="${wc.city}"]`).tap(); await page.waitForTimeout(300);
+    check(await page.evaluate((c) => state(24).done && !state(24).revealed && state(24).pick === c && state(24).city === c && feedDone(day, 24), wc.city), `${engine} the right city solves Where in the World on Tricky`);
+    await page.unroute("**/globe.js*");
+  }
   // Code Garden (26) shows only from NEW_GAMES_FROM, so it gets its own page whose clock starts no earlier than that day
   // (an init script shifts Date only if today is before it; since 2026-11-21 it is today). Tricky on an iPhone SE: one wrong check, then solve by touch.
   {

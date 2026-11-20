@@ -155,7 +155,7 @@ function revealState(d, i, s = {}) {
   if (i === 16) return set({ board: goalModel(d).good.slice(), history: [] });
   if (i === 22) return set({ bulbs: lanternModel(d).solution.slice(), dots: [] });
   if (i === 23) return set({ beds: bedsModel(d).rects.map((b) => b.slice()) });
-  if (i === 24) { const m = savedPlace(d, s); return set({ pick: m.place.country }); }
+  if (i === 24) { const m = savedPlace(d, s); return set({ pick: placeAnswer(m) }); }
   if (i === 26) return set({ cur: codeModel(d).code.slice() });
   if (i === 25) return set({ moves: [], tries: s.tries || 0 });
   return set({});
