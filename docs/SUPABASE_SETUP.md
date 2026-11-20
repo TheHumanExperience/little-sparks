@@ -40,15 +40,16 @@ Points don't sync between steps 1 and 3, but they wait in each browser and are s
   - Each date × level × game counts only once; the server enforces this with its primary key.
 - **Time.** Day, Week (starting Monday) and Month follow India time. Only puzzles dated today ±1 day count, so archive days don't.
 - **Offline.** Points earned offline are queued in the browser and sent later.
+- **Optional.** The name sheet opens once, a moment after the first real solve, with a "Not now" button; without a name nothing is sent. A named player can tap "Leave the board" in the 🏆 sheet: `leave_board` removes their name and points, and their puzzles stay in the browser.
 - **Identity.** Each browser gets a random id kept in localStorage. There is no login, and clearing site data starts a new player.
 - **Same name = same player.** Names match ignoring case and spaces, so "De vansh" is "Devansh". Typing a name that already exists on another device joins that player and shares one score. Any points the device already had move across, and a puzzle solved on both counts once. This is trust-based: there are no logins, so anyone who types a name joins that score.
 
 ## Security notes
-- **Restricted access.** The browser can only call three functions: `join_or_create`, `record_solve` and `leaderboard`.
+- **Restricted access.** The browser can only call four functions: `join_or_create`, `record_solve`, `leaderboard` and `leave_board`.
   - The tables have row-level security with no policies, and anon has no table rights.
   - The functions use fixed SQL with typed parameters, so there is no SQL injection, and they pin `search_path`.
   - Points are computed on the server.
-- **Ids stay private.** The leaderboard never returns player ids. Because names are shared on purpose, anyone who joins a name can also rename that player.
+- **Ids stay private.** The leaderboard never returns player ids. Because names are shared on purpose, anyone who joins a name can also rename that player. They can also remove it with `leave_board`, which is the same trust-based model: fine for a small circle of friends.
 - **Name rules.** Names must be 1–20 characters with no control or hidden characters. They are escaped before display.
 - **Spam limits.** Without logins, a determined person could still script fake players. Two caps limit this: 60 solves per player per day and 60 new players per hour. If that ever matters, enable Supabase anonymous sign-ins with a captcha.
 - **Housekeeping (SQL Editor).**

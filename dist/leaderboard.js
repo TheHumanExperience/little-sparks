@@ -171,15 +171,44 @@ function lbInit() {
     if ($("#lbSheet").open) show(current);
   };
   nameSheet.addEventListener("close", () => { if (!st.asked) { st.asked = true; save(); } });
+  $("#lbNotNow").onclick = () => nameSheet.close();
+
+  /* Leave the board: the server removes this player and its points; puzzles saved on this phone stay.
+     A fresh id afterwards means joining again later starts a new player. Offline → nothing changes. */
+  let leaving = false;
+  function askLeave() {
+    $("#lbMe").innerHTML = `Leave the board? Your name and points come off it. Your puzzles stay on this phone.
+      <span class="lbleave"><button type="button" class="linkish" id="lbLeaveYes">Leave the board</button><button type="button" class="linkish" id="lbLeaveNo">Stay on it</button></span>`;
+    $("#lbLeaveYes").onclick = leave;
+    $("#lbLeaveNo").onclick = renderMe;
+    $("#lbLeaveNo").focus?.();
+  }
+  async function leave() {
+    if (leaving) return;
+    leaving = true;
+    try {
+      await flushing;
+      if (st.name) await rpc("leave_board", { p_player: st.id });
+      st = { ...st, id: lbUuid(), name: "", synced: false, asked: true, sent: {}, queue: [] };
+      save();
+      lbToast("You've left the board. Your puzzles are all still here ✳");
+      renderMe();
+      show(current);
+    } catch {
+      renderMe();
+      $("#lbPending").textContent = "Couldn't reach the leaderboard to leave it. Try again in a moment.";
+    } finally { leaving = false; }
+  }
 
   /* Leaderboard sheet with Day / Week / Month tabs. */
   let current = "day";
   const tabs = [...document.querySelectorAll("#lbTabs [data-period]")];
   function renderMe() {
     $("#lbMe").innerHTML = st.name
-      ? `Playing as <b>${lbEsc(st.name)}</b> <button type="button" class="linkish" id="lbEdit">Edit name</button>`
+      ? `Playing as <b>${lbEsc(st.name)}</b> <button type="button" class="linkish" id="lbEdit">Edit name</button> <button type="button" class="linkish lbquiet" id="lbLeave">Leave the board</button>`
       : `<button type="button" class="linkish" id="lbEdit">Add your name to join the board</button>`;
     $("#lbEdit").onclick = askName;
+    if (st.name) $("#lbLeave").onclick = askLeave;
     const n = st.queue.length;
     $("#lbPending").textContent = n ? `${n} solve${n > 1 ? "s" : ""} waiting to sync.` : "";
   }

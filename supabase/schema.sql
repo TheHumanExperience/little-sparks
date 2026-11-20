@@ -1,5 +1,5 @@
 -- Little Sparks leaderboard. Paste into Supabase → SQL Editor → Run. Safe to re-run.
--- The browser only uses the anon key through the three functions below; the tables
+-- The browser only uses the anon key through the four functions below; the tables
 -- themselves have RLS on with no policies, so anon cannot read or write them directly.
 -- Player ids are random uuids kept in each browser; the leaderboard never returns them.
 -- Names are unique ignoring case and spaces, and the same name on another device joins
@@ -104,7 +104,17 @@ language sql stable security definer set search_path = public as $$
   select rk, name, pts, coalesce(me, false) from r where rk <= 50 or me order by rk, name;
 $$;
 
+-- Leave the board: removes this player and, through the cascade, all its points.
+-- Trust-based like join_or_create: the id is a random uuid kept in the browser, but anyone who
+-- types a player's name gets that id back, so a friend could remove someone. Fine for a small circle.
+create or replace function public.leave_board(p_player uuid) returns void
+language plpgsql security definer set search_path = public as $$
+begin
+  if p_player is null then raise exception 'missing id'; end if;
+  delete from players p where p.id = p_player;
+end $$;
+
 -- Supabase grants EXECUTE on new public functions to anon and authenticated by default,
--- so revoke explicitly and grant back only the three RPCs the browser needs.
-revoke all on function public.ist_today(), public.join_or_create(uuid, text), public.record_solve(uuid, date, int, int), public.leaderboard(text, uuid) from public, anon, authenticated;
-grant execute on function public.join_or_create(uuid, text), public.record_solve(uuid, date, int, int), public.leaderboard(text, uuid) to anon;
+-- so revoke explicitly and grant back only the four RPCs the browser needs.
+revoke all on function public.ist_today(), public.join_or_create(uuid, text), public.record_solve(uuid, date, int, int), public.leaderboard(text, uuid), public.leave_board(uuid) from public, anon, authenticated;
+grant execute on function public.join_or_create(uuid, text), public.record_solve(uuid, date, int, int), public.leaderboard(text, uuid), public.leave_board(uuid) to anon;
