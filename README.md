@@ -67,7 +67,7 @@ The table is the base order, but the day never opens with Letterlight. The first
 
 Every card still gets harder from Gentle to Tricky, and progress is saved in the browser.
 
-**The Aha track** replaces the old single Aha Moment card. Each day has five logical-reasoning cards, placed together as one block (cards 5–9) so the reasoning flow isn't broken up. They are drawn from nineteen categories, mixing number puzzles and logic puzzles:
+**The Aha track** replaces the old single Aha Moment card. Each day has five logical-reasoning cards, placed together as one block (cards 5–9) so the reasoning flow isn't broken up. They are drawn from twenty categories, mixing number puzzles and logic puzzles:
 
 - Percentages and profit
 - Arrangements
@@ -88,12 +88,13 @@ Every card still gets harder from Gentle to Tricky, and progress is saved in the
 - Matchsticks (move one stick to fix a seven-segment equation, drawn as a board)
 - Tournaments (knockouts, leagues and who can still top the table)
 - Is the info enough? (would statement 1, 2, either or both pin the answer down?)
+- Who Knows? (two friends each hold half a secret, and their short chat pins it down; the candidates are buttons on every level)
 
-Each date and level shows five consecutive categories from a fixed ring of all nineteen (`AHA_RING`, which alternates number and logic groups except at one wrap-around), and the window rotates daily, so every category comes up about equally often. Every question is generated in `dist/aha.js` from the date and difficulty. Its names and numbers are drawn fresh each time. A brute-force solver confirms the question has exactly one answer, and each question comes with a hint and a "why" explanation.
+Each date and level shows five consecutive categories from a fixed ring of all twenty (`AHA_RING_V3`, which alternates number and logic groups except at two places; days before `NEW_GAMES_FROM` use the nineteen-category `AHA_RING`, without Who Knows?), and the window rotates daily, so every category comes up about equally often. Every question is generated in `dist/aha.js` from the date and difficulty. Its names and numbers are drawn fresh each time. A brute-force solver confirms the question has exactly one answer, and each question comes with a hint and a "why" explanation.
 
 - **Formats.** Gentle and Medium are multiple choice. Tricky asks you to type the answer in a numeric field, or a name picker for grids and liars. Matchsticks has no options on any level, because they gave the answer away. You type the corrected equation instead. Spaces, −/–, ×/x/* and full-width signs all count the same, and only the one-move answer is accepted.
 - **Skill badges.** A small badge on each card shows how many questions of that category you have solved.
-- **Older saves.** Past days that have an old Aha Moment save in slot 3 still open the original puzzle. A date × level whose Aha cards were played before the ring grew to nineteen (saves with `aha: 1`, or no flag) keeps its original ten-category rotation and questions; new plays are stamped `aha: 2`.
+- **Older saves.** Past days that have an old Aha Moment save in slot 3 still open the original puzzle. A date × level whose Aha cards were played before the ring grew to nineteen (saves with `aha: 1`, or no flag) keeps its original ten-category rotation and questions. Plays stamped `aha: 2` keep the nineteen-category ring, and plays from `NEW_GAMES_FROM` on are stamped `aha: 3`.
 
 **Swipe to draw.** In Bloom Trail and Bloom Trail 5×5 you can press a square and slide your finger (or mouse) across neighbouring squares to draw the trail. Sliding back onto the previous square undoes a step. Tapping squares one by one still works. The grid uses `touch-action: none`, so drawing never scrolls the feed.
 
@@ -120,7 +121,7 @@ Mobile browsers are the main target, and the feed was tested at 320, 360, 375 an
 | `dist/globe.js`, `dist/places.js`, `dist/places/` | Where in the World (state 24): country table, options, renderer; generated photo list and photos |
 | `dist/codegarden.js` | Code Garden (state 26): generator, scoring, solver and renderer |
 | `dist/petal.js` | Last Petal (state 25): positions, win/lose solver, the bee and the renderer |
-| `dist/aha.js` | The Aha track: 19 logical-reasoning categories with brute-force solvers |
+| `dist/aha.js` | The Aha track: 20 logical-reasoning categories with brute-force solvers |
 | `dist/feed.js` | Feed, celebrations and rewards, clear & retry, day and level sheets, and midnight rollover |
 | `dist/leaderboard.js`, `dist/leaderboard-config.js` | The optional Supabase leaderboard |
 | `dist/favicon.svg`, `dist/favicon-32.png`, `dist/apple-touch-icon.png` | Browser-tab and iPhone home-screen icons |

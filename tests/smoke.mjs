@@ -286,6 +286,28 @@ for (const [engine, launch, ctxOpts] of engines) {
   await page.locator(".spark.live #ahaInput").fill(" " + ms.a.replace(/−/g, "-").replace(/ /g, "") + " "); await page.locator(".spark.live #ahaInput").press("Enter");
   await page.waitForTimeout(200);
   check(await page.evaluate((i) => state(i).done && !state(i).revealed, ms.idx), `${engine} Matchsticks solves by typing ${ms.a}`);
+  // Who Knows? (iPhone SE): NEW_GAMES_FROM is rewritten to today so the Aha block uses rotation 3. The first level whose
+  // block shows Who Knows? today is used; if none does, its question is pinned to slot 0 like Matchsticks above.
+  const cutover = await page.evaluate(() => today());
+  await page.route("**/daily-content.js*", async (r) => { const res = await r.fetch(); await r.fulfill({ response: res, body: (await res.text()).replace(/const NEW_GAMES_FROM='[^']*'/, `const NEW_GAMES_FROM='${cutover}'`) }); });
+  let wk = null;
+  for (const lv of [0, 1, 2]) {
+    await fresh(lv);
+    wk = await page.evaluate((last) => { const cat = AHA_CATS.findIndex((c) => c.id === "knows"), d = today(); let slot = ahaCategories(d).indexOf(cat);
+      if (slot < 0 && !last) return null;
+      if (slot < 0) { slot = 0; AHA_CACHE.set(`${puzzleSeed(d)}|0|${ahaRotation(d)}`, { cat, ...AHA_GEN[cat](rng(puzzleSeed(d) + "|smoke"), difficulty), kind: "choice" }); }
+      const m = ahaModel(d, slot); return { rot: ahaRotation(d), idx: AHA_SLOTS[slot], k: m.options.indexOf(m.a), n: m.options.length, lines: m.clues.length }; }, lv === 2);
+    if (wk) break;
+  }
+  check(wk.rot === 3, `${engine} NEW_GAMES_FROM switches the Aha block to rotation 3`);
+  await goTo(wk.idx);
+  const kf = await page.evaluate(() => { const card = document.querySelector(".spark.live").getBoundingClientRect(), opts = [...document.querySelectorAll(".spark.live [data-aha]")];
+    return { n: opts.length, lines: document.querySelectorAll(".spark.live .ahaclues li").length, rows: document.querySelectorAll(".spark.live .ahatable tbody tr").length, minH: Math.min(...opts.map((o) => o.getBoundingClientRect().height)), inside: opts.every((o) => { const r = o.getBoundingClientRect(); return r.left >= card.left && r.right <= card.right; }), overflow: document.documentElement.scrollWidth > innerWidth }; });
+  check(kf.n === wk.n && kf.lines === wk.lines && kf.rows >= 3 && kf.minH >= 44 && kf.inside && !kf.overflow, `${engine} 375×667 Who Knows? shows the list, the dialogue and every candidate as a 44px button`, JSON.stringify(kf));
+  await page.locator(`.spark.live [data-aha="${wk.k}"]`).tap();
+  await page.locator(".spark.live .stage button", { hasText: "Check my answer" }).tap(); await page.waitForTimeout(200);
+  check(await page.evaluate((i) => state(i).done && !state(i).revealed && state(i).aha === 3, wk.idx), `${engine} Who Knows? solves by tapping the answer and saves aha: 3`);
+  await page.unroute("**/daily-content.js*");
   await page.setViewportSize(vp); await fresh(0); await goTo(13);
   const ladderNextWord = () => page.evaluate(() => { const m = ladderModel(day), s = state(13); return ladderNext(s.steps.at(-1), m.end); });
   for (const ch of await ladderNextWord()) await page.locator(`.spark.live .keys [data-key="${ch}"]`).tap();

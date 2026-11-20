@@ -1,12 +1,12 @@
 # Aha track: question pool
 
-The Aha track isn't a fixed list of questions. Each day shows five of these 19 puzzle types, as a window sliding round `AHA_RING` in `dist/aha.js` (number and logic types alternate, so each day mixes both). Each type's generator then builds a fresh question from the date and level, and a brute-force solver checks that it has exactly one answer. Over a year that comes to about 20,900 questions (19 types × 3 levels × 366 days).
+The Aha track isn't a fixed list of questions. Each day shows five of these 20 puzzle types, as a window sliding round `AHA_RING_V3` in `dist/aha.js` (number and logic types alternate, apart from two pairs of logic types, so each day mixes both). Days before `NEW_GAMES_FROM` keep the nineteen-type `AHA_RING`, without Who Knows?. Each type's generator then builds a fresh question from the date and level, and a brute-force solver checks that it has exactly one answer. Over a year that comes to about 22,000 questions (20 types × 3 levels × 366 days).
 
-On Gentle and Medium, number questions are multiple choice. On Tricky you type the answer.
+On Gentle and Medium, number questions are multiple choice. On Tricky you type the answer. Who Knows? always shows its candidates as buttons, because they are the whole answer set.
 
 Sample questions below come from the real generators (seeded with a fixed sample key, not a real date).
 
-## The 19 types
+## The 20 types
 
 | # | Type | Group | What it is |
 |---|---|---|---|
@@ -29,6 +29,7 @@ Sample questions below come from the real generators (seeded with a fixed sample
 | 17 | Is the Info Enough? | logic | You don't need the answer, just whether you could get it. |
 | 18 | Counting & Chance | numbers | Plan for the unluckiest draw. |
 | 19 | Clocks & Calendars | logic | Hands, hours and weekdays. |
+| 20 | Who Knows? | logic | Two friends, half a secret each. What they don't know tells you everything. |
 
 ## Blood Relations
 
@@ -702,3 +703,73 @@ The classroom clock shows 1:59.
 What is the smaller angle between the hour hand and the minute hand, in degrees?
 
 Answer: **65.5** (The minute hand is at 354°, the hour hand at 59.5°. The smaller gap is 65.5°.)
+
+## Who Knows?
+
+_Two friends, half a secret each. What they don't know tells you everything._
+
+The host tells one friend half of the secret and the other friend the other half: a birthday's month and day, a flower and its colour, a café drink and cake, a cinema row and seat, a playing card's value and suit, or a number's tens and units digits. Both see the full list. Each line of their chat rules some candidates out. Gentle has 6–8 candidates and two lines, Medium 8–10 and three lines, and Tricky 10–12 with either “I knew you didn't know either” or two rounds of “still don't know”.
+
+**Gentle**
+
+Priya is thinking of a two-digit number. Priya tells Ana only its tens digit and Asha only its units digit. Both see this list, then they talk it over:
+
+| Tens | Numbers |
+|---|---|
+| 2 | 22, 23, 26 |
+| 5 | 51 |
+| 6 | 66 |
+| 8 | 82, 83 |
+
+- Ana: “I don't know the number.”
+- Asha: “Now I know!”
+
+Which number is it?
+
+Options: 22 · 23 · 26 · 51 · 66 · 82 · 83
+
+Answer: **26** (Ana doesn't know, so Ana's tens digit comes up more than once. That rules out 51 and 66. Asha now knows, so Asha's units digit comes up just once among those left. Only 26 is left.)
+
+**Medium**
+
+Ravi and Kabir are guessing Hana's birthday. Hana tells Ravi only the month and Kabir only the day. Both see this list, then they talk it over:
+
+| Month | Days |
+|---|---|
+| March | 13, 16, 18 |
+| April | 18, 19 |
+| May | 13 |
+| July | 16 |
+| August | 19 |
+
+- Ravi: “I don't know the birthday.”
+- Kabir: “Now I know!”
+- Ravi: “Then I know it too.”
+
+When is Hana's birthday?
+
+Options: March 13 · March 16 · March 18 · April 18 · April 19 · May 13 · July 16 · August 19
+
+Answer: **April 19** (Ravi doesn't know, so Ravi's month comes up more than once. That rules out May 13, July 16 and August 19. Kabir now knows, so Kabir's day comes up just once among those left. That rules out March 18 and April 18. Ravi now knows, so Ravi's month comes up just once among those left. Only April 19 is left.)
+
+**Tricky**
+
+Jonah and Leo are guessing Lena's birthday. Lena tells Jonah only the month and Leo only the day. Both see this list, then they talk it over:
+
+| Month | Days |
+|---|---|
+| March | 12, 14, 15 |
+| April | 11, 13, 15 |
+| June | 12 |
+| July | 14 |
+| August | 12, 13 |
+
+- Jonah: “I don't know the birthday, but I knew Leo didn't know either.”
+- Leo: “I didn't know at first, but now I do.”
+- Jonah: “Then I know it too.”
+
+When is Lena's birthday?
+
+Options: March 12 · March 14 · March 15 · April 11 · April 13 · April 15 · June 12 · July 14 · August 12 · August 13
+
+Answer: **August 13** (Jonah was sure Leo couldn't know, so no day under Jonah's month is a one-off. That rules out April 11, April 13, April 15, June 12 and July 14. Leo now knows, so Leo's day comes up just once among those left. That rules out March 12 and August 12. Jonah now knows, so Jonah's month comes up just once among those left. Only August 13 is left.)

@@ -1,6 +1,6 @@
 /* Aha track — five logical-reasoning questions a day (state indexes 3, 17, 18, 19, 20), drawn
-   from nineteen category generators (number and logic groups alternate). Gentle/Medium are multiple
-   choice; Tricky asks you to type the answer. A question is a pure function of (date, difficulty, slot).
+   from twenty category generators (number and logic groups alternate). Gentle/Medium are multiple
+   choice; Tricky asks you to type the answer (Who Knows? keeps its candidate buttons on every level). A question is a pure function of (date, difficulty, slot).
    Every generator builds a puzzle, then brute-forces it with ahaSolve() and retries until
    exactly one answer survives. verify-aha.cjs re-runs the same solvers. */
 const AHA_SLOTS = [3, 17, 18, 19, 20];
@@ -24,6 +24,7 @@ const AHA_CATS = [
   { id: "matchsticks", name: "Matchsticks", group: "logic", type: "Logical reasoning", art: "| ‒ |", blurb: "Move one stick to make the sum true." },
   { id: "tournaments", name: "Tournaments", group: "numbers", type: "Logical reasoning", art: "⚑ vs ⚑", blurb: "Fixtures, knockouts and who can still top the table." },
   { id: "sufficiency", name: "Is the Info Enough?", group: "logic", type: "Logical reasoning", art: "① ② ?", blurb: "You don't need the answer, just whether you could get it." },
+  { id: "knows", name: "Who Knows?", group: "logic", type: "Logical reasoning", art: "◐ ◑ ?", blurb: "Two friends, half a secret each. What they don't know tells you everything." },
 ];
 const AHA_NAMES = ["Asha", "Bilal", "Chitra", "Dev", "Esha", "Farhan", "Gauri", "Hari", "Ira", "Jai", "Kavya", "Leela", "Manav", "Neel", "Ojas", "Pari", "Rhea", "Sahil", "Tara", "Uma", "Vikram", "Zoya", "Anya", "Kabir", "Meera", "Rohan", "Sana", "Arjun", "Diya", "Ishaan", "Naina", "Vihaan", "Aditi", "Kiran", "Mira", "Noor", "Tanvi", "Yash", "Ved", "Riya", "Om", "Lata", "Nikhil", "Pooja", "Sameer", "Tejas"];
 const WEEKDAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
@@ -42,16 +43,22 @@ const permsOf = (n) => AHA_PERMS.get(n) || (AHA_PERMS.set(n, ahaPerms(n)), AHA_P
 
 /* Which five categories a date shows: a window sliding round AHA_RING (number and logic
    groups alternate, so every day mixes both), shuffled into slots. Rotation 1 is the original
-   ten-category window; a date × level keeps it if its Aha cards were played before the ring grew. */
+   ten-category window; a date × level keeps it if its Aha cards were played before the ring grew.
+   Rotation 2 is the nineteen-category AHA_RING; rotation 3 (AHA_RING_V3, with Who Knows?) starts on NEW_GAMES_FROM.
+   The saved `aha` flag (1, 2 or 3) pins a played day to its rotation, so its categories never change. */
 const AHA_RING = [10, 0, 1, 12, 11, 2, 3, 14, 13, 4, 5, 15, 16, 6, 7, 17, 18, 8, 9];
+const AHA_RING_V3 = [10, 0, 1, 12, 11, 2, 3, 14, 13, 4, 5, 19, 15, 16, 6, 7, 17, 18, 8, 9];
 function ahaRotation(d, store = all) {
-  const games = store[progressKey(d)]?.games || {};
-  return AHA_SLOTS.some((i) => { const g = games[i]; return g && (g.aha === 1 || (!g.aha && (g.started || g.done || g.credit || g.revealed || g.answer !== undefined))); }) ? 1 : 2;
+  const games = store[progressKey(d)]?.games || {}, saved = AHA_SLOTS.map((i) => games[i]).filter(Boolean);
+  if (saved.some((g) => g.aha === 1 || (!g.aha && (g.started || g.done || g.credit || g.revealed || g.answer !== undefined)))) return 1;
+  if (saved.some((g) => g.aha === 2)) return 2;
+  return saved.some((g) => g.aha === 3) || d >= NEW_GAMES_FROM ? 3 : 2;
 }
 function ahaCategories(d, store = all) {
-  if (ahaRotation(d, store) === 1) { const start = mod(calendarIndex(d) * 3 + difficulty * 7, 10); return shuffle([0, 1, 2, 3, 4].map((j) => mod(start + j, 10)), rng(puzzleSeed(d) + "|aha-order")); }
-  const N = AHA_RING.length, start = mod(calendarIndex(d) * 3 + difficulty * 7, N);
-  return shuffle([0, 1, 2, 3, 4].map((j) => AHA_RING[mod(start + j, N)]), rng(puzzleSeed(d) + "|aha-order-v2"));
+  const rot = ahaRotation(d, store);
+  if (rot === 1) { const start = mod(calendarIndex(d) * 3 + difficulty * 7, 10); return shuffle([0, 1, 2, 3, 4].map((j) => mod(start + j, 10)), rng(puzzleSeed(d) + "|aha-order")); }
+  const ring = rot === 3 ? AHA_RING_V3 : AHA_RING, N = ring.length, start = mod(calendarIndex(d) * 3 + difficulty * 7, N);
+  return shuffle([0, 1, 2, 3, 4].map((j) => ring[mod(start + j, N)]), rng(puzzleSeed(d) + (rot === 3 ? "|aha-order-v3" : "|aha-order-v2")));
 }
 
 /* ───────── Solvers: every one returns the list of distinct answers the data allows ───────── */
@@ -1057,7 +1064,90 @@ function genSufficiency(r, lv) {
   return { data, kind: "name", a, options: SUF_LABELS.slice(), wide: true, intro: `${u === "sweets" ? `${X} and ${Y} share a box of sweets. ` : ""}The question: “${ask0}”`, clues: [`Statement 1: ${txt(data.s1)}`, `Statement 2: ${txt(data.s2)}`], ask: "Is the information enough to answer it?", hint: "Test each statement on its own first: does it allow exactly one answer? Only then try them together.", why: `Statement 1 alone ${label(v1)}. Statement 2 alone ${label(v2)}. Together they ${label(v12, true)}. So: ${a.toLowerCase()}.` };
 }
 
-const AHA_GEN = [genPercent, genOrder, genTsd, genLiars, genNumbers, genDi, genRatio, genGrid, genGuarantee, genClock, genBlood, genDirections, genCube, genOddone, genSeries, genCoins, genMatchsticks, genTournaments, genSufficiency];
+/* ───────── Who Knows? (AHA_CATS 19): two friends, half a secret each ─────────
+   The host tells one friend half A of the secret and the other half B; both see the full list.
+   Each line of dialogue filters the list by what the speaker could or couldn't know. */
+const KNOWS_NAMES = ["Asha", "Ben", "Chitra", "Leo", "Mira", "Sam", "Noor", "Omar", "Priya", "Tom", "Yuki", "Zara", "Kabir", "Lena", "Ravi", "Ana", "Dev", "Ella", "Hana", "Jonah"];
+const KNOWS_DAYS = ["11", "12", "13", "14", "15", "16", "17", "18", "19"];
+const KNOWS_THEMES = [
+  { A: ["March", "April", "May", "June", "July", "August"], B: KNOWS_DAYS, halves: ["month", "day"], what: "the birthday", head: ["Month", "Days"], cell: (a, b) => b, label: (a, b) => `${a} ${b}`,
+    setup: (H, X, Y) => `${X} and ${Y} are guessing ${H}'s birthday. ${H} tells ${X} only the month and ${Y} only the day.`, ask: (H) => `When is ${H}'s birthday?` },
+  { A: ["rose", "lily", "tulip", "daisy", "marigold", "orchid"], B: ["red", "white", "pink", "yellow", "orange", "purple"], halves: ["flower", "colour"], what: "the flower", head: ["Flower", "Colours"], cell: (a, b) => b, label: (a, b) => `${b} ${a}`,
+    setup: (H, X, Y) => `At the flower show, ${H} picks one bloom to take home. ${H} tells ${X} only the kind of flower and ${Y} only its colour.`, ask: (H) => `Which flower did ${H} pick?` },
+  { A: ["chai", "coffee", "cocoa", "lassi", "lemonade"], B: ["carrot cake", "lemon cake", "plum cake", "walnut cake", "chocolate cake", "banana bread"], halves: ["drink", "cake"], what: "the order", head: ["Drink", "Cakes"], cell: (a, b) => b, label: (a, b) => `${a} & ${b}`,
+    setup: (H, X, Y) => `${H} is treating everyone at the corner café and orders one drink and one cake. ${H} tells ${X} only the drink and ${Y} only the cake.`, ask: (H) => `What did ${H} order?` },
+  { A: ["A", "B", "C", "D", "E", "F"], B: ["1", "2", "3", "4", "5", "6", "7", "8", "9"], halves: ["row", "seat number"], what: "the seat", head: ["Row", "Seats"], cell: (a, b) => b, label: (a, b) => `Row ${a}, seat ${b}`,
+    setup: (H, X, Y) => `${H} has a ticket for the evening film and lets ${X} and ${Y} guess the seat. ${H} tells ${X} only the row and ${Y} only the seat number.`, ask: (H) => `Which seat is ${H}'s?` },
+  { A: ["Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"], B: ["hearts", "spades", "diamonds", "clubs"], halves: ["value", "suit"], what: "the card", head: ["Value", "Suits"], cell: (a, b) => b, label: (a, b) => `${a} of ${b}`,
+    setup: (H, X, Y) => `${H} lays one playing card face down. ${H} tells ${X} only its value and ${Y} only its suit.`, ask: () => "Which card is it?" },
+  { A: ["1", "2", "3", "4", "5", "6", "7", "8", "9"], B: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"], halves: ["tens digit", "units digit"], what: "the number", head: ["Tens", "Numbers"], cell: (a, b) => a + b, label: (a, b) => a + b,
+    setup: (H, X, Y) => `${H} is thinking of a two-digit number. ${H} tells ${X} only its tens digit and ${Y} only its units digit.`, ask: () => "Which number is it?" },
+];
+/* Two dialogue shapes per level. ops: no = "I don't know", yes = "now I know", start = "I knew from the start",
+   knewNot = "I knew the other one didn't know". All ops in a line are judged on the list as it stood when the line began. */
+const KNOWS_SHAPES = [
+  [[{ w: 0, ops: ["no"], say: "no" }, { w: 1, ops: ["yes"], say: "now" }], [{ w: 0, ops: ["no"], say: "no" }, { w: 1, ops: ["start"], say: "start" }]],
+  [[{ w: 0, ops: ["no"], say: "no" }, { w: 1, ops: ["yes"], say: "now" }, { w: 0, ops: ["yes"], say: "too" }], [{ w: 0, ops: ["no"], say: "no" }, { w: 1, ops: ["no"], say: "neither" }, { w: 0, ops: ["yes"], say: "now" }]],
+  [[{ w: 0, ops: ["no", "knewNot"], say: "sure" }, { w: 1, ops: ["yes"], say: "atFirst" }, { w: 0, ops: ["yes"], say: "too" }], [{ w: 0, ops: ["no"], say: "no" }, { w: 1, ops: ["no"], say: "neither" }, { w: 0, ops: ["no"], say: "still" }, { w: 1, ops: ["yes"], say: "now" }]],
+];
+/* The list left after each line (index 0 = the full list). "Now I know" read strictly also means the speaker
+   didn't know just before the previous line; the generator only keeps puzzles where both readings agree. */
+function knowsTrace(d, strict) {
+  const S0 = d.cands.map((_, i) => i), trace = [S0], cnt = (T, w, v) => T.filter((i) => d.cands[i][w] === v).length;
+  let prev = S0;
+  for (const ln of d.lines) {
+    const cur = trace[trace.length - 1], w = ln.w, o = 1 - w;
+    trace.push(cur.filter((i) => { const v = d.cands[i][w]; return ln.ops.every((op) =>
+      op === "no" ? cnt(cur, w, v) > 1
+      : op === "start" ? cnt(S0, w, v) === 1
+      : op === "yes" ? cnt(cur, w, v) === 1 && (!strict || cnt(prev, w, v) > 1)
+      : cur.every((j) => d.cands[j][w] !== v || cnt(cur, o, d.cands[j][o]) > 1)); }));
+    prev = cur;
+  }
+  return trace;
+}
+Object.assign(AHA_SOLVE, {
+  knows(d) {
+    const a = knowsTrace(d, true).at(-1), b = knowsTrace(d, false).at(-1), out = ahaUniq([...a, ...b].map((i) => d.labels[i]));
+    return a.length && a.join() === b.join() ? out : [...out, "×readings differ"];
+  },
+});
+/* Rows (half A) hold 1–3 candidates each; more rows on harder levels. Tricky needs at least five values of half B,
+   so the playing-card theme (four suits) stays on Gentle and Medium. */
+function genKnows(r, lv) {
+  const kbMin = lv === 2 ? 5 : 4, th = ahaPick(r, KNOWS_THEMES.filter((t) => t.B.length >= kbMin)), shape = ahaPick(r, KNOWS_SHAPES[lv]), [H, X, Y] = shuffle(KNOWS_NAMES, r), who = [X, Y];
+  const [lo, hi] = [[6, 8], [8, 10], [10, 12]][lv];
+  for (;;) {
+    const ka = Math.min(th.A.length, ahaInt(r, [3, 4, 5][lv], [4, 6, 6][lv])), kb = ahaInt(r, kbMin, Math.min(th.B.length, 7)), sizes = [...Array(ka)].map(() => ahaInt(r, 1, 3)), n = sizes.reduce((x, y) => x + y, 0);
+    if (n < lo || n > hi) continue;
+    const as = shuffle([...th.A.keys()], r).slice(0, ka).sort((x, y) => x - y), bs = shuffle([...th.B.keys()], r).slice(0, kb);
+    const cells = as.flatMap((a, k) => shuffle(bs, r).slice(0, sizes[k]).map((b) => [a, b])).sort((x, y) => x[0] - y[0] || x[1] - y[1]);
+    const data = { cands: cells, labels: cells.map(([a, b]) => th.label(th.A[a], th.B[b])), lines: shape.map(({ w, ops }) => ({ w, ops })) };
+    const trace = knowsTrace(data, true), loose = knowsTrace(data, false);
+    if (trace.at(-1).length !== 1 || loose.at(-1).join() !== trace.at(-1).join() || trace.some((t, k) => k && t.length >= trace[k - 1].length)) continue;
+    if (shape[0].ops.includes("knewNot") && knowsTrace({ ...data, lines: [{ w: 0, ops: ["no"] }] }, true)[1].length === trace[1].length) continue;
+    const a = data.labels[trace.at(-1)[0]], half = (w) => th.halves[w], list = (ix) => ix.map((i) => data.labels[i]).join(", ").replace(/, ([^,]*)$/, " and $1");
+    const say = { no: `“I don't know ${th.what}.”`, neither: "“I don't know either.”", still: "“I still don't know.”", now: "“Now I know!”", start: "“I knew it from the start.”", too: "“Then I know it too.”", sure: `“I don't know ${th.what}, but I knew ${Y} didn't know either.”`, atFirst: "“I didn't know at first, but now I do.”" };
+    const why = shape.map((ln, k) => {
+      const S = who[ln.w], gone = trace[k].filter((i) => !trace[k + 1].includes(i)), left = trace[k + 1];
+      const said = ln.say === "sure" ? `${X} was sure ${Y} couldn't know, so no ${half(1)} under ${X}'s ${half(0)} is a one-off`
+        : ln.ops[0] === "no" ? `${S} ${ln.say === "still" ? "still doesn't" : "doesn't"} know, so ${S}'s ${half(ln.w)} comes up more than once${k ? " among those left" : ""}`
+        : ln.ops[0] === "start" ? `${S} knew from the start, so ${S}'s ${half(ln.w)} comes up only once on the whole list`
+        : `${S} now knows, so ${S}'s ${half(ln.w)} comes up just once among those left`;
+      return `${said}. ${left.length === 1 ? `Only ${a} is left.` : gone.length <= left.length ? `That rules out ${list(gone)}.` : `That leaves ${list(left)}.`}`;
+    });
+    const groups = as.map((ai) => [th.A[ai], cells.filter((c) => c[0] === ai).map((c) => th.cell(th.A[ai], th.B[c[1]])).join(", ")]);
+    return {
+      data, kind: "name", a, options: data.labels.slice(),
+      intro: `${th.setup(H, X, Y)} Both see this list, then they talk it over:`, table: { head: th.head, rows: groups },
+      clues: shape.map((ln) => `${who[ln.w]}: ${say[ln.say]}`), ask: th.ask(H),
+      hint: `Take it one line at a time. If ${X} doesn't know, ${X}'s ${half(0)} can't be one that appears only once, so cross those out first.`,
+      why: why.join(" "),
+    };
+  }
+}
+
+const AHA_GEN = [genPercent, genOrder, genTsd, genLiars, genNumbers, genDi, genRatio, genGrid, genGuarantee, genClock, genBlood, genDirections, genCube, genOddone, genSeries, genCoins, genMatchsticks, genTournaments, genSufficiency, genKnows];
 const AHA_CACHE = new Map();
 /* The question for a date's slot (0–4) at the current difficulty. */
 function ahaModel(d, slot) {
