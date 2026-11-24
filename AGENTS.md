@@ -45,6 +45,7 @@ Prefer `npm run smoke` over manual screenshots. Take screenshots only when a hum
 | `docs/tech-stack.md` | Languages, tool versions, supported browsers, CI and hosting. |
 | `docs/wiki/` | Dated record of decisions, working rules (including the cleanup rule) and environment findings. Read `docs/wiki/index.md` before larger work. |
 | `brand/` | Logo masters and exports. Not deployed. |
+| `.github/ISSUE_TEMPLATE/` | Issue forms: Bug (game, level, day, device), Game or content idea, Task (with a "not before" date). Default labels `bug`/`enhancement`. |
 | `LICENSE` | All rights reserved, with third-party exclusions. The site shows the matching notice in the level sheet. |
 
 ## Game registry (state index → game)
