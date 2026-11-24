@@ -1,0 +1,15 @@
+name: Task
+description: Maintenance, cleanup, docs or a dated follow-up.
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What needs doing
+      description: Files involved, and what done looks like.
+    validations:
+      required: true
+  - type: input
+    id: when
+    attributes:
+      label: Not before
+      description: Earliest date this can happen, if any (YYYY-MM-DD).
